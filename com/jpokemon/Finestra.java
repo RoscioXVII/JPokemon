@@ -9,26 +9,41 @@ public class Finestra extends JFrame {
 
     public Finestra(){
         super("JPokemon");
+
+
         setLayout(null); // prima era new border layout
         setSize(1920,1080); // posso anche fare il set location
         setLocationRelativeTo(null);// per impostare la posizione della finestra
 
 
-        // prova GIF -- carico la gif
+        // prova GIF -- carico la gif -->
         ImageIcon gif1 = new ImageIcon("img/blastoise-front.gif");
         ImageIcon gif2 = new ImageIcon("img/charizard-retro.gif");
 
-        // creo un altro jlabel contenente la gif
-        JLabel labelgif1 = new JLabel(gif1);
-        JLabel labelgif2 = new JLabel(gif2);
+       // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
+        Image img1 = gif1.getImage().getScaledInstance(270, 270, Image.SCALE_DEFAULT);
+        Image img2 = gif2.getImage().getScaledInstance(270, 270, Image.SCALE_DEFAULT);
+
+        ImageIcon scaledGif1 = new ImageIcon(img1);
+        ImageIcon scaledGif2 = new ImageIcon(img2);
+
+
+        // creo un altro JLabel contenente la gif scalata --> DIMENSIONI MAGGIORATE
+        JLabel labelgif1 = new JLabel(scaledGif1);
+        JLabel labelgif2 = new JLabel(scaledGif2);
+
+
+        // creo un altro jlabel contenente la gif --> DIMENSIONI STANDARD
+        //JLabel labelgif1 = new JLabel(gif1);
+        //JLabel labelgif2 = new JLabel(gif2);
 
         // il label sarà grande quanto le gif stesse
-        labelgif1.setSize(gif1.getIconWidth(),gif1.getIconHeight());
-        labelgif2.setSize(gif2.getIconWidth(),gif2.getIconHeight());
+        labelgif1.setSize(270,270);//(gif1.getIconWidth(),gif1.getIconHeight()); //SONO LE DIMENSIONI STANDARD
+        labelgif2.setSize(270,270);//(gif2.getIconWidth(),gif2.getIconHeight());
 
         //posizionamento gif
-        labelgif1.setLocation(920,150);
-        labelgif2.setLocation(800,210);
+        labelgif1.setLocation(800,80);
+        labelgif2.setLocation(300,270);
 
 
         add(labelgif1); // posso specificare il borderlayout (area in cui va a posizionarsi)
