@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Home extends JFrame {
     public Home(){
-        ImageIcon img = new ImageIcon("img/home.jpg");
+        ImageIcon img = new ImageIcon("img/home.png");
         JLabel label = new JLabel(img);
         JPanel pannello = new JPanel();
         pannello.setLayout(new BorderLayout());
@@ -17,7 +17,7 @@ public class Home extends JFrame {
         // aggiungo il bottone al pannello
         pannello.add(start);
         pannello.add(label,BorderLayout.CENTER);
-        start.setLocation(572,840);
+        start.setLocation(775,840);
 
         setContentPane(pannello); // TODO
         //SCHERMO INTERO
