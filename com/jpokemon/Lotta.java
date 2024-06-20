@@ -2,6 +2,8 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Lotta extends JFrame {
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
@@ -20,6 +22,7 @@ public class Lotta extends JFrame {
     private JButton pokemon5 = new JButton("POKEMON 5");
     private JButton pokemon6 = new JButton("POKEMON 6");
 
+    private JButton Indietro = new JButton("Indietro");
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
@@ -72,20 +75,117 @@ public class Lotta extends JFrame {
 
         pannello.add(labelgif1); // posso specificare il borderlayout (area in cui va a posizionarsi)
         pannello.add(labelgif2); // aggiungo solo il label e successivamente lo posiziono
+
+        attacca.setSize(200,100);
+        pokemon.setSize(200,100);
+
         mossa1.setSize(200,100);
         mossa2.setSize(200,100);
         mossa3.setSize(200,100);
         mossa4.setSize(200,100);
+
+        pokemon1.setSize(200,100);
+        pokemon2.setSize(200,100);
+        pokemon3.setSize(200,100);
+        pokemon4.setSize(200,100);
+        pokemon5.setSize(200,100);
+        pokemon6.setSize(200,100);
+
+        attacca.setLocation(0,700);
+        pokemon.setLocation(200,700);
+
         mossa1.setLocation(0,700);
         mossa2.setLocation(200,700);
         mossa3.setLocation(400,700);
         mossa4.setLocation(600,700);
+
+        pokemon1.setLocation(0,700);
+        pokemon2.setLocation(200,700);
+        pokemon3.setLocation(0,800);
+        pokemon4.setLocation(200,800);
+        pokemon5.setLocation(0,900);
+        pokemon6.setLocation(200,900);
+
+        pannello.add(pokemon,BorderLayout.SOUTH);
+        pannello.add(attacca,BorderLayout.SOUTH);
+
         pannello.add(mossa1,BorderLayout.SOUTH);
         pannello.add(mossa2,BorderLayout.SOUTH);
         pannello.add(mossa3,BorderLayout.SOUTH);
         pannello.add(mossa4,BorderLayout.SOUTH);
 
+        pannello.add(pokemon1,BorderLayout.SOUTH);
+        pannello.add(pokemon2,BorderLayout.SOUTH);
+        pannello.add(pokemon3,BorderLayout.SOUTH);
+        pannello.add(pokemon4,BorderLayout.SOUTH);
+        pannello.add(pokemon5,BorderLayout.SOUTH);
+        pannello.add(pokemon6,BorderLayout.SOUTH);
 
+        attacca.setVisible(true);
+        pokemon.setVisible(true);   //non servono ma li metto per ricordarmi i nomi
+
+        mossa1.setVisible(false);
+        mossa2.setVisible(false);
+        mossa3.setVisible(false);
+        mossa4.setVisible(false);
+
+        pokemon1.setVisible(false);
+        pokemon2.setVisible(false);
+        pokemon3.setVisible(false);
+        pokemon4.setVisible(false);
+        pokemon5.setVisible(false);
+        pokemon6.setVisible(false);
+
+        attacca.addActionListener(e -> {
+            attacca.setVisible(false);
+            pokemon.setVisible(false);
+
+            mossa1.setVisible(true);
+            mossa2.setVisible(true);
+            mossa3.setVisible(true);
+            mossa4.setVisible(true);
+        });
+
+        pokemon.addActionListener(e ->{
+            attacca.setVisible(false);
+            pokemon.setVisible(false);
+
+            pokemon1.setVisible(true);
+            pokemon2.setVisible(true);
+            pokemon3.setVisible(true);
+            pokemon4.setVisible(true);
+            pokemon5.setVisible(true);
+            pokemon6.setVisible(true);
+        });
+        //QUESTO VA CAMBIATO MA DOPO STICAZZI daje siu
+        mossa1.addActionListener(e -> {
+            JOptionPane.showMessageDialog(Lotta.this, "bulbasaur usa " + mossa1.getText());
+        });
+
+        // CONSIGLIO DI CAMBIARLO IN UN BOTTONE PER EVITARE DI ANNULLARE ATTACCHI IN CORSO
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_C) {
+                    attacca.setVisible(true);
+                    pokemon.setVisible(true);
+
+                    mossa1.setVisible(false);
+                    mossa2.setVisible(false);
+                    mossa3.setVisible(false);
+                    mossa4.setVisible(false);
+
+                    pokemon1.setVisible(false);
+                    pokemon2.setVisible(false);
+                    pokemon3.setVisible(false);
+                    pokemon4.setVisible(false);
+                    pokemon5.setVisible(false);
+                    pokemon6.setVisible(false);
+                }
+            }
+        });
+
+        setFocusable(true);
+        requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
 
         pannello.add(label,BorderLayout.NORTH);
         setContentPane(pannello); // TODO

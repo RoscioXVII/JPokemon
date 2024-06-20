@@ -14,14 +14,15 @@ public class Pokemon {
     private int attaccoSpeciale;
     private int difesaSpeciale;
     private int velocita;
-    private int sprite;
 
+    private String spriteFront;
+    private String spriteBack;
 
     public Pokemon(String nome, String tipo, int lvl, int ps, int esp){
         this.nome = nome;
         this.tipo = tipo;
         this.lvl = lvl;
-        this.ps = ps;
+        this.ps = ps;   // queste ultime due poi ci penso io
         this. esp = esp;
     }
     public String getNome(){
