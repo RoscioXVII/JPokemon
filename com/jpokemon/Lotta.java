@@ -5,10 +5,20 @@ import java.awt.*;
 
 public class Lotta extends JFrame {
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
+    private JButton attacca = new JButton("Attacca");
+    private JButton pokemon = new JButton("Pokemon");
+
     private JButton mossa1 = new JButton("MOSSA 1");
     private JButton mossa2 = new JButton("MOSSA 2");
     private JButton mossa3 = new JButton("MOSSA 3");
     private JButton mossa4 = new JButton("MOSSA 4");
+
+    private JButton pokemon1 = new JButton("POKEMON 1");
+    private JButton pokemon2 = new JButton("POKEMON 2");
+    private JButton pokemon3 = new JButton("POKEMON 3");
+    private JButton pokemon4 = new JButton("POKEMON 4");
+    private JButton pokemon5 = new JButton("POKEMON 5");
+    private JButton pokemon6 = new JButton("POKEMON 6");
 
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
