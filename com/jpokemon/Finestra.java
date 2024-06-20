@@ -17,8 +17,8 @@ public class Finestra extends JFrame {
 
 
         // prova GIF -- carico la gif -->
-        ImageIcon gif1 = new ImageIcon("img/blastoise-front.gif");
-        ImageIcon gif2 = new ImageIcon("img/charizard-retro.gif");
+        ImageIcon gif1 = new ImageIcon("img/front/blastoise-front.gif");
+        ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
 
        // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
         Image img1 = gif1.getImage().getScaledInstance(270, 270, Image.SCALE_DEFAULT);
