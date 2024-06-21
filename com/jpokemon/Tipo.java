@@ -8,6 +8,8 @@ public enum Tipo {
     BUIO, VELENO, VOLANTE,
     COLEOTTERO,FOLLETTO,ACCIAIO
 
+    // per la tabella debolezze usare switch case
+
 
     
 

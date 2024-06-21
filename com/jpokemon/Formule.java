@@ -1,5 +1,8 @@
 package com.jpokemon;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Formule {
 
     public Formule(){}
@@ -26,6 +29,29 @@ public class Formule {
         return (int)formula;
 
     }
+
+    // TABELLA DEBOLEZZE - POI LA SPOSTIAMO DOVE MEGLIO è
+    // è una mappa che associa un tipo ad un'altra mappa con associazione tipo-moltiplicatore
+    // è una costante in quanto predefinita dalle meccaniche di gioco
+    //infatti questa viene riempita una volta e non piu modificata
+    // con coppie UNIVOCHE
+    private static final Map<Tipo,Map<Tipo,Double>> tabellaDebolezze = new HashMap<>();
+
+    // static perche devo istanziare SEMPRE la tabella che anch'essa risulta essere un campo static
+    static {
+        for(Tipo tipo: Tipo.values()){
+            tabellaDebolezze.put(tipo, new HashMap<>());
+        }
+        //AGGIUNTA MANUALE DI TUTTE LE DEBOLEZZE
+        //ES.
+        tabellaDebolezze.get(Tipo.FUOCO).put(Tipo.ERBA,2.0);
+        tabellaDebolezze.get(Tipo.FUOCO).put(Tipo.ACQUA,0.5);
+        tabellaDebolezze.get(Tipo.FUOCO).put(Tipo.NORMALE,1.0);
+    }
+
+
+
+
 
 
 }
