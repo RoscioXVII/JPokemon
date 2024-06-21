@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Home extends JFrame {
+    private JPanel pannello;
+    private JButton start;
     public Home(){
         ImageIcon img = new ImageIcon("img/home.png");
         JLabel label = new JLabel(img);
-        JPanel pannello = new JPanel();
+        pannello = new JPanel();
         pannello.setLayout(new BorderLayout());
 
         // creo bottone
-        JButton start = new JButton("START");
+        start = new JButton("START");
         start.setSize(450,100);
 
         // aggiungo il bottone al pannello
@@ -26,12 +28,21 @@ public class Home extends JFrame {
      //   setExtendedState(JFrame.MAXIMIZED_BOTH);
      //   setUndecorated(true);
         // SCHERMO INTERO - FINE
-        setSize(1920,1080); // dimensioni finestra
-        setLocationRelativeTo(null);
-        //setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
 
+        // OPZIONI COMMENTATE RIGUARDANTI VISUALIZZAZIONE A FINESTRA
+
+        //setSize(1920,1080); // dimensioni finestra
+        //setLocationRelativeTo(null);
+        //setResizable(false);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setVisible(true);
+
+    }
+    public JButton getStart(){
+        return start;
+    }
+    public JPanel getPannello(){
+        return pannello;
     }
 
 

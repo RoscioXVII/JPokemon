@@ -23,20 +23,22 @@ public class Lotta extends JFrame {
     private JButton pokemon6 = new JButton("POKEMON 6");
 
     private JButton Indietro = new JButton("Indietro");
+    private JPanel pannello;
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
 
     public Lotta(){
-        super("JPokemon");
-        setLayout(null);
-        setSize(1920,1080); // dimensioni finestra
-        setLocationRelativeTo(null);
+        //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
+        //super("JPokemon");
+        //setLayout(null);
+        //setSize(1920,1080); // dimensioni finestra
+        //setLocationRelativeTo(null);
         //setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        JPanel pannello = new JPanel(null);
+        pannello = new JPanel(null);
         ImageIcon fondoLotta = new ImageIcon("img/lotta.png");
         Image img = fondoLotta.getImage().getScaledInstance(1920,700,Image.SCALE_SMOOTH);
         fondoLotta = new ImageIcon(img);
@@ -190,7 +192,11 @@ public class Lotta extends JFrame {
         pannello.add(label,BorderLayout.NORTH);
         setContentPane(pannello); // TODO
 
-        setVisible(true);
+        //setVisible(true);
+    }
+
+    public JPanel getPannello(){
+        return pannello;
     }
 
 
