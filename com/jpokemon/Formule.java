@@ -50,12 +50,15 @@ public class Formule {
 
     // static perche devo istanziare SEMPRE la tabella che anch'essa risulta essere un campo static
     static {
+
+
         for(Tipo tipo1: Tipo.values()){
-            tabellaDebolezze.put(tipo1, new HashMap<>());
+            tabellaDebolezze.put(tipo1,new HashMap<>());
             for(Tipo tipo2: Tipo.values()){
-                tabellaDebolezze.get(tipo1).put(tipo2, 1.0);
+                tabellaDebolezze.get(tipo1).put(tipo2,1.0);
             }
         }
+
         //AGGIUNTA MANUALE DI TUTTE LE DEBOLEZZE
         //ES.
 

@@ -189,6 +189,27 @@ public class Lotta extends JFrame {
         setFocusable(true);
         requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
 
+        //LOCALE
+        JLabel nomePok1 = new JLabel("Charizard"); //sostituire con pokemon.getNome()
+        nomePok1.setBounds(1380,570,100,20);
+        JProgressBar barraPSpok1 = new BarraPS(50).getBarraSalute(); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
+        barraPSpok1.setLocation(1380,580); //PS del pokemonLocale
+        JLabel PsPok1 = new JLabel(50 + "/" + 50); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
+        PsPok1.setBounds(1380,610,100,20);
+        //AVVERSARI
+        JLabel nomePok2 = new JLabel("Blastoise");
+        nomePok2.setBounds(85,105,100,20);
+        JProgressBar barraPSpok2 = new BarraPS(100).getBarraSalute();
+        barraPSpok2.setLocation(85,113); //PS del pokemonAvversario - potrei usare anche qui il setBounds
+        JLabel PsPok2 = new JLabel(100+"/"+100);
+        PsPok2.setBounds(85,143,100,20);
+        pannello.add(barraPSpok1);
+        pannello.add(barraPSpok2);
+        pannello.add(nomePok1);
+        pannello.add(nomePok2);
+        pannello.add(PsPok1);
+        pannello.add(PsPok2);
+
         pannello.add(label,BorderLayout.NORTH);
         setContentPane(pannello); // TODO
 

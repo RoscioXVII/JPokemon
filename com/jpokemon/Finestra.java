@@ -8,6 +8,7 @@ public class Finestra extends JFrame {
     private  JPanel pannelloCard;
 
 
+
     public Finestra(){
         setTitle("JPokemon");
         setSize(1920,1080); // posso anche fare il set location
