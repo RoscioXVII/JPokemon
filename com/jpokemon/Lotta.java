@@ -14,6 +14,7 @@ public class Lotta extends JFrame {
 
 
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
+    // mettero tutto a static
     private JButton attacca = new JButton("Attacca");
     private JButton pokemon = new JButton("Pokemon");
 
@@ -105,8 +106,8 @@ public class Lotta extends JFrame {
 
         mossa1.setLocation(0,700);
         mossa2.setLocation(200,700);
-        mossa3.setLocation(400,700);
-        mossa4.setLocation(600,700);
+        mossa3.setLocation(0,800);
+        mossa4.setLocation(200,800);
 
         pokemon1.setLocation(0,700);
         pokemon2.setLocation(200,700);
@@ -114,6 +115,14 @@ public class Lotta extends JFrame {
         pokemon4.setLocation(200,800);
         pokemon5.setLocation(0,900);
         pokemon6.setLocation(200,900);
+
+        //BOTTONE INDIETRO -- DA SISTEMARE
+        JButton indietro = new JButton("INDIETRO");
+        indietro.setSize(200,300);
+        indietro.setVisible(true);
+        indietro.setLocation(400,700);
+
+        pannello.add(indietro);
 
         pannello.add(pokemon,BorderLayout.SOUTH);
         pannello.add(attacca,BorderLayout.SOUTH);
@@ -132,6 +141,7 @@ public class Lotta extends JFrame {
 
         attacca.setVisible(true);
         pokemon.setVisible(true);   //non servono ma li metto per ricordarmi i nomi
+        indietro.setVisible(false);
 
         mossa1.setVisible(false);
         mossa2.setVisible(false);
@@ -145,6 +155,7 @@ public class Lotta extends JFrame {
         pokemon5.setVisible(false);
         pokemon6.setVisible(false);
 
+
         attacca.addActionListener(e -> {
             attacca.setVisible(false);
             pokemon.setVisible(false);
@@ -153,6 +164,7 @@ public class Lotta extends JFrame {
             mossa2.setVisible(true);
             mossa3.setVisible(true);
             mossa4.setVisible(true);
+            indietro.setVisible(true);
         });
 
         pokemon.addActionListener(e ->{
@@ -165,33 +177,33 @@ public class Lotta extends JFrame {
             pokemon4.setVisible(true);
             pokemon5.setVisible(true);
             pokemon6.setVisible(true);
+            indietro.setVisible(true);
+
         });
+        indietro.addActionListener(x ->{
+            attacca.setVisible(true);
+            pokemon.setVisible(true);
+            mossa1.setVisible(false);
+            mossa2.setVisible(false);
+            mossa3.setVisible(false);
+            mossa4.setVisible(false);
+            pokemon1.setVisible(false);
+            pokemon2.setVisible(false);
+            pokemon3.setVisible(false);
+            pokemon4.setVisible(false);
+            pokemon5.setVisible(false);
+            pokemon6.setVisible(false);
+            indietro.setVisible(false);
+
+        });
+
         //QUESTO VA CAMBIATO MA DOPO STICAZZI daje siu
         mossa1.addActionListener(e -> {
+            // esegue la mossa del pokemon --> mosse[]
             JOptionPane.showMessageDialog(Lotta.this, "bulbasaur usa " + mossa1.getText());
         });
 
-        // CONSIGLIO DI CAMBIARLO IN UN BOTTONE PER EVITARE DI ANNULLARE ATTACCHI IN CORSO
-        addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_C) {
-                    attacca.setVisible(true);
-                    pokemon.setVisible(true);
 
-                    mossa1.setVisible(false);
-                    mossa2.setVisible(false);
-                    mossa3.setVisible(false);
-                    mossa4.setVisible(false);
-
-                    pokemon1.setVisible(false);
-                    pokemon2.setVisible(false);
-                    pokemon3.setVisible(false);
-                    pokemon4.setVisible(false);
-                    pokemon5.setVisible(false);
-                    pokemon6.setVisible(false);
-                }
-            }
-        });
 
         setFocusable(true);
         requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
