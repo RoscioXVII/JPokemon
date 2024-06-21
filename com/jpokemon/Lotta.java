@@ -4,19 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class Lotta extends JFrame {
+    private Pokemon[] squadra = new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
+    //devo fare un metodo grafico per selezionarli
+
+
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
     private JButton attacca = new JButton("Attacca");
     private JButton pokemon = new JButton("Pokemon");
 
-    private JButton mossa1 = new JButton("MOSSA 1");
+    private JButton mossa1 = new JButton("MOSSA 1"); //pokemon.getmossa(1); --> pokemon ha array mosse[4]
     private JButton mossa2 = new JButton("MOSSA 2");
     private JButton mossa3 = new JButton("MOSSA 3");
     private JButton mossa4 = new JButton("MOSSA 4");
-
-    private JButton pokemon1 = new JButton("POKEMON 1");
-    private JButton pokemon2 = new JButton("POKEMON 2");
+    // FORMATO BOTTONE: NOME (pokemon.getNome()), IMAGEICON(pokemon.getSpriteMini);
+    private JButton pokemon1 = new JButton("Charizard",new ImageIcon("img/mini/charizard-mini.gif")); //con un get del pokemon prendo l img la faccio imageicon e creo il bottone
+    private JButton pokemon2 = new JButton("Rapidash", new ImageIcon("img/mini/rapidash-mini.gif"));
     private JButton pokemon3 = new JButton("POKEMON 3");
     private JButton pokemon4 = new JButton("POKEMON 4");
     private JButton pokemon5 = new JButton("POKEMON 5");
@@ -215,10 +222,36 @@ public class Lotta extends JFrame {
 
         //setVisible(true);
     }
-
+    // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
     public JPanel getPannello(){
         return pannello;
     }
+
+    public void cambiaPokemon(int indice){ // quello contenuto nel bottone, viene ritornato dall actionlistener
+        Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
+        squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
+        squadra[0]=cambio;
+    }
+
+
+    // devo cambiare tutti i riferimenti al pokemon vecchio con quello nuovo
+    //utilizzo metodo per risalire dal nome all'istanza del pokemon vera e propria che sta dentro pokemon
+    // va da se che i 6 pokemon che ho li devo contenere dentro una lista
+
+
+
+
+    /*
+        public Pokemon trovaPokemon(String nomePokemon){ // non optional perche se in squadra è certamente presente
+        for(Pokemon pokemon:squadra){
+            if(nomePokemon.equals(pokemon.getSpriteMini())) // questo è contenuto nel bottone
+                return pokemon; // pokemon trovato
+        }
+        return null; // condizione in cui non si arriva mai --> è sicuramente presente
+    }
+     */
+
+
 
 
 

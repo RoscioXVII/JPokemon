@@ -18,14 +18,18 @@ public class Pokemon {
 
     private String spriteFront;
     private String spriteBack;
+    private String spriteMini;
 
-    public Pokemon(String nome, String tipo1,String tipo2, int lvl, int ps, int esp){
+    public Pokemon(String nome, String tipo1,String tipo2, int lvl, int ps, int esp, String spriteFront, String spriteBack, String spriteMini){
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
         this.lvl = lvl;
         this.ps = ps;   // queste ultime due poi ci penso io
-        this. esp = esp;
+        this.esp = esp;
+        this.spriteFront = spriteFront;
+        this.spriteBack = spriteBack;
+        this.spriteMini = spriteMini;
     }
     public String getNome(){
         return nome;
@@ -62,5 +66,17 @@ public class Pokemon {
 
     public void setPs(int ps) {
         this.ps = ps;
+    }
+
+    public String getSpriteFront() {
+        return spriteFront;
+    }
+
+    public String getSpriteBack() {
+        return spriteBack;
+    }
+
+    public String getSpriteMini() {
+        return spriteMini;
     }
 }
