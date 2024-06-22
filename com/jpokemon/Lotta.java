@@ -212,14 +212,16 @@ public class Lotta extends JFrame {
         JLabel nomePok1 = new JLabel("Charizard"); //sostituire con pokemon.getNome()
         nomePok1.setBounds(1380,570,100,20);
         JProgressBar barraPSpok1 = new BarraPS(50).getBarraSalute(); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
-        barraPSpok1.setLocation(1380,580); //PS del pokemonLocale
+        barraPSpok1.setLocation(1380,590); //PS del pokemonLocale
+        barraPSpok1.setSize(500,20); // DA LEVARE
         JLabel PsPok1 = new JLabel(50 + "/" + 50); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
         PsPok1.setBounds(1380,610,100,20);
         //AVVERSARI
         JLabel nomePok2 = new JLabel("Blastoise");
         nomePok2.setBounds(85,105,100,20);
         JProgressBar barraPSpok2 = new BarraPS(100).getBarraSalute();
-        barraPSpok2.setLocation(85,113); //PS del pokemonAvversario - potrei usare anche qui il setBounds
+        barraPSpok2.setLocation(85,123); //PS del pokemonAvversario - potrei usare anche qui il setBounds
+        barraPSpok2.setSize(500,20); // DA LEVARE
         JLabel PsPok2 = new JLabel(100+"/"+100);
         PsPok2.setBounds(85,143,100,20);
         pannello.add(barraPSpok1);
@@ -244,7 +246,6 @@ public class Lotta extends JFrame {
         squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
         squadra[0]=cambio;
     }
-
 
     // devo cambiare tutti i riferimenti al pokemon vecchio con quello nuovo
     //utilizzo metodo per risalire dal nome all'istanza del pokemon vera e propria che sta dentro pokemon

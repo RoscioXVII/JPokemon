@@ -9,6 +9,7 @@ public class Pokemon {
     private int esp; // esperienza per l'aumento del livello
     private Mossa[] mosse = new Mossa[4];
     //statistiche base
+
     private int ps;
     private int attacco;
     private int difesa;
