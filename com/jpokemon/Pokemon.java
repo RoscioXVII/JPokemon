@@ -20,17 +20,26 @@ public class Pokemon {
     private String spriteFront;
     private String spriteBack;
     private String spriteMini;
+    private int lvlEvoluzione;
+    private String nomeEvoluzione;
 
-    public Pokemon(String nome, String tipo1,String tipo2, int lvl, int ps, int esp, String spriteFront, String spriteBack, String spriteMini){
+    public Pokemon(String nome, String tipo1,String tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
+                   int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita){ // devo trovare il modo di mettere le mosse
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
-        this.lvl = lvl;
+        this.lvlEvoluzione = lvlEvoluzione;
+        this.nomeEvoluzione = nomeEvoluzione;
         this.ps = ps;   // queste ultime due poi ci penso io
         this.esp = esp;
-        this.spriteFront = spriteFront;
-        this.spriteBack = spriteBack;
-        this.spriteMini = spriteMini;
+        this.attacco = attacco;
+        this.difesa = difesa;
+        this.attaccoSpeciale = attaccoSpeciale;
+        this.difesaSpeciale = difesaSpeciale;
+        this.velocita = velocita;
+        this.spriteFront = "img/front/"+nome.toLowerCase() + "-front.gif";
+        this.spriteBack = "img/retro/"+nome.toLowerCase() + "-retro.gif";
+        this.spriteMini = "img/mini/"+nome.toLowerCase() + "-mini.gif";
     }
     public String getNome(){
         return nome;
@@ -80,4 +89,7 @@ public class Pokemon {
     public String getSpriteMini() {
         return spriteMini;
     }
+
+    public void Evolvi(){} // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
+    public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
 }

@@ -2,6 +2,7 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Finestra extends JFrame {
     private CardLayout cardLayout;
@@ -9,7 +10,7 @@ public class Finestra extends JFrame {
 
 
 
-    public Finestra(){
+    public Finestra() throws IOException {
         setTitle("JPokemon");
         setSize(1920,1080); // posso anche fare il set location
         setLocationRelativeTo(null);// per impostare la posizione della finestra

@@ -1,0 +1,10 @@
+Bulbasaur:erba:veleno:tackle:growl:none:none:16:ivysaur:45:64:49:49:65:65:45
+Ivysaur:erba:veleno:tackle:growl:leech seed:vine whip:32:venusaur:60:141:62:63:80:80:60
+Venusaur:erba:veleno:tackle:leech seed:vine whip:razor leaf:none:none:80:208:82:83:100:100:80
+Charmender:fuoco:none:scratch:growl:ember:none:16:charmeleon:39:65:52:43:60:50:65
+Charmeleon:fuoco:none:scratch:growl:ember:none:36:charizard:58:142:64:58:80:65:80
+Charizard:fuoco:volo:lanciafiamme:graffio:ember:leer:none:none:78:209:84:78:109:85:100
+Squirtle:acqua:none:tackle:tail whip:none:none:16:wartortle:44:66:48:65:50:64:43
+Wartortle:acqua:none:bubble:water gun:36:blastoise:59:143:63:80:65:80:58
+Blastoise:acqua:none:tail whip:water gun:bite:withdraw:none:none:79:210:83:100:85:105:78
+// qui definisco i pokemon con questo formato (nome-tipo1-tipo2-mosse[4]) - livello evoluzione - nomeEvoluzione - ps - esp - attacco - difesa - speciale - velocita

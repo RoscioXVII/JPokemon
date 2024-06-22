@@ -1,53 +1,53 @@
 Absorb:Erba:Speciale:20:100:25:Recupera:0.5:Danno
 Acid:Veleno:Speciale:40:100:30:Abbassa:Difesa Speciale
-Acid Armor:Stato:null:null:20:Effetto
-Agility:Stato:null:null:30:Effetto
-Amnesia:Stato:null:null:20:Effetto
-Aurora Beam:Speciale:65:100:20:Effetto
-Barrage:Fisico:15:85:20:Effetto
-Barrier:Stato:null:null:20:Effetto
-Bide
-Bind
-Bite
-Blizzard
-Body Slam
-Bone Club
-Bonemerang
-Bubble
-Bubble Beam
-Clamp
-Comet Punch
-Confuse Ray
-Confusion
-Constrict
-Conversion
-Counter
-Crabhammer
-Cut
-Defense Curl
-Dig
-Disable
-Dizzy Punch
-Double Kick
-Double Slap
-Double Team
-Double-Edge
-Dragon Rage
-Dream Eater
-Drill Peck
-Earthquake
-Egg Bomb
-Ember
-Explosion
-Fire Blast
-Fire Punch
-Fire Spin
-Fissure
-Flamethrower
-Flash
-Fly
-Focus Energy
-Fury Attack
+Acid Armor:Veleno:Stato:null:null:20:Effetto
+Agility:Psico:Stato:null:null:30:Effetto
+Amnesia:Psico:Stato:null:null:20:Effetto
+Aurora Beam:Ghiaccio:Speciale:65:100:20:Effetto
+Barrage:Normale:Fisico:15:85:20:Effetto
+Barrier:Normale:Stato:null:null:20:Effetto
+Bide:Normale:Fisico:null:null:10
+Bind:Normale:Fisico:15:85:20
+Bite:Buio:Fisico:60:100:25
+Blizzard:Ghiaccio:Speciale:110:70:5
+Body Slam:Normale:Fisico:85:100:15
+Bone Club:Terra:Fisico:65:85:20
+Bonemerang:Terra:Fisico:50:90:10
+Bubble:Acqua:Speciale:40:100:30
+Bubble Beam:Acqua:Speciale:65:100:20
+Clamp:Acqua:Fisico:35:85:15
+Comet Punch:Normale:Fisico:18:85:15
+Confuse Ray:Spettro:Stato:null:100:10
+Confusion:Psico:Speciale:50:100:25
+Constrict:Normale:Fisico:10:100:35
+Conversion:Normale:Stato:null:null:30
+Counter:Lotta:Fisico:null:100:20
+Crabhammer:Acqua:Fisico:100:90:10
+Cut:Normale:Fisico:50:95:30
+Defense Curl:Normale:Stato:null:null:40
+Dig:Terra:Fisico:80:100:10
+Disable:Normale:Stato:null:100:20
+Dizzy Punch:Normale:Fisico:70:100:10
+Double Kick:Lotta:Fisico:30:100:30
+Double Slap:Normale:Fisico:15:85:10
+Double Team:Normale:Stato:null:null:15
+Double-Edge:Normale:Fisico:120:100:15
+Dragon Rage:Drago:Speciale:null:100:10
+Dream Eater:Psico:Speciale:100:100:15
+Drill Peck:Volo:Fisico:80:100:20
+Earthquake:Terra:Fisico:100:100:10
+Egg Bomb:Normale:Fisico:100:75:10
+Ember:Fuoco:Speciale:40:100:25
+Explosion:Normale:Fisico:250:100:5
+Fire Blast:Fuoco:Speciale:110:85:5
+Fire Punch:Fuoco:Fisico:75:100:15
+Fire Spin:Fuoco:Speciale:35:85:15
+Fissure:Terra:Fisico:null:30:5
+Flamethrower:Fuoco:Speciale:90:100:15
+Flash:Normale:Stato:null:100:15
+Fly:Volo:Fisico:90:95:15
+Focus Energy:Normale:Stato:null:null:30
+Fury Attack:Normale:Fisico:15:85:20
 Fury Swipes
 Glare
 Growl

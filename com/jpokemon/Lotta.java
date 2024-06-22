@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,13 +31,13 @@ public class Lotta extends JFrame {
     private JButton pokemon5 = new JButton("POKEMON 5");
     private JButton pokemon6 = new JButton("POKEMON 6");
 
-    private JButton Indietro = new JButton("Indietro");
+    private JButton indietro = new JButton("INDIETRO");
     private JPanel pannello;
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
 
-    public Lotta(){
+    public Lotta() throws IOException {
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
         //super("JPokemon");
         //setLayout(null);
@@ -57,9 +58,13 @@ public class Lotta extends JFrame {
         //pannello.setLayout(new BorderLayout());
 
         // PARTE AGGIUNTA POKEMON
+        Pokemon prova;
+        Reader provaLettore = new Reader();
+        prova=provaLettore.buildPokemon();
+
         // prova GIF -- carico la gif -->
         ImageIcon gif1 = new ImageIcon("img/front/blastoise-front.gif");
-        ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
+        ImageIcon gif2 = new ImageIcon(prova.getSpriteBack());                                                                                //ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
 
         // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
         Image img1 = gif1.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
@@ -117,7 +122,6 @@ public class Lotta extends JFrame {
         pokemon6.setLocation(200,900);
 
         //BOTTONE INDIETRO -- DA SISTEMARE
-        JButton indietro = new JButton("INDIETRO");
         indietro.setSize(200,300);
         indietro.setVisible(true);
         indietro.setLocation(400,700);
