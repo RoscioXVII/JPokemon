@@ -63,7 +63,7 @@ public class Pokemon {
 
     public int getPs() {
         return ps;
-    }
+    } // valore totale salute, non viene alterato
 
     public void setTipo1(String tipo) {
         this.tipo1 = tipo;
