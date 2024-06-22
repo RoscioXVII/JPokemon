@@ -3,18 +3,22 @@ package com.jpokemon;
 public class Mossa {
     private String nome;
     private Tipo tipo; // i tipi sono speciale, fisico, stato
-    private int danno;
+    private int potenza;
+
     private int precisione;
+    private TipoMossa tipoMossa;
     private int PP; // limite utilizzo mossa --> ad ogni utilizzo decrementa
 
-    public Mossa(String nome, Tipo tipo, int danno,int precisione, int pp){
+    public Mossa(String nome, Tipo tipo,TipoMossa tipoMossa, int potenza,int precisione, int pp){
         this.nome = nome;
         this.tipo = tipo;
-        this.danno = danno;
+        this.potenza = potenza;
         this.precisione = precisione;
         this.PP = pp;
     }
-
+    public TipoMossa getTipoMossa(){
+        return tipoMossa;
+    }
     public String getNome() {
         return nome;
     }
@@ -31,12 +35,12 @@ public class Mossa {
         this.tipo = tipo;
     }
 
-    public int getDanno() {
-        return danno;
+    public int getPotenza() {
+        return potenza;
     }
 
-    public void setDanno(int danno) {
-        this.danno = danno;
+    public void setPotenza(int potenza) {
+        this.potenza = potenza;
     }
 
     public int getPrecisione() {return precisione;}

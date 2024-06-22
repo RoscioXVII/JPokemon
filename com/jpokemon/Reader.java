@@ -1,6 +1,7 @@
 package com.jpokemon;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -37,7 +38,26 @@ public class Reader {
             }
             else
                 return null; // caso in cui sono finite le righe da leggere
-        } catch (IOException e){
+        } catch (FileNotFoundException e){
+            System.err.println("file non presente");
+            throw e;
+        }
+    }
+    public Mossa buildMossa() throws IOException {
+        String[] info;
+        try{
+            sc = new Scanner(new File(infoMosse));
+            if(sc.hasNextLine()){
+                info = sc.nextLine().split(":");
+                if (info.length<6) // numero argomenti file .txt che deve NECESSARIAMENTE avere
+                    throw new IOException("Il formato del file è errato, numero di elementi forniti insufficiente ");
+                // costruttore mossa -->
+                return new Mossa(info[0],Tipo.valueOf(info[1]),TipoMossa.valueOf(info[2]),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[4]));
+            }
+            else
+                return null;
+
+        } catch (FileNotFoundException e){
             System.err.println("file non presente");
             throw e;
         }

@@ -16,7 +16,9 @@ public class Reflection {
      */
 
 
-    public static void main(String[] args) throws Exception {
+    /*
+
+        public static void main(String[] args) throws Exception {
         Mossa Mosse = new Mossa("Azione",Tipo.NORMALE,40,100,30);
 
         Method[] metodi = Mossa.class.getDeclaredMethods();
@@ -28,5 +30,8 @@ public class Reflection {
 
         }
     }
+
+     */
+
 
 }
