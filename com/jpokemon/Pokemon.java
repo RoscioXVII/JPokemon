@@ -21,6 +21,7 @@ public class Pokemon {
     private String spriteBack;
     private String spriteMini;
     private int lvlEvoluzione;
+    private int salute; // la salute verrà aggiornata durante gli attacchi, ps è invece il valore totale
     private String nomeEvoluzione;
 
     public Pokemon(String nome, String tipo1,String tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
@@ -31,6 +32,7 @@ public class Pokemon {
         this.lvlEvoluzione = lvlEvoluzione;
         this.nomeEvoluzione = nomeEvoluzione;
         this.ps = ps;   // queste ultime due poi ci penso io
+        this.salute = ps;
         this.esp = esp;
         this.attacco = attacco;
         this.difesa = difesa;
@@ -88,6 +90,10 @@ public class Pokemon {
 
     public String getSpriteMini() {
         return spriteMini;
+    }
+
+    public int getSalute(){
+        return salute;
     }
 
     public void Evolvi(){} // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
