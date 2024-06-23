@@ -63,4 +63,34 @@ public class Reader {
         }
     }
 
+    public int contaRighe() throws FileNotFoundException { //cosi posso determinare il limite massimo del numero da generare tramite random
+        int i=0;
+        try{
+            Scanner sc = new Scanner(new File(infoPokemon)); // il random serve solo per i pokemon, non per le mosse
+            while(sc.hasNextLine())
+                i++;
+            return i;
+        } catch (FileNotFoundException e) {
+            System.err.println("File non trovato");
+            throw e;
+        }
+    }
+    //genero l'indice random e con questa funzione ottengo la riga desiderata
+    public String getRigaByIndex(String path,int index) throws FileNotFoundException {
+
+        try{
+            Scanner sc = new Scanner(new File(path));
+            for(int i=0;i<index;i++){
+                sc.nextLine(); // va avanti (ignora le righe non corrispondenti all'indice dato)
+            }
+            return sc.nextLine(); // riga desiderata
+
+
+        } catch (FileNotFoundException e){
+            System.err.println("File non trovato");
+            throw e;
+        }
+
+    }
+
 }
