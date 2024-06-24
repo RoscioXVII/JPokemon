@@ -1,5 +1,6 @@
 package com.jpokemon;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -206,7 +207,49 @@ public class Formule {
         return tabellaDebolezze.get(tipo1).get(tipo2);
     }
 
+    //MAPPA PER EFFETTI DELLE MOSSE
+    private static final Map<String,String> Effetti = new HashMap<>();
 
+    private static String[] creaStringa(){      //Dovuto creare questo perche' per qualche motivo non posso usare la funzione fatta su reader
+        Reader a = new Reader();
+        try{
+            return a.BuildHashMossa();
+        }catch(FileNotFoundException e) {
+            throw new RuntimeException("File non trovato"); // messa cosi perchè non essendo una classe non riesco a fare throw IOException
+        }
+    }
 
+    static{
+        String[] a = creaStringa();
+        int cont = a.length;
+
+        for(String i: a){
+            Effetti.put(i,null);
+        }
+
+        //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
+
+        Effetti.put(a[0],"Recupera:0.5:Danno");
+        Effetti.put(a[1],"Diminuisci:1:difesaSpeciale");
+        Effetti.put(a[2],"Aumenta:2:difesa");
+        Effetti.put(a[3],"Aumenta:2:velocita");
+        Effetti.put(a[4],"Aumenta:2:difesaSpeciale");
+        Effetti.put(a[5],"Diminuisci:1:attacco");
+        Effetti.put(a[6],"RipetiAttacco:2:5");
+        Effetti.put(a[7],"Aumenta:2:difesa");
+        Effetti.put(a[8],"Bide"); //mossa con effetto unico (salva il danno subito per due turni poi attacca con il doppio del danno subito)
+        Effetti.put(a[9],"Trappola"); //altro effetto unico
+        Effetti.put(a[10],"Tentenna:");
+
+    }
+
+    public void Aumenta(){
+
+    }
+    public void Diminuisci(){}
+    public void RipetiAttacco(){}
+    public void Bide(){}
+    public void Trappola(){}
+    public void Tentenna(){}
 
 }

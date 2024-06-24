@@ -3,6 +3,7 @@ package com.jpokemon;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Reader {
@@ -52,7 +53,7 @@ public class Reader {
                 if (info.length<6) // numero argomenti file .txt che deve NECESSARIAMENTE avere
                     throw new IOException("Il formato del file è errato, numero di elementi forniti insufficiente ");
                 // costruttore mossa -->
-                return new Mossa(info[0],Tipo.valueOf(info[1]),TipoMossa.valueOf(info[2]),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[4]));
+                return new Mossa(info[0],Tipo.valueOf(info[1]),TipoMossa.valueOf(info[2]),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
             }
             else
                 return null;
@@ -87,6 +88,37 @@ public class Reader {
 
 
         } catch (FileNotFoundException e){
+            System.err.println("File non trovato");
+            throw e;
+        }
+
+    }
+
+    public int contaRigheMosse() throws FileNotFoundException { //cosi posso determinare il massimo del file Mosse
+        int i=0;
+        try{
+            Scanner sc = new Scanner(new File(infoMosse));
+            while(sc.hasNextLine())
+                i++;
+            return i;
+        } catch (FileNotFoundException e) {
+            System.err.println("File non trovato");
+            throw e;
+        }
+    }
+
+    public String[] BuildHashMossa() throws FileNotFoundException {
+        String[] res = new String[contaRigheMosse()];
+        int i = 0;
+        try{
+            sc = new Scanner(new File(infoMosse));
+            while(sc.hasNextLine()){
+                res[i] = sc.nextLine(); //con questo mi creo una base per fare il for dopo nella classe formule
+                i++;
+            }
+            return res;
+
+        } catch(FileNotFoundException e) {
             System.err.println("File non trovato");
             throw e;
         }

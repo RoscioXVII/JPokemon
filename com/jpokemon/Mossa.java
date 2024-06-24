@@ -55,8 +55,6 @@ public class Mossa {
         this.PP = PP;
     }
 
-    public void ToString(){
-        System.out.println("Nome: "+nome);
-    }
+
 
 }

@@ -1,11 +1,11 @@
-Absorb:Erba:Speciale:20:100:25:Recupera:0.5:Danno
-Acid:Veleno:Speciale:40:100:30:Abbassa:Difesa Speciale
-Acid Armor:Veleno:Stato:null:null:20:Effetto
-Agility:Psico:Stato:null:null:30:Effetto
-Amnesia:Psico:Stato:null:null:20:Effetto
-Aurora Beam:Ghiaccio:Speciale:65:100:20:Effetto
-Barrage:Normale:Fisico:15:85:20:Effetto
-Barrier:Normale:Stato:null:null:20:Effetto
+Absorb:Erba:Speciale:20:100:25
+Acid:Veleno:Speciale:40:100:30
+Acid Armor:Veleno:Stato:null:null:20
+Agility:Psico:Stato:null:null:30
+Amnesia:Psico:Stato:null:null:20
+Aurora Beam:Ghiaccio:Speciale:65:100:20
+Barrage:Normale:Fisico:15:85:20
+Barrier:Normale:Stato:null:null:20
 Bide:Normale:Fisico:null:null:10
 Bind:Normale:Fisico:15:85:20
 Bite:Buio:Fisico:60:100:25
