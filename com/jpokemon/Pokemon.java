@@ -29,6 +29,7 @@ public class Pokemon {
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
+
         this.lvlEvoluzione = lvlEvoluzione;
         this.nomeEvoluzione = nomeEvoluzione;
         this.ps = ps;   // queste ultime due poi ci penso io
@@ -56,6 +57,27 @@ public class Pokemon {
     public String getTipo2() {
         return tipo2;
     }
+
+    public void setMosse(Mossa[] mosse){
+        this.mosse = mosse;
+    }
+    public Mossa[] getMosse(){
+        return mosse;
+    }
+    public String mossaString(){
+        String s = "";
+        for(int i = 0; i < mosse.length; i++) {
+            if(mosse[i] != null){
+                s += mosse[i].getNome() + " ";
+            }else{
+                s += "null ";
+            }
+
+        }
+        return s;
+    }
+
+
 
     public int getLvl() {
         return lvl;

@@ -10,7 +10,8 @@ public class Formule {
     public Formule(){}
 
     public static int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int bruttoColpo,int livello, int potenza, int attacco, int difesa){
-
+        //RICORDA CHE IL BRUTTO COLPO VA MESSO DA FUORI COSI PUOI FAR USCIRE IL MESSAGGIO IN CASO
+        //ricardate de mette il superefficace da fuori che se no non lo stampi mai
         double stab = 1;
         double superefficace = 1;
 
@@ -23,7 +24,7 @@ public class Formule {
                 stab = 1.5;
             }
         }
-
+        // da 0 a 4 con valori 0 0.25 0.5 1 2 4
         if(tipoPoke2_2 == null){
             superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1);
         }else{
@@ -204,6 +205,8 @@ public class Formule {
 
     }
 
+
+    //Prendi il valore del confronto tra i tipi
     public Double getCostanteMoltiplicativa(Tipo tipo1,Tipo tipo2){
         return tabellaDebolezze.get(tipo1).get(tipo2);
     }
@@ -241,7 +244,8 @@ public class Formule {
         Effetti.put(a[8],"Bide"); //mossa con effetto unico (salva il danno subito per due turni poi attacca con il doppio del danno subito)
         Effetti.put(a[9],"Trappola"); //altro effetto unico
         Effetti.put(a[10],"Tentenna:");
-
+        Effetti.put(a[54],"Diminuisci:1:attacco");
+        Effetti.put(a[145],"Diminuisci:1:difesa");
     }
     /*
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente

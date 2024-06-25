@@ -6,12 +6,13 @@ public class Mossa {
     private int potenza;
 
     private int precisione;
-    private TipoMossa tipoMossa;
+    private TipoMossa tipoMossa;//FISICO SPECIALE STATO
     private int PP; // limite utilizzo mossa --> ad ogni utilizzo decrementa
 
     public Mossa(String nome, Tipo tipo,TipoMossa tipoMossa, int potenza,int precisione, int pp){
         this.nome = nome;
         this.tipo = tipo;
+        this.tipoMossa = tipoMossa;
         this.potenza = potenza;
         this.precisione = precisione;
         this.PP = pp;
@@ -19,6 +20,9 @@ public class Mossa {
     public TipoMossa getTipoMossa(){
         return tipoMossa;
     }
+
+    public void setTipoMossa(TipoMossa tipoMossa){this.tipoMossa = tipoMossa;}
+
     public String getNome() {
         return nome;
     }
@@ -54,7 +58,5 @@ public class Mossa {
     public void setPP(int PP) {
         this.PP = PP;
     }
-
-
 
 }

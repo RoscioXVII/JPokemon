@@ -50,7 +50,7 @@ Focus Energy:Normale:Stato:null:null:30
 Fury Attack:Normale:Fisico:15:85:20
 Fury Swipes
 Glare
-Growl
+Growl:Normale:Stato:0:100:40
 Growth
 Guillotine
 Gust
@@ -108,7 +108,7 @@ Rock Slide
 Rock Throw
 Rolling Kick
 Sand Attack
-Scratch
+Scratch:Normale:Fisico:40:100:35
 Screech
 Seismic Toss
 Self-Destruct
@@ -140,8 +140,8 @@ Supersonic
 Surf
 Swift
 Swords Dance
-Tackle
-Tail Whip
+Tackle:Normale:Fisico:40:100:35
+Tail Whip:Normale:Stato:0:100:30
 Take Down
 Teleport
 Thrash

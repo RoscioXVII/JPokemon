@@ -47,7 +47,6 @@ public class Lotta extends JFrame {
         //setResizable(false);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         pannello = new JPanel(null);
         ImageIcon fondoLotta = new ImageIcon("img/lotta.png");
         Image img = fondoLotta.getImage().getScaledInstance(1920,700,Image.SCALE_SMOOTH);

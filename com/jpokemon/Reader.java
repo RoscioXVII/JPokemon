@@ -3,6 +3,7 @@ package com.jpokemon;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -44,6 +45,47 @@ public class Reader {
             throw e;
         }
     }
+
+    public Pokemon buildPokemonByString(String string) throws IOException {
+        String[] info;
+        info = string.split(":");
+        Mossa[] mossa = new Mossa[4];
+        int cont = 3;
+
+        for(int i = 0; i < 4; i++){
+            mossa[i] = buildMossaByString(info[cont]);
+            cont++;
+        }
+
+        Pokemon ritorno = new Pokemon(info[0],info[1],info[2],Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
+                Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
+                Integer.parseInt(info[14]),Integer.parseInt(info[15]));
+
+        ritorno.setMosse(mossa);
+
+        return ritorno;
+
+    }
+
+    public Mossa buildMossaByString(String string)throws IOException{
+        String[] info;
+        try{
+            sc = new Scanner(new File(infoMosse));
+            while (sc.hasNextLine()){
+                info = sc.nextLine().split(":");
+                if(info[0].equals(string)) {
+                    return new Mossa(info[0],Tipo.valueOf(info[1].toUpperCase()),TipoMossa.valueOf(info[2].toUpperCase()),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
+                }
+            }
+            return null; // non arrivera mai
+        } catch (FileNotFoundException e){
+            System.err.println("file non presente");
+            throw e;
+        }
+    }
+
+
+
     public Mossa buildMossa() throws IOException {
         String[] info;
         try{
