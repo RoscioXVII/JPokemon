@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class Lotta extends JFrame {
     private Pokemon[] squadra = new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
+    private Pokemon[] squadra2 = new Pokemon[6]; // squadra dell'avversario
     //devo fare un metodo grafico per selezionarli
 
 
@@ -73,9 +74,6 @@ public class Lotta extends JFrame {
         ImageIcon scaledGif1 = new ImageIcon(img1);
         ImageIcon scaledGif2 = new ImageIcon(img2);
 
-
-
-
         // creo un altro JLabel contenente la gif scalata --> DIMENSIONI MAGGIORATE
         JLabel labelgif1 = new JLabel(scaledGif1);
         JLabel labelgif2 = new JLabel(scaledGif2);
@@ -87,10 +85,9 @@ public class Lotta extends JFrame {
         labelgif1.setLocation(1200,150);
         labelgif2.setLocation(300,400);
 
-
         pannello.add(labelgif1); // posso specificare il borderlayout (area in cui va a posizionarsi)
         pannello.add(labelgif2); // aggiungo solo il label e successivamente lo posiziono
-
+//SET SIZE
         attacca.setSize(200,100);
         pokemon.setSize(200,100);
 
@@ -105,7 +102,7 @@ public class Lotta extends JFrame {
         pokemon4.setSize(200,100);
         pokemon5.setSize(200,100);
         pokemon6.setSize(200,100);
-
+// SET LOCATION
         attacca.setLocation(0,700);
         pokemon.setLocation(200,700);
 
@@ -201,7 +198,7 @@ public class Lotta extends JFrame {
 
         });
 
-        //QUESTO VA CAMBIATO MA DOPO STICAZZI daje siu
+        //QUESTO VA CAMBIATO MA DOPO
         mossa1.addActionListener(e -> {
             // esegue la mossa del pokemon --> mosse[]
             JOptionPane.showMessageDialog(Lotta.this, "bulbasaur usa " + mossa1.getText());

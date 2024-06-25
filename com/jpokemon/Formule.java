@@ -3,6 +3,7 @@ package com.jpokemon;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Formule {
 
@@ -228,7 +229,7 @@ public class Formule {
         }
 
         //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
-
+        //TODO: Devo finire di mettere tutte le mosse, prima capisco come devo formattarli e poi compilo tutto.
         Effetti.put(a[0],"Recupera:0.5:Danno");
         Effetti.put(a[1],"Diminuisci:1:difesaSpeciale");
         Effetti.put(a[2],"Aumenta:2:difesa");
@@ -242,14 +243,36 @@ public class Formule {
         Effetti.put(a[10],"Tentenna:");
 
     }
+    /*
+    TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
+    TODO: inoltre questo aumento/diminuzione delle statistiche arriva fino ad un massimo di 6 (se hai una statistica a +5 e fai una mossa da +2 il risultato deve essere +6)
+     */
+    public void Aumenta(int valore,String campo, int percentuale){}
+    public void Diminuisci(int valore,String campo, int percentuale){}
 
-    public void Aumenta(){
-
+    public int[] RipetiAttacco(int minimo, int massimo, int percentuale){
+        int[] attacchi = new int[5];
+        Random roll = new Random();
+        attacchi[0] = 1;
+        attacchi[1] = 1;
+        for(int i = 2; i<5; i++){
+            if(roll.nextInt() <= 37){
+                attacchi[i] = 1;
+            }else{
+                attacchi[i] = 0;
+                return attacchi; //Se returna qua allora ci sono un tot di attacchi non da calcolare che verranno controllati dal valore 0
+            }
+        }
+        return attacchi; // se ritorna qua ha fatto 5 attacchi
     }
-    public void Diminuisci(){}
-    public void RipetiAttacco(){}
-    public void Bide(){}
-    public void Trappola(){}
-    public void Tentenna(){}
+    public void Bide(){} // non implementiamo ti prego
+    public int Trappola(int hpMAX){
+        return hpMAX/8;
+    }
+    public Boolean Tentenna(int percentuale){
+        Random roll = new Random();
+
+        return roll.nextInt() < 30;
+    }
 
 }
