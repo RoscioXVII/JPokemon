@@ -264,8 +264,10 @@ public class Lotta extends JFrame {
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
             // esegue la mossa del pokemon --> mosse[]
-            barraPSpok2.diminuisci(finalTest[0].getPotenza());
-            contro.attacca(prova, finalTest[0]);
+            //barraPSpok2.diminuisci(finalTest[0].getPotenza());
+            //contro.attacca(prova, finalTest[0]);
+            //PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
+            barraPSpok2.diminuisci(contro.attacca(prova, finalTest[0]));
             PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
         });
         mossa2.addActionListener(e -> {

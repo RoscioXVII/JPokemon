@@ -31,9 +31,11 @@ public class Reader {
                 //mosse[1] = info[4];
                 //mosse[2] = info[5];
                 //mosse[3] = info[6];
+                Tipo tipo1 = Tipo.getTipoByString(info[1]);
+                Tipo tipo2 = Tipo.getTipoByString(info[2]);
 
 
-                return new Pokemon(info[0],info[1],info[2],Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
+                return new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
                         Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
                         Integer.parseInt(info[14]),Integer.parseInt(info[15]));
 
@@ -57,7 +59,10 @@ public class Reader {
             cont++;
         }
 
-        Pokemon ritorno = new Pokemon(info[0],info[1],info[2],Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
+        Tipo tipo1 = Tipo.getTipoByString(info[1]);
+        Tipo tipo2 = Tipo.getTipoByString(info[2]);
+
+        Pokemon ritorno = new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
                 Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
                 Integer.parseInt(info[14]),Integer.parseInt(info[15]));
 
@@ -111,6 +116,7 @@ public class Reader {
         try{
             Scanner sc = new Scanner(new File(infoPokemon)); // il random serve solo per i pokemon, non per le mosse
             while(sc.hasNextLine())
+
                 i++;
             return i;
         } catch (FileNotFoundException e) {
@@ -140,8 +146,11 @@ public class Reader {
         int i=0;
         try{
             Scanner sc = new Scanner(new File(infoMosse));
-            while(sc.hasNextLine())
+            while(sc.hasNextLine()){
+                sc.nextLine();
                 i++;
+            }//PRODUCTOR CODE NON TOCCARE PER NESSUN MOTIVO
+
             return i;
         } catch (FileNotFoundException e) {
             System.err.println("File non trovato");
@@ -165,6 +174,23 @@ public class Reader {
             throw e;
         }
 
+    }
+    public int cercaRiga(String nomeEvoluzione) throws FileNotFoundException {
+        int i=0;
+        try{
+            sc = new Scanner(new File(infoPokemon));
+            while(sc.hasNextLine()){
+                String[] info = sc.nextLine().split(":");
+                if(info[0].equals(nomeEvoluzione)){
+                    return i;
+                }
+                i++;
+            }
+        } catch (FileNotFoundException e){
+            System.err.println("File non trovato");
+            throw e;
+        }
+        return -1; // non è stata trovata l'evoluzione TODO: da cambiare
     }
 
 }

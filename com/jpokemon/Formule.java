@@ -7,11 +7,17 @@ import java.util.Random;
 
 public class Formule {
 
-    public Formule(){}
+    private static final Map<Tipo,Map<Tipo,Double>> tabellaDebolezze = new HashMap<>();
+    private static final Map<String,String> Effetti = new HashMap<>();
 
-    public static int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int bruttoColpo,int livello, int potenza, int attacco, int difesa){
+    public Formule(){
+
+    }
+    public int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int bruttoColpo,int livello, int potenza, int attacco, int difesa){
         //RICORDA CHE IL BRUTTO COLPO VA MESSO DA FUORI COSI PUOI FAR USCIRE IL MESSAGGIO IN CASO
-        //ricardate de mette il superefficace da fuori che se no non lo stampi mai
+        //STESSA COSA PER IL SUPEREFFICACE
+        Formule a =new Formule();
+
         double stab = 1;
         double superefficace = 1;
 
@@ -26,14 +32,36 @@ public class Formule {
         }
         // da 0 a 4 con valori 0 0.25 0.5 1 2 4
         if(tipoPoke2_2 == null){
-            superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1);
+            //superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1);
+            superefficace = a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1);
         }else{
-            superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1) * tabellaDebolezze.get(tipoMossa).get(tipoPoke2_2);
+            //superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1) * tabellaDebolezze.get(tipoMossa).get(tipoPoke2_2);
+            superefficace = a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1) * a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_2);;
         }
 
-        double danno = ((((((((2.0*livello)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * bruttoColpo * superefficace));
+        //double danno = ((((((((2.0*livello)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * bruttoColpo * superefficace));
+
+        double numeratore = (2.0*livello)/5;
+        numeratore += 2;
+        numeratore *= potenza;
+        numeratore *= (attacco/difesa);
+        numeratore /= 50;
+        numeratore += 2;
+
+        double danno = numeratore * stab * bruttoColpo * superefficace;
 
         return (int)danno;
+    }
+
+    public static int bruttoColpo(int velocita){
+        Random rand = new Random();
+        if(rand.nextInt(255) < velocita/2){
+            return 2;
+        }else{
+            return 1;
+        }
+
+
     }
 
     public static int exp(int baseExp, int livelloPokemon){
@@ -43,18 +71,13 @@ public class Formule {
         return (int)formula;
 
     }
-
     // TABELLA DEBOLEZZE - POI LA SPOSTIAMO DOVE MEGLIO è
     // è una mappa che associa un tipo ad un'altra mappa con associazione tipo-moltiplicatore
     // è una costante in quanto predefinita dalle meccaniche di gioco
     //infatti questa viene riempita una volta e non piu modificata
     // con coppie UNIVOCHE
-    private static final Map<Tipo,Map<Tipo,Double>> tabellaDebolezze = new HashMap<>();
-
     // static perche devo istanziare SEMPRE la tabella che anch'essa risulta essere un campo static
     static {
-
-
         for(Tipo tipo1: Tipo.values()){
             tabellaDebolezze.put(tipo1,new HashMap<>());
             for(Tipo tipo2: Tipo.values()){
@@ -205,14 +228,13 @@ public class Formule {
 
     }
 
-
     //Prendi il valore del confronto tra i tipi
     public Double getCostanteMoltiplicativa(Tipo tipo1,Tipo tipo2){
         return tabellaDebolezze.get(tipo1).get(tipo2);
     }
 
     //MAPPA PER EFFETTI DELLE MOSSE
-    private static final Map<String,String> Effetti = new HashMap<>();
+
 
     private static String[] creaStringa(){      //Dovuto creare questo perche' per qualche motivo non posso usare la funzione fatta su reader
         Reader a = new Reader();

@@ -1,9 +1,12 @@
 package com.jpokemon;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Pokemon {
     private String nome;
-    private String tipo1;
-    private String tipo2;
+    private Tipo tipo1;
+    private Tipo tipo2;
     private int lvl;
 
     private int esp; // esperienza per l'aumento del livello
@@ -24,7 +27,7 @@ public class Pokemon {
     private int salute; // la salute verrà aggiornata durante gli attacchi, ps è invece il valore totale
     private String nomeEvoluzione;
 
-    public Pokemon(String nome, String tipo1,String tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
+    public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
                    int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita){ // devo trovare il modo di mettere le mosse
         this.nome = nome;
         this.tipo1 = tipo1;
@@ -51,10 +54,10 @@ public class Pokemon {
         this.nome = nome;
     }
 
-    public String getTipo1() {
+    public Tipo getTipo1() {
         return tipo1;
     }
-    public String getTipo2() {
+    public Tipo getTipo2() {
         return tipo2;
     }
 
@@ -87,10 +90,10 @@ public class Pokemon {
         return ps;
     } // valore totale salute, non viene alterato
 
-    public void setTipo1(String tipo) {
+    public void setTipo1(Tipo tipo) {
         this.tipo1 = tipo;
     }
-    public void setTipo2(String tipo) {
+    public void setTipo2(Tipo tipo) {
         this.tipo2 = tipo;
     }
 
@@ -100,6 +103,20 @@ public class Pokemon {
 
     public void setPs(int ps) {
         this.ps = ps;
+    }
+
+    public void setDifesa(int difesa) {
+        this.difesa = difesa;
+    }
+    public int getDifesa(){
+        return difesa;
+    }
+
+    public void setAttacco(int attacco){
+        this.attacco = attacco;
+    }
+    public int getAttacco(){
+        return attacco;
     }
 
     public String getSpriteFront() {
@@ -118,18 +135,60 @@ public class Pokemon {
         return salute;
     }
 
-    public void evolvi(){} // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
+    public void evolvi() throws FileNotFoundException {
+        Reader lettore = new Reader();
+        try {
+            Pokemon evoluzione = lettore.buildPokemonByString(lettore.getRigaByIndex("testo/pokemon.txt",lettore.cercaRiga(this.nomeEvoluzione)));
+            this.copia(evoluzione);
+        } catch (IOException e) {
+            System.err.println("File non formattato correttamente ");
+        }
+    } // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
     public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
 
-    public void attacca(Pokemon avversario, Mossa mossa){
-        avversario.salute-=mossa.getPotenza();
-        int PP = mossa.getPP();
-        mossa.setPP(PP-1);
+    public int attacca(Pokemon avversario, Mossa mossa){
+
+        Formule b = new Formule();
+
+        //int bruttoColpo = Formule.bruttoColpo(this.velocita);
+
+        int danno = b.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),1,this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa());
+
+        avversario.salute-=danno;
+        mossa.setPP((mossa.getPP())-1);
+
+        return danno;
+    }
 
 
-        //mossa.getTipo();
-    } // ogni bottone è specifico per una mossa e
+    //mossa.getTipo();
+    // ogni bottone è specifico per una mossa e
     // richiama il metodo fornendo l'avversario
     // e la mossa (presa dall'array) che verrà eseguita
+    public void copia(Pokemon evoluzione){ //copia dopo evoluzione
+        this.nome = evoluzione.nome;
+        this.ps = evoluzione.ps;
+        this.esp = evoluzione.esp;
+        this.attacco = evoluzione.attacco;
+        this.difesa = evoluzione.difesa;
+        this.mosse = evoluzione.mosse;
+        this.attaccoSpeciale = evoluzione.attaccoSpeciale;
+        this.difesaSpeciale = evoluzione.difesaSpeciale;
+        this.velocita = evoluzione.velocita;
+        this.spriteFront = evoluzione.spriteFront;
+        this.spriteBack = evoluzione.spriteBack;
+        this.spriteMini = evoluzione.spriteMini;
+        this.nomeEvoluzione = evoluzione.nomeEvoluzione;
+        this.lvlEvoluzione = evoluzione.lvlEvoluzione;
+        this.tipo1 = evoluzione.tipo1;
+        this.tipo2 = evoluzione.tipo2;
+
+
+
+
+
+
+    }
+
 }
 
