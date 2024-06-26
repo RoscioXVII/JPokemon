@@ -13,7 +13,7 @@ public class Formule {
     public Formule(){
 
     }
-    public int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int bruttoColpo,int livello, int potenza, int attacco, int difesa){
+    public static int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int bruttoColpo,int livello, int potenza, int attacco, int difesa){
         //RICORDA CHE IL BRUTTO COLPO VA MESSO DA FUORI COSI PUOI FAR USCIRE IL MESSAGGIO IN CASO
         //STESSA COSA PER IL SUPEREFFICACE
         Formule a =new Formule();
@@ -38,24 +38,25 @@ public class Formule {
             //superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1) * tabellaDebolezze.get(tipoMossa).get(tipoPoke2_2);
             superefficace = a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1) * a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_2);;
         }
+        if(superefficace >= 2){
+            System.out.println("superefficace");
+        } else if (superefficace < 1 && superefficace > 0) {
+            System.out.println("non molto efficace....");
+        }else if (superefficace == 0) {
+            System.out.println("Non ha effetto!");
+        }
 
         //double danno = ((((((((2.0*livello)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * bruttoColpo * superefficace));
-
-        double numeratore = (2.0*livello)/5;
-        numeratore += 2;
-        numeratore *= potenza;
-        numeratore *= (attacco/difesa);
-        numeratore /= 50;
-        numeratore += 2;
-
-        double danno = numeratore * stab * bruttoColpo * superefficace;
+        double danno = ((((((((2.0*livello*bruttoColpo)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * superefficace));
 
         return (int)danno;
     }
 
     public static int bruttoColpo(int velocita){
         Random rand = new Random();
-        if(rand.nextInt(255) < velocita/2){
+        int x = rand.nextInt(255);
+        System.out.println(x);
+        if(x < velocita/2){
             return 2;
         }else{
             return 1;
@@ -71,6 +72,22 @@ public class Formule {
         return (int)formula;
 
     }
+
+    public static int floor(double valore){
+        return (int)valore;
+    }
+    //QUESTE DUE FORMULE PROBABILMENTE DOVRANNO ESSERE CHIAMATE OGNI LVL UP
+    public static int calcolaStatisticheBase(int statistica,int livello, int IV, int EV){
+        //HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
+        //Other Stats = (floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + 5) x Nature
+
+        return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + 5;
+
+    }
+    public static int calcolaHpBase(int statistica,int livello, int IV, int EV){
+        return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + livello + 10;
+    }
+
     // TABELLA DEBOLEZZE - POI LA SPOSTIAMO DOVE MEGLIO è
     // è una mappa che associa un tipo ad un'altra mappa con associazione tipo-moltiplicatore
     // è una costante in quanto predefinita dalle meccaniche di gioco

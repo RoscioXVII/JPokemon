@@ -82,10 +82,6 @@ public class Pokemon {
 
 // qui definisco i pokemon con questo formato (nome-tipo1-tipo2-mosse[4]) - livello evoluzione - nomeEvoluzione - ps - esp - attacco - difesa - speciale - velocita
 
-    public int getLvl() {
-        return lvl;
-    }
-
     public int getPs() {
         return ps;
     } // valore totale salute, non viene alterato
@@ -97,27 +93,21 @@ public class Pokemon {
         this.tipo2 = tipo;
     }
 
-    public void setLvl(int lvl) {
-        this.lvl = lvl;
-    }
+    public void setLvl(int lvl) {this.lvl = lvl;}
+    public int getLvl(){return lvl;}
 
     public void setPs(int ps) {
         this.ps = ps;
     }
 
-    public void setDifesa(int difesa) {
-        this.difesa = difesa;
-    }
-    public int getDifesa(){
-        return difesa;
-    }
+    public void setDifesa(int difesa) {this.difesa = difesa;}
+    public int getDifesa(){return difesa;}
 
-    public void setAttacco(int attacco){
-        this.attacco = attacco;
-    }
-    public int getAttacco(){
-        return attacco;
-    }
+    public void setAttacco(int attacco){this.attacco = attacco;}
+    public int getAttacco(){return attacco;}
+
+    public void setVelocita(int velocita){this.velocita = velocita;}
+    public int getVelocita(){return velocita;}
 
     public String getSpriteFront() {
         return spriteFront;
@@ -147,12 +137,9 @@ public class Pokemon {
     public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
 
     public int attacca(Pokemon avversario, Mossa mossa){
+        int bruttoColpo = Formule.bruttoColpo(this.velocita);
 
-        Formule b = new Formule();
-
-        //int bruttoColpo = Formule.bruttoColpo(this.velocita);
-
-        int danno = b.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),1,this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa());
+        int danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),bruttoColpo,this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa());
 
         avversario.salute-=danno;
         mossa.setPP((mossa.getPP())-1);
