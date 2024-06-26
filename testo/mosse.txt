@@ -1,12 +1,12 @@
 Absorb:Erba:Speciale:20:100:25
 Acid:Veleno:Speciale:40:100:30
-Acid Armor:Veleno:Stato:null:null:20
-Agility:Psico:Stato:null:null:30
-Amnesia:Psico:Stato:null:null:20
+Acid Armor:Veleno:Stato:0:-1:20
+Agility:Psico:Stato:0:-1:30
+Amnesia:Psico:Stato:0:-1:20
 Aurora Beam:Ghiaccio:Speciale:65:100:20
 Barrage:Normale:Fisico:15:85:20
-Barrier:Normale:Stato:null:null:20
-Bide:Normale:Fisico:null:null:10
+Barrier:Normale:Stato:0:-1:20
+Bide:Normale:Fisico:0:-1:10
 Bind:Normale:Fisico:15:85:20
 Bite:Buio:Fisico:60:100:25
 Blizzard:Ghiaccio:Speciale:110:70:5
@@ -17,22 +17,22 @@ Bubble:Acqua:Speciale:40:100:30
 Bubble Beam:Acqua:Speciale:65:100:20
 Clamp:Acqua:Fisico:35:85:15
 Comet Punch:Normale:Fisico:18:85:15
-Confuse Ray:Spettro:Stato:null:100:10
+Confuse Ray:Spettro:Stato:0:100:10
 Confusion:Psico:Speciale:50:100:25
 Constrict:Normale:Fisico:10:100:35
-Conversion:Normale:Stato:null:null:30
-Counter:Lotta:Fisico:null:100:20
+Conversion:Normale:Stato:0:-1:30
+Counter:Lotta:Fisico:0:100:20
 Crabhammer:Acqua:Fisico:100:90:10
 Cut:Normale:Fisico:50:95:30
-Defense Curl:Normale:Stato:null:null:40
+Defense Curl:Normale:Stato:0:-1:40
 Dig:Terra:Fisico:80:100:10
-Disable:Normale:Stato:null:100:20
+Disable:Normale:Stato:0:100:20
 Dizzy Punch:Normale:Fisico:70:100:10
 Double Kick:Lotta:Fisico:30:100:30
 Double Slap:Normale:Fisico:15:85:10
-Double Team:Normale:Stato:null:null:15
+Double Team:Normale:Stato:0:-1:15
 Double-Edge:Normale:Fisico:120:100:15
-Dragon Rage:Drago:Speciale:null:100:10
+Dragon Rage:Drago:Speciale:0:100:10
 Dream Eater:Psico:Speciale:100:100:15
 Drill Peck:Volo:Fisico:80:100:20
 Earthquake:Terra:Fisico:100:100:10
@@ -42,11 +42,11 @@ Explosion:Normale:Fisico:250:100:5
 Fire Blast:Fuoco:Speciale:110:85:5
 Fire Punch:Fuoco:Fisico:75:100:15
 Fire Spin:Fuoco:Speciale:35:85:15
-Fissure:Terra:Fisico:null:30:5
+Fissure:Terra:Fisico:0:30:5
 Flamethrower:Fuoco:Speciale:90:100:15
-Flash:Normale:Stato:null:100:15
+Flash:Normale:Stato:0:100:15
 Fly:Volo:Fisico:90:95:15
-Focus Energy:Normale:Stato:null:null:30
+Focus Energy:Normale:Stato:0:-1:30
 Fury Attack:Normale:Fisico:15:85:20
 Fury Swipes
 Glare

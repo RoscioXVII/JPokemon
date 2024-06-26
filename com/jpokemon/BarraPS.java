@@ -19,11 +19,6 @@ public class BarraPS extends JFrame {
         int salute = barraSalute.getValue();
         while(salute>=vita-danno){
             barraSalute.setValue(salute);
-            try{
-                Thread.sleep(150); // velocita decremento barra
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }
             salute--;
         }
         vita-=danno;

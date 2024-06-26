@@ -77,7 +77,7 @@ public class Pokemon {
         return s;
     }
 
-
+// qui definisco i pokemon con questo formato (nome-tipo1-tipo2-mosse[4]) - livello evoluzione - nomeEvoluzione - ps - esp - attacco - difesa - speciale - velocita
 
     public int getLvl() {
         return lvl;
@@ -118,6 +118,18 @@ public class Pokemon {
         return salute;
     }
 
-    public void Evolvi(){} // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
+    public void evolvi(){} // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
     public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
+
+    public void attacca(Pokemon avversario, Mossa mossa){
+        avversario.salute-=mossa.getPotenza();
+        int PP = mossa.getPP();
+        mossa.setPP(PP-1);
+
+
+        //mossa.getTipo();
+    } // ogni bottone è specifico per una mossa e
+    // richiama il metodo fornendo l'avversario
+    // e la mossa (presa dall'array) che verrà eseguita
 }
+
