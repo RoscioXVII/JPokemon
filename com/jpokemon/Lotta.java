@@ -35,12 +35,18 @@ public class Lotta extends JFrame {
 
     private JButton indietro = new JButton("INDIETRO");
     private JPanel pannello;
+    private JLabel nomePok1;
+    private JProgressBar barraPSpok1;
+    private JLabel labelgif1;
+    private JLabel PsPok1;
+    private JLabel labelgif2;
+
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
 
     public Lotta() throws IOException {
-        // i bottoni li dichiaro solo ma li istanzio tutti qui dentro, in quanto devono fare riferimento a oggetti non statici
+
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
         //super("JPokemon");
         //setLayout(null);
@@ -54,11 +60,11 @@ public class Lotta extends JFrame {
         Reader provaLettore = new Reader();
         prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
 
-        Pokemon contro;
-        contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
 
-
-
+        Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+        Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
+        squadra[0] = contro;
+        squadra[1] = squad2;
 
         pannello = new JPanel(null);
         ImageIcon fondoLotta = new ImageIcon("img/lotta.png");
@@ -73,10 +79,10 @@ public class Lotta extends JFrame {
 
         // prova GIF -- carico la gif -->
         ImageIcon gif1 = new ImageIcon(prova.getSpriteFront());
-        ImageIcon gif2 = new ImageIcon(contro.getSpriteBack());  //ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
+        ImageIcon gif2 = new ImageIcon(squadra[0].getSpriteBack());  //ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
 
-        Mossa[] test = new Mossa[4];
-        test = contro.getMosse();
+        Mossa[] test;
+        test = squadra[0].getMosse();
 
         mossa1 = new JButton(test[0].getNome()); //un pokemon ha sempre due mosse minimo
         mossa2 = new JButton(test[1].getNome());
@@ -93,7 +99,8 @@ public class Lotta extends JFrame {
 
 
 
-        pokemon1 = new JButton(contro.getNome(),new ImageIcon(contro.getSpriteMini()));
+        pokemon1 = new JButton(squadra[0].getNome(),new ImageIcon(squadra[0].getSpriteMini()));
+        pokemon2 = new JButton(squadra[1].getNome(), new ImageIcon(squadra[1].getSpriteMini()));
         // il resto lo prendo (anche questo in realtà) dall'array squadra
         // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
         Image img1 = gif1.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
@@ -103,8 +110,10 @@ public class Lotta extends JFrame {
         ImageIcon scaledGif2 = new ImageIcon(img2);
 
         // creo un altro JLabel contenente la gif scalata --> DIMENSIONI MAGGIORATE
+
         JLabel labelgif1 = new JLabel(scaledGif1);
-        JLabel labelgif2 = new JLabel(scaledGif2);
+        labelgif2 = new JLabel(scaledGif2);
+
         // il label sarà grande quanto le gif stesse
         labelgif1.setSize(300,300);//(gif1.getIconWidth(),gif1.getIconHeight()); //SONO LE DIMENSIONI STANDARD
         labelgif2.setSize(300,300);//(gif2.getIconWidth(),gif2.getIconHeight());
@@ -168,63 +177,13 @@ public class Lotta extends JFrame {
         pannello.add(pokemon5,BorderLayout.SOUTH);
         pannello.add(pokemon6,BorderLayout.SOUTH);
 
-        attacca.setVisible(true);
-        pokemon.setVisible(true);   //non servono ma li metto per ricordarmi i nomi
-        indietro.setVisible(false);
-
-        mossa1.setVisible(false);
-        mossa2.setVisible(false);
-        mossa3.setVisible(false);
-        mossa4.setVisible(false);
-
-        pokemon1.setVisible(false);
-        pokemon2.setVisible(false);
-        pokemon3.setVisible(false);
-        pokemon4.setVisible(false);
-        pokemon5.setVisible(false);
-        pokemon6.setVisible(false);
+        vistaMain();
 
 
-        attacca.addActionListener(e -> {
-            attacca.setVisible(false);
-            pokemon.setVisible(false);
+        attacca.addActionListener(e -> vistaMosse());
 
-            mossa1.setVisible(true);
-            mossa2.setVisible(true);
-            mossa3.setVisible(true);
-            mossa4.setVisible(true);
-            indietro.setVisible(true);
-        });
-
-        pokemon.addActionListener(e ->{
-            attacca.setVisible(false);
-            pokemon.setVisible(false);
-
-            pokemon1.setVisible(true);
-            pokemon2.setVisible(true);
-            pokemon3.setVisible(true);
-            pokemon4.setVisible(true);
-            pokemon5.setVisible(true);
-            pokemon6.setVisible(true);
-            indietro.setVisible(true);
-
-        });
-        indietro.addActionListener(x ->{
-            attacca.setVisible(true);
-            pokemon.setVisible(true);
-            mossa1.setVisible(false);
-            mossa2.setVisible(false);
-            mossa3.setVisible(false);
-            mossa4.setVisible(false);
-            pokemon1.setVisible(false);
-            pokemon2.setVisible(false);
-            pokemon3.setVisible(false);
-            pokemon4.setVisible(false);
-            pokemon5.setVisible(false);
-            pokemon6.setVisible(false);
-            indietro.setVisible(false);
-
-        });
+        pokemon.addActionListener(e ->vistaPokemon());
+        indietro.addActionListener(x ->vistaMain());
 
 
 
@@ -232,12 +191,12 @@ public class Lotta extends JFrame {
         requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
 
         //LOCALE
-        JLabel nomePok1 = new JLabel(contro.getNome()); //sostituire con pokemon.getNome()
+        nomePok1 = new JLabel(squadra[0].getNome()); //sostituire con pokemon.getNome()
         nomePok1.setBounds(1380,570,100,20);
-        JProgressBar barraPSpok1 = new BarraPS(contro.getPs()).getBarraSalute(); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
+        barraPSpok1 = new BarraPS(squadra[0].getPs()).getBarraSalute(); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
         barraPSpok1.setLocation(1380,590); //PS del pokemonLocale
         barraPSpok1.setSize(500,20); // DA LEVARE
-        JLabel PsPok1 = new JLabel(contro.getPs() + "/" + contro.getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
+        PsPok1 = new JLabel(squadra[0].getPs() + "/" + squadra[0].getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
         PsPok1.setBounds(1380,610,100,20);
         //AVVERSARI
         JLabel nomePok2 = new JLabel(prova.getNome());
@@ -264,31 +223,32 @@ public class Lotta extends JFrame {
 
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
-            barraPSpok2.diminuisci(contro.attacca(prova, finalTest[0]));
+            barraPSpok2.diminuisci(squadra[0].attacca(prova, finalTest[0]));
             PsPok2.setText(prova.getPs()+"/"+a);  //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
         });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
         mossa2.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[1].getPotenza());
-            contro.attacca(prova, finalTest[1]);
+            squadra[0].attacca(prova, finalTest[1]);
             PsPok2.setText(prova.getPs()+"/"+a);
         });
 
         mossa3.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[2].getPotenza());
-            contro.attacca(prova, finalTest[2]);
+            squadra[0].attacca(prova, finalTest[2]);
             PsPok2.setText(prova.getPs()+"/"+a);
         });
 
         mossa4.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[3].getPotenza());
-            contro.attacca(prova, finalTest[3]);
+            squadra[0].attacca(prova, finalTest[3]);
             PsPok2.setText(prova.getPs()+"/"+a);
         });
 
-        pokemon2.addActionListener(e->{
-            // cambio pokemon con riferimenti
-
-        });
+        pokemon2.addActionListener(e->cambiaPokemon(1));
+        pokemon3.addActionListener(e->cambiaPokemon(2));
+        pokemon4.addActionListener(e->cambiaPokemon(3));
+        pokemon5.addActionListener(e->cambiaPokemon(4));
+        pokemon6.addActionListener(e->cambiaPokemon(5));
 
 
 
@@ -303,12 +263,82 @@ public class Lotta extends JFrame {
         Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
         squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
         squadra[0]=cambio;
+        aggiornaUI();
     }
 
     // TODO: da implementare viene eseguita quando viene cambiato un pokemon dalla schermata principale
     //  oppure quando un pokemon viene sconfitto, e quindi viene sotituito con un altro
-    public void cambiaPokemon(){}
 
+    private void aggiornaUI(){
+        nomePok1.setText(squadra[0].getNome());
+
+        barraPSpok1.setMaximum(squadra[0].getPs());
+        barraPSpok1.setValue(squadra[0].getPs());
+        PsPok1.setText(squadra[0].getPs() + "/" + squadra[0].getPs());
+
+
+        // Aggiorna le GIF
+
+        ImageIcon img = new ImageIcon(squadra[0].getSpriteBack());
+        Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        labelgif2.setIcon(new ImageIcon(scaledGif));
+
+        // devo aggiornare le gif anche nella schermata di selezione dei pokemon
+        pokemon1.setText(squadra[0].getNome());
+        pokemon1.setIcon(new ImageIcon(squadra[0].getSpriteMini()));
+        pokemon2.setText(squadra[1].getNome());
+        pokemon2.setIcon(new ImageIcon(squadra[1].getSpriteMini()));
+
+
+
+
+        // Aggiorna le mosse
+        Mossa[] mosse = squadra[0].getMosse();
+        mossa1.setText(mosse[0].getNome());
+        mossa2.setText(mosse[1].getNome());
+        mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
+        mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
+    }
+
+
+    private void vistaMosse(){
+        attacca.setVisible(false);
+        pokemon.setVisible(false);
+
+        mossa1.setVisible(true);
+        mossa2.setVisible(true);
+        mossa3.setVisible(true);
+        mossa4.setVisible(true);
+        indietro.setVisible(true);
+    }
+    private void vistaPokemon(){
+        attacca.setVisible(false);
+        pokemon.setVisible(false);
+
+        pokemon1.setVisible(true);
+        pokemon2.setVisible(true);
+        pokemon3.setVisible(true);
+        pokemon4.setVisible(true);
+        pokemon5.setVisible(true);
+        pokemon6.setVisible(true);
+        indietro.setVisible(true);
+    }
+
+    private void vistaMain(){
+        attacca.setVisible(true);
+        pokemon.setVisible(true);
+        mossa1.setVisible(false);
+        mossa2.setVisible(false);
+        mossa3.setVisible(false);
+        mossa4.setVisible(false);
+        pokemon1.setVisible(false);
+        pokemon2.setVisible(false);
+        pokemon3.setVisible(false);
+        pokemon4.setVisible(false);
+        pokemon5.setVisible(false);
+        pokemon6.setVisible(false);
+        indietro.setVisible(false);
+    }
 
     // devo cambiare tutti i riferimenti al pokemon vecchio con quello nuovo
     //utilizzo metodo per risalire dal nome all'istanza del pokemon vera e propria che sta dentro pokemon
