@@ -21,13 +21,13 @@ public class Lotta extends JFrame {
     private JButton attacca = new JButton("Attacca");
     private JButton pokemon = new JButton("Pokemon");
 
-    private JButton mossa1;// = new JButton("MOSSA 1"); //pokemon.getmossa(1); --> pokemon ha array mosse[4]
-    private JButton mossa2;// = new JButton("MOSSA 2");
-    private JButton mossa3;// = new JButton("MOSSA 3");
-    private JButton mossa4;// = new JButton("MOSSA 4");
-    // FORMATO BOTTONE: NOME (pokemon.getNome()), IMAGEICON(pokemon.getSpriteMini);
-    private JButton pokemon1; // = new JButton("Charizard",new ImageIcon("img/mini/charizard-mini.gif")); //con un get del pokemon prendo l img la faccio imageicon e creo il bottone
-    private JButton pokemon2 = new JButton("Rapidash", new ImageIcon("img/mini/rapidash-mini.gif"));
+    private JButton mossa1;
+    private JButton mossa2;
+    private JButton mossa3;
+    private JButton mossa4;
+
+    private JButton pokemon1;
+    private JButton pokemon2;
     private JButton pokemon3 = new JButton("POKEMON 3");
     private JButton pokemon4 = new JButton("POKEMON 4");
     private JButton pokemon5 = new JButton("POKEMON 5");
@@ -60,9 +60,8 @@ public class Lotta extends JFrame {
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // PARTE AGGIUNTA POKEMON
-        Pokemon prova;
         Reader provaLettore = new Reader();
-        prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
+        Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
         squadra2[0] = prova;
 
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
@@ -223,14 +222,16 @@ public class Lotta extends JFrame {
         //QUESTO VA CAMBIATO MA DOPO
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo
         int a = squadra2[0].getPs();
-
+        cambioUtente=false;
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
             // implementare if con variabile booleana per capire chi dei due attacca (di chi è il turno)
             //posso anche dentro cambio contesto
+            // devo considerare anche la velocita delle due mosse
             if (!cambioUtente){
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[0]));
                 PsPok2.setText(squadra2[0].getPs()+"/"+a);
+                cambiaContesto();
             }
             else{
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest[0]));
@@ -356,13 +357,21 @@ public class Lotta extends JFrame {
 
     private void cambiaContesto(){
         // sarebbe la funz utile per lo scambio utente
-
+        Mossa[] mosse;
         // Aggiorna le mosse
-        Mossa[] mosse = squadra2[0].getMosse();
+        if(!cambioUtente)
+            mosse = squadra2[0].getMosse();
+        else
+            mosse = squadra[0].getMosse();
+
         mossa1.setText(mosse[0].getNome());
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
         mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
+        cambioUtente = !cambioUtente; // il contrario, quindi l'altro utente
+        // il cambio contesto si ha quando viene cambiato pokemon
+        // per il resto viene fatto un if sulla velocita delle mosse
+        // quindi per i casi normali è da rivedere
 
     }
 
