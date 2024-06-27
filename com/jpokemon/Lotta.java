@@ -237,15 +237,15 @@ public class Lotta extends JFrame {
         JProgressBar barraPSpok1 = new BarraPS(contro.getPs()).getBarraSalute(); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
         barraPSpok1.setLocation(1380,590); //PS del pokemonLocale
         barraPSpok1.setSize(500,20); // DA LEVARE
-        JLabel PsPok1 = new JLabel(contro.getSalute() + "/" + contro.getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
+        JLabel PsPok1 = new JLabel(contro.getPs() + "/" + contro.getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
         PsPok1.setBounds(1380,610,100,20);
         //AVVERSARI
         JLabel nomePok2 = new JLabel(prova.getNome());
         nomePok2.setBounds(85,105,100,20);
-        BarraPS barraPSpok2 = new BarraPS(prova.getSalute());
+        BarraPS barraPSpok2 = new BarraPS(prova.getPs());
         barraPSpok2.getBarraSalute().setLocation(85,123); //PS del pokemonAvversario - potrei usare anche qui il setBounds
         barraPSpok2.getBarraSalute().setSize(500,20); // DA LEVARE
-        JLabel PsPok2 = new JLabel(prova.getSalute()+"/"+prova.getPs()); // devo aggiornare questo valore
+        JLabel PsPok2 = new JLabel(prova.getPs()+"/"+prova.getPs()); // devo aggiornare questo valore
         PsPok2.setBounds(85,143,100,20);
         pannello.add(barraPSpok1);
         pannello.add(barraPSpok2.getBarraSalute());
@@ -260,32 +260,29 @@ public class Lotta extends JFrame {
 
         //QUESTO VA CAMBIATO MA DOPO
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo
+        int a = prova.getPs();
 
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
-            // esegue la mossa del pokemon --> mosse[]
-            //barraPSpok2.diminuisci(finalTest[0].getPotenza());
-            //contro.attacca(prova, finalTest[0]);
-            //PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
             barraPSpok2.diminuisci(contro.attacca(prova, finalTest[0]));
-            PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
-        });
+            PsPok2.setText(prova.getPs()+"/"+a);  //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
+        });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
         mossa2.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[1].getPotenza());
             contro.attacca(prova, finalTest[1]);
-            PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
+            PsPok2.setText(prova.getPs()+"/"+a);
         });
 
         mossa3.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[2].getPotenza());
             contro.attacca(prova, finalTest[2]);
-            PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
+            PsPok2.setText(prova.getPs()+"/"+a);
         });
 
         mossa4.addActionListener(e -> {
             barraPSpok2.diminuisci(finalTest[3].getPotenza());
             contro.attacca(prova, finalTest[3]);
-            PsPok2.setText(prova.getSalute()+"/"+prova.getPs());
+            PsPok2.setText(prova.getPs()+"/"+a);
         });
 
         pokemon2.addActionListener(e->{

@@ -11,20 +11,42 @@ public class Pokemon {
 
     private int esp; // esperienza per l'aumento del livello
     private Mossa[] mosse = new Mossa[4];
-    //statistiche base
 
-    private int ps;
+    //statistiche base
+    private int psBase;
+    private int attaccoBase;
+    private int difesaBase;
+    private int attaccoSpecialeBase;
+    private int difesaSpecialeBase;
+    private int velocitaBase;
+    //variabili per sprite e quelle per le evoluzioni
+    private String spriteFront;
+    private String spriteBack;
+    private String spriteMini;
+    private int lvlEvoluzione;
+    //Stats effettive ? dovrebbe funzionare cosi
+    private int ps; // la salute verrà aggiornata durante gli attacchi, ps è invece il valore BASE
     private int attacco;
     private int difesa;
     private int attaccoSpeciale;
     private int difesaSpeciale;
     private int velocita;
+    private int EV; //DA INSERIRE DENTRO IL COSTRUTTORE E DENTRO IL FILE DI TESTO DEI POKEMON
+    //SET per EXTRA
+    private int IVps;
+    private int IVattacco;
+    private int IVdifesa;
+    private int IVattaccoSpeciale;
+    private int IVdifesaSpeciale;
+    private int IVvelocita;
 
-    private String spriteFront;
-    private String spriteBack;
-    private String spriteMini;
-    private int lvlEvoluzione;
-    private int salute; // la salute verrà aggiornata durante gli attacchi, ps è invece il valore totale
+    private int EVps;
+    private int EVattacco;
+    private int EVdifesa;
+    private int EVattaccoSpeciale;
+    private int EVdifesaSpeciale;
+    private int EVvelocita;
+
     private String nomeEvoluzione;
 
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
@@ -32,34 +54,41 @@ public class Pokemon {
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
-
         this.lvlEvoluzione = lvlEvoluzione;
         this.nomeEvoluzione = nomeEvoluzione;
-        this.ps = ps;   // queste ultime due poi ci penso io
-        this.salute = ps;
-        this.esp = esp;
-        this.attacco = attacco;
-        this.difesa = difesa;
-        this.attaccoSpeciale = attaccoSpeciale;
-        this.difesaSpeciale = difesaSpeciale;
-        this.velocita = velocita;
+        this.psBase = ps;
+        //this.salute = ps;
+        this.esp = esp; //NOTA questa vale come xp "BASE" ovvero quella che ottieni VINCENDO contro il pokemon in questione
+        this.attaccoBase = attacco;
+        this.difesaBase = difesa;
+        this.attaccoSpecialeBase = attaccoSpeciale;
+        this.difesaSpecialeBase = difesaSpeciale;
+        this.velocitaBase = velocita;
         this.spriteFront = "img/front/"+nome.toLowerCase() + "-front.gif";
         this.spriteBack = "img/retro/"+nome.toLowerCase() + "-retro.gif";
         this.spriteMini = "img/mini/"+nome.toLowerCase() + "-mini.gif";
     }
-    public String getNome(){
-        return nome;
-    }
+
     public void setNome(String nome){
         this.nome = nome;
     }
+    public String getNome(){
+        return nome;
+    }
 
+    public void setTipo1(Tipo tipo) {
+        this.tipo1 = tipo;
+    }
+    public void setTipo2(Tipo tipo) {
+        this.tipo2 = tipo;
+    }
     public Tipo getTipo1() {
         return tipo1;
     }
     public Tipo getTipo2() {
         return tipo2;
     }
+
 
     public void setMosse(Mossa[] mosse){
         this.mosse = mosse;
@@ -79,35 +108,59 @@ public class Pokemon {
         }
         return s;
     }
+// i pokemon sono definiti con questo formato (nome-tipo1-tipo2-mosse[4]) - livello evoluzione - nomeEvoluzione - ps - esp - attacco - difesa - speciale - velocita
+// SET E GET STATS EFFETTIVE, levato quelli per le stats base che tanto devono rimanere sempre uguali
 
-// qui definisco i pokemon con questo formato (nome-tipo1-tipo2-mosse[4]) - livello evoluzione - nomeEvoluzione - ps - esp - attacco - difesa - speciale - velocita
-
+    public void setPs(int Ps){
+        this.ps = Ps;
+    }
     public int getPs() {
         return ps;
-    } // valore totale salute, non viene alterato
-
-    public void setTipo1(Tipo tipo) {
-        this.tipo1 = tipo;
     }
-    public void setTipo2(Tipo tipo) {
-        this.tipo2 = tipo;
+    public int getPsBase(){
+        return psBase;
     }
 
-    public void setLvl(int lvl) {this.lvl = lvl;}
-    public int getLvl(){return lvl;}
-
-    public void setPs(int ps) {
-        this.ps = ps;
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
     }
-
-    public void setDifesa(int difesa) {this.difesa = difesa;}
-    public int getDifesa(){return difesa;}
+    public int getLvl(){
+        return lvl;
+    }
 
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
+    public int getAttaccoBase(){return attaccoBase;}
+
+    public void setDifesa(int difesa) {this.difesa = difesa;}
+    public int getDifesa(){return difesa;}
+    public int getDifesaBase(){return difesaBase;}
+
+    public void setAttaccoSpeciale(int ATS){
+        this.attaccoSpeciale = ATS;
+    }
+    public int getAttaccoSpeciale(){
+        return attaccoSpeciale;
+    }
+    public int getAttaccoSpecialeBase(){
+        return attaccoSpecialeBase;
+    }
+
+    public void setDifesaSpeciale(int DFS){
+        this.difesaSpeciale = DFS;
+    }
+    public int getDifesaSpeciale(){
+        return difesaSpeciale;
+    }
+    public int getDifesaSpecialeBase(){
+        return difesaSpecialeBase;
+    }
 
     public void setVelocita(int velocita){this.velocita = velocita;}
     public int getVelocita(){return velocita;}
+    public int getVelocitaBase(){return velocitaBase;}
+
+    //per gli sprite basta il get
 
     public String getSpriteFront() {
         return spriteFront;
@@ -119,10 +172,6 @@ public class Pokemon {
 
     public String getSpriteMini() {
         return spriteMini;
-    }
-
-    public int getSalute(){
-        return salute;
     }
 
     public void evolvi() throws FileNotFoundException {
@@ -141,7 +190,7 @@ public class Pokemon {
 
         int danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),bruttoColpo,this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa());
 
-        avversario.salute-=danno;
+        avversario.ps-=danno;
         mossa.setPP((mossa.getPP())-1);
 
         return danno;
@@ -154,14 +203,14 @@ public class Pokemon {
     // e la mossa (presa dall'array) che verrà eseguita
     public void copia(Pokemon evoluzione){ //copia dopo evoluzione
         this.nome = evoluzione.nome;
-        this.ps = evoluzione.ps;
+        this.psBase = evoluzione.psBase;
         this.esp = evoluzione.esp;
-        this.attacco = evoluzione.attacco;
-        this.difesa = evoluzione.difesa;
+        this.attaccoBase = evoluzione.attaccoBase;
+        this.difesaBase = evoluzione.difesaBase;
         this.mosse = evoluzione.mosse;
-        this.attaccoSpeciale = evoluzione.attaccoSpeciale;
-        this.difesaSpeciale = evoluzione.difesaSpeciale;
-        this.velocita = evoluzione.velocita;
+        this.attaccoSpecialeBase = evoluzione.attaccoSpecialeBase;
+        this.difesaSpecialeBase = evoluzione.difesaSpecialeBase;
+        this.velocitaBase = evoluzione.velocitaBase;
         this.spriteFront = evoluzione.spriteFront;
         this.spriteBack = evoluzione.spriteBack;
         this.spriteMini = evoluzione.spriteMini;
@@ -169,11 +218,13 @@ public class Pokemon {
         this.lvlEvoluzione = evoluzione.lvlEvoluzione;
         this.tipo1 = evoluzione.tipo1;
         this.tipo2 = evoluzione.tipo2;
-
-
-
-
-
+        //nuove statistiche effettive ancora tocca implementare IV ed EV ma tanto l evoluzione non parte senza quindi tranquillo
+        this.setPs(Formule.calcolaHpBase(evoluzione.psBase,lvl,IVps,EVps));
+        this.setAttacco(Formule.calcolaStatisticheBase(evoluzione.attaccoBase,lvl,IVattacco,EVattacco));
+        this.setDifesa(Formule.calcolaStatisticheBase(evoluzione.difesaBase,lvl,IVdifesa,EVdifesa));
+        this.setAttaccoSpeciale(Formule.calcolaStatisticheBase(evoluzione.attaccoSpecialeBase,lvl,IVattaccoSpeciale,EVattaccoSpeciale));
+        this.setDifesaSpeciale(Formule.calcolaStatisticheBase(evoluzione.difesaSpecialeBase,lvl,IVdifesaSpeciale,EVdifesaSpeciale));
+        this.setVelocita(Formule.calcolaStatisticheBase(evoluzione.velocitaBase,lvl,IVvelocita,EVvelocita));
 
     }
 

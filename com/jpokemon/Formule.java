@@ -32,10 +32,8 @@ public class Formule {
         }
         // da 0 a 4 con valori 0 0.25 0.5 1 2 4
         if(tipoPoke2_2 == null){
-            //superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1);
             superefficace = a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1);
         }else{
-            //superefficace = tabellaDebolezze.get(tipoMossa).get(tipoPoke2_1) * tabellaDebolezze.get(tipoMossa).get(tipoPoke2_2);
             superefficace = a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1) * a.getCostanteMoltiplicativa(tipoMossa,tipoPoke2_2);;
         }
         if(superefficace >= 2){
@@ -46,7 +44,6 @@ public class Formule {
             System.out.println("Non ha effetto!");
         }
 
-        //double danno = ((((((((2.0*livello)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * bruttoColpo * superefficace));
         double danno = ((((((((2.0*livello*bruttoColpo)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * superefficace));
 
         return (int)danno;
@@ -55,8 +52,9 @@ public class Formule {
     public static int bruttoColpo(int velocita){
         Random rand = new Random();
         int x = rand.nextInt(255);
-        System.out.println(x);
+
         if(x < velocita/2){
+            System.out.println("BRUTTO COLPO!!!!!");
             return 2;
         }else{
             return 1;
@@ -77,12 +75,11 @@ public class Formule {
         return (int)valore;
     }
     //QUESTE DUE FORMULE PROBABILMENTE DOVRANNO ESSERE CHIAMATE OGNI LVL UP
+    //DI SOLITO IL CAMPO statistica SI RIFERISCE ALLA STATISTICA BASE DEL POKEMON
+    //HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
+    //Other Stats = (floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + 5) x Nature
     public static int calcolaStatisticheBase(int statistica,int livello, int IV, int EV){
-        //HP = floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + Level + 10
-        //Other Stats = (floor(0.01 x (2 x Base + IV + floor(0.25 x EV)) x Level) + 5) x Nature
-
         return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + 5;
-
     }
     public static int calcolaHpBase(int statistica,int livello, int IV, int EV){
         return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + livello + 10;

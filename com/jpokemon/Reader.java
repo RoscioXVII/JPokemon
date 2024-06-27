@@ -3,8 +3,11 @@ package com.jpokemon;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.text.Normalizer;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Reader {
@@ -49,6 +52,10 @@ public class Reader {
     }
 
     public Pokemon buildPokemonByString(String string) throws IOException {
+        Random a = new Random();    //SERVONO PER LA CREAZIONE DEGLI IV
+        int[] IV = new int[6];      //SPIEGAZIONE VELOCE: Valori random che vanno da 0 a 15 che indicano dove il pokemon "spicca" di piu
+                                    //ESEMPIO: se creiamo 2 pokemon, 1 snorlax e 1 charizard, sappiamo che charizard sarà sempre piu veloce
+                                    // se creiamo 2 charizard pero' grazie a questi IV uno avrà le statistiche migliori dell altro
         String[] info;
         info = string.split(":");
         Mossa[] mossa = new Mossa[4];
@@ -61,14 +68,34 @@ public class Reader {
 
         Tipo tipo1 = Tipo.getTipoByString(info[1]);
         Tipo tipo2 = Tipo.getTipoByString(info[2]);
+        int lvl = 5;
 
-        Pokemon ritorno = new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
+        for(int i = 0; i < 6; i++){
+            IV[i] = a.nextInt(15);
+        }
+        int Ps = Formule.calcolaHpBase(Integer.parseInt(info[9]),lvl,IV[0],0);
+        int attacco = Formule.calcolaStatisticheBase(Integer.parseInt(info[11]),lvl,IV[1],0);
+        int difesa = Formule.calcolaStatisticheBase(Integer.parseInt(info[12]),lvl,IV[2],0);
+        int attaccoSpeciale = Formule.calcolaStatisticheBase(Integer.parseInt(info[13]),lvl,IV[3],0);
+        int difesaSpeciale = Formule.calcolaStatisticheBase(Integer.parseInt(info[14]),lvl,IV[4],0);
+        int velocita = Formule.calcolaStatisticheBase(Integer.parseInt(info[15]),lvl,IV[5],0);
+
+        Pokemon pokemon = new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
                 Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
                 Integer.parseInt(info[14]),Integer.parseInt(info[15]));
 
-        ritorno.setMosse(mossa);
+        pokemon.setLvl(lvl);
 
-        return ritorno;
+        pokemon.setMosse(mossa);
+
+        pokemon.setPs(Ps);
+        pokemon.setAttacco(attacco);
+        pokemon.setDifesa(difesa);
+        pokemon.setAttaccoSpeciale(attaccoSpeciale);
+        pokemon.setDifesaSpeciale(difesaSpeciale);
+        pokemon.setVelocita(velocita);
+
+        return pokemon;
 
     }
 
