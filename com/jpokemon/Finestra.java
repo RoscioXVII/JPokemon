@@ -12,7 +12,7 @@ public class Finestra extends JFrame {
 
     public Finestra() throws IOException {
         setTitle("JPokemon");
-        setSize(1920,1080); // posso anche fare il set location
+        setSize(1280,720); // posso anche fare il set location
         setLocationRelativeTo(null);// per impostare la posizione della finestra
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 

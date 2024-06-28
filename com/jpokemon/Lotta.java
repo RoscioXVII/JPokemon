@@ -74,10 +74,10 @@ public class Lotta extends JFrame {
 
         pannello = new JPanel(null);
         ImageIcon fondoLotta = new ImageIcon("img/lotta.png");
-        Image img = fondoLotta.getImage().getScaledInstance(1920,700,Image.SCALE_SMOOTH);
+        Image img = fondoLotta.getImage().getScaledInstance(1280,400,Image.SCALE_SMOOTH);
         fondoLotta = new ImageIcon(img);
         JLabel label = new JLabel(fondoLotta);
-        label.setSize(1920, 700); // parte per l'aggiunta delle gif
+        label.setSize(1280, 400); // parte per l'aggiunta delle gif
         label.setLocation(0, 0);
         pannello.add(label);
         //pannello.setLayout(new BorderLayout());
@@ -109,8 +109,8 @@ public class Lotta extends JFrame {
         pokemon2 = new JButton(squadra[1].getNome(), new ImageIcon(squadra[1].getSpriteMini()));
         // il resto lo prendo (anche questo in realtà) dall'array squadra
         // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
-        Image img1 = gif1.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-        Image img2 = gif2.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        Image img1 = gif1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        Image img2 = gif2.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
         ImageIcon scaledGif1 = new ImageIcon(img1);
         ImageIcon scaledGif2 = new ImageIcon(img2);
@@ -121,12 +121,12 @@ public class Lotta extends JFrame {
         labelgif2 = new JLabel(scaledGif2);
 
         // il label sarà grande quanto le gif stesse
-        labelgif1.setSize(300,300);//(gif1.getIconWidth(),gif1.getIconHeight()); //SONO LE DIMENSIONI STANDARD
-        labelgif2.setSize(300,300);//(gif2.getIconWidth(),gif2.getIconHeight());
+        labelgif1.setSize(150,150);//(gif1.getIconWidth(),gif1.getIconHeight()); //SONO LE DIMENSIONI STANDARD
+        labelgif2.setSize(150,150);//(gif2.getIconWidth(),gif2.getIconHeight());
 
         //posizionamento gif
-        labelgif1.setLocation(1200,150);
-        labelgif2.setLocation(300,400);
+        labelgif1.setLocation(880,100);
+        labelgif2.setLocation(240,250);
 
         pannello.add(labelgif1); // posso specificare il borderlayout (area in cui va a posizionarsi)
         pannello.add(labelgif2); // aggiungo solo il label e successivamente lo posiziono
@@ -146,25 +146,25 @@ public class Lotta extends JFrame {
         pokemon5.setSize(200,100);
         pokemon6.setSize(200,100);
 // SET LOCATION
-        attacca.setLocation(0,700);
-        pokemon.setLocation(200,700);
+        attacca.setLocation(0,400);
+        pokemon.setLocation(200,400);
 
-        mossa1.setLocation(0,700);
-        mossa2.setLocation(200,700);
-        mossa3.setLocation(0,800);
-        mossa4.setLocation(200,800);
+        mossa1.setLocation(0,400);
+        mossa2.setLocation(200,400);
+        mossa3.setLocation(0,500);
+        mossa4.setLocation(200,500);
 
-        pokemon1.setLocation(0,700);
-        pokemon2.setLocation(200,700);
-        pokemon3.setLocation(0,800);
-        pokemon4.setLocation(200,800);
-        pokemon5.setLocation(0,900);
-        pokemon6.setLocation(200,900);
+        pokemon1.setLocation(0,400);
+        pokemon2.setLocation(200,400);
+        pokemon3.setLocation(0,500);
+        pokemon4.setLocation(200,500);
+        pokemon5.setLocation(0,600);
+        pokemon6.setLocation(200,600);
 
         //BOTTONE INDIETRO -- DA SISTEMARE
         indietro.setSize(200,300);
         indietro.setVisible(true);
-        indietro.setLocation(400,700);
+        indietro.setLocation(400,400);
 
         pannello.add(indietro);
 
@@ -197,22 +197,22 @@ public class Lotta extends JFrame {
 
         //LOCALE
         nomePok1 = new JLabel(squadra[0].getNome()); //sostituire con pokemon.getNome()
-        nomePok1.setBounds(1380,570,100,20);
+        nomePok1.setBounds(930,320,100,20);
         barraPSpok1 = new BarraPS(squadra[0].getPs()); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
-        barraPSpok1.getBarraSalute().setLocation(1380,590); //PS del pokemonLocale
-        barraPSpok1.getBarraSalute().setSize(500,20); // DA LEVARE
+        barraPSpok1.getBarraSalute().setLocation(930,335); //PS del pokemonLocale
+        barraPSpok1.getBarraSalute().setSize(310,20); // DA LEVARE
         PsPok1 = new JLabel(squadra[0].getPs() + "/" + squadra[0].getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
-        PsPok1.setBounds(1380,610,100,20);
+        PsPok1.setBounds(930,355,100,20);
         //AVVERSARI
         nomePok2 = new JLabel(squadra2[0].getNome());
-        nomePok2.setBounds(85,105,100,20);
+        nomePok2.setBounds(55,55,100,20);
         barraPSpok2 = new BarraPS(squadra2[0].getPs());
-        barraPSpok2.getBarraSalute().setLocation(85,123); //PS del pokemonAvversario - potrei usare anche qui il setBounds
-        barraPSpok2.getBarraSalute().setSize(500,20); // DA LEVARE
+        barraPSpok2.getBarraSalute().setLocation(55,70); //PS del pokemonAvversario - potrei usare anche qui il setBounds
+        barraPSpok2.getBarraSalute().setSize(310,20); // DA LEVARE
         PsPok2 = new JLabel(squadra2[0].getPs()+"/"+squadra2[0].getPs()); // devo aggiornare questo valore
-        PsPok2.setBounds(85,143,100,20);
+        PsPok2.setBounds(55,90,100,20);
         utente = new JLabel("UTENTE 1 ");
-        utente.setBounds(600,620,200,200);
+        utente.setBounds(605,320,200,200);
         pannello.add(utente);
         pannello.add(barraPSpok1.getBarraSalute());
         pannello.add(barraPSpok2.getBarraSalute());
@@ -304,33 +304,28 @@ public class Lotta extends JFrame {
         // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
 
         if(!cambioUtente){
-
-
             nomePok1.setText(squadra[0].getNome());
-
             barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
             barraPSpok1.getBarraSalute().setValue(squadra[0].getPs());
             PsPok1.setText(squadra[0].getPs() + "/" + squadra[0].getPs());
             // Aggiorna le GIF
 
             ImageIcon img = new ImageIcon(squadra[0].getSpriteBack());
-            Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+            Image scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             labelgif2.setIcon(new ImageIcon(scaledGif));
 
 
         }
         else{
-
-
             nomePok2.setText(squadra2[0].getNome());
-
             barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
             barraPSpok2.getBarraSalute().setValue(squadra2[0].getPs());
-            PsPok2.setText(squadra2[0].getPs() + "/" + squadra2[0].getPs());
+            PsPok2.setText(squadra2[0].getPs() + "/" + squadra2[0].getPs()); // al posto di get ps dovrei mettere le variabili temporanee a e b
+            // risolvo mettendo dentro pokemon salute e ps come prima
             // Aggiorna le GIF
 
             ImageIcon img = new ImageIcon(squadra2[0].getSpriteFront());
-            Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+            Image scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             labelgif1.setIcon(new ImageIcon(scaledGif));
 
         }
