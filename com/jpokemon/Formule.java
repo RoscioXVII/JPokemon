@@ -269,7 +269,7 @@ public class Formule {
 
         //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
         //TODO: Devo finire di mettere tutte le mosse, prima capisco come devo formattarli e poi compilo tutto.
-        Effetti.put(a[0],"Recupera:0.5:Danno");
+        Effetti.put(a[0],"Assorbimento");
         Effetti.put(a[1],"Diminuisci:1:difesaSpeciale");
         Effetti.put(a[2],"Aumenta:2:difesa");
         Effetti.put(a[3],"Aumenta:2:velocita");
@@ -287,32 +287,65 @@ public class Formule {
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
     TODO: inoltre questo aumento/diminuzione delle statistiche arriva fino ad un massimo di 6 (se hai una statistica a +5 e fai una mossa da +2 il risultato deve essere +6)
      */
-    public void Aumenta(int valore,String campo, int percentuale){}
-    public void Diminuisci(int valore,String campo, int percentuale){}
-
+    public void Aumenta(Pokemon pokemon,int valore,String campo, int percentuale){
+        int x;
+        switch (campo){
+            case "attacco" -> x = pokemon.aumentaAttacco(valore);
+            case "difesa" -> x = pokemon.aumentaDifesa(valore);
+            case "attaccoSpeciale" -> x = pokemon.aumentaAttaccoSpeciale(valore);
+            case "difesaSpeciale" -> x = pokemon.aumentaDifesaSpeciale(valore);
+            case "velocita" -> x =pokemon.aumentaVelocita(valore);
+            default -> x = -1;
+        }
+        if (x == -1){
+            System.out.println("Raggiunto massimo della statistica!");
+        }
+    }
+    public void Diminuisci(Pokemon pokemon,int valore,String campo, int percentuale, int ripetizioni){
+        int x;
+        switch (campo){
+            case "attacco" -> x = pokemon.diminuisciAttacco(valore);
+            case "difesa" -> x = pokemon.diminuisciDifesa(valore);
+            case "attaccoSpeciale" -> x = pokemon.diminuisciAttaccoSpeciale(valore);
+            case "difesaSpeciale" -> x = pokemon.diminuisciDifesaSpeciale(valore);
+            case "velocita" -> x =pokemon.diminuisciVelocita(valore);
+            default -> x = -1;
+        }
+        if (x == -1){
+            System.out.println("Raggiunto minimo della statistica!");
+        }
+    }
+    public int Assorbimento(int danno){
+        return danno/2;
+    }
     public int[] RipetiAttacco(int minimo, int massimo, int percentuale){
         int[] attacchi = new int[5];
         Random roll = new Random();
         attacchi[0] = 1;
         attacchi[1] = 1;
         for(int i = 2; i<5; i++){
-            if(roll.nextInt() <= 37){
+            int x = roll.nextInt();
+            if(x <= 37 && i <= 3){
                 attacchi[i] = 1;
-            }else{
+            } else if (x <= 25 && i > 3) {
+                attacchi[i] = 1;
+            }else {
                 attacchi[i] = 0;
                 return attacchi; //Se returna qua allora ci sono un tot di attacchi non da calcolare che verranno controllati dal valore 0
             }
         }
         return attacchi; // se ritorna qua ha fatto 5 attacchi
     }
-    public void Bide(){} // non implementiamo ti prego
+    public int Bide(int danno){
+        return danno * 2;
+    } // non implementiamo ti prego
     public int Trappola(int hpMAX){
         return hpMAX/8;
     }
     public Boolean Tentenna(int percentuale){
         Random roll = new Random();
 
-        return roll.nextInt() < 30;
+        return roll.nextInt() < percentuale;
     }
 
 }

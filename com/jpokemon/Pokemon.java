@@ -32,6 +32,13 @@ public class Pokemon {
     private int difesaSpeciale;
     private int velocita;
     private int EV; //DA INSERIRE DENTRO IL COSTRUTTORE E DENTRO IL FILE DI TESTO DEI POKEMON
+    //SET PER MOSSE
+    //SERVONO PER GESTIRE GLI AUMENTI E LA DIMINUZIONE DELLE STATISTICHE, IL MASSIMO VALE +6 il minimo vale -6
+    private int ripetizioniAttacco = 0;
+    private int ripetizioniDifesa = 0;
+    private int ripetizioniAttaccoSpeciale = 0;
+    private int ripetizioniDifesaSpeciale = 0;
+    private int ripetizioniVelocita = 0;
     //SET per EXTRA
     private int IVps;
     private int IVattacco;
@@ -173,6 +180,159 @@ public class Pokemon {
     public String getSpriteMini() {
         return spriteMini;
     }
+
+    public int aumentaAttacco(int valore){
+        if(this.ripetizioniAttacco == 6){
+            return -1;
+        }else if(this.ripetizioniAttacco+valore > 6){
+            while(this.ripetizioniAttacco < 6){
+                this.attacco += 1;
+                this.ripetizioniAttacco += 1;
+            }
+            return 1;
+        }else{
+            this.attacco = this.attacco + 1;
+            this.ripetizioniAttacco += 1;
+            return 1;
+        }
+    };
+    public int aumentaDifesa(int valore){
+        if(this.ripetizioniDifesa == 6){
+            return -1;
+        }else if(this.ripetizioniDifesa+valore > 6){
+            while(this.ripetizioniDifesa < 6){
+                this.difesa += 1;
+                this.ripetizioniDifesa += 1;
+            }
+            return 1;
+        }else{
+            this.difesa = this.difesa + 1;
+            this.ripetizioniDifesa += 1;
+            return 1;
+        }
+    };
+    public int aumentaAttaccoSpeciale(int valore){
+        if(this.ripetizioniAttaccoSpeciale == 6){
+            return -1;
+        }else if(this.ripetizioniAttaccoSpeciale+valore > 6){
+            while(this.ripetizioniAttaccoSpeciale < 6){
+                this.attaccoSpeciale += 1;
+                this.ripetizioniAttaccoSpeciale += 1;
+            }
+            return 1;
+        }else{
+            this.attaccoSpeciale = this.attaccoSpeciale + 1;
+            this.ripetizioniAttaccoSpeciale += 1;
+            return 1;
+        }
+    };
+    public int aumentaDifesaSpeciale(int valore){
+        if(this.ripetizioniDifesaSpeciale == 6){
+            return -1;
+        }else if(this.ripetizioniDifesaSpeciale+valore > 6){
+            while(this.ripetizioniDifesaSpeciale < 6){
+                this.difesaSpeciale += 1;
+                this.ripetizioniDifesaSpeciale += 1;
+            }
+            return 1;
+        }else{
+            this.difesaSpeciale = this.difesaSpeciale + 1;
+            this.ripetizioniDifesaSpeciale += 1;
+            return 1;
+        }
+    };
+    public int aumentaVelocita(int valore){
+        if(this.ripetizioniVelocita == 6){
+            return -1;
+        }else if(this.ripetizioniVelocita+valore > 6){
+            while(this.ripetizioniVelocita < 6){
+                this.velocita += 1;
+                this.ripetizioniVelocita += 1;
+            }
+            return 1;
+        }else{
+            this.velocita = this.velocita + 1;
+            this.ripetizioniVelocita += 1;
+            return 1;
+        }
+    };
+
+
+    public int diminuisciAttacco(int valore){
+        if(this.ripetizioniAttacco == -6){
+            return -1;
+        }else if(this.ripetizioniAttacco-valore < -6){
+            while(this.ripetizioniAttacco > -6){
+                this.attacco -= 1;
+                this.ripetizioniAttacco -= 1;
+            }
+            return 1;
+        }else{
+            this.attacco = this.attacco - 1;
+            return 1;
+        }
+    };
+    public int diminuisciDifesa(int valore){
+        if(this.ripetizioniDifesa == -6){
+            return -1;
+        }else if(this.ripetizioniDifesa-valore < -6){
+            while(this.ripetizioniDifesa > -6){
+                this.difesa -= 1;
+                this.ripetizioniDifesa -= 1;
+            }
+            return 1;
+        }else{
+            this.difesa = this.difesa - 1;
+            return 1;
+        }
+    };
+    public int diminuisciAttaccoSpeciale(int valore){
+        if(this.ripetizioniAttaccoSpeciale == -6){
+            return -1;
+        }else if(this.ripetizioniAttaccoSpeciale-valore < -6){
+            while(this.ripetizioniAttaccoSpeciale > -6){
+                this.attaccoSpeciale -= 1;
+                this.ripetizioniAttaccoSpeciale -= 1;
+            }
+            return 1;
+        }else{
+            this.attaccoSpeciale = this.attaccoSpeciale - 1;
+            return 1;
+        }
+    };
+    public int diminuisciDifesaSpeciale(int valore){
+        if(this.ripetizioniDifesaSpeciale == -6){
+            return -1;
+        }else if(this.ripetizioniDifesaSpeciale-valore < -6){
+            while(this.ripetizioniDifesaSpeciale > -6){
+                this.difesaSpeciale -= 1;
+                this.ripetizioniDifesaSpeciale -= 1;
+            }
+            return 1;
+        }else{
+            this.difesaSpeciale = this.difesaSpeciale - 1;
+            return 1;
+        }
+    };
+    public int diminuisciVelocita(int valore){
+        if(this.ripetizioniVelocita == -6){
+            return -1;
+        }else if(this.ripetizioniVelocita-valore < -6){
+            while(this.ripetizioniVelocita > -6){
+                this.velocita -= 1;
+                this.ripetizioniVelocita -= 1;
+            }
+            return 1;
+        }else{
+            this.velocita = this.velocita - 1;
+            return 1;
+        }
+    };
+
+
+
+
+
 
     public void evolvi() throws FileNotFoundException {
         Reader lettore = new Reader();
