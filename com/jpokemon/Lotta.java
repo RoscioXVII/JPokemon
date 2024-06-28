@@ -302,10 +302,9 @@ public class Lotta extends JFrame {
 
     private void aggiornaUI(){
         // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
-        Mossa[] mosse;
 
         if(!cambioUtente){
-            mosse=squadra[0].getMosse();
+
 
             nomePok1.setText(squadra[0].getNome());
 
@@ -318,16 +317,10 @@ public class Lotta extends JFrame {
             Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
             labelgif2.setIcon(new ImageIcon(scaledGif));
 
-            // devo aggiornare le gif anche nella schermata di selezione dei pokemon
-            pokemon1.setText(squadra[0].getNome());
-            pokemon1.setIcon(new ImageIcon(squadra[0].getSpriteMini()));
-            pokemon2.setText(squadra[1].getNome());
-            pokemon2.setIcon(new ImageIcon(squadra[1].getSpriteMini()));
-            // fare tutti gli altri
 
         }
         else{
-            mosse=squadra2[0].getMosse();
+
 
             nomePok2.setText(squadra2[0].getNome());
 
@@ -340,22 +333,9 @@ public class Lotta extends JFrame {
             Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
             labelgif1.setIcon(new ImageIcon(scaledGif));
 
-            // devo aggiornare le gif anche nella schermata di selezione dei pokemon
-            pokemon1.setText(squadra2[0].getNome());
-            pokemon1.setIcon(new ImageIcon(squadra2[0].getSpriteMini()));
-            pokemon2.setText(squadra2[1].getNome());
-            pokemon2.setIcon(new ImageIcon(squadra2[1].getSpriteMini()));
         }
+        cambiaContesto();
 
-
-
-        // Aggiorna le mosse
-
-        mossa1.setText(mosse[0].getNome());
-        mossa2.setText(mosse[1].getNome());
-        mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
-        mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
-        //cambiaContesto(); <-- serve perche se c'è il cambio pokemon c'è anche il cambio turno
     }
 
 
