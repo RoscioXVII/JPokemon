@@ -43,7 +43,9 @@ public class Lotta extends JFrame {
     private JLabel PsPok1;
     private JLabel PsPok2;
     private JLabel labelgif2;
+    private JLabel utente;
     private boolean cambioUtente;
+
 
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
@@ -209,6 +211,9 @@ public class Lotta extends JFrame {
         barraPSpok2.getBarraSalute().setSize(500,20); // DA LEVARE
         PsPok2 = new JLabel(squadra2[0].getPs()+"/"+squadra2[0].getPs()); // devo aggiornare questo valore
         PsPok2.setBounds(85,143,100,20);
+        utente = new JLabel("UTENTE 1 ");
+        utente.setBounds(600,620,200,200);
+        pannello.add(utente);
         pannello.add(barraPSpok1.getBarraSalute());
         pannello.add(barraPSpok2.getBarraSalute());
         pannello.add(nomePok1);
@@ -318,10 +323,12 @@ public class Lotta extends JFrame {
             pokemon1.setIcon(new ImageIcon(squadra[0].getSpriteMini()));
             pokemon2.setText(squadra[1].getNome());
             pokemon2.setIcon(new ImageIcon(squadra[1].getSpriteMini()));
+            // fare tutti gli altri
 
         }
         else{
             mosse=squadra2[0].getMosse();
+
             nomePok2.setText(squadra2[0].getNome());
 
             barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
@@ -348,7 +355,7 @@ public class Lotta extends JFrame {
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
         mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
-        //cambiaContesto();
+        //cambiaContesto(); <-- serve perche se c'è il cambio pokemon c'è anche il cambio turno
     }
 
 
@@ -399,14 +406,16 @@ public class Lotta extends JFrame {
         if(!cambioUtente){
             mosse = squadra2[0].getMosse();
             squad = squadra2;
+            utente.setText("UTENTE 2");
         }
 
         else{
             mosse = squadra[0].getMosse();
             squad = squadra;
+            utente.setText("UTENTE 1");
         }
 
-
+        // posso accorpare aggiornaUI e questa in una sola dato che le istruzioni solo duplicate
         mossa1.setText(mosse[0].getNome());
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
