@@ -63,6 +63,7 @@ public class Lotta extends JFrame {
         Reader provaLettore = new Reader();
         Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
         squadra2[0] = prova;
+        squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
 
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
@@ -220,8 +221,10 @@ public class Lotta extends JFrame {
 
 
         //QUESTO VA CAMBIATO MA DOPO
-        Mossa[] finalTest = test; // mi serve final, poi lo tolgo
+        Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
+        Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
         int a = squadra2[0].getPs();
+        int b = squadra[0].getPs();
         cambioUtente=false;
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
@@ -234,8 +237,9 @@ public class Lotta extends JFrame {
                 cambiaContesto();
             }
             else{
-                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest[0]));
-                PsPok1.setText(squadra[0].getPs()+"/"+a);
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[0]));
+                PsPok1.setText(squadra[0].getPs()+"/"+b);
+                cambiaContesto();
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
@@ -257,7 +261,7 @@ public class Lotta extends JFrame {
             squadra[0].attacca(prova, finalTest[3]);
             PsPok2.setText(prova.getPs()+"/"+a);
         });
-
+        // cambio UI per il secondo utente
         pokemon2.addActionListener(e->cambiaPokemon(1));
         pokemon3.addActionListener(e->cambiaPokemon(2));
         pokemon4.addActionListener(e->cambiaPokemon(3));
@@ -273,10 +277,18 @@ public class Lotta extends JFrame {
         return pannello;
     }
 
-    public void cambiaPokemon(int indice){ // quello contenuto nel bottone, viene ritornato dall actionlistener
-        Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
-        squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
-        squadra[0]=cambio;
+    public void cambiaPokemon(int indice){// quello contenuto nel bottone, viene ritornato dall actionlistener
+        if(!cambioUtente){
+            Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
+            squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
+            squadra[0]=cambio;
+        }
+        else{
+            Pokemon cambio = squadra2[indice]; // identifico il pokemon che subentrera nella lotta
+            squadra2[indice] = squadra2[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
+            squadra2[0]=cambio;
+        }
+
         aggiornaUI();
     }
 
@@ -284,35 +296,59 @@ public class Lotta extends JFrame {
     //  oppure quando un pokemon viene sconfitto, e quindi viene sotituito con un altro
 
     private void aggiornaUI(){
-        nomePok1.setText(squadra[0].getNome());
+        // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
+        Mossa[] mosse;
 
-        barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
-        barraPSpok1.getBarraSalute().setValue(squadra[0].getPs());
-        PsPok1.setText(squadra[0].getPs() + "/" + squadra[0].getPs());
+        if(!cambioUtente){
+            mosse=squadra[0].getMosse();
 
+            nomePok1.setText(squadra[0].getNome());
 
-        // Aggiorna le GIF
+            barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
+            barraPSpok1.getBarraSalute().setValue(squadra[0].getPs());
+            PsPok1.setText(squadra[0].getPs() + "/" + squadra[0].getPs());
+            // Aggiorna le GIF
 
-        ImageIcon img = new ImageIcon(squadra[0].getSpriteBack());
-        Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
-        labelgif2.setIcon(new ImageIcon(scaledGif));
+            ImageIcon img = new ImageIcon(squadra[0].getSpriteBack());
+            Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+            labelgif2.setIcon(new ImageIcon(scaledGif));
 
-        // devo aggiornare le gif anche nella schermata di selezione dei pokemon
-        pokemon1.setText(squadra[0].getNome());
-        pokemon1.setIcon(new ImageIcon(squadra[0].getSpriteMini()));
-        pokemon2.setText(squadra[1].getNome());
-        pokemon2.setIcon(new ImageIcon(squadra[1].getSpriteMini()));
+            // devo aggiornare le gif anche nella schermata di selezione dei pokemon
+            pokemon1.setText(squadra[0].getNome());
+            pokemon1.setIcon(new ImageIcon(squadra[0].getSpriteMini()));
+            pokemon2.setText(squadra[1].getNome());
+            pokemon2.setIcon(new ImageIcon(squadra[1].getSpriteMini()));
 
+        }
+        else{
+            mosse=squadra2[0].getMosse();
+            nomePok2.setText(squadra2[0].getNome());
+
+            barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
+            barraPSpok2.getBarraSalute().setValue(squadra2[0].getPs());
+            PsPok2.setText(squadra2[0].getPs() + "/" + squadra2[0].getPs());
+            // Aggiorna le GIF
+
+            ImageIcon img = new ImageIcon(squadra2[0].getSpriteFront());
+            Image scaledGif = img.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+            labelgif1.setIcon(new ImageIcon(scaledGif));
+
+            // devo aggiornare le gif anche nella schermata di selezione dei pokemon
+            pokemon1.setText(squadra2[0].getNome());
+            pokemon1.setIcon(new ImageIcon(squadra2[0].getSpriteMini()));
+            pokemon2.setText(squadra2[1].getNome());
+            pokemon2.setIcon(new ImageIcon(squadra2[1].getSpriteMini()));
+        }
 
 
 
         // Aggiorna le mosse
-        Mossa[] mosse = squadra[0].getMosse();
+
         mossa1.setText(mosse[0].getNome());
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
         mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
-        cambiaContesto();
+        //cambiaContesto();
     }
 
 
@@ -358,17 +394,38 @@ public class Lotta extends JFrame {
     private void cambiaContesto(){
         // sarebbe la funz utile per lo scambio utente
         Mossa[] mosse;
+        Pokemon[] squad;
         // Aggiorna le mosse
-        if(!cambioUtente)
+        if(!cambioUtente){
             mosse = squadra2[0].getMosse();
-        else
+            squad = squadra2;
+        }
+
+        else{
             mosse = squadra[0].getMosse();
+            squad = squadra;
+        }
+
 
         mossa1.setText(mosse[0].getNome());
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
         mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
-        cambioUtente = !cambioUtente; // il contrario, quindi l'altro utente
+        pokemon1.setText(squad[0].getNome());
+        pokemon1.setIcon(new ImageIcon(squad[0].getSpriteMini()));
+        pokemon2.setText(squad[1].getNome());
+        pokemon2.setIcon(new ImageIcon(squad[1].getSpriteMini()));
+        //pokemon3.setText(squad[2].getNome());
+        //pokemon3.setIcon(new ImageIcon(squad[2].getSpriteMini()));
+        //pokemon4.setText(squad[3].getNome());
+        //pokemon4.setIcon(new ImageIcon(squad[3].getSpriteMini()));
+        //pokemon5.setText(squad[4].getNome());
+        //pokemon5.setIcon(new ImageIcon(squad[4].getSpriteMini()));
+        //pokemon6.setText(squad[5].getNome());
+        //pokemon6.setIcon(new ImageIcon(squad[5].getSpriteMini()));
+        cambioUtente=!cambioUtente;
+
+         // il contrario, quindi l'altro utente
         // il cambio contesto si ha quando viene cambiato pokemon
         // per il resto viene fatto un if sulla velocita delle mosse
         // quindi per i casi normali è da rivedere
