@@ -228,8 +228,8 @@ public class Lotta extends JFrame {
         //QUESTO VA CAMBIATO MA DOPO
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
         Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
-        int a = squadra2[0].getPs();
-        int b = squadra[0].getPs();
+        int a = squadra2[0].getSalute();
+        int b = squadra[0].getSalute();
         cambioUtente=false;
         // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
         mossa1.addActionListener(e -> {
@@ -237,6 +237,7 @@ public class Lotta extends JFrame {
             //posso anche dentro cambio contesto
             // devo considerare anche la velocita delle due mosse
             if (!cambioUtente){
+                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[0].getNome());
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[0]));
                 PsPok2.setText(squadra2[0].getPs()+"/"+a);
                 cambiaContesto();

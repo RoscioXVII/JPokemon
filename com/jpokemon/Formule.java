@@ -249,7 +249,7 @@ public class Formule {
 
     //MAPPA PER EFFETTI DELLE MOSSE
 
-
+    /*
     private static String[] creaStringa(){      //Dovuto creare questo perche' per qualche motivo non posso usare la funzione fatta su reader
         Reader a = new Reader();
         try{
@@ -258,30 +258,185 @@ public class Formule {
             throw new RuntimeException("File non trovato"); // messa cosi perchè non essendo una classe non riesco a fare throw IOException
         }
     }
-
+    */
     static{
+        /*
         String[] a = creaStringa();
         int cont = a.length;
 
         for(String i: a){
             Effetti.put(i,null);
         }
-
+        */
         //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
         //TODO: Devo finire di mettere tutte le mosse, prima capisco come devo formattarli e poi compilo tutto.
-        Effetti.put(a[0],"Assorbimento");
-        Effetti.put(a[1],"Diminuisci:1:difesaSpeciale");
-        Effetti.put(a[2],"Aumenta:2:difesa");
-        Effetti.put(a[3],"Aumenta:2:velocita");
-        Effetti.put(a[4],"Aumenta:2:difesaSpeciale");
-        Effetti.put(a[5],"Diminuisci:1:attacco");
-        Effetti.put(a[6],"RipetiAttacco:2:5");
-        Effetti.put(a[7],"Aumenta:2:difesa");
-        Effetti.put(a[8],"Bide"); //mossa con effetto unico (salva il danno subito per due turni poi attacca con il doppio del danno subito)
-        Effetti.put(a[9],"Trappola"); //altro effetto unico
-        Effetti.put(a[10],"Tentenna:");
-        Effetti.put(a[54],"Diminuisci:1:attacco");
-        Effetti.put(a[145],"Diminuisci:1:difesa");
+        Effetti.put("Absorb","Assorbimento:Dopo");
+        Effetti.put("Acid","Diminuisci:1:difesaSpeciale:Dopo");
+        Effetti.put("Acid Armor","Aumenta:2:difesa:Dopo");
+        Effetti.put("Agility","Aumenta:2:velocita:Dopo");
+        Effetti.put("Amnesia","Aumenta:2:difesaSpeciale:Dopo");
+        Effetti.put("Aurora Beam","Diminuisci:1:attacco:Dopo");
+        Effetti.put("Barrage","RipetiAttacco:2:5:Durante");
+        Effetti.put("Barrier","Aumenta:2:difesa:Dopo");
+        Effetti.put("Bide","Bide"); //mossa con effetto unico (salva il danno subito per due turni poi attacca con il doppio del danno subito)
+        Effetti.put("Bind","Trappola"); //altro effetto unico
+        Effetti.put("Bite","Tentenna:Dopo");
+        Effetti.put("Blizzard",null);
+        Effetti.put("Body Slam",null);
+        Effetti.put("Bone Club",null);
+        Effetti.put("Bonemerang",null);
+        Effetti.put("Bubble",null);
+        Effetti.put("Bubble Beam",null);
+        Effetti.put("Clamp",null);
+        Effetti.put("Comet Punch",null);
+        Effetti.put("Confuse Ray",null);
+        Effetti.put("Confusion",null);
+        Effetti.put("Constrict",null);
+        Effetti.put("Conversion",null);
+        Effetti.put("Counter",null);
+        Effetti.put("Crabhammer",null);
+        Effetti.put("Cut",null);
+        Effetti.put("Defense Curl",null);
+        Effetti.put("Dig",null);
+        Effetti.put("Disable",null);
+        Effetti.put("Dizzy Punch",null);
+        Effetti.put("Double Kick",null);
+        Effetti.put("Double Slap",null);
+        Effetti.put("Double Team",null);
+        Effetti.put("Double-Edge",null);
+        Effetti.put("Dragon Rage",null);
+        Effetti.put("Dream Eater",null);
+        Effetti.put("Drill Peck",null);
+        Effetti.put("Earthquake",null);
+        Effetti.put("Egg Bomb",null);
+        Effetti.put("Ember",null);
+        Effetti.put("Explosion",null);
+        Effetti.put("Fire Blast",null);
+        Effetti.put("Fire Punch",null);
+        Effetti.put("Fire Spin",null);
+        Effetti.put("Fissure",null);
+        Effetti.put("Flamethrower",null);
+        Effetti.put("Flash",null);
+        Effetti.put("Fly",null);
+        Effetti.put("Focus Energy",null);
+        Effetti.put("Fury Attack",null);
+        Effetti.put("Fury Swipes",null);
+        Effetti.put("Glare",null);
+        Effetti.put("Growl","Diminuisci:1:attacco:Dopo");
+        Effetti.put("Growth",null);
+        Effetti.put("Guillotine",null);
+        Effetti.put("Gust",null);
+        Effetti.put("Harden",null);
+        Effetti.put("Haze",null);
+        Effetti.put("Headbutt",null);
+        Effetti.put("High Jump Kick",null);
+        Effetti.put("Horn Drill",null);
+        Effetti.put("Hydro Pump",null);
+        Effetti.put("Hyper Beam",null);
+        Effetti.put("Hyper Fang",null);
+        Effetti.put("Hypnosis",null);
+        Effetti.put("Ice Beam",null);
+        Effetti.put("Ice Punch",null);
+        Effetti.put("Jump Kick",null);
+        Effetti.put("Karate Chop",null);
+        Effetti.put("Kinesis",null);
+        Effetti.put("Leech Life",null);
+        Effetti.put("Leech Seed",null);
+        Effetti.put("Leer",null);
+        Effetti.put("Lick",null);
+        Effetti.put("Light Screen",null);
+        Effetti.put("Lovely Kiss",null);
+        Effetti.put("Low Kick",null);
+        Effetti.put("Meditate",null);
+        Effetti.put("Mega Drain",null);
+        Effetti.put("Mega Kick",null);
+        Effetti.put("Mega Punch",null);
+        Effetti.put("Metronome",null);
+        Effetti.put("Mimic",null);
+        Effetti.put("Minimize",null);
+        Effetti.put("Mirror Move",null);
+        Effetti.put("Mist",null);
+        Effetti.put("Night Shade",null);
+        Effetti.put("Pay Day",null);
+        Effetti.put("Peck",null);
+        Effetti.put("Petal Dance",null);
+        Effetti.put("Pin Missile",null);
+        Effetti.put("Poison Gas",null);
+        Effetti.put("Poison Powder",null);
+        Effetti.put("Poison Sting",null);
+        Effetti.put("Pound",null);
+        Effetti.put("Psybeam",null);
+        Effetti.put("Psychic",null);
+        Effetti.put("Psywave",null);
+        Effetti.put("Quick Attack",null);
+        Effetti.put("Rage",null);
+        Effetti.put("Razor Leaf",null);
+        Effetti.put("Razor Wind",null);
+        Effetti.put("Recover",null);
+        Effetti.put("Reflect",null);
+        Effetti.put("Rest",null);
+        Effetti.put("Roar",null);
+        Effetti.put("Rock Slide",null);
+        Effetti.put("Rock Throw",null);
+        Effetti.put("Sand Attack",null);
+        Effetti.put("Scratch",null);
+        Effetti.put("Screech",null);
+        Effetti.put("Seismic Toss",null);
+        Effetti.put("Self-Destruct",null);
+        Effetti.put("Sharpen",null);
+        Effetti.put("Sing",null);
+        Effetti.put("Skull Bash",null);
+        Effetti.put("Sky Attack",null);
+        Effetti.put("Slam",null);
+        Effetti.put("Slash",null);
+        Effetti.put("Sleep Powder",null);
+        Effetti.put("Sludge",null);
+        Effetti.put("Smog",null);
+        Effetti.put("Smokescreen",null);
+        Effetti.put("Soft-Boiled",null);
+        Effetti.put("Solar Beam",null);
+        Effetti.put("Sonic Boom",null);
+        Effetti.put("Spike Cannon",null);
+        Effetti.put("Splash",null);
+        Effetti.put("Spore",null);
+        Effetti.put("Stomp",null);
+        Effetti.put("Strength",null);
+        Effetti.put("String Shot",null);
+        Effetti.put("Struggle",null);
+        Effetti.put("Stun Spore",null);
+        Effetti.put("Submission",null);
+        Effetti.put("Substitute",null);
+        Effetti.put("Super Fang",null);
+        Effetti.put("Supersonic",null);
+        Effetti.put("Surf",null);
+        Effetti.put("Swift",null);
+        Effetti.put("Swords Dance",null);
+        Effetti.put("Tackle","Diminuisci:1:difesa:Dopo");
+        Effetti.put("Tail Whip",null);
+        Effetti.put("Take Down",null);
+        Effetti.put("Teleport",null);
+        Effetti.put("Thrash",null);
+        Effetti.put("Thunder",null);
+        Effetti.put("Thunder Punch",null);
+        Effetti.put("Thunder Shock",null);
+        Effetti.put("Thunder Wave",null);
+        Effetti.put("Thunderbolt",null);
+        Effetti.put("Toxic",null);
+        Effetti.put("Transform",null);
+        Effetti.put("Tri Attack",null);
+        Effetti.put("Twineedle",null);
+        Effetti.put("Vine Whip",null);
+        Effetti.put("Vise Grip",null);
+        Effetti.put("Water Gun",null);
+        Effetti.put("Waterfall",null);
+        Effetti.put("Whirlwind",null);
+        Effetti.put("Withdraw",null);
+        Effetti.put("Wrap",null);
+    }
+    public static String[] getEffettoFromTabella(String nome){
+        String x = Effetti.get(nome);
+
+        return x.split(":");
     }
     /*
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente

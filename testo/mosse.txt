@@ -57,7 +57,7 @@ Gust
 Harden
 Haze
 Headbutt
-Hign Jump Kick
+High Jump Kick
 Horn Drill
 Hydro Pump
 Hyper Beam
@@ -91,7 +91,7 @@ Petal Dance
 Pin Missile
 Poison Gas
 Poison Powder
-Poison sting
+Poison Sting
 Pound
 Psybeam
 Psychic

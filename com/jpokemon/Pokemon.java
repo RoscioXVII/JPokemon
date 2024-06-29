@@ -55,6 +55,7 @@ public class Pokemon {
     private int EVvelocita;
 
     private String nomeEvoluzione;
+    private int salute;
 
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
                    int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita){ // devo trovare il modo di mettere le mosse
@@ -120,6 +121,7 @@ public class Pokemon {
 
     public void setPs(int Ps){
         this.ps = Ps;
+        this.salute = Ps;
     }
     public int getPs() {
         return ps;
@@ -127,6 +129,7 @@ public class Pokemon {
     public int getPsBase(){
         return psBase;
     }
+    public int getSalute(){return salute;}
 
     public void setLvl(int lvl) {
         this.lvl = lvl;
