@@ -249,25 +249,8 @@ public class Formule {
 
     //MAPPA PER EFFETTI DELLE MOSSE
 
-    /*
-    private static String[] creaStringa(){      //Dovuto creare questo perche' per qualche motivo non posso usare la funzione fatta su reader
-        Reader a = new Reader();
-        try{
-            return a.BuildHashMossa();
-        }catch(FileNotFoundException e) {
-            throw new RuntimeException("File non trovato"); // messa cosi perchè non essendo una classe non riesco a fare throw IOException
-        }
-    }
-    */
     static{
-        /*
-        String[] a = creaStringa();
-        int cont = a.length;
 
-        for(String i: a){
-            Effetti.put(i,null);
-        }
-        */
         //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
         //TODO: Devo finire di mettere tutte le mosse, prima capisco come devo formattarli e poi compilo tutto.
         Effetti.put("Absorb","Assorbimento:Dopo");
@@ -433,10 +416,12 @@ public class Formule {
         Effetti.put("Withdraw",null);
         Effetti.put("Wrap",null);
     }
-    public static String[] getEffettoFromTabella(String nome){
-        String x = Effetti.get(nome);
-
-        return x.split(":");
+    public static String getEffettoFromTabella(String nome){
+        if(Effetti.get(nome) == null){
+            return "Nulla";
+        }else{
+            return Effetti.get(nome);
+        }
     }
     /*
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
