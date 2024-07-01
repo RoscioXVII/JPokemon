@@ -224,7 +224,9 @@ public class Lotta extends JFrame {
         int a = squadra2[0].getSalute();
         int b = squadra[0].getSalute();
         cambioUtente=false;
-        // tutte le mosse devo aggiungere un cambio contesto (dopo che fa un'azione utente 1 la mano passa a utente 2)
+        int danno;
+        Mossa Mossapokemon1 = null; // SE LA MOSSA VALE "null" allora ha priorità sulle altre perché non fa danno al pokemon avversario (ad esempio cambiare pokemon ha la priorità)
+        Mossa Mossapokemon2;
         mossa1.addActionListener(e -> {
             // implementare if con variabile booleana per capire chi dei due attacca (di chi è il turno)
             //posso anche dentro cambio contesto
@@ -234,11 +236,13 @@ public class Lotta extends JFrame {
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[0]));
                 PsPok2.setText(squadra2[0].getPs()+"/"+a);
                 cambiaContesto();
+
             }
             else{
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[0]));
                 PsPok1.setText(squadra[0].getPs()+"/"+b);
                 cambiaContesto();
+                turno(Mossapokemon1, finalTest2[0]); // dentro turno va fatto TUTTO pure abbassare le barre della vita non potendo ritornare piu di un valore.
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
@@ -271,6 +275,58 @@ public class Lotta extends JFrame {
 
 
     }
+
+    public void turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
+        // la velocita e del pokemon non della mossa
+        int danno, CondEffetto1, CondEffetto2;
+        String effetto1, effetto2;
+
+        CondEffetto1 = Effetti.Effetto(Mossapokemon1.getNome());
+        CondEffetto2 = Effetti.Effetto(Mossapokemon2.getNome());
+        if(CondEffetto1 != -1){
+            effetto1 = Effetti.getEffetto(Mossapokemon1.getNome());
+        }
+        if(CondEffetto2 != -1){
+            effetto2 = Effetti.getEffetto(Mossapokemon2.getNome());
+        }
+
+        //GESTIONE CASI CondEffetto = 1
+        // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
+        if(CondEffetto1 == 1 && CondEffetto2 != 1){
+            // squadra poi squadra 2
+        } else if (CondEffetto2 == 1 && CondEffetto1 != 1) {
+            // squadra 2 poi squadra
+        }else{
+            if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
+                //attacca squadra poi squadra2
+            }else{
+                //Attacca Squadra2 poi squadra
+            }
+        }
+        //TODO questi casi qua 2 e 3 possono essere uniti, per adesso li divido perchè non ci sto lavorando preciso sopra
+        //TODO ricordiamoci che esistono anche le mosse senza effetto, che verranno gestite nella maniera piu semplice
+        //GESTIONE CASI CondEffetto = 2
+        // questi sono i casi PEGGIORI non sto scherzando
+        if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
+            //attacca squadra poi squadra2
+        }else{
+            //Attacca Squadra2 poi squadra
+        }
+
+        //GESTIONE CASI CondEffetto = 3
+        //i piu comuni sono questi
+        if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
+            //attacca squadra poi squadra2
+        }else{
+            //Attacca Squadra2 poi squadra
+        }
+
+        //STO AL VOLO SULLA CLASSE EFFETTI
+        // mo arrivoppp
+
+        return danno;
+    }
+
     // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
     public JPanel getPannello(){
         return pannello;

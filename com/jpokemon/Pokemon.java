@@ -65,7 +65,6 @@ public class Pokemon {
         this.lvlEvoluzione = lvlEvoluzione;
         this.nomeEvoluzione = nomeEvoluzione;
         this.psBase = ps;
-        this.salute = ps;
         this.esp = esp; //NOTA questa vale come xp "BASE" ovvero quella che ottieni VINCENDO contro il pokemon in questione
         this.attaccoBase = attacco;
         this.difesaBase = difesa;

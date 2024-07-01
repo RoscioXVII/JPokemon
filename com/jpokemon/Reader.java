@@ -89,6 +89,8 @@ public class Reader {
         pokemon.setMosse(mossa);
 
         pokemon.setPs(Ps);
+        pokemon.setSalute(Ps);
+
         pokemon.setAttacco(attacco);
         pokemon.setDifesa(difesa);
         pokemon.setAttaccoSpeciale(attaccoSpeciale);

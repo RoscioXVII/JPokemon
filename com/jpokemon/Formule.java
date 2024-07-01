@@ -351,7 +351,7 @@ public class Formule {
         Effetti.put("Psybeam",null);
         Effetti.put("Psychic",null);
         Effetti.put("Psywave",null);
-        Effetti.put("Quick Attack",null);
+        Effetti.put("Quick Attack","Attacco Rapido:Prima");
         Effetti.put("Rage",null);
         Effetti.put("Razor Leaf",null);
         Effetti.put("Razor Wind",null);
@@ -427,7 +427,7 @@ public class Formule {
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
     TODO: inoltre questo aumento/diminuzione delle statistiche arriva fino ad un massimo di 6 (se hai una statistica a +5 e fai una mossa da +2 il risultato deve essere +6)
      */
-    public void Aumenta(Pokemon pokemon,int valore,String campo, int percentuale){
+    public static void Aumenta(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
         switch (campo){
             case "attacco" -> x = pokemon.aumentaAttacco(valore);
@@ -441,7 +441,7 @@ public class Formule {
             System.out.println("Raggiunto massimo della statistica!");
         }
     }
-    public void Diminuisci(Pokemon pokemon,int valore,String campo, int percentuale, int ripetizioni){
+    public static void Diminuisci(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
         switch (campo){
             case "attacco" -> x = pokemon.diminuisciAttacco(valore);

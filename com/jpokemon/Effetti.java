@@ -31,11 +31,21 @@ public class Effetti {
         return 3;
     }
 
+    public static String getEffetto(String nome){
+        String effetto = Formule.getEffettoFromTabella(nome);
+        String[] get = effetto.split(":");
+
+        return get[0];
+
+    }
+
+
+    /*
     public static void main(String[] args) {
         int risoluzioneEffetto1 = Effetto("Absorb");
         int risoluzioneEffetto2 = Effetto("Acid");
         int risoluzioneEffetto3 = Effetto("Acid Armor");
         int risoluzioneEffetto4 = Effetto("Wrap");
     }
-
+    */
 }
