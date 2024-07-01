@@ -14,8 +14,6 @@ public class Lotta extends JFrame {
     private Pokemon[] squadra2 = new Pokemon[6]; // squadra dell'avversario
     //devo fare un metodo grafico per selezionarli
 
-
-
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
     // mettero tutto a static
     private JButton attacca = new JButton("Attacca");
@@ -82,7 +80,6 @@ public class Lotta extends JFrame {
         pannello.add(label);
         //pannello.setLayout(new BorderLayout());
 
-
         // prova GIF -- carico la gif -->
         ImageIcon gif1 = new ImageIcon(squadra2[0].getSpriteFront());
         ImageIcon gif2 = new ImageIcon(squadra[0].getSpriteBack());  //ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
@@ -94,7 +91,6 @@ public class Lotta extends JFrame {
         mossa2 = new JButton(test[1].getNome());
         if(test[2] == null)
             mossa3 = new JButton("vuoto"); //TODO: Implementare if per i bottoni senza mosse
-
         else
             mossa3 = new JButton(test[2].getNome());
 
@@ -190,8 +186,6 @@ public class Lotta extends JFrame {
         pokemon.addActionListener(e ->vistaPokemon());
         indietro.addActionListener(x ->vistaMain());
 
-
-
         setFocusable(true);
         requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
 
@@ -223,7 +217,6 @@ public class Lotta extends JFrame {
 
         pannello.add(label,BorderLayout.NORTH);
         setContentPane(pannello); // TODO
-
 
         //QUESTO VA CAMBIATO MA DOPO
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1

@@ -266,12 +266,12 @@ public class Formule {
         Effetti.put("Bite","Tentenna:Dopo");
         Effetti.put("Blizzard",null);
         Effetti.put("Body Slam",null);
-        Effetti.put("Bone Club",null);
-        Effetti.put("Bonemerang",null);
-        Effetti.put("Bubble",null);
-        Effetti.put("Bubble Beam",null);
-        Effetti.put("Clamp",null);
-        Effetti.put("Comet Punch",null);
+        Effetti.put("Bone Club","Tentenna:Dopo");
+        Effetti.put("Bonemerang","RipetiAttacco:2:2:Durante");
+        Effetti.put("Bubble","Diminuisci:1:velocita:Dopo");
+        Effetti.put("Bubble Beam","Diminuisci:1:velocita:Dopo");
+        Effetti.put("Clamp","Trappola");
+        Effetti.put("Comet Punch","RipetiAttacco:2:5:Durante");
         Effetti.put("Confuse Ray",null);
         Effetti.put("Confusion",null);
         Effetti.put("Constrict",null);
