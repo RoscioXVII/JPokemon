@@ -14,6 +14,7 @@ public class Reader {
     //classe responsabile della lettura delle mosse e dei pokemon contenuti nei file .txt
     private static final String infoPokemon = "testo/pokemon.txt";
     private static final String infoMosse = "testo/mosse.txt";
+    private static final String infoUtente = "testo/utenti.txt";
     private static Scanner sc;
     private String[] mosse = new String[4]; // //Le metto come string per prendere solo il nome poi con l'altro metodo prenderò anche tutto il resto
 
@@ -222,4 +223,51 @@ public class Reader {
         return -1; // non è stata trovata l'evoluzione TODO: da cambiare
     }
 
-}
+    public Utente buildUtentebyString(String parametriUtente) throws IOException {
+        String[] info;
+        Pokemon[] pokemons = new Pokemon[6];
+        try{
+            sc = new Scanner(new File(infoUtente));
+            // o leggo tutto e creo una lista oppure leggo una linea random con cui costruire la squadra dell'utente
+            if (sc.hasNextLine())
+                info = sc.nextLine().split(":");
+            else
+                return null; // caso in cui sono finite le righe da leggere
+        } catch (FileNotFoundException e){
+            System.err.println("file non presente");
+            throw e;
+        }
+
+
+        //cerca squadra
+        String[] squad = cercaSquadra(info[4]);
+        //qua dentro mi serve un build squadra
+        // da info dovrei lanciare 6 build pokemon con gli attributi contenuti in info
+        // --- fare if per vedere se squad è vuoto ---
+        pokemons[0] = buildPokemonByString(squad[0]);
+        pokemons[1] = buildPokemonByString(squad[1]);
+        pokemons[2] = buildPokemonByString(squad[2]);
+        pokemons[3] = buildPokemonByString(squad[3]);
+        pokemons[4] = buildPokemonByString(squad[4]);
+        pokemons[5] = buildPokemonByString(squad[5]);
+        // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
+        // metto tutti i parametri dentro
+        return new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),pokemons);
+    }
+
+    private String[] cercaSquadra(String squadra) throws FileNotFoundException {
+        sc = new Scanner(new File("testo/squadreUtenti.txt"));
+        String info[];
+        while(sc.hasNextLine()){
+            info = sc.nextLine().split(":");
+            if(info[0].equals(squadra))
+                return info;
+        }
+        return null;
+        // squadra non trovata
+    }
+
+
+    }
+
+

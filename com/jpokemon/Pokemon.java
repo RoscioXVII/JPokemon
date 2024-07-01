@@ -13,7 +13,7 @@ public class Pokemon {
     private Mossa[] mosse = new Mossa[4];
 
     //statistiche base
-    private int psBase;
+    private int psBase; // TODO: AO NON SO A CHE SERVE, MI SERVE SALUTE
     private int attaccoBase;
     private int difesaBase;
     private int attaccoSpecialeBase;

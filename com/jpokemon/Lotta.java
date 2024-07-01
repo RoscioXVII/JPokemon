@@ -324,7 +324,7 @@ public class Lotta extends JFrame {
         //STO AL VOLO SULLA CLASSE EFFETTI
         // mo arrivoppp
 
-        return danno;
+        //return danno;
     }
 
     // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
