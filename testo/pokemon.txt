@@ -7,4 +7,29 @@ Charizard:fuoco:volo:lanciafiamme:graffio:ember:leer:-1:-1:78:209:84:78:109:85:1
 Squirtle:acqua:null:Tackle:Tail Whip:null:null:16:wartortle:44:66:48:65:50:64:43
 Wartortle:acqua:null:bubble:water gun:null:null36:blastoise:59:143:63:80:65:80:58
 Blastoise:acqua:null:tail whip:water gun:bite:withdraw:-1:-1:79:210:83:100:85:105:78
+Butterfree:coleottero:volante:confusione:paralizzante:supersuono:psicoraggio:-1:-1:60:45:50:90:80:70
+Tauros:normale:null:azione:pestone:colpocoda:fulmisguardo:-1:-1:75:100:95:40:70:110
+Lapras:acqua:ghiaccio:pistolacqua:growl:geloraggio:idropompa:-1:-1:130:85:80:85:95:60
+Scyther:coleottero:volante:attacco rapido:fulmisguardo:doppioteam:lacerazione:-1:-1:70:110:80:55:80:105
+Ponyta:fuoco:null:braciere:colpocoda:null:null:40:rapidash:50:85:55:65:65:90
+Rapidash:fuoco:null:braciere:colpocoda:growl:turbofuoco:-1:-1:65:100:70:80:80:105
+Ekans:veleno:null:fulmisguardo:morso:null:null:arbok:22:35:60:44:40:54:55
+Arbok:veleno:null:fulmisguardo:morso:stridio:acido:-1:-1:60:85:69:65:79:80
+Pikachu:elettro:null:growl:tuonoshock:attacco rapido:null:20:raichu:35:55:30:50:50:90
+Raichu:elettro:null:growl:tuonoshock:attacco rapido:fulmine:-1:-1:60:90:55:90:80:100
+Pidgey:normale:volante:raffica:attacco rapido:null:null:pidgeotto:18:40:45:40:35:35:56
+Pidgeotto:normale:volante:raffica:attacco rapido:attacco d'ala:null:36:pidgeot:63:60:55:50:50:71
+Pidgeot:normale:volante:raffica:attacco rapido:attacco d'ala:agilita:-1:-1:83:80:75:70:70:91
+Nidoran:veleno:null:growl:azione:graffio:null:16:nidorina:55:47:52:40:40:41
+Nidorina:veleno:null:growl:azione:graffio:veleno spina:30:nidoqueen:70:62:67:55:55:56
+Nidoqueen:veleno:terra:growl:azione:veleno spina:terremoto:-1:-1:90:82:87:75:85:76
+Growlithe:fuoco:null:morso:boato:braciere:21:arcanine:55:70:45:70:50:60
+Arcanine:fuoco:null:morso:boato:braciere:fulmisguardo:-1:-1:90:110:80:100:80:95
+Graveler:roccia:terra:azione:sassata:rafforzatore:ricciolscudo:28:golem:55:95:115:45:45:35
+Golem:roccia:terra:azione:sassata:rafforzatore:ricciolscudo:-1:-1:80:110:130:55:65:45
+Machop:lotta:null:colpokarate:colpo basso:null:null:28:machoke:70:80:50:35:35:35
+Machoke:lotta:null:colpokarate:colpo basso:fulmisguardo:null:36:machamp:80:100:70:50:60:45
+Machamp:lotta:null:colpokarate:colpo basso:fulmisguardo:sottomissione:-1:-1:90:130:80:65:85:55
+Tentacool:acqua:veleno:acido:supersuono:avvolgibotta:null:30:tentacruel:40:40:35:50:100:70
+Tentacruel:acqua:veleno:acido:idropompa:avvolgibotta:pistolacqua:-1:-1:80:70:65:80:120:100
 
