@@ -36,16 +36,54 @@ public class Effetti {
         String[] get = effetto.split(":");
 
         return get[0];
-
     }
 
+    public static int attivaEffettoDurante(Pokemon attaccante,Pokemon bersaglio, Mossa mossa){
+        //questi di solito sono effetti che alterano il danno inflitto
+        int danno;
 
-    /*
-    public static void main(String[] args) {
-        int risoluzioneEffetto1 = Effetto("Absorb");
-        int risoluzioneEffetto2 = Effetto("Acid");
-        int risoluzioneEffetto3 = Effetto("Acid Armor");
-        int risoluzioneEffetto4 = Effetto("Wrap");
+        String place = Formule.getEffettoFromTabella(mossa.getNome());
+        if(place == null){
+            return Formule.danno(attaccante.getTipo1(),attaccante.getTipo2(),bersaglio.getTipo1(),bersaglio.getTipo2(),mossa.getTipo(),attaccante.getLvl(),mossa.getPotenza()
+            ,attaccante.getAttacco(),bersaglio.getDifesa(),attaccante.getVelocita());
+        }
+        String[] accesso = place.split(":");
+
+        switch (accesso[0]){
+            case "RipetiAttacco" -> danno = Formule.RipetiAttacco(Integer.parseInt(accesso[1]),Integer.parseInt(accesso[2]),attaccante,bersaglio,mossa);
+            case "Critico" -> danno = Formule.danno(attaccante.getTipo1(),attaccante.getTipo2(),bersaglio.getTipo1(),bersaglio.getTipo2(),mossa.getTipo(),attaccante.getLvl(),mossa.getPotenza()
+                    ,attaccante.getAttacco(),bersaglio.getDifesa(),(attaccante.getVelocita() * 4)); //LA PROBABILITA QUA DOVREBBE ESSERE * 8 MA HO MESSO 4 PERCHE TROPPO FORTE
+            case "UnColpo" -> danno = Formule.UnColpo(attaccante,bersaglio);
+            case "DannoFisso" -> danno = Formule.DannoFisso(attaccante,bersaglio,mossa,accesso[1]);
+            default -> danno = -6000;
+        }
+
+        return danno;
     }
-    */
+    public static int attivaEffettoDopo(Pokemon attaccante, Pokemon bersaglio,Mossa mossa, int danno){
+        //questi sono aumenti/diminuzioni di stats e cose che accadono a fine azione, probabilmente aggirabili se
+        // il pokemon attacca per secondo
+        int risultato;
+        String place = Formule.getEffettoFromTabella(mossa.getNome());
+        if(place == null){
+            return -3; //se ritorno -3 allora vado avanti senza problemi
+        }
+        String[] accesso = place.split(":");
+
+        switch (accesso[0]){
+            case "Assorbimento" ->risultato = Formule.Assorbimento(attaccante,danno);
+            case "Aumenta" ->;
+            case "Diminuisci" ->;
+            case "Tentenna" ->;
+            case "Rinculo" ->;
+            case "Esplosione" ->;
+            case "Cura" ->;
+            case "JKick" ->;
+            case "Schermo" ->;
+            case "Riflesso" ->;
+        }
+
+        return risultato;
+    }
+
 }

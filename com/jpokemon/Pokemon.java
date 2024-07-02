@@ -82,7 +82,6 @@ public class Pokemon {
     public String getNome(){
         return nome;
     }
-
     public void setTipo1(Tipo tipo) {
         this.tipo1 = tipo;
     }
@@ -333,11 +332,6 @@ public class Pokemon {
             return 1;
         }
     };
-
-
-
-
-
 
     public void evolvi() throws FileNotFoundException {
         Reader lettore = new Reader();

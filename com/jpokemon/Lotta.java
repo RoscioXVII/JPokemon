@@ -234,13 +234,13 @@ public class Lotta extends JFrame {
             if (!cambioUtente){
                 int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[0].getNome());
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[0]));
-                PsPok2.setText(squadra2[0].getPs()+"/"+a);
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
                 cambiaContesto();
 
             }
             else{
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[0]));
-                PsPok1.setText(squadra[0].getPs()+"/"+b);
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
                 cambiaContesto();
                 turno(Mossapokemon1, finalTest2[0]); // dentro turno va fatto TUTTO pure abbassare le barre della vita non potendo ritornare piu di un valore.
             }
@@ -248,21 +248,49 @@ public class Lotta extends JFrame {
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
         });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
         mossa2.addActionListener(e -> {
-            barraPSpok2.diminuisci(finalTest[1].getPotenza());
-            squadra[0].attacca(prova, finalTest[1]);
-            PsPok2.setText(prova.getPs()+"/"+a);
+            if (!cambioUtente){
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[1]));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                cambiaContesto();
+                // ROBE SALVATE
+            }
+            else{
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[1]));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                cambiaContesto();
+
+            }
+
         });
 
         mossa3.addActionListener(e -> {
-            barraPSpok2.diminuisci(finalTest[2].getPotenza());
-            squadra[0].attacca(prova, finalTest[2]);
-            PsPok2.setText(prova.getPs()+"/"+a);
+            if (!cambioUtente){
+                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[2].getNome());
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[2]));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                cambiaContesto();
+            }
+            else{
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[2]));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                cambiaContesto();
+            }
+
         });
 
         mossa4.addActionListener(e -> {
-            barraPSpok2.diminuisci(finalTest[3].getPotenza());
-            squadra[0].attacca(prova, finalTest[3]);
-            PsPok2.setText(prova.getPs()+"/"+a);
+            if (!cambioUtente){
+                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[3].getNome());
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[3]));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                cambiaContesto();
+            }
+            else{
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[3]));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                cambiaContesto();
+            }
+
         });
         // cambio UI per il secondo utente
         pokemon2.addActionListener(e->cambiaPokemon(1));
@@ -271,15 +299,12 @@ public class Lotta extends JFrame {
         pokemon5.addActionListener(e->cambiaPokemon(4));
         pokemon6.addActionListener(e->cambiaPokemon(5));
 
-
-
-
     }
 
-    public void turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
+    public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
         // la velocita e del pokemon non della mossa
         int danno, CondEffetto1, CondEffetto2;
-        String effetto1, effetto2;
+        String effetto1, effetto2 = null;
 
         CondEffetto1 = Effetti.Effetto(Mossapokemon1.getNome());
         CondEffetto2 = Effetti.Effetto(Mossapokemon2.getNome());
@@ -294,9 +319,30 @@ public class Lotta extends JFrame {
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
         if(CondEffetto1 == 1 && CondEffetto2 != 1){
             // squadra poi squadra 2
+            barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+            PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+            if(squadra2[0].getSalute() <= 0){
+                return -2;
+            }
+            if (CondEffetto2 == 3){
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                if(effetto2 != null){
+                    Effetti.attivaEffettoDopo(squadra[0],squadra2[0],Mossapokemon2);
+                }
+
+            }else{
+                if(effetto2 != null){
+                    Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon2);
+                }
+            }
+            return 0;
         } else if (CondEffetto2 == 1 && CondEffetto1 != 1) {
             // squadra 2 poi squadra
-        }else{
+        }else if(CondEffetto2 == 1 && CondEffetto1 == 1){
             if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
                 //attacca squadra poi squadra2
             }else{
@@ -321,10 +367,7 @@ public class Lotta extends JFrame {
             //Attacca Squadra2 poi squadra
         }
 
-        //STO AL VOLO SULLA CLASSE EFFETTI
-        // mo arrivoppp
 
-        //return danno;
     }
 
     // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
@@ -356,8 +399,8 @@ public class Lotta extends JFrame {
         if(!cambioUtente){
             nomePok1.setText(squadra[0].getNome());
             barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
-            barraPSpok1.getBarraSalute().setValue(squadra[0].getPs());
-            PsPok1.setText(squadra[0].getPs() + "/" + squadra[0].getPs());
+            barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
+            PsPok1.setText(squadra[0].getSalute() + "/" + squadra[0].getPs());
             // Aggiorna le GIF
 
             ImageIcon img = new ImageIcon(squadra[0].getSpriteBack());
@@ -369,8 +412,8 @@ public class Lotta extends JFrame {
         else{
             nomePok2.setText(squadra2[0].getNome());
             barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
-            barraPSpok2.getBarraSalute().setValue(squadra2[0].getPs());
-            PsPok2.setText(squadra2[0].getPs() + "/" + squadra2[0].getPs()); // al posto di get ps dovrei mettere le variabili temporanee a e b
+            barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
+            PsPok2.setText(squadra2[0].getSalute() + "/" + squadra2[0].getPs()); // al posto di get ps dovrei mettere le variabili temporanee a e b
             // risolvo mettendo dentro pokemon salute e ps come prima
             // Aggiorna le GIF
 
