@@ -1,5 +1,9 @@
 package com.jpokemon;
 
+import java.io.*;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Utente {
     private String nome;
     private int vittorie;
@@ -24,10 +28,48 @@ public class Utente {
         this.partiteGiocate = partiteGiocate;
         this.squadra = squadra;
     }
-    public void scrittore(){ // crea i file da testo quando non sono gia presenti
+    public void scrittore() throws IOException {
+        // crea i file da testo quando non sono gia presenti
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/utenti.txt",true))){
+            writer.write(toString());
+            writer.newLine();
 
+        } catch (IOException e){
+            System.err.println("Errore nella scrittura nel file");
+            throw e;
+        }
+
+        // file writer deve essere messo a true senno sovrascrive alla volta dopo
+
+        //FORMATO FILE .TXT:
+        //nome:vittorie:sconfitte:partiteGiocate
+
+        //FORMATO FILE .TXT SQUADREUTENTI:
+        //nomeUtente:pokemon:statistichePokemon:pokemon2:statistichePokemon
     }
     public String getNome(){
         return nome;
     }
+    public void incrementaVittorie(){
+        vittorie++;
+    }
+    public void incrementaSconfitte(){
+        sconfitte++;
+    }
+    public void partiteGiocate(){
+        partiteGiocate++;
+    }
+    public Pokemon[] getSquadra(){
+        return squadra;
+    }
+
+    @Override
+    public String toString() {
+        return nome +
+                ":" + vittorie + ':' + sconfitte +
+                ":" + sconfitte +
+                ":" + partiteGiocate;
+    }
+
+
 }

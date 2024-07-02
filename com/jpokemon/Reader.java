@@ -160,9 +160,17 @@ public class Reader {
         try{
             Scanner sc = new Scanner(new File(path));
             for(int i=0;i<index;i++){
-                sc.nextLine(); // va avanti (ignora le righe non corrispondenti all'indice dato)
+                if(!sc.hasNextLine()) // se == false quindi
+                    return null;
+                else
+                    sc.nextLine(); // va avanti (ignora le righe non corrispondenti all'indice dato)
             }
-            return sc.nextLine(); // riga desiderata
+            if (sc.hasNextLine()) { // Controlla se la riga desiderata esiste
+                return sc.nextLine(); // Restituisce la riga desiderata
+            } else {
+                return null; // Se l'indice è fuori dal range delle righe
+            }
+
 
 
         } catch (FileNotFoundException e){
@@ -266,6 +274,18 @@ public class Reader {
         return null;
         // squadra non trovata
     }
+
+
+
+/*
+    public String[] cercaSquadraPokemon(String nomeUtente){
+        String[] info;
+        // devo splittare le info lette dal file .txt
+        return info;
+    }
+
+
+ */
 
 
     }
