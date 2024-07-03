@@ -253,11 +253,11 @@ public class Lotta extends JFrame {
         });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
         mossa2.addActionListener(e -> {
             if (!cambioUtente){
-                setMossa(0);
+                setMossa(1);
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                setTurno(turno(finalTest[getMossa()], finalTest2[1]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
@@ -276,11 +276,11 @@ public class Lotta extends JFrame {
 
         mossa3.addActionListener(e -> {
             if (!cambioUtente){
-                setMossa(0);
+                setMossa(2);
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                setTurno(turno(finalTest[getMossa()], finalTest2[2]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
@@ -299,11 +299,11 @@ public class Lotta extends JFrame {
 
         mossa4.addActionListener(e -> {
             if (!cambioUtente){
-                setMossa(0);
+                setMossa(3);
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                setTurno(turno(finalTest[getMossa()], finalTest2[3]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
