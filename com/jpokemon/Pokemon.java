@@ -389,7 +389,7 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return nome + '-' +
+        String Stringa = nome + '-' +
                 "-" + tipo1 +
                 "-" + tipo2 +
                 "-" + lvl +
@@ -429,8 +429,20 @@ public class Pokemon {
                 "-" + EVdifesaSpeciale +
                 "-" + EVvelocita +
                 "-" + nomeEvoluzione +
-                "-" + salute;
-        // da controllare
+                "-" + salute +
+                "-" + mosse[0].getNome() + // implementare if che se e null restituisce null
+                "-" + mosse[1].getNome();
+        if(mosse[2]==null)
+            Stringa+="-null";
+        else
+            Stringa+="-" + mosse[2].getNome();
+
+        if(mosse[3]==null)
+            Stringa+="-null";
+        else
+            Stringa+="-" + mosse[3].getNome();
+
+        return Stringa;
     }
 }
 
