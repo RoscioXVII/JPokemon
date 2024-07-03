@@ -387,5 +387,50 @@ public class Pokemon {
 
     }
 
+    @Override
+    public String toString() {
+        return nome + '-' +
+                "-" + tipo1 +
+                "-" + tipo2 +
+                "-" + lvl +
+                "-" + esp +
+                "-" + psBase +
+                "-" + attaccoBase +
+                "-" + difesaBase +
+                "-" + attaccoSpecialeBase +
+                "-" + difesaSpecialeBase +
+                "-" + velocitaBase +
+                "-" + spriteFront +
+                "-" + spriteBack +
+                "-" + spriteMini +
+                "-" + lvlEvoluzione +
+                "-" + ps +
+                "-" + attacco +
+                "-" + difesa +
+                "-" + attaccoSpeciale +
+                "-" + difesaSpeciale +
+                "-" + velocita +
+                "-" + EV +
+                "-" + ripetizioniAttacco +
+                "-" + ripetizioniDifesa +
+                "-" + ripetizioniAttaccoSpeciale +
+                "-" + ripetizioniDifesaSpeciale +
+                "-" + ripetizioniVelocita +
+                "-" + IVps +
+                "-" + IVattacco +
+                "-" + IVdifesa +
+                "-" + IVattaccoSpeciale +
+                "-" + IVdifesaSpeciale +
+                "-" + IVvelocita +
+                "-" + EVps +
+                "-" + EVattacco +
+                "-" + EVdifesa +
+                "-" + EVattaccoSpeciale +
+                "-" + EVdifesaSpeciale +
+                "-" + EVvelocita +
+                "-" + nomeEvoluzione +
+                "-" + salute;
+        // da controllare
+    }
 }
 

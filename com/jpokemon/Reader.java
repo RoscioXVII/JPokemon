@@ -275,6 +275,16 @@ public class Reader {
         // squadra non trovata
     }
 
+    public Pokemon[] generaSquadra() throws IOException {
+        Random random = new Random();
+        Pokemon[] squad = new Pokemon[6];
+        for(int i=0;i<6;i++){
+            squad[i]=buildPokemonByString(getRigaByIndex("testo/pokemon.txt", random.nextInt(contaRighe())));
+
+        }
+        return squad;
+    }
+
 
 
 /*

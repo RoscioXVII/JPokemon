@@ -2,6 +2,7 @@ package com.jpokemon;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Utente {
@@ -11,11 +12,13 @@ public class Utente {
     private int partiteGiocate;
 
     private Pokemon[] squadra = new Pokemon[6];
-    public Utente(String nome){
+    public Utente(String nome) {
         this.nome = nome;
         vittorie=0;
         sconfitte=0;
         partiteGiocate=0;
+
+        //squadra = rd.generaSquadra();
         // per la squadra chiamo una serie di metodi del reader random
     }
     // caso in cui l'utente non esiste, viene preso solo in input il nome
@@ -39,13 +42,74 @@ public class Utente {
             throw e;
         }
 
-        // file writer deve essere messo a true senno sovrascrive alla volta dopo
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
+            writer.write(squadraString());
+            writer.newLine();
+
+        } catch (IOException e){
+            System.err.println("Errore nella scrittura nel file");
+            throw e;
+        }
+
+
+
+        // ora genera la squadra e la mette dentro il file delle squadre
+
 
         //FORMATO FILE .TXT:
         //nome:vittorie:sconfitte:partiteGiocate
 
         //FORMATO FILE .TXT SQUADREUTENTI:
         //nomeUtente:pokemon:statistichePokemon:pokemon2:statistichePokemon
+    }
+    public void scrittoreModifica() throws IOException {
+        // la uso ad ogni chiusura dell'applicazione, prima di uscire la mando in esecuzione
+        // aggiorna i salvataggi quando sono stati gia creati e vengono registrati progressi
+        File fileTemp  = new File("fileTemp.txt");
+        File sorgente = new File("testo/utenti.txt");
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
+            String stringa;
+            while((stringa=reader.readLine())!=null){
+                if (stringa.startsWith(this.nome+":")){
+                    writer.write(this.toString());
+                    writer.newLine();
+                }
+
+                else{
+                    writer.write(stringa);
+                    writer.newLine();
+                }
+
+            }
+            sorgente.delete();
+            fileTemp.renameTo(new File("testo/utenti.txt"));
+            // scrivi la squadra nell'apposito file
+        } catch (IOException e ){
+            System.err.println("File non formattato corretamente");
+        }
+
+        sorgente = new File("testo/squadreUtenti.txt");
+        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
+            String stringa;
+            while((stringa=reader.readLine())!=null){
+                if (stringa.startsWith(squadra[0].getNome()+":")){
+                    writer.write(this.toString());
+                    writer.newLine();
+                }
+
+                else{
+                    writer.write(stringa);
+                    writer.newLine();
+                }
+
+            }
+            sorgente.delete();
+            fileTemp.renameTo(new File("testo/squadreUtenti.txt"));
+        } catch (IOException e ){
+            System.err.println("File non formattato corretamente");
+        }
+
     }
     public String getNome(){
         return nome;
@@ -70,6 +134,22 @@ public class Utente {
                 ":" + sconfitte +
                 ":" + partiteGiocate;
     }
+
+
+    public String squadraString(){
+        String info="";
+        for(int i=0;i<6;i++){
+            info+= squadra[i].toString();
+            info+=":";
+        }
+        return info;
+
+    }
+
+
+
+
+
 
 
 }

@@ -20,7 +20,7 @@ public class SelezioneUtente extends JFrame {
 
 
 
-    public SelezioneUtente() throws FileNotFoundException {
+    public SelezioneUtente() throws IOException {
         Reader rd = new Reader();
         ImageIcon img = new ImageIcon("img/selezioneutenti.jpg");
         Image wallpaper = img.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
@@ -76,46 +76,50 @@ public class SelezioneUtente extends JFrame {
         casella.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         if (bottone1.getText().equals("NUOVO UTENTE")){
-            bottone1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                    Utente utente1 = new Utente(input);
-                    try {
-                        utente1.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
-                    } catch (IOException exc) {
-                        throw new RuntimeException(exc);
-                    }
+
+            bottone1.addActionListener(e -> {
+                String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
+                Utente utente1 = new Utente(input);
+                // utente 1 genera squadra
+                try {
+                    utente1.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                } catch (IOException exc) {
+                    throw new RuntimeException(exc);
+                }
+            });
+        }
+        else{
+            bottone1.addActionListener(e->{
+                try {
+                    Utente utente1 = new Utente(rd.getRigaByIndex("testo/utenti.txt",0));
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
             });
         }
 
+        // else{} --> sovrascrivo l'utente
+
         if (bottone2.getText().equals("NUOVO UTENTE")){
-            bottone2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                    Utente utente2 = new Utente(input);
-                    try {
-                        utente2.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
-                    } catch (IOException exc) {
-                        throw new RuntimeException(exc);
-                    }
+            bottone2.addActionListener(e -> {
+                String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
+                Utente utente2 = new Utente(input);
+                try {
+                    utente2.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                } catch (IOException exc) {
+                    throw new RuntimeException(exc);
                 }
             });
         }
 
         if(bottone3.getText().equals("NUOVO UTENTE")){
-            bottone3.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                    Utente utente3 = new Utente(input);
-                    try {
-                        utente3.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
-                    } catch (IOException exc) {
-                        throw new RuntimeException(exc);
-                    }
+            bottone3.addActionListener(e -> {
+                String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
+                Utente utente3 = new Utente(input);
+                try {
+                    utente3.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                } catch (IOException exc) {
+                    throw new RuntimeException(exc);
                 }
             });
         }
