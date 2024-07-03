@@ -2,16 +2,15 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
 
 public class Lotta extends JFrame {
     private Pokemon[] squadra = new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
     private Pokemon[] squadra2 = new Pokemon[6]; // squadra dell'avversario
+    private int mossa = -10;
+    private int numTurno = 0;
+    private int turno = 0;
     //devo fare un metodo grafico per selezionarli
 
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
@@ -61,7 +60,7 @@ public class Lotta extends JFrame {
 
         // PARTE AGGIUNTA POKEMON
         Reader provaLettore = new Reader();
-        Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
+        Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
         squadra2[0] = prova;
         squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
 
@@ -219,6 +218,8 @@ public class Lotta extends JFrame {
         setContentPane(pannello); // TODO
 
         //QUESTO VA CAMBIATO MA DOPO
+        Reader AssegnaMosse = new Reader();
+
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
         Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
         int a = squadra2[0].getSalute();
@@ -226,53 +227,71 @@ public class Lotta extends JFrame {
         cambioUtente=false;
         int danno;
         Mossa Mossapokemon1 = null; // SE LA MOSSA VALE "null" allora ha priorità sulle altre perché non fa danno al pokemon avversario (ad esempio cambiare pokemon ha la priorità)
-        Mossa Mossapokemon2;
+        Mossa Mossapokemon2 = null;
         mossa1.addActionListener(e -> {
-            // implementare if con variabile booleana per capire chi dei due attacca (di chi è il turno)
-            //posso anche dentro cambio contesto
-            // devo considerare anche la velocita delle due mosse
             if (!cambioUtente){
-                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[0].getNome());
-                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[0]));
-                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                setMossa(0);
                 cambiaContesto();
-
             }
             else{
-                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[0]));
-                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                if(getTurno() == -1){
+                    if(squadra[0].getSalute() <= 0){
+                        cambioUtente=false;
+                        PreCambiaPokemon();
+                    }else{
+                        cambioUtente=true;
+                        PreCambiaPokemon();
+                    }
+                }
+                cambioUtente=true;
+                setMossa(-10);
                 cambiaContesto();
-                turno(Mossapokemon1, finalTest2[0]); // dentro turno va fatto TUTTO pure abbassare le barre della vita non potendo ritornare piu di un valore.
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
         });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
         mossa2.addActionListener(e -> {
             if (!cambioUtente){
-                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[1]));
-                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                setMossa(0);
                 cambiaContesto();
-                // ROBE SALVATE
             }
             else{
-                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[1]));
-                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                if(getTurno() == -1){
+                    if(squadra[0].getSalute() <= 0){
+                        cambioUtente=false;
+                        PreCambiaPokemon();
+                    }else{
+                        cambioUtente=true;
+                        PreCambiaPokemon();
+                    }
+                }
+                cambioUtente=true;
+                setMossa(-10);
                 cambiaContesto();
-
             }
 
         });
 
         mossa3.addActionListener(e -> {
             if (!cambioUtente){
-                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[2].getNome());
-                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[2]));
-                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                setMossa(0);
                 cambiaContesto();
             }
             else{
-                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[2]));
-                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                if(getTurno() == -1){
+                    if(squadra[0].getSalute() <= 0){
+                        cambioUtente=false;
+                        PreCambiaPokemon();
+                    }else{
+                        cambioUtente=true;
+                        PreCambiaPokemon();
+                    }
+                }
+                cambioUtente=true;
+                setMossa(-10);
                 cambiaContesto();
             }
 
@@ -280,14 +299,22 @@ public class Lotta extends JFrame {
 
         mossa4.addActionListener(e -> {
             if (!cambioUtente){
-                int RisoluzioneEffetto1 = Effetti.Effetto(finalTest[3].getNome());
-                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], finalTest[3]));
-                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                setMossa(0);
                 cambiaContesto();
             }
             else{
-                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], finalTest2[3]));
-                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                if(getTurno() == -1){
+                    if(squadra[0].getSalute() <= 0){
+                        cambioUtente=false;
+                        PreCambiaPokemon();
+                    }else{
+                        cambioUtente=true;
+                        PreCambiaPokemon();
+                    }
+                }
+                cambioUtente=true;
+                setMossa(-10);
                 cambiaContesto();
             }
 
@@ -301,19 +328,30 @@ public class Lotta extends JFrame {
 
     }
 
+    public void setMossa(int numero){
+        this.mossa = numero;
+    }
+    public int getMossa(){
+        return mossa;
+    }
+    public void setTurno(int numero){
+        this.turno = numero;
+    }
+    public int getTurno(){
+        return turno;
+    }
+
     public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
         // la velocita e del pokemon non della mossa
-        int danno, CondEffetto1, CondEffetto2;
+        int danno, CondEffetto1, CondEffetto2,effetti;
         String effetto1, effetto2 = null;
+        Boolean turno1, turno2 = false;
+
+        //SE IL POKEMON VIENE CAMBIATO COL TASTO FACCIAMO CHE LA MOSSA VIENE ISTANZIATA NULL
+        //QUINDI POSSIAMO GESTIRE IL CAMBIO POKEMON FUORI DAL TURNO
 
         CondEffetto1 = Effetti.Effetto(Mossapokemon1.getNome());
         CondEffetto2 = Effetti.Effetto(Mossapokemon2.getNome());
-        if(CondEffetto1 != -1){
-            effetto1 = Effetti.getEffetto(Mossapokemon1.getNome());
-        }
-        if(CondEffetto2 != -1){
-            effetto2 = Effetti.getEffetto(Mossapokemon2.getNome());
-        }
 
         //GESTIONE CASI CondEffetto = 1
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
@@ -322,59 +360,232 @@ public class Lotta extends JFrame {
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
             PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
             if(squadra2[0].getSalute() <= 0){
-                return -2;
+                return -1;
             }
             if (CondEffetto2 == 3){
+                danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
+                barraPSpok1.diminuisci(danno);
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                Effetti.attivaEffettoDopo(squadra2[0],squadra[0],Mossapokemon2,danno);
+                return 0;
+
+            }else if (CondEffetto2 ==2) {
+
+                danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
+                barraPSpok1.diminuisci(danno);
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
+            }else{
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
-                if(effetto2 != null){
-                    Effetti.attivaEffettoDopo(squadra[0],squadra2[0],Mossapokemon2);
-                }
-
-            }else{
-                if(effetto2 != null){
-                    Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon2);
-                }
+                return 0;
             }
-            return 0;
         } else if (CondEffetto2 == 1 && CondEffetto1 != 1) {
             // squadra 2 poi squadra
+            barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+            PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+            if (squadra[0].getSalute() <= 0){
+                return -1;
+            }
+            if (CondEffetto1 == 3){
+                danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
+                barraPSpok2.diminuisci(danno);
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                Effetti.attivaEffettoDopo(squadra[0],squadra2[0],Mossapokemon1,danno);
+                return 0;
+            }else if (CondEffetto1==2){
+                danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0], Mossapokemon1);
+                barraPSpok2.diminuisci(danno);
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
+            }else{
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
+            }
         }else if(CondEffetto2 == 1 && CondEffetto1 == 1){
             if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
                 //attacca squadra poi squadra2
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
             }else{
                 //Attacca Squadra2 poi squadra
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
             }
-        }
-        //TODO questi casi qua 2 e 3 possono essere uniti, per adesso li divido perchè non ci sto lavorando preciso sopra
-        //TODO ricordiamoci che esistono anche le mosse senza effetto, che verranno gestite nella maniera piu semplice
-        //GESTIONE CASI CondEffetto = 2
-        // questi sono i casi PEGGIORI non sto scherzando
-        if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
-            //attacca squadra poi squadra2
+        } else if (CondEffetto2 == -1 && CondEffetto1 == -1) {
+            if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
+                //attacca squadra poi squadra2
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
+            }else{
+                //Attacca Squadra2 poi squadra
+                barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
+                PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                if (squadra[0].getSalute() <= 0){
+                    return -1;
+                }
+                barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+                PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                if(squadra2[0].getSalute() <= 0){
+                    return -1;
+                }
+                return 0;
+            }
         }else{
-            //Attacca Squadra2 poi squadra
+            if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
+                if(CondEffetto1 == 2){
+                    danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon1);
+                    barraPSpok2.diminuisci(danno);
+                    PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    if(squadra2[0].getSalute() <= 0){
+                        return -1;
+                    }
+                }else{
+                    danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
+                    barraPSpok2.diminuisci(danno);
+                    PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    if(squadra2[0].getSalute() <= 0){
+                        return -1;
+                    }
+                    Effetti.attivaEffettoDopo(squadra[0],squadra2[0],Mossapokemon1,danno);
+                }
+                if(CondEffetto2 == 2){
+                    danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
+                    barraPSpok1.diminuisci(danno);
+                    PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    if (squadra[0].getSalute() <= 0){
+                        return -1;
+                    }
+                }else{
+                    danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
+                    barraPSpok1.diminuisci(danno);
+                    PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    if (squadra[0].getSalute() <= 0){
+                        return -1;
+                    }
+                    Effetti.attivaEffettoDopo(squadra2[0],squadra[0],Mossapokemon2,danno);
+                }
+                return 0;
+            }else{
+                if(CondEffetto2 == 2){
+                    danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
+                    barraPSpok1.diminuisci(danno);
+                    PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    if (squadra[0].getSalute() <= 0){
+                        return -1;
+                    }
+                }else{
+                    danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
+                    barraPSpok1.diminuisci(danno);
+                    PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    if (squadra[0].getSalute() <= 0){
+                        return -1;
+                    }
+                    Effetti.attivaEffettoDopo(squadra2[0],squadra[0],Mossapokemon2,danno);
+                }
+
+                if(CondEffetto1 == 2){
+                    danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon1);
+                    barraPSpok2.diminuisci(danno);
+                    PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    if(squadra2[0].getSalute() <= 0){
+                        return -1;
+                    }
+                }else{
+                    danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
+                    barraPSpok2.diminuisci(danno);
+                    PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    if(squadra2[0].getSalute() <= 0){
+                        return -1;
+                    }
+                    Effetti.attivaEffettoDopo(squadra[0],squadra2[0],Mossapokemon1,danno);
+                }
+                return 0;
+            }
+            //qua non puo arrivare
         }
-
-        //GESTIONE CASI CondEffetto = 3
-        //i piu comuni sono questi
-        if(squadra[0].getVelocita() > squadra2[0].getVelocita()){
-            //attacca squadra poi squadra2
-        }else{
-            //Attacca Squadra2 poi squadra
-        }
-
-
     }
 
     // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
     public JPanel getPannello(){
         return pannello;
     }
+    public void PreCambiaPokemon(){
+        int possibiliCambi = 0;
+        int[] indiceCambi = new int[6];
 
+        if(!cambioUtente){
+            for(int i=0;i<6;i++){
+                if(squadra[i] != null){
+                    if(squadra[i].getSalute() > 0){
+                        indiceCambi[possibiliCambi] = i;
+                        possibiliCambi++;
+                    }
+                }
+            }
+        }else{
+            for(int i=0;i<6;i++){
+                if(squadra2[i] != null){
+                    if(squadra2[i].getSalute() > 0){
+                        indiceCambi[possibiliCambi] = i;
+                        possibiliCambi++;
+                    }
+                }
+            }
+        }
+        if(possibiliCambi == 0){
+
+            System.exit(1);
+        }else{
+            cambiaPokemon(indiceCambi[0]);
+        }
+    }
     public void cambiaPokemon(int indice){// quello contenuto nel bottone, viene ritornato dall actionlistener
         if(!cambioUtente){
             Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta

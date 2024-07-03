@@ -69,7 +69,7 @@ public class Reader {
 
         Tipo tipo1 = Tipo.getTipoByString(info[1]);
         Tipo tipo2 = Tipo.getTipoByString(info[2]);
-        int lvl = 5;
+        int lvl = 100;
 
         for(int i = 0; i < 6; i++){
             IV[i] = a.nextInt(15);

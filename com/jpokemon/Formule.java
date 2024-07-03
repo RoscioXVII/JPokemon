@@ -23,7 +23,7 @@ public class Formule {
         int bruttoColpo = bruttoColpo(velocita);
 
         double stab = 1;
-        double superefficace = 1;
+        double superefficace;
 
         if(tipoPoke1_2 == null){
             if(tipoPoke1_1 == tipoMossa){
@@ -310,7 +310,7 @@ public class Formule {
         Effetti.put("Fury Attack","RipetiAttacco:2:5:Durante");
         Effetti.put("Fury Swipes","RipetiAttacco:2:5:Durante");
         Effetti.put("Glare",null);//RIMUOVI
-        Effetti.put("Growl","Diminuisci:1:attacco:30:Dopo");
+        Effetti.put("Growl","Diminuisci:1:attacco:100:Dopo");
         Effetti.put("Growth","Aumenta:1:attacco:100:Dopo");
         Effetti.put("Guillotine","UnColpo:Durante");
         Effetti.put("Gust",null);
@@ -401,7 +401,7 @@ public class Formule {
         Effetti.put("Swift",null);
         Effetti.put("Swords Dance","Aumenta:2:Attacco:100:Dopo");
         Effetti.put("Tackle",null);
-        Effetti.put("Tail Whip","Diminuisci:1:difesa:Dopo");
+        Effetti.put("Tail Whip","Diminuisci:1:difesa:100:Dopo");
         Effetti.put("Take Down","Rinculo:1:4:Dopo");
         Effetti.put("Teleport",null);//RIMUOVI
         Effetti.put("Thrash",null);
@@ -435,6 +435,10 @@ public class Formule {
      */
     public static void Aumenta(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
+        Random roll = new Random(100);
+        if(roll.nextInt() > percentuale){
+            return;
+        }
         switch (campo){
             case "attacco" -> x = pokemon.aumentaAttacco(valore);
             case "difesa" -> x = pokemon.aumentaDifesa(valore);
@@ -443,12 +447,13 @@ public class Formule {
             case "velocita" -> x =pokemon.aumentaVelocita(valore);
             default -> x = -1;
         }
-        if (x == -1){
-            System.out.println("Raggiunto massimo della statistica!");
-        }
     }
     public static void Diminuisci(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
+        Random roll = new Random(100);
+        if(roll.nextInt() > percentuale){
+            return;
+        }
         switch (campo){
             case "attacco" -> x = pokemon.diminuisciAttacco(valore);
             case "difesa" -> x = pokemon.diminuisciDifesa(valore);
@@ -456,9 +461,6 @@ public class Formule {
             case "difesaSpeciale" -> x = pokemon.diminuisciDifesaSpeciale(valore);
             case "velocita" -> x =pokemon.diminuisciVelocita(valore);
             default -> x = -1;
-        }
-        if (x == -1){
-            System.out.println("Raggiunto minimo della statistica!");
         }
     }
     public static void Esplosione(Pokemon attaccante){
@@ -534,10 +536,37 @@ public class Formule {
     public static int Trappola(int hpMAX){
         return hpMAX/8;
     }
-    public static Boolean Tentenna(int percentuale){
+    public static int Tentenna(int percentuale){
         Random roll = new Random();
 
-        return roll.nextInt() < percentuale;
+        if(roll.nextInt(100) < percentuale){
+            return 1;
+        }else{
+            return -3;
+        }
+    }
+    public static void Rinculo(int danno,Pokemon pokemon,int numeratore,int denominatore){
+
+        int risultato = 0;
+
+        risultato = pokemon.getSalute() - (danno/denominatore);
+
+        if(risultato <= 0){
+            pokemon.setSalute(0);
+        }else{
+            pokemon.setSalute(risultato);
+        }
+
+    }
+    public static void Cura(Pokemon pokemon){
+        int risultato = pokemon.getSalute() + (pokemon.getPs()/2);
+
+        if(risultato >= pokemon.getPs()){
+            pokemon.setSalute(pokemon.getPs());
+        }else{
+            pokemon.setSalute(risultato);
+        }
+
     }
 
 }

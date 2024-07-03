@@ -189,29 +189,26 @@ public class Pokemon {
         if(this.ripetizioniAttacco == 6){
             return -1;
         }else if(this.ripetizioniAttacco+valore > 6){
-            while(this.ripetizioniAttacco < 6){
-                this.attacco += 1;
-                this.ripetizioniAttacco += 1;
-            }
+            this.attacco += (6-this.ripetizioniAttacco);
+            this.ripetizioniAttacco = 6;
             return 1;
         }else{
-            this.attacco = this.attacco + 1;
-            this.ripetizioniAttacco += 1;
+            this.attacco = this.attacco + valore;
+            this.ripetizioniAttacco += valore;
             return 1;
         }
     };
+
     public int aumentaDifesa(int valore){
         if(this.ripetizioniDifesa == 6){
             return -1;
         }else if(this.ripetizioniDifesa+valore > 6){
-            while(this.ripetizioniDifesa < 6){
-                this.difesa += 1;
-                this.ripetizioniDifesa += 1;
-            }
+            this.difesa += (6-this.ripetizioniDifesa);
+            this.ripetizioniDifesa = 6;
             return 1;
         }else{
-            this.difesa = this.difesa + 1;
-            this.ripetizioniDifesa += 1;
+            this.difesa = this.difesa + valore;
+            this.ripetizioniDifesa += valore;
             return 1;
         }
     };
@@ -219,11 +216,10 @@ public class Pokemon {
         if(this.ripetizioniAttaccoSpeciale == 6){
             return -1;
         }else if(this.ripetizioniAttaccoSpeciale+valore > 6){
-            while(this.ripetizioniAttaccoSpeciale < 6){
-                this.attaccoSpeciale += 1;
-                this.ripetizioniAttaccoSpeciale += 1;
-            }
+            this.attaccoSpeciale += (6-this.ripetizioniAttaccoSpeciale);
+            this.ripetizioniAttaccoSpeciale = 6;
             return 1;
+
         }else{
             this.attaccoSpeciale = this.attaccoSpeciale + 1;
             this.ripetizioniAttaccoSpeciale += 1;
@@ -234,10 +230,8 @@ public class Pokemon {
         if(this.ripetizioniDifesaSpeciale == 6){
             return -1;
         }else if(this.ripetizioniDifesaSpeciale+valore > 6){
-            while(this.ripetizioniDifesaSpeciale < 6){
-                this.difesaSpeciale += 1;
-                this.ripetizioniDifesaSpeciale += 1;
-            }
+            this.difesaSpeciale += (6-this.ripetizioniDifesaSpeciale);
+            this.ripetizioniDifesaSpeciale = 6;
             return 1;
         }else{
             this.difesaSpeciale = this.difesaSpeciale + 1;
@@ -249,10 +243,8 @@ public class Pokemon {
         if(this.ripetizioniVelocita == 6){
             return -1;
         }else if(this.ripetizioniVelocita+valore > 6){
-            while(this.ripetizioniVelocita < 6){
-                this.velocita += 1;
-                this.ripetizioniVelocita += 1;
-            }
+            this.velocita += (6-this.ripetizioniVelocita);
+            this.ripetizioniVelocita = 6;
             return 1;
         }else{
             this.velocita = this.velocita + 1;
@@ -264,29 +256,29 @@ public class Pokemon {
 
     public int diminuisciAttacco(int valore){
         if(this.ripetizioniAttacco == -6){
+            System.out.println("Attacco al minimo");
             return -1;
         }else if(this.ripetizioniAttacco-valore < -6){
-            while(this.ripetizioniAttacco > -6){
-                this.attacco -= 1;
-                this.ripetizioniAttacco -= 1;
-            }
+            this.attacco -= (6+this.ripetizioniAttacco);
+            this.ripetizioniAttacco = -6;
             return 1;
         }else{
             this.attacco = this.attacco - 1;
+            this.ripetizioniAttacco -= 1;
             return 1;
         }
     };
     public int diminuisciDifesa(int valore){
         if(this.ripetizioniDifesa == -6){
+            System.out.println("Difesa al minimo");
             return -1;
         }else if(this.ripetizioniDifesa-valore < -6){
-            while(this.ripetizioniDifesa > -6){
-                this.difesa -= 1;
-                this.ripetizioniDifesa -= 1;
-            }
+            this.difesa -= (6+this.ripetizioniDifesa);
+            this.ripetizioniDifesa = -6;
             return 1;
         }else{
             this.difesa = this.difesa - 1;
+            this.ripetizioniDifesa -= 1;
             return 1;
         }
     };
@@ -294,13 +286,12 @@ public class Pokemon {
         if(this.ripetizioniAttaccoSpeciale == -6){
             return -1;
         }else if(this.ripetizioniAttaccoSpeciale-valore < -6){
-            while(this.ripetizioniAttaccoSpeciale > -6){
-                this.attaccoSpeciale -= 1;
-                this.ripetizioniAttaccoSpeciale -= 1;
-            }
+            this.attaccoSpeciale -= (6+this.ripetizioniAttaccoSpeciale);
+            this.ripetizioniAttaccoSpeciale = -6;
             return 1;
         }else{
             this.attaccoSpeciale = this.attaccoSpeciale - 1;
+            this.ripetizioniAttaccoSpeciale -= 1;
             return 1;
         }
     };
@@ -308,13 +299,12 @@ public class Pokemon {
         if(this.ripetizioniDifesaSpeciale == -6){
             return -1;
         }else if(this.ripetizioniDifesaSpeciale-valore < -6){
-            while(this.ripetizioniDifesaSpeciale > -6){
-                this.difesaSpeciale -= 1;
-                this.ripetizioniDifesaSpeciale -= 1;
-            }
+            this.difesaSpeciale -= (6+this.ripetizioniDifesaSpeciale);
+            this.ripetizioniDifesaSpeciale = -6;
             return 1;
         }else{
             this.difesaSpeciale = this.difesaSpeciale - 1;
+            this.ripetizioniDifesaSpeciale -= 1;
             return 1;
         }
     };
@@ -322,13 +312,12 @@ public class Pokemon {
         if(this.ripetizioniVelocita == -6){
             return -1;
         }else if(this.ripetizioniVelocita-valore < -6){
-            while(this.ripetizioniVelocita > -6){
-                this.velocita -= 1;
-                this.ripetizioniVelocita -= 1;
-            }
+            this.velocita -= (6+this.ripetizioniVelocita);
+            this.ripetizioniVelocita = -6;
             return 1;
         }else{
             this.velocita = this.velocita - 1;
+            this.ripetizioniVelocita -= 1;
             return 1;
         }
     };
@@ -345,11 +334,10 @@ public class Pokemon {
     public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
 
     public int attacca(Pokemon avversario, Mossa mossa){
-        int bruttoColpo = Formule.bruttoColpo(this.velocita);
 
-        int danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),bruttoColpo,this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa());
+        int danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa(),this.getVelocita());
 
-        avversario.ps-=danno;
+        avversario.salute-=danno;
         mossa.setPP((mossa.getPP())-1);
 
         return danno;
