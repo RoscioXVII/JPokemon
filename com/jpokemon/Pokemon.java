@@ -2,6 +2,7 @@ package com.jpokemon;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 public class Pokemon {
     private String nome;
@@ -39,6 +40,8 @@ public class Pokemon {
     private int ripetizioniAttaccoSpeciale = 0;
     private int ripetizioniDifesaSpeciale = 0;
     private int ripetizioniVelocita = 0;
+    private int ripetizioniPrecisione = 0;
+    private int ripetizioniElusione = 0;
     //SET per EXTRA
     private int IVps;
     private int IVattacco;
@@ -57,8 +60,23 @@ public class Pokemon {
     private String nomeEvoluzione;
     private int salute;
 
+    private int elusione = 3;
+    private int elusioneN = 3;
+    private int precisione = 3;
+    private int precisioneN = 3;
+
+    private int EVpsYield;
+    private int EVattaccoYield;
+    private int EVdifesaYield;
+    private int EVattaccoSpecialeYield;
+    private int EVdifesaSpecialeYield;
+    private int EVvelocitaYield;
+
+
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
-                   int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita){ // devo trovare il modo di mettere le mosse
+                   int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita,int evps, int evattacco, int evdifesa,
+                   int evattaccoSpeciale,int evdifesaSpeciale, int evvelocita){
+
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
@@ -74,6 +92,13 @@ public class Pokemon {
         this.spriteFront = "img/front/"+nome.toLowerCase() + "-front.gif";
         this.spriteBack = "img/retro/"+nome.toLowerCase() + "-retro.gif";
         this.spriteMini = "img/mini/"+nome.toLowerCase() + "-mini.gif";
+
+        this.EVpsYield = evps;
+        this.EVattaccoYield = evattacco;
+        this.EVdifesaYield = evdifesa;
+        this.EVattaccoSpecialeYield = evattaccoSpeciale;
+        this.EVdifesaSpecialeYield = evdifesaSpeciale;
+        this.EVvelocitaYield = evvelocita;
     }
 
     public void setNome(String nome){
@@ -185,6 +210,17 @@ public class Pokemon {
         return spriteMini;
     }
 
+    public int getPrecisione(){
+        return precisione;
+    }
+    public int getPrecisioneN(){
+        return precisioneN;
+    }
+    public int getElusione(){
+        return this.ripetizioniElusione;
+    }
+
+
     public int aumentaAttacco(int valore){
         if(this.ripetizioniAttacco == 6){
             return -1;
@@ -252,6 +288,87 @@ public class Pokemon {
             return 1;
         }
     };
+    public int aumentaPrecisione(int valore){
+        if(this.ripetizioniPrecisione == 6){
+            return -1;
+        }else if(this.ripetizioniPrecisione+valore > 6){
+            this.precisione = 9;
+            this.ripetizioniPrecisione = 6;
+            return 1;
+        } else {
+            for(int i=0;i<valore;i++){
+                if(this.ripetizioniPrecisione<0){
+                    this.precisioneN--;
+                    this.ripetizioniPrecisione++;
+                }else{
+                    this.precisione++;
+                    this.ripetizioniPrecisione++;
+                }
+            }
+            return 1;
+        }
+    }
+    public int diminuisciPrecisione(int valore){
+        if(this.ripetizioniPrecisione == -6){
+            return -1;
+        }else if(this.ripetizioniPrecisione-valore >-6){
+            this.precisioneN = 9;
+            this.ripetizioniPrecisione = -6;
+            return 1;
+        }else{
+            for(int i=0;i<valore;i++){
+                if(this.ripetizioniPrecisione<0){
+                    this.precisioneN++;
+                    this.ripetizioniPrecisione--;
+                }else{
+                    this.precisione--;
+                    this.ripetizioniPrecisione--;
+                }
+            }
+            return 1;
+        }
+    }
+    public int aumentaElusione(int valore){
+        if(this.ripetizioniElusione == 6){
+            return -1;
+        }else if(this.ripetizioniElusione+valore > 6){
+            this.elusione = 9;
+            this.ripetizioniElusione = 6;
+            return 1;
+        }else{
+            for(int i=0;i<valore;i++){
+                if(this.ripetizioniElusione<0){
+                    this.elusioneN--;
+                    this.ripetizioniElusione++;
+                }else{
+                    this.elusione++;
+                    this.ripetizioniElusione++;
+                }
+            }
+            return 1;
+        }
+    }
+    public int diminuisciElusione(int valore){
+        if(this.ripetizioniElusione == -6){
+            return -1;
+        }else if(this.ripetizioniElusione-valore >-6){
+            this.elusioneN = 9;
+            this.ripetizioniElusione = -6;
+            return 1;
+        }else{
+            for(int i=0;i<valore;i++){
+                if(this.ripetizioniElusione<0){
+                    this.elusioneN++;
+                    this.ripetizioniElusione--;
+                }else{
+                    this.elusione--;
+                    this.ripetizioniElusione--;
+                }
+            }
+            return 1;
+        }
+
+    }
 
 
     public int diminuisciAttacco(int valore){
@@ -335,7 +452,32 @@ public class Pokemon {
 
     public int attacca(Pokemon avversario, Mossa mossa){
 
-        int danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa(),this.getVelocita());
+        Random roll = new Random();
+
+        int danno;
+        double risultato;
+
+        int prec = this.getPrecisione();
+        int precN = this.getPrecisioneN();
+        int elusione = avversario.getElusione();
+
+        if(elusione <= 0){
+            risultato = (((double) (prec + elusione) /precN));
+        }else{
+            risultato = (((double) (prec) /precN+elusione));
+        }
+
+        if(roll.nextInt(100) > (int)risultato*mossa.getPrecisione()){
+            return 0;
+        }
+
+        if(mossa.getTipoMossa() == TipoMossa.FISICO){
+            danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),this.lvl,mossa.getPotenza(),this.attacco,avversario.getDifesa(),this.getVelocita());
+        } else if (mossa.getTipoMossa() == TipoMossa.SPECIALE) {
+            danno = Formule.danno(this.tipo1,this.tipo2,avversario.getTipo1(),avversario.getTipo2(),mossa.getTipo(),this.lvl,mossa.getPotenza(),this.attaccoSpeciale,avversario.getDifesaSpeciale(),this.getVelocita());
+        } else {
+            danno = 0;
+        }
 
         avversario.salute-=danno;
         mossa.setPP((mossa.getPP())-1);
@@ -365,6 +507,12 @@ public class Pokemon {
         this.lvlEvoluzione = evoluzione.lvlEvoluzione;
         this.tipo1 = evoluzione.tipo1;
         this.tipo2 = evoluzione.tipo2;
+        this.EVpsYield = evoluzione.EVpsYield;
+        this.EVattaccoYield = evoluzione.EVattaccoYield;
+        this.EVdifesaYield = evoluzione.EVdifesaYield;
+        this.EVattaccoSpecialeYield = evoluzione.EVattaccoSpecialeYield;
+        this.EVdifesaSpecialeYield = evoluzione.EVdifesaSpecialeYield;
+        this.EVvelocitaYield = evoluzione.EVvelocitaYield;
         //nuove statistiche effettive ancora tocca implementare IV ed EV ma tanto l evoluzione non parte senza quindi tranquillo
         this.setPs(Formule.calcolaHpBase(evoluzione.psBase,lvl,IVps,EVps));
         this.setAttacco(Formule.calcolaStatisticheBase(evoluzione.attaccoBase,lvl,IVattacco,EVattacco));

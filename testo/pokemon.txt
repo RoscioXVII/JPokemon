@@ -1,34 +1,34 @@
-Bulbasaur:erba:veleno:Tackle:Growl:null:null:16:ivysaur:45:64:49:49:65:65:45
-Ivysaur:erba:veleno:Tackle:Growl:leech seed:vine whip:32:venusaur:60:141:62:63:80:80:60
-Venusaur:erba:veleno:tackle:leech seed:vine whip:razor leaf:-1:-1:80:208:82:83:100:100:80
-Charmander:fuoco:null:Scratch:Growl:Ember:null:16:charmeleon:39:65:52:43:60:50:65
-Charmeleon:fuoco:null:Scratch:Growl:Ember:null:36:charizard:58:142:64:58:80:65:80
-Charizard:fuoco:Volo:Lanciafiamme:Scratch:Ember:Leer:-1:-1:78:209:84:78:109:85:100
-Squirtle:acqua:null:Tackle:Tail Whip:null:null:16:wartortle:44:66:48:65:50:64:43
-Wartortle:acqua:null:bubble:water gun:null:null36:blastoise:59:143:63:80:65:80:58
-Blastoise:acqua:null:tail whip:water gun:bite:withdraw:-1:-1:79:210:83:100:85:105:78
-Butterfree:coleottero:volante:confusione:paralizzante:supersuono:psicoraggio:-1:-1:60:45:50:90:80:70
-Tauros:normale:null:azione:pestone:colpocoda:fulmisguardo:-1:-1:75:100:95:40:70:110
-Lapras:acqua:ghiaccio:pistolacqua:growl:geloraggio:idropompa:-1:-1:130:85:80:85:95:60
-Scyther:coleottero:volante:attacco rapido:fulmisguardo:doppioteam:lacerazione:-1:-1:70:110:80:55:80:105
-Ponyta:fuoco:null:braciere:colpocoda:null:null:40:rapidash:50:85:55:65:65:90
-Rapidash:fuoco:null:braciere:colpocoda:growl:turbofuoco:-1:-1:65:100:70:80:80:105
-Ekans:veleno:null:fulmisguardo:morso:null:null:arbok:22:35:60:44:40:54:55
-Arbok:veleno:null:fulmisguardo:morso:stridio:acido:-1:-1:60:85:69:65:79:80
-Pikachu:elettro:null:growl:tuonoshock:attacco rapido:null:20:raichu:35:55:30:50:50:90
-Raichu:elettro:null:growl:tuonoshock:attacco rapido:fulmine:-1:-1:60:90:55:90:80:100
-Pidgey:normale:volante:raffica:attacco rapido:null:null:pidgeotto:18:40:45:40:35:35:56
-Pidgeotto:normale:volante:raffica:attacco rapido:attacco d'ala:null:36:pidgeot:63:60:55:50:50:71
-Pidgeot:normale:volante:raffica:attacco rapido:attacco d'ala:agilita:-1:-1:83:80:75:70:70:91
-Nidoran:veleno:null:growl:azione:graffio:null:16:nidorina:55:47:52:40:40:41
-Nidorina:veleno:null:growl:azione:graffio:veleno spina:30:nidoqueen:70:62:67:55:55:56
-Nidoqueen:veleno:terra:growl:azione:veleno spina:terremoto:-1:-1:90:82:87:75:85:76
-Growlithe:fuoco:null:morso:boato:braciere:21:arcanine:55:70:45:70:50:60
-Arcanine:fuoco:null:morso:boato:braciere:fulmisguardo:-1:-1:90:110:80:100:80:95
-Graveler:roccia:terra:azione:sassata:rafforzatore:ricciolscudo:28:golem:55:95:115:45:45:35
-Golem:roccia:terra:azione:sassata:rafforzatore:ricciolscudo:-1:-1:80:110:130:55:65:45
-Machop:lotta:null:colpokarate:colpo basso:null:null:28:machoke:70:80:50:35:35:35
-Machoke:lotta:null:colpokarate:colpo basso:fulmisguardo:null:36:machamp:80:100:70:50:60:45
-Machamp:lotta:null:colpokarate:colpo basso:fulmisguardo:sottomissione:-1:-1:90:130:80:65:85:55
-Tentacool:acqua:veleno:acido:supersuono:avvolgibotta:null:30:tentacruel:40:40:35:50:100:70
-Tentacruel:acqua:veleno:acido:idropompa:avvolgibotta:pistolacqua:-1:-1:80:70:65:80:120:100
+Bulbasaur:erba:veleno:Tackle:Growl:null:null:16:Ivysaur:45:64:49:49:65:65:45:EV:0:0:0:1:0:0
+Ivysaur:erba:veleno:Tackle:Growl:Leech Seed:Vine whip:32:Venusaur:60:141:62:63:80:80:60:EV:0:0:0:1:1:0
+Venusaur:erba:veleno:Tackle:Leech Seed:Vine Whip:Razor Leaf:-1:-1:80:208:82:83:100:100:80:EV:0:0:0:2:1:0
+Charmander:fuoco:null:Scratch:Growl:Ember:null:16:Charmeleon:39:65:52:43:60:50:65:EV:0:0:0:0:0:1
+Charmeleon:fuoco:null:Scratch:Growl:Ember:null:36:Charizard:58:142:64:58:80:65:80:EV:0:0:0:1:0:1
+Charizard:fuoco:volante:Lanciafiamme:Scratch:Ember:Leer:-1:-1:78:209:84:78:109:85:100:EV:0:0:0:3:0:0
+Squirtle:acqua:null:Tackle:Tail Whip:null:null:16:Wartortle:44:66:48:65:50:64:43:EV:0:0:1:0:0:0
+Wartortle:acqua:null:Bubble:Water Gun:null:null36:Blastoise:59:143:63:80:65:80:58:EV:0:0:1:0:1:0
+Blastoise:acqua:null:Tail Whip:Water Gun:Bite:Withdraw:-1:-1:79:210:83:100:85:105:78:EV:0:0:0:0:3:0
+Butterfree:coleottero:volante:Confusion:Psybeam:Tackle:String Shot:-1:-1:60:178:45:50:90:80:70:EV:0:0:0:2:1:0
+Tauros:normale:null:Tackle:Stomp:Tail Whip:Leer:-1:-1:75:172:100:95:40:70:110:EV:0:1:0:0:0:1
+Lapras:acqua:ghiaccio:Water Gun:Growl:Body Slam:Ice Beam:-1:-1:130:187:85:80:85:95:60:EV:2:0:0:0:0:0
+Scyther:coleottero:volante:Quick Attack:Leer:Double Team:Slash:-1:-1:70:100:110:80:55:80:105:EV:0:1:0:0:0:0
+Ponyta:fuoco:null:Ember:Tail Whip:null:null:40:Rapidash:50:82:85:55:65:65:90:EV:0:0:0:0:0:1
+Rapidash:fuoco:null:Ember:Tail Whip:Growl:Stomp:-1:-1:65:175:100:70:80:80:105:EV:0:0:0:0:0:2
+Ekans:veleno:null:Leer:Wrap:null:null:22:Arbok:35:58:60:44:40:54:55:EV:0:1:0:0:0:0
+Arbok:veleno:null:Leer:Poison Sting:Wrap:null:-1:-1:60:157:85:69:65:79:80:EV:0:2:0:0:0:0
+Pikachu:elettro:null:Growl:Thunder Shock:Quick Attack:null:20:Raichu:35:112:55:30:50:50:90:EV:0:0:0:0:0:2
+Raichu:elettro:null:Growl:Thunder Shock:Quick Attack:null:-1:-1:60:243:90:55:90:80:100:EV:0:0:0:0:0:3
+Pidgey:normale:volante:Gust:Sand Attack:null:null:18:Pidgeotto:40:50:45:40:35:35:56:EV:0:0:0:0:0:1
+Pidgeotto:normale:volante:Gust:Sand Attack:null:null:36:Pidgeot:63:122:60:55:50:50:71:EV:0:0:0:0:0:2
+Pidgeot:normale:volante:Gust:Sand Attack:Quick Attack:null:-1:-1:83:216:80:75:70:70:91:EV:0:0:0:0:0:3
+Nidoran:veleno:null:Growl:Tackle:null:null:16:Nidorina:55:55:47:52:40:40:41:EV:1:0:0:0:0:0
+Nidorina:veleno:null:Growl:Tackle:Scratch:null:30:Nidoqueen:70:128:62:67:55:55:56:EV:2:0:0:0:0:0
+Nidoqueen:veleno:terra:Growl:Tackle:Scratch:Body Slam:-1:-1:90:227:82:87:75:85:76:EV:3:0:0:0:0:0
+Growlithe:fuoco:null:Bite:Roar:null:null:21:Arcanine:55:70:70:45:70:50:60:EV:0:1:0:0:0:0
+Arcanine:fuoco:null:Ember:Leer:Roar:Take Down:-1:-1:90:194:110:80:100:80:95:EV:0:2:0:0:0:0
+Graveler:roccia:terra:Defense Curl:Tackle:null:null:28:Golem:55:137:95:115:45:45:35:EV:0:0:2:0:0:0
+Golem:roccia:terra:Defense Curl:Tackle:null:null:-1:-1:80:223:110:130:55:65:45:EV:0:0:3:0:0:0
+Machop:lotta:null:Karate Chop:Low Kick:null:null:28:Machoke:70:61:80:50:35:35:35:EV:0:1:0:0:0:0
+Machoke:lotta:null:Karate Chop:Leer:Low Kick:null:36:Machamp:80:142:100:70:50:60:45:EV:0:2:0:0:0:0
+Machamp:lotta:null:Karate Chop:Leer:Low Kick:null:-1:-1:90:227:130:80:65:85:55:EV:0:3:0:0:0:0
+Tentacool:acqua:veleno:Acid:Wrap:null:null:30:Tentacruel:40:67:40:35:50:100:70:EV:0:0:0:0:1:0
+Tentacruel:acqua:veleno:Acid:Wrap:null:null:-1:-1:80:180:70:65:80:120:100:EV:0:0:0:0:2:0

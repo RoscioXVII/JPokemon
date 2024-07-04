@@ -21,37 +21,6 @@ public class Reader {
     public Reader() { // vuoto perche tutti i campi sono static / final
     }
 
-    public Pokemon buildPokemon() throws IOException {
-        String[] info;
-        try{
-            sc = new Scanner(new File(infoPokemon));
-            // o leggo tutto e creo una lista oppure leggo una linea random con cui costruire la squadra dell'utente
-            if (sc.hasNextLine()){
-                info = sc.nextLine().split(":");
-                if(info.length<16)
-                    throw new IOException("Il formato del file è errato, numero di elementi forniti insufficiente.");
-
-                //mosse[0] = info[3];
-                //mosse[1] = info[4];
-                //mosse[2] = info[5];
-                //mosse[3] = info[6];
-                Tipo tipo1 = Tipo.getTipoByString(info[1]);
-                Tipo tipo2 = Tipo.getTipoByString(info[2]);
-
-
-                return new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
-                        Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
-                        Integer.parseInt(info[14]),Integer.parseInt(info[15]));
-
-            }
-            else
-                return null; // caso in cui sono finite le righe da leggere
-        } catch (FileNotFoundException e){
-            System.err.println("file non presente");
-            throw e;
-        }
-    }
-
     public Pokemon buildPokemonByString(String string) throws IOException {
         Random a = new Random();    //SERVONO PER LA CREAZIONE DEGLI IV
         int[] IV = new int[6];      //SPIEGAZIONE VELOCE: Valori random che vanno da 0 a 15 che indicano dove il pokemon "spicca" di piu
@@ -69,7 +38,7 @@ public class Reader {
 
         Tipo tipo1 = Tipo.getTipoByString(info[1]);
         Tipo tipo2 = Tipo.getTipoByString(info[2]);
-        int lvl = 100;
+        int lvl = 5;
 
         for(int i = 0; i < 6; i++){
             IV[i] = a.nextInt(15);
@@ -83,7 +52,8 @@ public class Reader {
 
         Pokemon pokemon = new Pokemon(info[0],tipo1,tipo2,Integer.parseInt(info[7]),info[8],Integer.parseInt(info[9]),Integer.parseInt(info[10]),
                 Integer.parseInt(info[11]),Integer.parseInt(info[12]),Integer.parseInt(info[13]),
-                Integer.parseInt(info[14]),Integer.parseInt(info[15]));
+                Integer.parseInt(info[14]),Integer.parseInt(info[15]),Integer.parseInt(info[17]),Integer.parseInt(info[18]),Integer.parseInt(info[19]),Integer.parseInt(info[20])
+                ,Integer.parseInt(info[21]),Integer.parseInt(info[22]));
 
         pokemon.setLvl(lvl);
 

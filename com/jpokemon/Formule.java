@@ -439,12 +439,14 @@ public class Formule {
         if(roll.nextInt() > percentuale){
             return;
         }
-        switch (campo){
+        switch (campo.toLowerCase()){
             case "attacco" -> x = pokemon.aumentaAttacco(valore);
             case "difesa" -> x = pokemon.aumentaDifesa(valore);
-            case "attaccoSpeciale" -> x = pokemon.aumentaAttaccoSpeciale(valore);
-            case "difesaSpeciale" -> x = pokemon.aumentaDifesaSpeciale(valore);
+            case "attaccospeciale" -> x = pokemon.aumentaAttaccoSpeciale(valore);
+            case "difesaspeciale" -> x = pokemon.aumentaDifesaSpeciale(valore);
             case "velocita" -> x =pokemon.aumentaVelocita(valore);
+            case "precisione" -> x=pokemon.aumentaPrecisione(valore);
+            case "elusione" -> x=pokemon.aumentaElusione(valore);
             default -> x = -1;
         }
     }
@@ -454,12 +456,14 @@ public class Formule {
         if(roll.nextInt() > percentuale){
             return;
         }
-        switch (campo){
+        switch (campo.toLowerCase()){
             case "attacco" -> x = pokemon.diminuisciAttacco(valore);
             case "difesa" -> x = pokemon.diminuisciDifesa(valore);
-            case "attaccoSpeciale" -> x = pokemon.diminuisciAttaccoSpeciale(valore);
-            case "difesaSpeciale" -> x = pokemon.diminuisciDifesaSpeciale(valore);
+            case "attaccospeciale" -> x = pokemon.diminuisciAttaccoSpeciale(valore);
+            case "difesaspeciale" -> x = pokemon.diminuisciDifesaSpeciale(valore);
             case "velocita" -> x =pokemon.diminuisciVelocita(valore);
+            case "precisione" -> x =pokemon.diminuisciPrecisione(valore);
+            case "elusione" -> x =pokemon.diminuisciElusione(valore);
             default -> x = -1;
         }
     }

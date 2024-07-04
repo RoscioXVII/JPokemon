@@ -1,0 +1,34 @@
+7:Leech Seed:13:Vine Whip
+30:Razor Leaf
+43:Growth:65:SolarBeam
+9:Ember:15:Leer
+24:Rage:33:Slash
+46:Flamethrower:55:Fire Spin
+8:Bubble:15:Water Gun
+24:Bite:31:Withdraw
+42:Skull Bash:52:Hydro Pump
+7:Tackle:26:Whirlwind:32:Psybeam
+21:Stomp:28:Tail Whip:35:Leer:44:Rage:51:Take Down
+25:Body Slam:38:Ice Beam:46:Hydro Pump
+17:Leer:24:Double Team:29:Slash:35:Swords Dance:42:Agility
+30:Tail Whip:32:Stomp:35:Growl:39:Fire Spin
+47:Take Down:55:Agility
+10:Poison Sting:17:Bite
+27:Glare:36:Screech:47:Acid
+16:Quick Attack
+26:Swift:33:Agility:43:Thunder
+12:Quick Attack
+21:Whirlwind:31:Wing Attack
+44:Agility
+8:Scratch:14:Poison Sting
+23:Tail Whip
+31:Body Slam:32:Bite:41:Fury Swipes:50:Double Kick
+18:Ember:20:Leer
+30:Take Down:39:Agility:50:Flamethrower
+11:Defense Curl:16:Rock Throw:21:Self-Destruct
+29:Harden:36:Earthquake:43:Explosion
+20:Low Kick:25:Leer
+35:Seismic Toss
+52:Submission
+18:Poison Sting:22:Water Gun:27:Constrict
+35:Barrier:43:Screech:50:Hydro Pump
