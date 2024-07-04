@@ -249,7 +249,7 @@ public class Reader {
 
 
         //cerca squadra
-        String[] squad = cercaSquadra(info[4]);
+        String squad = cercaSquadra(info[4]);
         //qua dentro mi serve un build squadra
         // da info dovrei lanciare 6 build pokemon con gli attributi contenuti in info
         // --- fare if per vedere se squad è vuoto ---
