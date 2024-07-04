@@ -28,10 +28,13 @@ public class Finestra extends JFrame {
         JPanel pannello2 = pannelloUtente.getPannello();
         JPanel pannello3 = pannelloLotta.getPannello();
 
+
         // aggiunta dei pannelli al pannelloCard
         pannelloCard.add(pannello1, "CARD 1");
         pannelloCard.add(pannello2,"CARD 2");
         pannelloCard.add(pannello3, "CARD 3");
+
+
         //aggiungo il pannello al frame (finestra)
         add(pannelloCard);
 

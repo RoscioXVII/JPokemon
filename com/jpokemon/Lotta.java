@@ -42,12 +42,16 @@ public class Lotta extends JFrame {
     private JLabel labelgif2;
     private JLabel utente;
     private boolean cambioUtente;
+    private int  vittorieUtente1;
+    private int vittorieUtente2;
+    private Pokemon[] squadraUtente1 = new Pokemon[6];
+
+    private Pokemon[] squadraUtente2 = new Pokemon[6];
 
 
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
-
     public Lotta() throws IOException {
 
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
@@ -59,15 +63,35 @@ public class Lotta extends JFrame {
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // PARTE AGGIUNTA POKEMON
+
         Reader provaLettore = new Reader();
         Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
-        squadra2[0] = prova;
-        squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+        //squadra2[0] = prova;
+        //squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+        squadraUtente2[0] = prova;
+        squadraUtente2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+
+        //squadraUtente1 = Utente1.getSquadra();
+        //squadraUtente2 = Utente2.getSquadra();
+
 
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
-        squadra[0] = contro;
-        squadra[1] = squad2;
+        squadraUtente1[0] = contro;
+        squadraUtente1[1] = squad2;
+        //squadra[0] = contro;
+        //squadra[1] = squad2;
+
+        // PROVA
+        squadra = squadraUtente1.clone();
+        squadra2 = squadraUtente2.clone();
+
+
+        // quando finisco la lotta ripristino tutto da squadraUtente1 e 2 cosi riprendo da 0
+
+
+
+
 
         pannello = new JPanel(null);
         ImageIcon fondoLotta = new ImageIcon("img/lotta.png");
@@ -237,11 +261,11 @@ public class Lotta extends JFrame {
                 setTurno(turno(finalTest[getMossa()], finalTest2[0]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
-                        squadra2[0].sconfitto(squadra[0]);
+                        //squadra2[0].sconfitto(squadra[0]);
                         cambioUtente=false;
                         PreCambiaPokemon();
                     }else{
-                        squadra[0].sconfitto(squadra2[0]);
+                        //squadra[0].sconfitto(squadra2[0]);
                         cambioUtente=true;
                         PreCambiaPokemon();
                     }
@@ -582,22 +606,75 @@ public class Lotta extends JFrame {
             }
         }
         if(possibiliCambi == 0){
+            if(!cambioUtente){
+                pokemon1.setEnabled(false); // quindi anche le mosse
+                vittorieUtente2++;
+                // devo passarci il flag di vittoria
+                Vittoria frameVittoria = new Vittoria(cambioUtente);
 
-            System.exit(1);
+                resettaLotta();
+                //checkBattaglia();
+
+
+                // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
+            }
+            else{
+                pokemon1.setEnabled(false); // quindi anche le mosse
+                vittorieUtente1++;
+                Vittoria frameVittoria = new Vittoria(cambioUtente);
+                resettaLotta();
+                //checkBattaglia();
+
+                // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
+            }
+
+            //System.exit(1);
         }else{
             cambiaPokemon(indiceCambi[0]);
-        }
+            }
+
     }
+
     public void cambiaPokemon(int indice){// quello contenuto nel bottone, viene ritornato dall actionlistener
-        if(!cambioUtente){
+        if(!cambioUtente) {
             Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
             squadra[indice] = squadra[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
-            squadra[0]=cambio;
+            squadra[0] = cambio;
+            if (squadra[indice].getSalute() <= 0) {
+                // rendo il bottone non cliccabile
+                switch (indice) {
+                    case 0:
+                        // devo bloccare anche le mosse
+                        pokemon1.setEnabled(false);
+                    case 1:
+                        pokemon2.setEnabled(false);
+                    case 2:
+                        pokemon3.setEnabled(false);
+                    case 3:
+                        pokemon4.setEnabled(false);
+                    case 4:
+                        pokemon5.setEnabled(false);
+                    case 5:
+                        pokemon6.setEnabled(false);
+                }
+            }
         }
         else{
             Pokemon cambio = squadra2[indice]; // identifico il pokemon che subentrera nella lotta
             squadra2[indice] = squadra2[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
             squadra2[0]=cambio;
+            if(squadra2[indice].getSalute()<=0){
+                switch (indice){
+                    case 0: pokemon1.setEnabled(false);
+                    case 1: pokemon2.setEnabled(false);
+                    case 2: pokemon3.setEnabled(false);
+                    case 3: pokemon4.setEnabled(false);
+                    case 4: pokemon5.setEnabled(false);
+                    case 5: pokemon6.setEnabled(false);
+
+                }
+                // rendo il bottone non cliccabile
+            }
         }
 
         aggiornaUI();
@@ -719,6 +796,36 @@ public class Lotta extends JFrame {
         // il cambio contesto si ha quando viene cambiato pokemon
         // per il resto viene fatto un if sulla velocita delle mosse
         // quindi per i casi normali è da rivedere
+
+    }
+    public void checkBattaglia(){
+        if(vittorieUtente1-vittorieUtente2>1){
+            // resetto le vittorie e poi restarto
+            JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
+            // scrivo sul file
+            //utente1.incrementawin()
+            //utente1.scrittore()
+            //exit --> gioco finito
+            //resettaLotta();
+        }
+        if(vittorieUtente2-vittorieUtente1>1) {
+            JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
+            // scrivo sul file
+            //utente2.incrementawin()
+            //utente2.scrittore()
+            // exit --> gioco finito
+            //resettaLotta();
+        }
+        else
+            resettaLotta();
+    }
+
+    public void resettaLotta(){
+        // sistemo hp e tutto il resto cosi
+        squadra = squadraUtente1.clone();
+        squadra2 = squadraUtente2.clone();
+        aggiornaUI(); // da controllare
+
 
     }
 
