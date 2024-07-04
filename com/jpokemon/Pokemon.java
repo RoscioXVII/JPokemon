@@ -377,7 +377,7 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        String Stringa = nome + '-' +
+        String Stringa = nome +
                 "-" + tipo1 +
                 "-" + tipo2 +
                 "-" + lvl +
