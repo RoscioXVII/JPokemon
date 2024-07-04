@@ -115,9 +115,10 @@ public class Reader {
         int i=0;
         try{
             Scanner sc = new Scanner(new File(infoPokemon)); // il random serve solo per i pokemon, non per le mosse
-            while(sc.hasNextLine())
-
+            while(sc.hasNextLine()){
+                sc.nextLine();
                 i++;
+            }
             return i;
         } catch (FileNotFoundException e) {
             System.err.println("File non trovato");
@@ -218,28 +219,26 @@ public class Reader {
 
 
         //cerca squadra
-        String[] squad = cercaSquadra(info[4]);
+        String squad = cercaSquadra(info[4]);
         //qua dentro mi serve un build squadra
         // da info dovrei lanciare 6 build pokemon con gli attributi contenuti in info
         // --- fare if per vedere se squad è vuoto ---
-        pokemons[0] = buildPokemonByString(squad[0]);
-        pokemons[1] = buildPokemonByString(squad[1]);
-        pokemons[2] = buildPokemonByString(squad[2]);
-        pokemons[3] = buildPokemonByString(squad[3]);
-        pokemons[4] = buildPokemonByString(squad[4]);
-        pokemons[5] = buildPokemonByString(squad[5]);
+
+        //build squadra by string qua dentro
+        pokemons = buildSquadrabyString(squad);
         // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
         // metto tutti i parametri dentro
         return new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),pokemons);
     }
 
-    private String[] cercaSquadra(String squadra) throws FileNotFoundException {
+    private String cercaSquadra(String squadra) throws FileNotFoundException {
         sc = new Scanner(new File("testo/squadreUtenti.txt"));
-        String info[];
+        String info;
         while(sc.hasNextLine()){
-            info = sc.nextLine().split(":");
-            if(info[0].equals(squadra))
+            info = sc.nextLine();
+            if(info.startsWith(squadra))
                 return info;
+
         }
         return null;
         // squadra non trovata
@@ -249,10 +248,22 @@ public class Reader {
         Random random = new Random();
         Pokemon[] squad = new Pokemon[6];
         for(int i=0;i<6;i++){
-            squad[i]=buildPokemonByString(getRigaByIndex("testo/pokemon.txt", random.nextInt(contaRighe())));
-
+            //questo da errore
+            squad[i]=buildPokemonByString(getRigaByIndex("testo/pokemon.txt",random.nextInt(contaRighe())));
+            System.out.println("nome = "+squad[i].getNome());
         }
         return squad;
+    }
+
+    public Pokemon[] buildSquadrabyString(String parametriSquadra) throws IOException {
+        String pokemons[];
+        Pokemon[] squadra = new Pokemon[6];
+        pokemons = parametriSquadra.split(":");
+        // i pokemon so che sono 6 fissi di conseguenza
+        for(int i=0;i<6;i++){
+            squadra[i] = buildPokemonByString(pokemons[i]);
+        }
+        return squadra;
     }
 
 

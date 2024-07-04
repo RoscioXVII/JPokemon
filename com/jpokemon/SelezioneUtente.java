@@ -79,7 +79,12 @@ public class SelezioneUtente extends JFrame {
 
             bottone1.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente1 = new Utente(input);
+                Utente utente1 = null;
+                try {
+                    utente1 = new Utente(input);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 // utente 1 genera squadra
                 try {
                     utente1.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
@@ -92,7 +97,7 @@ public class SelezioneUtente extends JFrame {
             bottone1.addActionListener(e->{
                 try {
                     Utente utente1 = new Utente(rd.getRigaByIndex("testo/utenti.txt",0));
-                } catch (FileNotFoundException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             });
@@ -103,7 +108,12 @@ public class SelezioneUtente extends JFrame {
         if (bottone2.getText().equals("NUOVO UTENTE")){
             bottone2.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente2 = new Utente(input);
+                Utente utente2 = null;
+                try {
+                    utente2 = new Utente(input);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 try {
                     utente2.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
@@ -115,7 +125,12 @@ public class SelezioneUtente extends JFrame {
         if(bottone3.getText().equals("NUOVO UTENTE")){
             bottone3.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente3 = new Utente(input);
+                Utente utente3 = null;
+                try {
+                    utente3 = new Utente(input);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 try {
                     utente3.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
@@ -126,7 +141,12 @@ public class SelezioneUtente extends JFrame {
         if (bottone4.getText().equals("NUOVO UTENTE")){
             bottone4.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente4 = new Utente(input);
+                Utente utente4 = null;
+                try {
+                    utente4 = new Utente(input);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 try {
                     utente4.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {

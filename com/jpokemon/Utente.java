@@ -11,15 +11,15 @@ public class Utente {
     private int sconfitte;
     private int partiteGiocate;
 
-    private Pokemon[] squadra = new Pokemon[6];
-    public Utente(String nome) {
+    private Pokemon[] squadra;
+    public Utente(String nome) throws IOException {
         this.nome = nome;
         vittorie=0;
         sconfitte=0;
         partiteGiocate=0;
+        Reader rd = new Reader();
+        squadra = rd.generaSquadra();
 
-        //squadra = rd.generaSquadra();
-        // per la squadra chiamo una serie di metodi del reader random
     }
     // caso in cui l'utente non esiste, viene preso solo in input il nome
     // e la squadra viene random
@@ -43,17 +43,13 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
-            writer.write(squadraString());
+            writer.write(nome+":"+squadraString());
             writer.newLine();
 
         } catch (IOException e){
             System.err.println("Errore nella scrittura nel file");
             throw e;
         }
-
-
-
-        // ora genera la squadra e la mette dentro il file delle squadre
 
 
         //FORMATO FILE .TXT:
@@ -93,8 +89,9 @@ public class Utente {
         try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
             String stringa;
             while((stringa=reader.readLine())!=null){
-                if (stringa.startsWith(squadra[0].getNome()+":")){
-                    writer.write(this.toString());
+                // da modificare
+                if (stringa.startsWith(this.nome+":")){
+                    writer.write(nome+":"+squadraString());
                     writer.newLine();
                 }
 
