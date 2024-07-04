@@ -237,9 +237,11 @@ public class Lotta extends JFrame {
                 setTurno(turno(finalTest[getMossa()], finalTest2[0]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
+                        squadra2[0].sconfitto(squadra[0]);
                         cambioUtente=false;
                         PreCambiaPokemon();
                     }else{
+                        squadra[0].sconfitto(squadra2[0]);
                         cambioUtente=true;
                         PreCambiaPokemon();
                     }

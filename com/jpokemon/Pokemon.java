@@ -439,6 +439,22 @@ public class Pokemon {
         }
     };
 
+    public void sconfitto(Pokemon sconfitta){
+        this.EVps += sconfitta.EVpsYield;
+        this.EVattacco += sconfitta.EVattaccoYield;
+        this.EVdifesa += sconfitta.EVdifesaYield;
+        this.EVattaccoSpeciale += sconfitta.EVattaccoSpecialeYield;
+        this.EVdifesaSpeciale += sconfitta.EVdifesaSpecialeYield;
+        this.EVvelocita += sconfitta.EVvelocitaYield;
+
+        int xpPresa = xpGain(sconfitta);
+
+    }
+
+    public int xpGain(Pokemon sconfitta){
+        return 0;
+    }
+
     public void evolvi() throws FileNotFoundException {
         Reader lettore = new Reader();
         try {
