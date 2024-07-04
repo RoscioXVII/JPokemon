@@ -12,11 +12,14 @@ public class Utente {
     private int partiteGiocate;
 
     private Pokemon[] squadra = new Pokemon[6];
-    public Utente(String nome) {
+    public Utente(String nome) throws IOException {
         this.nome = nome;
         vittorie=0;
         sconfitte=0;
         partiteGiocate=0;
+        Reader rd = new Reader();
+        squadra = rd.generaSquadra();
+
 
         //squadra = rd.generaSquadra();
         // per la squadra chiamo una serie di metodi del reader random
@@ -43,6 +46,8 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
+            writer.write(nome);
+            writer.newLine();
             writer.write(squadraString());
             writer.newLine();
 
@@ -93,8 +98,11 @@ public class Utente {
         try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
             String stringa;
             while((stringa=reader.readLine())!=null){
-                if (stringa.startsWith(squadra[0].getNome()+":")){
-                    writer.write(this.toString());
+                // da modificare
+                if (stringa.startsWith(this.nome+":")){
+                    writer.write(this.nome);
+                    writer.newLine();
+                    writer.write(squadraString());
                     writer.newLine();
                 }
 
