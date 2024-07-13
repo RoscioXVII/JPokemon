@@ -83,8 +83,10 @@ public class Lotta extends JFrame {
         //squadra[1] = squad2;
 
         // PROVA
-        squadra = squadraUtente1.clone();
-        squadra2 = squadraUtente2.clone();
+        squadra = clonaSquadra(squadraUtente1);
+        squadra2 = clonaSquadra(squadraUtente2);
+        //squadra = squadraUtente1.clone();
+        //squadra2 = squadraUtente2.clone();
 
 
         // quando finisco la lotta ripristino tutto da squadraUtente1 e 2 cosi riprendo da 0
@@ -385,6 +387,7 @@ public class Lotta extends JFrame {
             // squadra poi squadra 2
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
             PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+            barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
             if(squadra2[0].getSalute() <= 0){
                 return -1;
             }
@@ -392,6 +395,7 @@ public class Lotta extends JFrame {
                 danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
                 barraPSpok1.diminuisci(danno);
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
@@ -403,6 +407,7 @@ public class Lotta extends JFrame {
                 danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
                 barraPSpok1.diminuisci(danno);
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
@@ -410,6 +415,7 @@ public class Lotta extends JFrame {
             }else{
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
@@ -419,6 +425,7 @@ public class Lotta extends JFrame {
             // squadra 2 poi squadra
             barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
             PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+            barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
             if (squadra[0].getSalute() <= 0){
                 return -1;
             }
@@ -426,6 +433,7 @@ public class Lotta extends JFrame {
                 danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
                 barraPSpok2.diminuisci(danno);
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
@@ -435,6 +443,7 @@ public class Lotta extends JFrame {
                 danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0], Mossapokemon1);
                 barraPSpok2.diminuisci(danno);
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
@@ -442,6 +451,7 @@ public class Lotta extends JFrame {
             }else{
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
@@ -452,11 +462,13 @@ public class Lotta extends JFrame {
                 //attacca squadra poi squadra2
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
@@ -465,11 +477,13 @@ public class Lotta extends JFrame {
                 //Attacca Squadra2 poi squadra
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
@@ -480,11 +494,13 @@ public class Lotta extends JFrame {
                 //attacca squadra poi squadra2
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
@@ -493,11 +509,13 @@ public class Lotta extends JFrame {
                 //Attacca Squadra2 poi squadra
                 barraPSpok1.diminuisci(squadra2[0].attacca(squadra[0], Mossapokemon2));
                 PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                 if (squadra[0].getSalute() <= 0){
                     return -1;
                 }
                 barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
                 PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                 if(squadra2[0].getSalute() <= 0){
                     return -1;
                 }
@@ -509,6 +527,7 @@ public class Lotta extends JFrame {
                     danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon1);
                     barraPSpok2.diminuisci(danno);
                     PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                     if(squadra2[0].getSalute() <= 0){
                         return -1;
                     }
@@ -516,6 +535,7 @@ public class Lotta extends JFrame {
                     danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
                     barraPSpok2.diminuisci(danno);
                     PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                     if(squadra2[0].getSalute() <= 0){
                         return -1;
                     }
@@ -525,6 +545,7 @@ public class Lotta extends JFrame {
                     danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
                     barraPSpok1.diminuisci(danno);
                     PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                     if (squadra[0].getSalute() <= 0){
                         return -1;
                     }
@@ -532,6 +553,7 @@ public class Lotta extends JFrame {
                     danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
                     barraPSpok1.diminuisci(danno);
                     PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                     if (squadra[0].getSalute() <= 0){
                         return -1;
                     }
@@ -543,6 +565,7 @@ public class Lotta extends JFrame {
                     danno = Effetti.attivaEffettoDurante(squadra2[0], squadra[0], Mossapokemon2);
                     barraPSpok1.diminuisci(danno);
                     PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                     if (squadra[0].getSalute() <= 0){
                         return -1;
                     }
@@ -550,6 +573,7 @@ public class Lotta extends JFrame {
                     danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
                     barraPSpok1.diminuisci(danno);
                     PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+                    barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
                     if (squadra[0].getSalute() <= 0){
                         return -1;
                     }
@@ -560,6 +584,7 @@ public class Lotta extends JFrame {
                     danno = Effetti.attivaEffettoDurante(squadra[0],squadra2[0],Mossapokemon1);
                     barraPSpok2.diminuisci(danno);
                     PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                     if(squadra2[0].getSalute() <= 0){
                         return -1;
                     }
@@ -567,6 +592,7 @@ public class Lotta extends JFrame {
                     danno = squadra[0].attacca(squadra2[0], Mossapokemon1);
                     barraPSpok2.diminuisci(danno);
                     PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+                    barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
                     if(squadra2[0].getSalute() <= 0){
                         return -1;
                     }
@@ -610,9 +636,12 @@ public class Lotta extends JFrame {
                 pokemon1.setEnabled(false); // quindi anche le mosse
                 vittorieUtente2++;
                 // devo passarci il flag di vittoria
-                Vittoria frameVittoria = new Vittoria(cambioUtente);
 
+                Vittoria frameVittoria = new Vittoria(cambioUtente);
                 resettaLotta();
+                System.out.println("coddue resettato");
+
+                //resettaLotta();
                 //checkBattaglia();
 
 
@@ -623,6 +652,8 @@ public class Lotta extends JFrame {
                 vittorieUtente1++;
                 Vittoria frameVittoria = new Vittoria(cambioUtente);
                 resettaLotta();
+                System.out.println("coddueeeeee resettato");
+                //resettaLotta();
                 //checkBattaglia();
 
                 // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
@@ -712,6 +743,8 @@ public class Lotta extends JFrame {
             labelgif1.setIcon(new ImageIcon(scaledGif));
 
         }
+        // aggiustarlo in caso di fine lotta, risolvere il problema dei bottoni (devono essere cliccabili quando si resetta la lotta)
+
         cambiaContesto();
 
     }
@@ -822,11 +855,29 @@ public class Lotta extends JFrame {
 
     public void resettaLotta(){
         // sistemo hp e tutto il resto cosi
-        squadra = squadraUtente1.clone();
-        squadra2 = squadraUtente2.clone();
+        squadra = clonaSquadra(squadraUtente1);
+        squadra2 = clonaSquadra(squadraUtente2);
+
+        //squadra = squadraUtente1.clone();
+        //squadra2 = squadraUtente2.clone();
+        //System.out.println("sto a resetta zio porco ");
         aggiornaUI(); // da controllare
+        // quando cambio il primo pokemon deve fare la lotta il secondo indipendetemente
 
+    }
 
+    private Pokemon[] clonaSquadra(Pokemon[] squad){
+        if (squad==null){
+            return null;
+        }
+        Pokemon[] squadraClonata = new Pokemon[squad.length];
+        for (int i = 0; i < squad.length; i++) {
+            if (squad[i] == null)
+                squadraClonata[i] = null;
+            else
+                squadraClonata[i] = squad[i].clone();
+        }
+        return squadraClonata;
     }
 
 
@@ -840,6 +891,8 @@ public class Lotta extends JFrame {
         return null; // condizione in cui non si arriva mai --> è sicuramente presente
     }
      */
+
+
 
 
 

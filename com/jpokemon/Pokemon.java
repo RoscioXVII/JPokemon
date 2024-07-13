@@ -1,10 +1,11 @@
 package com.jpokemon;
 
+import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
-public class Pokemon {
+public class Pokemon implements Cloneable {
     private String nome;
     private Tipo tipo1;
     private Tipo tipo2;
@@ -595,6 +596,17 @@ public class Pokemon {
             Stringa+="-" + mosse[3].getNome();
 
         return Stringa;
+    }
+
+    @Override
+    public Pokemon clone() {
+        try {
+            return (Pokemon) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // Questo non dovrebbe mai succedere, perché implementiamo Cloneable
+            throw new RuntimeException(e);
+        }
+
     }
 }
 
