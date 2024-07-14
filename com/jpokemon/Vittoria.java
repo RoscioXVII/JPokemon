@@ -3,9 +3,7 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 
-public class Vittoria extends JFrame {
-    private JPanel pannello;
-    private boolean flag;
+public class Vittoria extends StaticScreen {
     private JButton back;
     public Vittoria(boolean flag){
         setTitle("JPokemon");

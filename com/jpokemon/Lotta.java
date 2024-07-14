@@ -266,11 +266,19 @@ public class Lotta extends JFrame {
                     if(squadra[0].getSalute() <= 0){
                         //squadra2[0].sconfitto(squadra[0]);
                         cambioUtente=false;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }else{
                         //squadra[0].sconfitto(squadra2[0]);
                         cambioUtente=true;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
                 cambioUtente=true;
@@ -290,10 +298,18 @@ public class Lotta extends JFrame {
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }else{
                         cambioUtente=true;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
                 cambioUtente=true;
@@ -313,10 +329,18 @@ public class Lotta extends JFrame {
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                        }
                     }else{
                         cambioUtente=true;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
                 cambioUtente=true;
@@ -336,10 +360,18 @@ public class Lotta extends JFrame {
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
                         cambioUtente=false;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }else{
                         cambioUtente=true;
-                        PreCambiaPokemon();
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
                 cambioUtente=true;
@@ -384,6 +416,7 @@ public class Lotta extends JFrame {
 
         //GESTIONE CASI CondEffetto = 1
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
+        // FARE IF IN CUI SE UNA DELLE DUE MOSSE E NULL (CASO IN CUI VIENE CAMBIATO POKEMON) CHI NON CAMBIA MA SEMPRE LA MOSSA (SOLO LUI)
         if(CondEffetto1 == 1 && CondEffetto2 != 1){
             // squadra poi squadra 2
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
@@ -609,7 +642,7 @@ public class Lotta extends JFrame {
     public JPanel getPannello(){
         return pannello;
     }
-    public void PreCambiaPokemon(){
+    public void PreCambiaPokemon() throws IOException {
         int possibiliCambi = 0;
         int[] indiceCambi = new int[6];
 
