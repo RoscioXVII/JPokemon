@@ -47,7 +47,8 @@ public class Lotta extends JFrame {
     private Pokemon[] squadraUtente1 = new Pokemon[6];
 
     private Pokemon[] squadraUtente2 = new Pokemon[6];
-
+    private Utente utente1; // da implementare
+    private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
 
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
@@ -639,10 +640,7 @@ public class Lotta extends JFrame {
 
                 Vittoria frameVittoria = new Vittoria(cambioUtente);
                 resettaLotta();
-                System.out.println("coddue resettato");
-
-                //resettaLotta();
-                //checkBattaglia();
+                checkBattaglia();
 
 
                 // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
@@ -652,9 +650,7 @@ public class Lotta extends JFrame {
                 vittorieUtente1++;
                 Vittoria frameVittoria = new Vittoria(cambioUtente);
                 resettaLotta();
-                System.out.println("coddueeeeee resettato");
-                //resettaLotta();
-                //checkBattaglia();
+                checkBattaglia();
 
                 // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
             }
@@ -791,13 +787,13 @@ public class Lotta extends JFrame {
         if(!cambioUtente){
             mosse = squadra2[0].getMosse();
             squad = squadra2;
-            utente.setText("UTENTE 2");
+            utente.setText("UTENTE 2"); // utente.getNome()
         }
 
         else{
             mosse = squadra[0].getMosse();
             squad = squadra;
-            utente.setText("UTENTE 1");
+            utente.setText("UTENTE 1"); // utente.getNome()
         }
 
         // posso accorpare aggiornaUI e questa in una sola dato che le istruzioni solo duplicate
@@ -825,24 +821,34 @@ public class Lotta extends JFrame {
         // quindi per i casi normali è da rivedere
 
     }
-    public void checkBattaglia(){
+    public void checkBattaglia() throws IOException {
+
+
         if(vittorieUtente1-vittorieUtente2>1){
             // resetto le vittorie e poi restarto
-            JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
-            // scrivo sul file
-            //utente1.incrementawin()
-            //utente1.scrittore()
+            //JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
+            SchermataBattaglia battaglia = new SchermataBattaglia(true);
+            utente1.incrementaVittorie();
+            utente2.incrementaSconfitte();
+            utente1.scrittore();
+            utente2.scrittore();
+
             //exit --> gioco finito
             //resettaLotta();
         }
         if(vittorieUtente2-vittorieUtente1>1) {
-            JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
+            //JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
+            SchermataBattaglia battaglia = new SchermataBattaglia(false);
             // scrivo sul file
-            //utente2.incrementawin()
-            //utente2.scrittore()
+            utente2.incrementaVittorie();
+            utente1.incrementaSconfitte();
+            utente1.scrittore();
+            utente2.scrittore();
+
             // exit --> gioco finito
             //resettaLotta();
         }
+
         else
             resettaLotta();
     }
@@ -851,12 +857,7 @@ public class Lotta extends JFrame {
         // sistemo hp e tutto il resto cosi
         squadra = clonaSquadra(squadraUtente1);
         squadra2 = clonaSquadra(squadraUtente2);
-
-        //squadra = squadraUtente1.clone();
-        //squadra2 = squadraUtente2.clone();
-        //System.out.println("sto a resetta zio porco ");
-        aggiornaUI(); // da controllare
-
+        aggiornaUI();
         pokemon1.setEnabled(true);
         pokemon2.setEnabled(true);
         pokemon3.setEnabled(true);
@@ -865,11 +866,9 @@ public class Lotta extends JFrame {
         pokemon6.setEnabled(true);
 
 
-        // -- PROBLEMI GRAFICI
-        // bug vari con i pokemon avversari, barra salute che si aggiorna 'troppo tardi' e bottoni pokemon alterati
-        // bottoni non ripristinati
-        // barra salute del pokemon avversario non aggiornata
-        // chiaramente ricodnucibili/risolvibili con aggiornaUI()
+        // -- PROBLEMI
+        // se cambio pokemon e l'altro attacca non succede nulla
+
 
         // quando cambio il primo pokemon deve fare la lotta il secondo indipendetemente
 
