@@ -716,8 +716,6 @@ public class Lotta extends JFrame {
 
     private void aggiornaUI(){
         // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
-
-        if(!cambioUtente){
             nomePok1.setText(squadra[0].getNome());
             barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
             barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
@@ -728,9 +726,6 @@ public class Lotta extends JFrame {
             Image scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             labelgif2.setIcon(new ImageIcon(scaledGif));
 
-
-        }
-        else{
             nomePok2.setText(squadra2[0].getNome());
             barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
             barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
@@ -738,11 +733,10 @@ public class Lotta extends JFrame {
             // risolvo mettendo dentro pokemon salute e ps come prima
             // Aggiorna le GIF
 
-            ImageIcon img = new ImageIcon(squadra2[0].getSpriteFront());
-            Image scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+            img = new ImageIcon(squadra2[0].getSpriteFront());
+            scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             labelgif1.setIcon(new ImageIcon(scaledGif));
 
-        }
         // aggiustarlo in caso di fine lotta, risolvere il problema dei bottoni (devono essere cliccabili quando si resetta la lotta)
 
         cambiaContesto();
@@ -862,6 +856,21 @@ public class Lotta extends JFrame {
         //squadra2 = squadraUtente2.clone();
         //System.out.println("sto a resetta zio porco ");
         aggiornaUI(); // da controllare
+
+        pokemon1.setEnabled(true);
+        pokemon2.setEnabled(true);
+        pokemon3.setEnabled(true);
+        pokemon4.setEnabled(true);
+        pokemon5.setEnabled(true);
+        pokemon6.setEnabled(true);
+
+
+        // -- PROBLEMI GRAFICI
+        // bug vari con i pokemon avversari, barra salute che si aggiorna 'troppo tardi' e bottoni pokemon alterati
+        // bottoni non ripristinati
+        // barra salute del pokemon avversario non aggiornata
+        // chiaramente ricodnucibili/risolvibili con aggiornaUI()
+
         // quando cambio il primo pokemon deve fare la lotta il secondo indipendetemente
 
     }
