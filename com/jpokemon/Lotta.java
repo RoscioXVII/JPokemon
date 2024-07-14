@@ -6,17 +6,17 @@ import java.io.IOException;
 
 
 public class Lotta extends JFrame {
-    private Pokemon[] squadra = new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
-    private Pokemon[] squadra2 = new Pokemon[6]; // squadra dell'avversario
+    private Pokemon[] squadra; //= new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
+    private Pokemon[] squadra2; //= new Pokemon[6]; // squadra dell'avversario
     private int mossa = -10;
-    private int numTurno = 0;
+    private int numTurno = 0; // non la usiamo mai ao
     private int turno = 0;
     //devo fare un metodo grafico per selezionarli
 
     // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
     // mettero tutto a static
-    private JButton attacca = new JButton("Attacca");
-    private JButton pokemon = new JButton("Pokemon");
+    private final JButton attacca = new JButton("Attacca");
+    private final JButton pokemon = new JButton("Pokemon");
 
     private JButton mossa1;
     private JButton mossa2;
@@ -49,6 +49,8 @@ public class Lotta extends JFrame {
     private Pokemon[] squadraUtente2 = new Pokemon[6];
     private Utente utente1; // da implementare
     private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
+
+    // viene passato dalla schermata precedente, in base al tasto cliccato viene deciso quale utente utilizzare e questo viene caricato da memoria 
 
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
@@ -249,12 +251,10 @@ public class Lotta extends JFrame {
 
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
         Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
-        int a = squadra2[0].getSalute();
-        int b = squadra[0].getSalute();
+
         cambioUtente=false;
-        int danno;
-        Mossa Mossapokemon1 = null; // SE LA MOSSA VALE "null" allora ha priorità sulle altre perché non fa danno al pokemon avversario (ad esempio cambiare pokemon ha la priorità)
-        Mossa Mossapokemon2 = null;
+        //Mossa Mossapokemon1 = null; // SE LA MOSSA VALE "null" allora ha priorità sulle altre perché non fa danno al pokemon avversario (ad esempio cambiare pokemon ha la priorità)
+        //Mossa Mossapokemon2 = null;
         mossa1.addActionListener(e -> {
             if (!cambioUtente){
                 setMossa(0);
@@ -404,9 +404,9 @@ public class Lotta extends JFrame {
 
     public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
         // la velocita e del pokemon non della mossa
-        int danno, CondEffetto1, CondEffetto2,effetti;
-        String effetto1, effetto2 = null;
-        Boolean turno1, turno2 = false;
+        int danno, CondEffetto1, CondEffetto2,effetti; //effetti non viene mai usata, da togliere
+        String effetto1, effetto2 = null; // mai usati
+        Boolean turno1, turno2 = false; // mai usati
 
         //SE IL POKEMON VIENE CAMBIATO COL TASTO FACCIAMO CHE LA MOSSA VIENE ISTANZIATA NULL
         //QUINDI POSSIAMO GESTIRE IL CAMBIO POKEMON FUORI DAL TURNO
@@ -861,10 +861,10 @@ public class Lotta extends JFrame {
             // resetto le vittorie e poi restarto
             //JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
             SchermataBattaglia battaglia = new SchermataBattaglia(true);
-            utente1.incrementaVittorie();
-            utente2.incrementaSconfitte();
-            utente1.scrittore();
-            utente2.scrittore();
+            //utente1.incrementaVittorie();
+            //utente2.incrementaSconfitte();
+            //utente1.scrittore();
+            //utente2.scrittore();
 
             //exit --> gioco finito
             //resettaLotta();
@@ -873,10 +873,10 @@ public class Lotta extends JFrame {
             //JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
             SchermataBattaglia battaglia = new SchermataBattaglia(false);
             // scrivo sul file
-            utente2.incrementaVittorie();
-            utente1.incrementaSconfitte();
-            utente1.scrittore();
-            utente2.scrittore();
+            //utente2.incrementaVittorie();
+            //utente1.incrementaSconfitte();
+            //utente1.scrittore();
+            //utente2.scrittore();
 
             // exit --> gioco finito
             //resettaLotta();

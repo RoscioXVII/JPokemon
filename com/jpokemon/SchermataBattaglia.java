@@ -2,6 +2,8 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SchermataBattaglia extends StaticScreen {
 
@@ -12,7 +14,7 @@ public class SchermataBattaglia extends StaticScreen {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         this.flag = flag;
-        ImageIcon img = new ImageIcon("img/schermo-vittoria.png");
+        ImageIcon img = new ImageIcon("img/fine-game.jpg");
         Image wallpaper = img.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
         img = new ImageIcon(wallpaper);
         JLabel label = new JLabel(img);
@@ -25,11 +27,22 @@ public class SchermataBattaglia extends StaticScreen {
             testo = new JLabel("Il giocatore 1 ha vinto la serie di battaglie");
 
         //testo.setSize(100,100)
-        testo.setBounds(220,100,1200,100);
-        testo.setFont(new Font("Arial", Font.BOLD, 50));
+        testo.setBounds(350,20,1200,100);
+        testo.setFont(new Font("Arial", Font.BOLD, 30));
+        back = new JButton("Esci dal gioco");
+        back.setSize(250,70);
+        back.setLocation(540,590);
         //testo.setLocation(600,100);
         pannello.add(testo, BorderLayout.CENTER);
+        pannello.add(back);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         pannello.add(label,BorderLayout.CENTER);
+
         setContentPane(pannello);
     }
 }
