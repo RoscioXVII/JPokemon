@@ -2,8 +2,7 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class SchermataBattaglia extends StaticScreen {
 
@@ -35,12 +34,7 @@ public class SchermataBattaglia extends StaticScreen {
         //testo.setLocation(600,100);
         pannello.add(testo, BorderLayout.CENTER);
         pannello.add(back);
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        back.addActionListener(e -> System.exit(0));
         pannello.add(label,BorderLayout.CENTER);
 
         setContentPane(pannello);

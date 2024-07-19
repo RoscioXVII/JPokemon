@@ -1,9 +1,7 @@
 package com.jpokemon;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+
 
 public class Utente {
     private String nome;
@@ -58,7 +56,7 @@ public class Utente {
         //FORMATO FILE .TXT SQUADREUTENTI:
         //nomeUtente:pokemon:statistichePokemon:pokemon2:statistichePokemon
     }
-    public void scrittoreModifica() throws IOException {
+    public void scrittoreModifica() {
         // la uso ad ogni chiusura dell'applicazione, prima di uscire la mando in esecuzione
         // aggiorna i salvataggi quando sono stati gia creati e vengono registrati progressi
         File fileTemp  = new File("fileTemp.txt");

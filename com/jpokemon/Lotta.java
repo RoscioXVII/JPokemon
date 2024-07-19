@@ -690,7 +690,26 @@ public class Lotta extends JFrame {
 
             //System.exit(1);
         }else{
+            if(!cambioUtente){
+                squadra[0].sconfitto(squadra2[0]);
+                if(squadra[0].getLvl() == squadra[0].getLvlEvoluzione()){
+                    squadra[0].evolvi();
+                    aggiornaUI();
+                }
+                //cambiaPokemon(indiceCambi[0]);
+
+            }
+            else{
+                squadra2[0].sconfitto(squadra[0]);
+                if(squadra2[0].getLvl() == squadra2[0].getLvlEvoluzione()){
+                    squadra2[0].evolvi();
+                    aggiornaUI();
+                }
+                //cambiaPokemon(indiceCambi[0]);
+            }
+
             cambiaPokemon(indiceCambi[0]);
+
             }
 
     }
@@ -703,19 +722,12 @@ public class Lotta extends JFrame {
             if (squadra[indice].getSalute() <= 0) {
                 // rendo il bottone non cliccabile
                 switch (indice) {
-                    case 0:
-                        // devo bloccare anche le mosse
-                        pokemon1.setEnabled(false);
-                    case 1:
-                        pokemon2.setEnabled(false);
-                    case 2:
-                        pokemon3.setEnabled(false);
-                    case 3:
-                        pokemon4.setEnabled(false);
-                    case 4:
-                        pokemon5.setEnabled(false);
-                    case 5:
-                        pokemon6.setEnabled(false);
+                    case 0: pokemon1.setEnabled(false); // devo bloccare anche le mosse
+                    case 1: pokemon2.setEnabled(false);
+                    case 2: pokemon3.setEnabled(false);
+                    case 3: pokemon4.setEnabled(false);
+                    case 4: pokemon5.setEnabled(false);
+                    case 5: pokemon6.setEnabled(false);
                 }
             }
         }
@@ -758,15 +770,12 @@ public class Lotta extends JFrame {
             nomePok2.setText(squadra2[0].getNome());
             barraPSpok2.getBarraSalute().setMaximum(squadra2[0].getPs());
             barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
-            PsPok2.setText(squadra2[0].getSalute() + "/" + squadra2[0].getPs()); // al posto di get ps dovrei mettere le variabili temporanee a e b
-            // risolvo mettendo dentro pokemon salute e ps come prima
-            // Aggiorna le GIF
+            PsPok2.setText(squadra2[0].getSalute() + "/" + squadra2[0].getPs());
 
+            // Aggiorna le GIF
             img = new ImageIcon(squadra2[0].getSpriteFront());
             scaledGif = img.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
             labelgif1.setIcon(new ImageIcon(scaledGif));
-
-        // aggiustarlo in caso di fine lotta, risolvere il problema dei bottoni (devono essere cliccabili quando si resetta la lotta)
 
         cambiaContesto();
 
@@ -829,7 +838,7 @@ public class Lotta extends JFrame {
             utente.setText("UTENTE 1"); // utente.getNome()
         }
 
-        // posso accorpare aggiornaUI e questa in una sola dato che le istruzioni solo duplicate
+
         mossa1.setText(mosse[0].getNome());
         mossa2.setText(mosse[1].getNome());
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
@@ -854,7 +863,7 @@ public class Lotta extends JFrame {
         // quindi per i casi normali è da rivedere
 
     }
-    public void checkBattaglia() throws IOException {
+    public void checkBattaglia() {
 
 
         if(vittorieUtente1-vittorieUtente2>1){
@@ -889,6 +898,10 @@ public class Lotta extends JFrame {
     public void resettaLotta(){
         // sistemo hp e tutto il resto cosi
         squadra = clonaSquadra(squadraUtente1);
+        // dovrei prendere i cloni dai file di testo (che salvo a fine lotta)
+        // cosi tengo conto dei progressi dei pokemon (exp,lvl, ecc..)
+        // per fare questo devo implementare l'utente e utilizzare scrittoremodifica()
+
         squadra2 = clonaSquadra(squadraUtente2);
         aggiornaUI();
         pokemon1.setEnabled(true);
@@ -901,6 +914,7 @@ public class Lotta extends JFrame {
 
         // -- PROBLEMI
         // se cambio pokemon e l'altro attacca non succede nulla
+        // si blocca il tasto, non fa nulla e bisogna far cambiare pokemon necessariamente anche all'altro utente
 
 
         // quando cambio il primo pokemon deve fare la lotta il secondo indipendetemente

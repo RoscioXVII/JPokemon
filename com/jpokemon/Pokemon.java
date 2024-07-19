@@ -1,6 +1,5 @@
 package com.jpokemon;
 
-import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
@@ -130,10 +129,10 @@ public class Pokemon implements Cloneable {
     }
     public String mossaString(){
         String s = "";
-        for(int i = 0; i < mosse.length; i++) {
-            if(mosse[i] != null){
-                s += mosse[i].getNome() + " ";
-            }else{
+        for (Mossa mossa : mosse) {
+            if (mossa != null) {
+                s += mossa.getNome() + " ";
+            } else {
                 s += "null ";
             }
 
@@ -168,6 +167,9 @@ public class Pokemon implements Cloneable {
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
     public int getAttaccoBase(){return attaccoBase;}
+    public int getLvlEvoluzione(){
+        return lvlEvoluzione;
+    }
 
     public void setDifesa(int difesa) {this.difesa = difesa;}
     public int getDifesa(){return difesa;}
@@ -234,7 +236,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniAttacco += valore;
             return 1;
         }
-    };
+    }
 
     public int aumentaDifesa(int valore){
         if(this.ripetizioniDifesa == 6){
@@ -248,7 +250,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniDifesa += valore;
             return 1;
         }
-    };
+    }
     public int aumentaAttaccoSpeciale(int valore){
         if(this.ripetizioniAttaccoSpeciale == 6){
             return -1;
@@ -262,7 +264,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniAttaccoSpeciale += 1;
             return 1;
         }
-    };
+    }
     public int aumentaDifesaSpeciale(int valore){
         if(this.ripetizioniDifesaSpeciale == 6){
             return -1;
@@ -275,7 +277,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniDifesaSpeciale += 1;
             return 1;
         }
-    };
+    }
     public int aumentaVelocita(int valore){
         if(this.ripetizioniVelocita == 6){
             return -1;
@@ -288,7 +290,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniVelocita += 1;
             return 1;
         }
-    };
+    }
     public int aumentaPrecisione(int valore){
         if(this.ripetizioniPrecisione == 6){
             return -1;
@@ -298,13 +300,12 @@ public class Pokemon implements Cloneable {
             return 1;
         } else {
             for(int i=0;i<valore;i++){
-                if(this.ripetizioniPrecisione<0){
+                if(this.ripetizioniPrecisione<0)
                     this.precisioneN--;
-                    this.ripetizioniPrecisione++;
-                }else{
+                else
                     this.precisione++;
-                    this.ripetizioniPrecisione++;
-                }
+
+                this.ripetizioniPrecisione++;
             }
             return 1;
         }
@@ -318,13 +319,13 @@ public class Pokemon implements Cloneable {
             return 1;
         }else{
             for(int i=0;i<valore;i++){
-                if(this.ripetizioniPrecisione<0){
+                if(this.ripetizioniPrecisione<0)
                     this.precisioneN++;
-                    this.ripetizioniPrecisione--;
-                }else{
+                else
                     this.precisione--;
-                    this.ripetizioniPrecisione--;
-                }
+
+
+                this.ripetizioniPrecisione--;
             }
             return 1;
         }
@@ -338,13 +339,14 @@ public class Pokemon implements Cloneable {
             return 1;
         }else{
             for(int i=0;i<valore;i++){
-                if(this.ripetizioniElusione<0){
+                if(this.ripetizioniElusione<0)
                     this.elusioneN--;
-                    this.ripetizioniElusione++;
-                }else{
+
+                else
                     this.elusione++;
-                    this.ripetizioniElusione++;
-                }
+
+
+                this.ripetizioniElusione++;
             }
             return 1;
         }
@@ -358,13 +360,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }else{
             for(int i=0;i<valore;i++){
-                if(this.ripetizioniElusione<0){
+                if(this.ripetizioniElusione<0)
                     this.elusioneN++;
-                    this.ripetizioniElusione--;
-                }else{
+                else
                     this.elusione--;
-                    this.ripetizioniElusione--;
-                }
+
+                this.ripetizioniElusione--;
             }
             return 1;
         }
@@ -385,7 +386,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniAttacco -= 1;
             return 1;
         }
-    };
+    }
     public int diminuisciDifesa(int valore){
         if(this.ripetizioniDifesa == -6){
             System.out.println("Difesa al minimo");
@@ -399,7 +400,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniDifesa -= 1;
             return 1;
         }
-    };
+    }
     public int diminuisciAttaccoSpeciale(int valore){
         if(this.ripetizioniAttaccoSpeciale == -6){
             return -1;
@@ -412,7 +413,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniAttaccoSpeciale -= 1;
             return 1;
         }
-    };
+    }
     public int diminuisciDifesaSpeciale(int valore){
         if(this.ripetizioniDifesaSpeciale == -6){
             return -1;
@@ -425,7 +426,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniDifesaSpeciale -= 1;
             return 1;
         }
-    };
+    }
     public int diminuisciVelocita(int valore){
         if(this.ripetizioniVelocita == -6){
             return -1;
@@ -438,7 +439,7 @@ public class Pokemon implements Cloneable {
             this.ripetizioniVelocita -= 1;
             return 1;
         }
-    };
+    }
 
     public void sconfitto(Pokemon sconfitta){
         this.EVps += sconfitta.EVpsYield;
@@ -449,6 +450,8 @@ public class Pokemon implements Cloneable {
         this.EVvelocita += sconfitta.EVvelocitaYield;
 
         int xpPresa = xpGain(sconfitta);
+        // gestire xp per capire quando scatta il lvl successivo
+        //this.esp +=xpPresa;
 
     }
 
@@ -456,7 +459,7 @@ public class Pokemon implements Cloneable {
         return 0;
     }
 
-    public void evolvi() throws FileNotFoundException {
+    public void evolvi()   {
         Reader lettore = new Reader();
         try {
             Pokemon evoluzione = lettore.buildPokemonByString(lettore.getRigaByIndex("testo/pokemon.txt",lettore.cercaRiga(this.nomeEvoluzione)));
