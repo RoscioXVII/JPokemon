@@ -3,6 +3,7 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Random;
 
 
 public class Lotta extends JFrame {
@@ -55,7 +56,7 @@ public class Lotta extends JFrame {
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
-    public Lotta() throws IOException {
+    public Lotta(int numeroUtente) throws IOException {
 
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
         //super("JPokemon");
@@ -68,7 +69,13 @@ public class Lotta extends JFrame {
         // PARTE AGGIUNTA POKEMON
 
         Reader provaLettore = new Reader();
+        //Random rnd = new Random();
+        //utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));
+        //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
+
+
         Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
+        // dovrei inizializzare i due utenti (vengono creati con delle squadre random)
         //squadra2[0] = prova;
         //squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         squadraUtente2[0] = prova;
@@ -76,7 +83,8 @@ public class Lotta extends JFrame {
 
         //squadraUtente1 = Utente1.getSquadra();
         //squadraUtente2 = Utente2.getSquadra();
-
+        // UTENTE1 DEVE ESSERE QUELLO SELEZIONATO DAL BOTTONE
+        // UTENTE2 O VIENE CREATO RANDOM O VIENE SELEZIONATO RANDOM DAGLI UTENTI SALVATI SUL FILE (PIU SENSATO)
 
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
@@ -261,6 +269,8 @@ public class Lotta extends JFrame {
                 cambiaContesto();
             }
             else{
+                // index -10 out of bounds for length 4 (da rivedere, sarebbe il valore restituito dal cambio pokemon)
+                // implementare if in piu, se ho -10 restituisco null, se ho null dentro turno cambio pokemon e non faccio nulla
                 setTurno(turno(finalTest[getMossa()], finalTest2[0]));
                 if(getTurno() == -1){
                     if(squadra[0].getSalute() <= 0){
@@ -417,6 +427,24 @@ public class Lotta extends JFrame {
         //GESTIONE CASI CondEffetto = 1
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
         // FARE IF IN CUI SE UNA DELLE DUE MOSSE E NULL (CASO IN CUI VIENE CAMBIATO POKEMON) CHI NON CAMBIA MA SEMPRE LA MOSSA (SOLO LUI)
+        if(CondEffetto1==-10 && CondEffetto2!=-10){ // SIMO CONTROLLA STA ROBA
+            danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
+            barraPSpok1.diminuisci(danno);
+            PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
+            barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
+            if (squadra[0].getSalute() <= 0){
+                return -1;
+            }
+        }
+        if(CondEffetto2==-10 && CondEffetto1!=-10){ // SIMO CONTROLLA STA ROBA
+            barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
+            PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
+            barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
+            if(squadra2[0].getSalute() <= 0){
+                return -1;
+            }
+
+        }
         if(CondEffetto1 == 1 && CondEffetto2 != 1){
             // squadra poi squadra 2
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
@@ -634,6 +662,7 @@ public class Lotta extends JFrame {
                 }
                 return 0;
             }
+
             //qua non puo arrivare
         }
     }
@@ -671,21 +700,25 @@ public class Lotta extends JFrame {
                 vittorieUtente2++;
                 // devo passarci il flag di vittoria
 
-                Vittoria frameVittoria = new Vittoria(cambioUtente);
+                Vittoria frameVittoria = new Vittoria(cambioUtente); // è una finestra in piu, non la stessa modificata
+                //salvo i progressi sui file
+                //utente1.scrittoreModifica();
+                //utente2.scrittoreModifica();
                 resettaLotta();
                 checkBattaglia();
 
 
-                // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
+                // vuol dire che ha vinto il giocatore 2, perche 1 sta senza pokemon
             }
             else{
                 pokemon1.setEnabled(false); // quindi anche le mosse
                 vittorieUtente1++;
                 Vittoria frameVittoria = new Vittoria(cambioUtente);
+                //utente1.scrittoreModifica();
+                //utente2.scrittoreModifica();
                 resettaLotta();
                 checkBattaglia();
 
-                // vuol dire che ha vinto il giocaotre 2, perche 1 sta senza pokemon
             }
 
             //System.exit(1);
@@ -736,6 +769,7 @@ public class Lotta extends JFrame {
             squadra2[indice] = squadra2[0];// senno clicco il bottone e dal numero bottone tiro fuori il pokemon
             squadra2[0]=cambio;
             if(squadra2[indice].getSalute()<=0){
+                // rendo il bottone non cliccabile in caso di pokemon esausto
                 switch (indice){
                     case 0: pokemon1.setEnabled(false);
                     case 1: pokemon2.setEnabled(false);
@@ -745,15 +779,13 @@ public class Lotta extends JFrame {
                     case 5: pokemon6.setEnabled(false);
 
                 }
-                // rendo il bottone non cliccabile
+
             }
         }
 
         aggiornaUI();
     }
 
-    // TODO: da implementare viene eseguita quando viene cambiato un pokemon dalla schermata principale
-    //  oppure quando un pokemon viene sconfitto, e quindi viene sotituito con un altro
 
     private void aggiornaUI(){
         // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
@@ -847,6 +879,7 @@ public class Lotta extends JFrame {
         pokemon1.setIcon(new ImageIcon(squad[0].getSpriteMini()));
         pokemon2.setText(squad[1].getNome());
         pokemon2.setIcon(new ImageIcon(squad[1].getSpriteMini()));
+        // QUANDO AVRO LE SQUADRE COMPLETE CON GLI UTENTI POTRO TOGLIERE I COMMENTI ALLE ISTR. QUA SOTTO
         //pokemon3.setText(squad[2].getNome());
         //pokemon3.setIcon(new ImageIcon(squad[2].getSpriteMini()));
         //pokemon4.setText(squad[3].getNome());
@@ -863,20 +896,19 @@ public class Lotta extends JFrame {
         // quindi per i casi normali è da rivedere
 
     }
-    public void checkBattaglia() {
+    public void checkBattaglia() throws IOException {
 
 
         if(vittorieUtente1-vittorieUtente2>1){
             // resetto le vittorie e poi restarto
             //JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
             SchermataBattaglia battaglia = new SchermataBattaglia(true);
+            // sovrascrivo i file
             //utente1.incrementaVittorie();
             //utente2.incrementaSconfitte();
-            //utente1.scrittore();
-            //utente2.scrittore();
 
-            //exit --> gioco finito
-            //resettaLotta();
+            //non implemento la scrittura nei file perche sta nella funzione che richiama il metodo corrente
+
         }
         if(vittorieUtente2-vittorieUtente1>1) {
             //JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
@@ -884,11 +916,8 @@ public class Lotta extends JFrame {
             // scrivo sul file
             //utente2.incrementaVittorie();
             //utente1.incrementaSconfitte();
-            //utente1.scrittore();
-            //utente2.scrittore();
+            //non implemento la scrittura nei file perche sta nella funzione che richiama il metodo corrente
 
-            // exit --> gioco finito
-            //resettaLotta();
         }
 
         else
@@ -897,6 +926,7 @@ public class Lotta extends JFrame {
 
     public void resettaLotta(){
         // sistemo hp e tutto il resto cosi
+        // squadraUtente1 = new Utente(rd.getRigaByIndex("testo/utenti.txt",0); --> DEVO CONTROLLARE QUALE UTENTE DEVO PRENDERE
         squadra = clonaSquadra(squadraUtente1);
         // dovrei prendere i cloni dai file di testo (che salvo a fine lotta)
         // cosi tengo conto dei progressi dei pokemon (exp,lvl, ecc..)
@@ -935,7 +965,7 @@ public class Lotta extends JFrame {
         return squadraClonata;
     }
 
-
+// TODO: SE CLICCO UNA MOSSA NON PRESENTE SI BLOCCA (NON DEVE FARE NULLA)
 
     /*
         public Pokemon trovaPokemon(String nomePokemon){ // non optional perche se in squadra è certamente presente

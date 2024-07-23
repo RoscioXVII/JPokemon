@@ -78,17 +78,20 @@ public class SelezioneUtente extends JFrame {
         if (bottone1.getText().equals("NUOVO UTENTE")){
 
             bottone1.addActionListener(e -> {
+                // potrei ottimizzare tutto con una funzione che prende in input solo utente (cosi sa quale bottone modificare)
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
                 Utente utente1 = null;
                 try {
-                    utente1 = new Utente(input);
+                    utente1 = new Utente(input); // INUTILE, GLI UTENTI SERVONO DENTRO LOTTA, NON QUI
                 } catch (IOException ex) {
+                    System.err.println("Creazione utente non avvenuta correttamente");
                     throw new RuntimeException(ex);
                 }
                 // utente 1 genera squadra
                 try {
                     utente1.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
+                    System.err.println("Salvataggio non andato a buon fine ");
                     throw new RuntimeException(exc);
                 }
             });
@@ -98,6 +101,8 @@ public class SelezioneUtente extends JFrame {
                 try {
                     Utente utente1 = new Utente(rd.getRigaByIndex("testo/utenti.txt",0));
                 } catch (IOException ex) {
+                    System.err.println("File non formattato correttamente ");
+
                     throw new RuntimeException(ex);
                 }
             });
@@ -112,12 +117,25 @@ public class SelezioneUtente extends JFrame {
                 try {
                     utente2 = new Utente(input);
                 } catch (IOException ex) {
+                    System.err.println("Creazione utente non avvenuta correttamente");
                     throw new RuntimeException(ex);
                 }
                 try {
                     utente2.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
+                    System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
+                }
+            });
+        }
+        else{
+            bottone2.addActionListener(e->{
+                try {
+                    Utente utente2 = new Utente(rd.getRigaByIndex("testo/utenti.txt",1));
+                } catch (IOException ex) {
+                    System.err.println("File non formattato correttamente ");
+
+                    throw new RuntimeException(ex);
                 }
             });
         }
@@ -129,12 +147,25 @@ public class SelezioneUtente extends JFrame {
                 try {
                     utente3 = new Utente(input);
                 } catch (IOException ex) {
+                    System.err.println("Creazione utente non andato a buon fine");
                     throw new RuntimeException(ex);
                 }
                 try {
                     utente3.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
+                    System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
+                }
+            });
+        }
+        else{
+            bottone3.addActionListener(e->{
+                try {
+                    Utente utente3 = new Utente(rd.getRigaByIndex("testo/utenti.txt",2));
+                } catch (IOException ex) {
+                    System.err.println("File non formattato correttamente ");
+
+                    throw new RuntimeException(ex);
                 }
             });
         }
@@ -145,12 +176,25 @@ public class SelezioneUtente extends JFrame {
                 try {
                     utente4 = new Utente(input);
                 } catch (IOException ex) {
+                    System.err.println("Creazione utente non andato a buon fine");
                     throw new RuntimeException(ex);
                 }
                 try {
                     utente4.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
+                    System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
+                }
+            });
+        }
+        else{
+            bottone4.addActionListener(e->{
+                try {
+                    Utente utente4 = new Utente(rd.getRigaByIndex("testo/utenti.txt",3));
+                } catch (IOException ex) {
+                    System.err.println("File non formattato correttamente ");
+
+                    throw new RuntimeException(ex);
                 }
             });
         }
