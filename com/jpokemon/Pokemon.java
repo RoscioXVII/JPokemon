@@ -546,57 +546,57 @@ public class Pokemon implements Cloneable {
     @Override
     public String toString() {
         String Stringa = nome +
-                "-" + tipo1 +
-                "-" + tipo2 +
-                "-" + lvl +
-                "-" + esp +
-                "-" + psBase +
-                "-" + attaccoBase +
-                "-" + difesaBase +
-                "-" + attaccoSpecialeBase +
-                "-" + difesaSpecialeBase +
-                "-" + velocitaBase +
-                "-" + spriteFront +
-                "-" + spriteBack +
-                "-" + spriteMini +
-                "-" + lvlEvoluzione +
-                "-" + ps +
-                "-" + attacco +
-                "-" + difesa +
-                "-" + attaccoSpeciale +
-                "-" + difesaSpeciale +
-                "-" + velocita +
-                "-" + EV +
-                "-" + ripetizioniAttacco +
-                "-" + ripetizioniDifesa +
-                "-" + ripetizioniAttaccoSpeciale +
-                "-" + ripetizioniDifesaSpeciale +
-                "-" + ripetizioniVelocita +
-                "-" + IVps +
-                "-" + IVattacco +
-                "-" + IVdifesa +
-                "-" + IVattaccoSpeciale +
-                "-" + IVdifesaSpeciale +
-                "-" + IVvelocita +
-                "-" + EVps +
-                "-" + EVattacco +
-                "-" + EVdifesa +
-                "-" + EVattaccoSpeciale +
-                "-" + EVdifesaSpeciale +
-                "-" + EVvelocita +
-                "-" + nomeEvoluzione +
-                "-" + salute +
-                "-" + mosse[0].getNome() + // implementare if che se e null restituisce null
-                "-" + mosse[1].getNome();
+                "#" + tipo1 +
+                "#" + tipo2 +
+                "#" + lvl +
+                "#" + esp +
+                "#" + psBase +
+                "#" + attaccoBase +
+                "#" + difesaBase +
+                "#" + attaccoSpecialeBase +
+                "#" + difesaSpecialeBase +
+                "#" + velocitaBase +
+                "#" + spriteFront +
+                "#" + spriteBack +
+                "#" + spriteMini +
+                "#" + lvlEvoluzione +
+                "#" + ps +
+                "#" + attacco +
+                "#" + difesa +
+                "#" + attaccoSpeciale +
+                "#" + difesaSpeciale +
+                "#" + velocita +
+                "#" + EV +
+                "#" + ripetizioniAttacco +
+                "#" + ripetizioniDifesa +
+                "#" + ripetizioniAttaccoSpeciale +
+                "#" + ripetizioniDifesaSpeciale +
+                "#" + ripetizioniVelocita +
+                "#" + IVps +
+                "#" + IVattacco +
+                "#" + IVdifesa +
+                "#" + IVattaccoSpeciale +
+                "#" + IVdifesaSpeciale +
+                "#" + IVvelocita +
+                "#" + EVps +
+                "#" + EVattacco +
+                "#" + EVdifesa +
+                "#" + EVattaccoSpeciale +
+                "#" + EVdifesaSpeciale +
+                "#" + EVvelocita +
+                "#" + nomeEvoluzione +
+                "#" + salute +
+                "#" + mosse[0].getNome() + // implementare if che se e null restituisce null
+                "#" + mosse[1].getNome();
         if(mosse[2]==null)
-            Stringa+="-null";
+            Stringa+="#null";
         else
-            Stringa+="-" + mosse[2].getNome();
+            Stringa+="#" + mosse[2].getNome();
 
         if(mosse[3]==null)
-            Stringa+="-null";
+            Stringa+="#null";
         else
-            Stringa+="-" + mosse[3].getNome();
+            Stringa+="#" + mosse[3].getNome();
 
         return Stringa;
     }

@@ -27,6 +27,7 @@ public class Reader {
                                     //ESEMPIO: se creiamo 2 pokemon, 1 snorlax e 1 charizard, sappiamo che charizard sarà sempre piu veloce
                                     // se creiamo 2 charizard pero' grazie a questi IV uno avrà le statistiche migliori dell altro
         String[] info;
+        // devo fare una funz uguale che funziona solo per i file di testo e quindi splitta con #
         info = string.split(":");
         Mossa[] mossa = new Mossa[4];
         int cont = 3;
@@ -204,8 +205,9 @@ public class Reader {
 
     public Utente buildUtentebyString(String parametriUtente) throws IOException {
         String[] info;
-        Pokemon[] pokemons = new Pokemon[6];
-        try{
+        info = parametriUtente.split(":");
+        Pokemon[] pokemons;
+        /*try{
             sc = new Scanner(new File(infoUtente));
             // o leggo tutto e creo una lista oppure leggo una linea random con cui costruire la squadra dell'utente
             if (sc.hasNextLine())
@@ -216,15 +218,17 @@ public class Reader {
             System.err.println("file non presente");
             throw e;
         }
+         */
 
 
         //cerca squadra
-        String squad = cercaSquadra(info[4]);
+        String squad = cercaSquadra(info[0]);
         //qua dentro mi serve un build squadra
         // da info dovrei lanciare 6 build pokemon con gli attributi contenuti in info
         // --- fare if per vedere se squad è vuoto ---
 
         //build squadra by string qua dentro
+        System.out.println("SQUAD = "+ squad);
         pokemons = buildSquadrabyString(squad);
         // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
         // metto tutti i parametri dentro
@@ -232,6 +236,7 @@ public class Reader {
     }
 
     private String cercaSquadra(String squadra) throws FileNotFoundException {
+        System.out.println("QUESTO ARRIVA = "+ squadra);
         sc = new Scanner(new File("testo/squadreUtenti.txt"));
         String info;
         while(sc.hasNextLine()){
@@ -260,8 +265,14 @@ public class Reader {
         Pokemon[] squadra = new Pokemon[6];
         pokemons = parametriSquadra.split(":");
         // i pokemon so che sono 6 fissi di conseguenza
+        // prevedere se sono null
+        // ogni pokemon è diviso da : ed ogni attributo di un pokemon è diviso da #
+        // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
+
         for(int i=0;i<6;i++){
-            squadra[i] = buildPokemonByString(pokemons[i]);
+            // if se null mi mette null
+            pokemons[i] = pokemons[i].replace("#",":"); // risolto con questo
+            squadra[i] = buildPokemonByString(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
         }
         return squadra;
     }

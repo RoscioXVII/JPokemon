@@ -41,7 +41,7 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
-            writer.write(nome+":"+squadraString());
+            writer.write(nome+"#"+squadraString());
             writer.newLine();
 
         } catch (IOException e){
@@ -88,7 +88,7 @@ public class Utente {
             String stringa;
             while((stringa=reader.readLine())!=null){
                 // da modificare
-                if (stringa.startsWith(this.nome+":")){
+                if (stringa.startsWith(this.nome+":")){ // potrebbe andarci --> #
                     writer.write(nome+":"+squadraString());
                     writer.newLine();
                 }
