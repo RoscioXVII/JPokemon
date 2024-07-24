@@ -88,8 +88,8 @@ public class Lotta extends JFrame {
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
         //squadraUtente1 = utente1.getSquadra();
-        //squadraUtente1[0] = contro;
-        //squadraUtente1[1] = squad2;
+        squadraUtente1[0] = contro;
+        squadraUtente1[1] = squad2;
         //squadra[0] = contro;
         //squadra[1] = squad2;
 

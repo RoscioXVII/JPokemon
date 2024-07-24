@@ -80,6 +80,7 @@ public class Reader {
             while (sc.hasNextLine()){
                 info = sc.nextLine().split(":");
                 if(info[0].equals(string)) {
+                    // da problemi qui, probabilmente alcune mosse non sono ancor state definite e da problemi
                     return new Mossa(info[0],Tipo.valueOf(info[1].toUpperCase()),TipoMossa.valueOf(info[2].toUpperCase()),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
                 }
             }
@@ -255,7 +256,7 @@ public class Reader {
         for(int i=0;i<6;i++){
             //questo da errore
             squad[i]=buildPokemonByString(getRigaByIndex("testo/pokemon.txt",random.nextInt(contaRighe())));
-            System.out.println("nome = "+squad[i].getNome());
+            System.out.println("nome = "+squad[i].getNome()); // da togliere è solo per prova chiaramente
         }
         return squad;
     }
@@ -270,7 +271,8 @@ public class Reader {
         // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
 
         for(int i=0;i<6;i++){
-            // if se null mi mette null
+            // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
+
             pokemons[i] = pokemons[i].replace("#",":"); // risolto con questo
             squadra[i] = buildPokemonByString(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
         }

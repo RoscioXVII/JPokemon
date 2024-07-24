@@ -21,16 +21,19 @@ public class Finestra extends JFrame {
         pannelloCard = new JPanel(cardLayout);
         Home pannelloHome = new Home();
         SelezioneUtente pannelloUtente = new SelezioneUtente();
+        Lotta pannelloLotta = new Lotta(0); //devo gestire il numero utente, questo lo metto solo per testing, senno non si arriva alla schermata di lotta
 
         //creazione pannelli
         JPanel pannello1 = pannelloHome.getPannello();
         JPanel pannello2 = pannelloUtente.getPannello();
+        JPanel pannello3 = pannelloLotta.getPannello();
 
 
 
         // aggiunta dei pannelli al pannelloCard
         pannelloCard.add(pannello1, "CARD 1");
         pannelloCard.add(pannello2,"CARD 2");
+        pannelloCard.add(pannello3, "CARD 3");
 
 
 
@@ -38,6 +41,7 @@ public class Finestra extends JFrame {
         add(pannelloCard);
 
         //creazione pulsanti di controllo
+        // da risolvere, devo capire quale utente passare a lotta
         pannelloHome.getStart().addActionListener(e -> cardLayout.next(pannelloCard));
         pannelloUtente.getBottone1().addActionListener(e->cardLayout.next(pannelloCard)); //qua passo il numero della riga dove prendere l'utente da inizalizzare dentro lotta
         pannelloUtente.getBottone2().addActionListener(e->cardLayout.next(pannelloCard));
