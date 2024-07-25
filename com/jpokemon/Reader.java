@@ -21,6 +21,7 @@ public class Reader {
     public Reader() { // vuoto perche tutti i campi sono static / final
     }
 
+    // si usa pe i pokemon nuovi, senno si usa il load
     public Pokemon buildPokemonByString(String string) throws IOException {
         Random a = new Random();    //SERVONO PER LA CREAZIONE DEGLI IV
         int[] IV = new int[6];      //SPIEGAZIONE VELOCE: Valori random che vanno da 0 a 15 che indicano dove il pokemon "spicca" di piu
@@ -83,6 +84,8 @@ public class Reader {
                     // da problemi qui, probabilmente alcune mosse non sono ancor state definite e da problemi
                     return new Mossa(info[0],Tipo.valueOf(info[1].toUpperCase()),TipoMossa.valueOf(info[2].toUpperCase()),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
                 }
+                if(info[0].equals("null"))
+                    return null; // se è null il bottone non sarà cliccabile
             }
             return null; // non arrivera mai
         } catch (FileNotFoundException e){
@@ -264,19 +267,41 @@ public class Reader {
     public Pokemon[] buildSquadrabyString(String parametriSquadra) throws IOException {
         String pokemons[];
         Pokemon[] squadra = new Pokemon[6];
-        pokemons = parametriSquadra.split(":");
+        pokemons = parametriSquadra.split(":"); // ogni pokemon è diviso dai :, mentre i parametri dal #
         // i pokemon so che sono 6 fissi di conseguenza
         // prevedere se sono null
-        // ogni pokemon è diviso da : ed ogni attributo di un pokemon è diviso da #
         // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
 
         for(int i=0;i<6;i++){
             // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
-
-            pokemons[i] = pokemons[i].replace("#",":"); // risolto con questo
-            squadra[i] = buildPokemonByString(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
+            squadra[i] = loadPokemon(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
         }
         return squadra;
+    }
+    public Pokemon loadPokemon(String info) throws IOException {
+        //serve per caricare i pokemon da file di testo (sono separati da #)
+        String[] attributi = info.split("#");
+        Tipo tipo1 = Tipo.getTipoByString(attributi[1]);
+        Tipo tipo2 = Tipo.getTipoByString(attributi[2]);
+        Mossa[] mosse = new Mossa[4];
+
+        for (int i=0;i<4;i++){
+            mosse[i] = buildMossaByString(attributi[44-i]);
+        }
+
+
+        return new Pokemon(attributi[0],tipo1,tipo2,Integer.parseInt(attributi[3]),Integer.parseInt(attributi[4]),mosse,Integer.parseInt(attributi[5]),
+                Integer.parseInt(attributi[6]),Integer.parseInt(attributi[7]),Integer.parseInt(attributi[8]),Integer.parseInt(attributi[9]),
+                Integer.parseInt(attributi[10]),attributi[11],attributi[12],attributi[13],Integer.parseInt(attributi[14]),Integer.parseInt(attributi[15]),
+                Integer.parseInt(attributi[16]), Integer.parseInt(attributi[17]),Integer.parseInt(attributi[18]),Integer.parseInt(attributi[19]),Integer.parseInt(attributi[20]),
+                Integer.parseInt(attributi[21]),Integer.parseInt(attributi[22]),Integer.parseInt(attributi[23]),
+                Integer.parseInt(attributi[24]), Integer.parseInt(attributi[25]),Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),
+                Integer.parseInt(attributi[28]),Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),
+                Integer.parseInt(attributi[33]),Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),
+                attributi[38],Integer.parseInt(attributi[39]));
+                //fino a 44
+                // dentro l'array se ho meno di 4 mosse quelle assenti sono "null"
+
     }
 
 

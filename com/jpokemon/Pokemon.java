@@ -601,6 +601,58 @@ public class Pokemon implements Cloneable {
         return Stringa;
     }
 
+    // questo viene usato solo quando vengono caricati i pokemon dal file di testo, senno per quelli nuovi (non salvati), viene utilizzato l'altro costruttore
+    public Pokemon(String nome, Tipo tipo1, Tipo tipo2, int lvl, int esp, Mossa[] mosse, int psBase, int attaccoBase, int difesaBase,
+                   int attaccoSpecialeBase, int difesaSpecialeBase, int velocitaBase, String spriteFront, String spriteBack, String spriteMini,
+                   int lvlEvoluzione, int ps, int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita, int EV, int ripetizioniAttacco,
+                   int ripetizioniDifesa, int ripetizioniAttaccoSpeciale, int ripetizioniDifesaSpeciale, int IVps, int IVattacco, int IVdifesa, int IVattaccoSpeciale,
+                   int IVdifesaSpeciale, int IVvelocita, int EVps,
+                   int EVattacco, int EVdifesa, int EVattaccoSpeciale, int EVdifesaSpeciale, int EVvelocita, String nomeEvoluzione, int salute) {
+        this.nome = nome;
+        this.tipo1 = tipo1;
+        this.tipo2 = tipo2;
+        this.lvl = lvl;
+        this.esp = esp;
+        this.mosse = mosse;
+        this.psBase = psBase;
+        this.attaccoBase = attaccoBase;
+        this.difesaBase = difesaBase;
+        this.attaccoSpecialeBase = attaccoSpecialeBase;
+        this.difesaSpecialeBase = difesaSpecialeBase;
+        this.velocitaBase = velocitaBase;
+        this.spriteFront = spriteFront;
+        this.spriteBack = spriteBack;
+        this.spriteMini = spriteMini;
+        this.lvlEvoluzione = lvlEvoluzione;
+        this.ps = ps;
+        this.attacco = attacco;
+        this.difesa = difesa;
+        this.attaccoSpeciale = attaccoSpeciale;
+        this.difesaSpeciale = difesaSpeciale;
+        this.velocita = velocita;
+        this.EV = EV;
+        this.ripetizioniAttacco = ripetizioniAttacco;
+        this.ripetizioniDifesa = ripetizioniDifesa;
+        this.ripetizioniAttaccoSpeciale = ripetizioniAttaccoSpeciale;
+        this.ripetizioniDifesaSpeciale = ripetizioniDifesaSpeciale;
+        this.IVps = IVps;
+        this.IVattacco = IVattacco;
+        this.IVdifesa = IVdifesa;
+        this.IVattaccoSpeciale = IVattaccoSpeciale;
+        this.IVdifesaSpeciale = IVdifesaSpeciale;
+        this.IVvelocita = IVvelocita;
+        this.EVps = EVps;
+        this.EVattacco = EVattacco;
+        this.EVdifesa = EVdifesa;
+        this.EVattaccoSpeciale = EVattaccoSpeciale;
+        this.EVdifesaSpeciale = EVdifesaSpeciale;
+        this.EVvelocita = EVvelocita;
+        this.nomeEvoluzione = nomeEvoluzione;
+        this.salute = salute;
+
+
+    }
+
     @Override
     public Pokemon clone() {
         try {

@@ -1,3 +1,1 @@
-Sergio:0:0:0:0
-Angelino:0:0:0:0
 luciano:13:2:2:14
