@@ -272,7 +272,7 @@ public class Reader {
         // prevedere se sono null
         // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
 
-        for(int i=0;i<6;i++){
+        for(int i=1;i<=6;i++){ // inizio da 1 perche il primo elemento (indice 0), sarebbe il nome dell'utente proprietario della squadra
             // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
             squadra[i] = loadPokemon(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
         }
