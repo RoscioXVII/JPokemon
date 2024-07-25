@@ -48,7 +48,7 @@ public class Lotta extends JFrame {
     private Pokemon[] squadraUtente1 = new Pokemon[6];
 
     private Pokemon[] squadraUtente2 = new Pokemon[6];
-    private Utente utente1; // da implementare
+
     private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
 
     // viene passato dalla schermata precedente, in base al tasto cliccato viene deciso quale utente utilizzare e questo viene caricato da memoria 
@@ -57,6 +57,7 @@ public class Lotta extends JFrame {
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
     public Lotta(int numeroUtente) throws IOException {
+        // anziche numeroutente prendo utente direttamente, ma lo implemento dopo senno è un casino per i test
 
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
         //super("JPokemon");

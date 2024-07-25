@@ -21,7 +21,9 @@ public class Finestra extends JFrame {
         pannelloCard = new JPanel(cardLayout);
         Home pannelloHome = new Home();
         SelezioneUtente pannelloUtente = new SelezioneUtente();
-        Lotta pannelloLotta = new Lotta(0); //devo gestire il numero utente, questo lo metto solo per testing, senno non si arriva alla schermata di lotta
+        //Utente utente1 = pannelloUtente; --> praticamente faccio un return quando clicco il bottone dell utente creato e me lo ritrovo qui
+        Lotta pannelloLotta  = new Lotta(0);
+        //Lotta pannelloLotta = new Lotta(utenteRestituito); //devo gestire il numero utente, questo lo metto solo per testing, senno non si arriva alla schermata di lotta
 
         //creazione pannelli
         JPanel pannello1 = pannelloHome.getPannello();

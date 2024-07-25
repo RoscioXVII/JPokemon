@@ -177,7 +177,7 @@ public class SelezioneUtente extends JFrame {
         if (bottone4.getText().equals("NUOVO UTENTE")){
             bottone4.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente4 = null;
+                Utente utente4;
                 try {
                     utente4 = new Utente(input);
                 } catch (IOException ex) {
@@ -195,13 +195,17 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone4.addActionListener(e->{
                 try {
-                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",0));
+                     Utente utente4 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",3));
+                     //Lotta schermoLotta = new Lotta(utente4);
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
                     throw new RuntimeException(ex);
                 }
+
             });
+            // qua inizializzo (forse) lotta passando l'utente creato
+
         }
 
         pannello.add(bottone1,BorderLayout.CENTER);
