@@ -100,10 +100,9 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone1.addActionListener(e->{
                 try {
-                    String[] info = rd.getRigaByIndex("testo/utenti.txt",0).split(":");
-                    Pokemon[] squad;
-                    squad = rd.buildSquadrabyString(info[0]);
-                    Utente utente1 = new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),squad);
+
+
+                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",0));
                     // utente 1 sarà passato a lotta nel momento in cui verrà inizializzata (non so come)
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
@@ -136,11 +135,8 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone2.addActionListener(e->{
                 try {
-                    String[] info = rd.getRigaByIndex("testo/utenti.txt",1).split(":");
-                    Pokemon[] squad;
-                    squad = rd.buildSquadrabyString(info[0]);
-                    Utente utente2 = new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),squad);
 
+                    Utente utente2 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",1));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -170,10 +166,7 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone3.addActionListener(e->{
                 try {
-                    String[] info = rd.getRigaByIndex("testo/utenti.txt",2).split(":");
-                    Pokemon[] squad;
-                    squad = rd.buildSquadrabyString(info[0]);
-                    Utente utente3 = new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),squad);
+                    Utente utente3 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",2));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -202,10 +195,7 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone4.addActionListener(e->{
                 try {
-                    String[] info = rd.getRigaByIndex("testo/utenti.txt",3).split(":");
-                    Pokemon[] squad;
-                    squad = rd.buildSquadrabyString(info[0]);
-                    Utente utente4 = new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),squad);
+                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",0));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 

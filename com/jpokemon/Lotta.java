@@ -70,7 +70,7 @@ public class Lotta extends JFrame {
 
         Reader provaLettore = new Reader();
         //Random rnd = new Random();
-        //utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));
+        //utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));    <--------
         //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
 
 
