@@ -48,116 +48,118 @@ Flash:Normale:Stato:0:100:15
 Fly:Volo:Fisico:90:95:15
 Focus Energy:Normale:Stato:0:-1:30
 Fury Attack:Normale:Fisico:15:85:20
-Fury Swipes
-Glare
+Fury Swipes:Normale:Fisico:18:80:15
+Glare:Normale:Stato:0:100:30
 Growl:Normale:Stato:0:100:40
-Growth
-Guillotine
-Gust
-Harden
-Haze
-Headbutt
-High Jump Kick
-Horn Drill
-Hydro Pump
-Hyper Beam
-Hyper Fang
-Hypnosis
-Ice Beam
-Ice Punch
-Jump Kick
-Karate Chop
-Kinesis
-Leech Life
-Leech Seed
-Leer
-Lick
-Light Screen
-Lovely Kiss
-Low Kick
-Meditate
-Mega Drain
-Mega Kick
-Mega Punch
+Growth:Normale:Stato:0:-1:20
+Guillotine:Normale:Fisico:0:30:5
+Gust:Volante:Speciale:40:100:35
+Harden:Normale:Stato:0:-1:30
+Haze:Ghiaccio:Stato:0:-1:30
+Headbutt:Normale:Fisico:70:100:15
+High Jump Kick:Lotta:Fisico:130:90:10
+Horn Attack:Normale:Fisico:65:100:25
+Horn Drill:Normale:Fisico:0:30:5
+Hydro Pump:Acqua:Speciale:110:80:5
+Hyper Beam:Normale:Speciale:150:90:5
+Hyper Fang:Normale:Fisico:80:90:15
+Hypnosis:Psico:Stato:0:60:20
+Ice Beam:Ghiaccio:Speciale:90:100:10
+Ice Punch:Ghiaccio:Fisico:75:100:15
+Jump Kick:Lotta:Fisico:100:95:10
+Karate Chop:Lotta:Fisico:50:100:25
+Kinesis:Psico:Stato:0:80:15
+Leech Life:Coleottero:Fisico:80:100:10
+Leech Seed:Erba:Stato:0:90:10
+Leer:Normale:Stato:0:100:30
+Lick:Spettro:Fisico:30:100:30
+Light Screen:Psico:Stato:0:-1:30
+Lovely Kiss:Normale:Stato:0:75:10
+Low Kick:Lotta:Fisico:40:100:20
+Meditate:Psico:Stato:0:-1:40
+Mega Drain:Erba:Speciale:40:100:15
+Mega Kick:Normale:Fisico:120:75:5
+Mega Punch:Normale:Fisico:80:85:20
 Metronome
 Mimic
-Minimize
+Minimize:Normale:Stato:0:-1:10
 Mirror Move
 Mist
-Night Shade
-Pay Day
-Peck
-Petal Dance
-Pin Missile
+Night Shade:Spettro:Speciale:0:100:15
+Pay Day:Normale:Fisico:40:100:20
+Peck:Volante:Fisico:35:100:35
+Petal Dance:Erba:Speciale:120:100:10
+Pin Missile:Coleottero:Fisico:25:95:20
 Poison Gas
 Poison Powder
-Poison Sting
-Pound
-Psybeam
-Psychic
+Poison Sting:Veleno:Fisico:15:100:35
+Pound:Normale:Fisico:40:100:35
+Psybeam:Psico:Speciale:65:100:20
+Psychic:Psico:Speciale:90:100:10
 Psywave
-Quick Attack
-Rage
-Razor Leaf
-Razor Wind
-Recover
-Reflect
+Quick Attack:Normale:Fisico:40:100:30
+Rage:Normale:Fisico:20:100:20
+Razor Leaf:Erba:Fisico:55:95:25
+Razor Wind:Normale:Speciale:80:100:10
+Recover:Normale:Stato:0:-1:5
+Reflect:Psico:Stato:0:-1:20
 Rest
 Roar
-Rock Slide
-Rock Throw
-Rolling Kick
-Sand Attack
+Rock Slide:Roccia:Fisico:75:90:10
+Rock Throw:Roccia:Fisico:50:90:15
+Rolling Kick:Lotta:Fisico:60:85:15
+Sand Attack:Terra:Stato:0:100:15
 Scratch:Normale:Fisico:40:100:35
-Screech
-Seismic Toss
-Self-Destruct
-Sharpen
+Screech:Normale:Stato:0:85:40
+Seismic Toss:Lotta:Fisico:0:100:20
+Self-Destruct:Normale:200:100:5
+Sharpen:Normale:Stato:0:-1:30
 Sing
-Skull Bash
-Sky Attack
-Slam
-Slash
+Skull Bash:Normale:Fisico:130:100:10
+Sky Attack:Volante:Fisico:140:90:5
+Slam:Normale:Fisico:80:75:20
+Slash:Normale:Fisico:70:100:20
 Sleep Powder
-Sludge
-Smog
-Smokescreen
-Soft-Boiled
-Solar Beam
-Sonic Boom
-Spike Cannon
-Splash
+Sludge:Veleno:Speciale:65:100:20
+Smog:Veleno:Speciale:30:70:20
+Smokescreen:Normale:Stato:0:100:20
+Soft-Boiled:Normale:Stato:0:-1:5
+Solar Beam:Erba:Speciale:120:100:10
+Sonic Boom:Normale:Speciale:0:90:20
+Spike Cannon:Normale:Fisico:20:100:15
+Splash:Normale:Stato:0:-1:40
 Spore
-Stomp
-Strength
-String Shot
-Struggle
+Stomp:Normale:Fisico:65:100:20
+Strength:Normale:Fisico:80:100:15
+String Shot:Coleottero:Stato:0:95:40
+Struggle:Normale:Fisico:50:-1:9999
 Stun Spore
-Submission
+Submission:Lotta:Fisico:80:80:20
 Substitute
-Super Fang
+Super Fang:Normale:Fisico:0:90:10
 Supersonic
-Surf
-Swift
-Swords Dance
+Surf:Acqua:Speciale:90:100:15
+Swift:Normale:Speciale:60:-1:20
+Swords Dance:Normale:Stato:0:-1:20
 Tackle:Normale:Fisico:40:100:35
 Tail Whip:Normale:Stato:0:100:30
-Take Down
+Take Down:Normale:Fisico:90:85:20
 Teleport
-Thrash
-Thunder
-Thunder Punch
-Thunder Shock
+Thrash:Normale:Fisico:120:100:10
+Thunder:Elettro:Speciale:110:70:10
+Thunder Punch:Elettro:Fisico:75:100:15
+Thunder Shock:Elettro:Speciale:40:100:30
 Thunder Wave
-Thunderbolt
+Thunderbolt:Elettro:Speciale:90:100:15
 Toxic
 Transform
-Tri Attack
-Twineedle
-Vine Whip
-Vise Grip
-Water Gun
-Waterfall
+Tri Attack:Normale:Speciale:80:100:10
+Twineedle:Coleottero:Fisico:25:100:20
+Vine Whip:Erba:Fisico:45:100:25
+Vise Grip:Normale:Fisico:55:100:30
+Water Gun:Acqua:Speciale:40:100:25
+Waterfall:Acqua:Fisico:80:100:15
 Whirlwind
-Withdraw
-Wrap
+Wing Attack:Volante:Fisico:60:100:35
+Withdraw:Acqua:Stato:0:-1:40
+Wrap:Normale:Fisico:15:90:20
