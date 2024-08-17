@@ -21,7 +21,7 @@ public class SelezioneUtente extends JFrame {
 
 
     public SelezioneUtente() throws IOException {
-        Reader rd = new Reader();
+        Reader rd =  Reader.getInstance();
         ImageIcon img = new ImageIcon("img/selezioneutenti.jpg");
         Image wallpaper = img.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
         img = new ImageIcon(wallpaper);
@@ -102,7 +102,7 @@ public class SelezioneUtente extends JFrame {
                 try {
 
 
-                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",0));
+                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",0));
                     // utente 1 sarà passato a lotta nel momento in cui verrà inizializzata (non so come)
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
@@ -197,6 +197,9 @@ public class SelezioneUtente extends JFrame {
                 try {
                      Utente utente4 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",3));
                      //Lotta schermoLotta = new Lotta(utente4);
+                     //return utente4; <---chiaramente non si puo fare e devo quindi trovare una soluzione
+                    // o istanzio la schermata da qua o trovo il metodo per restituirlo e gestisco tutto dentro finestra
+
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -237,4 +240,5 @@ public class SelezioneUtente extends JFrame {
     public JButton getBottone4() {
         return bottone4;
     }
+
 }

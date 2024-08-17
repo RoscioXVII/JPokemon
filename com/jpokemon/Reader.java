@@ -16,9 +16,15 @@ public class Reader {
     private static final String infoMosse = "testo/mosse.txt";
     private static final String infoUtente = "testo/utenti.txt";
     private static Scanner sc;
+    private static Reader instance = null;
     private String[] mosse = new String[4]; // //Le metto come string per prendere solo il nome poi con l'altro metodo prenderò anche tutto il resto
 
-    public Reader() { // vuoto perche tutti i campi sono static / final
+    private Reader() { // vuoto perche tutti i campi sono static / final
+    }
+    public static Reader getInstance(){
+        if(instance==null)
+            instance = new Reader();
+        return instance;
     }
 
     // si usa pe i pokemon nuovi, senno si usa il load
@@ -281,24 +287,32 @@ public class Reader {
     public Pokemon loadPokemon(String info) throws IOException {
         //serve per caricare i pokemon da file di testo (sono separati da #)
         String[] attributi = info.split("#");
-        Tipo tipo1 = Tipo.getTipoByString(attributi[1]);
-        Tipo tipo2 = Tipo.getTipoByString(attributi[2]);
+
+        for (int i=0;i<attributi.length;i++)
+            System.out.println("£££££££ attributi = " + attributi[i] + " indice = " + i);
+        Tipo tipo1 = Tipo.getTipoByString(attributi[2]); // index 1 out of bound for lenght 1
+        Tipo tipo2 = Tipo.getTipoByString(attributi[3]);
         Mossa[] mosse = new Mossa[4];
 
-        for (int i=0;i<4;i++){
-            mosse[i] = buildMossaByString(attributi[44-i]);
+        for (int i=0;i<3;i++){
+            if(attributi[42+i].equals("null"))
+                mosse[i] = null;
+            else
+                mosse[i] = buildMossaByString(attributi[42+i]);
         }
+        for (Mossa mossa: mosse)
+            System.out.println("mosse = " + mossa.getNome());
 
 
-        return new Pokemon(attributi[0],tipo1,tipo2,Integer.parseInt(attributi[3]),Integer.parseInt(attributi[4]),mosse,Integer.parseInt(attributi[5]),
-                Integer.parseInt(attributi[6]),Integer.parseInt(attributi[7]),Integer.parseInt(attributi[8]),Integer.parseInt(attributi[9]),
-                Integer.parseInt(attributi[10]),attributi[11],attributi[12],attributi[13],Integer.parseInt(attributi[14]),Integer.parseInt(attributi[15]),
-                Integer.parseInt(attributi[16]), Integer.parseInt(attributi[17]),Integer.parseInt(attributi[18]),Integer.parseInt(attributi[19]),Integer.parseInt(attributi[20]),
-                Integer.parseInt(attributi[21]),Integer.parseInt(attributi[22]),Integer.parseInt(attributi[23]),
-                Integer.parseInt(attributi[24]), Integer.parseInt(attributi[25]),Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),
-                Integer.parseInt(attributi[28]),Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),
-                Integer.parseInt(attributi[33]),Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),
-                attributi[38],Integer.parseInt(attributi[39]));
+        return new Pokemon(attributi[1],tipo1,tipo2,Integer.parseInt(attributi[4]),Integer.parseInt(attributi[5]),mosse,Integer.parseInt(attributi[6]),
+                Integer.parseInt(attributi[7]),Integer.parseInt(attributi[8]),Integer.parseInt(attributi[9]),Integer.parseInt(attributi[10]),
+                Integer.parseInt(attributi[11]),attributi[12],attributi[13],attributi[14],Integer.parseInt(attributi[15]),Integer.parseInt(attributi[16]),
+                Integer.parseInt(attributi[17]), Integer.parseInt(attributi[18]),Integer.parseInt(attributi[19]),Integer.parseInt(attributi[20]),Integer.parseInt(attributi[21]),
+                Integer.parseInt(attributi[22]),Integer.parseInt(attributi[23]),Integer.parseInt(attributi[24]),
+                Integer.parseInt(attributi[25]), Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),Integer.parseInt(attributi[28]),
+                Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),Integer.parseInt(attributi[33]),
+                Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),Integer.parseInt(attributi[38]),
+                Integer.parseInt(attributi[39]),attributi[40],Integer.parseInt(attributi[41]));
                 //fino a 44
                 // dentro l'array se ho meno di 4 mosse quelle assenti sono "null"
 

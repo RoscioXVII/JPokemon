@@ -15,7 +15,7 @@ public class Utente {
         vittorie=0;
         sconfitte=0;
         partiteGiocate=0;
-        Reader rd = new Reader();
+        Reader rd = Reader.getInstance();
         squadra = rd.generaSquadra();
 
     }
@@ -41,7 +41,7 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
-            writer.write(nome+"#"+squadraString());
+            writer.write(nome+":"+squadraString());
             writer.newLine();
 
         } catch (IOException e){

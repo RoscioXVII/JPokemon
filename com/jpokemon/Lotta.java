@@ -69,7 +69,7 @@ public class Lotta extends JFrame {
 
         // PARTE AGGIUNTA POKEMON
 
-        Reader provaLettore = new Reader();
+        Reader provaLettore = Reader.getInstance();
         //Random rnd = new Random();
         //utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));    <--------
         //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
@@ -256,7 +256,7 @@ public class Lotta extends JFrame {
         setContentPane(pannello); // TODO
 
         //QUESTO VA CAMBIATO MA DOPO
-        Reader AssegnaMosse = new Reader();
+        //Reader AssegnaMosse = new Reader();
 
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
         Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio

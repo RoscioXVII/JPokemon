@@ -460,7 +460,7 @@ public class Pokemon implements Cloneable {
     }
 
     public void evolvi()   {
-        Reader lettore = new Reader();
+        Reader lettore =  Reader.getInstance();
         try {
             Pokemon evoluzione = lettore.buildPokemonByString(lettore.getRigaByIndex("testo/pokemon.txt",lettore.cercaRiga(this.nomeEvoluzione)));
             this.copia(evoluzione);
@@ -605,9 +605,9 @@ public class Pokemon implements Cloneable {
     public Pokemon(String nome, Tipo tipo1, Tipo tipo2, int lvl, int esp, Mossa[] mosse, int psBase, int attaccoBase, int difesaBase,
                    int attaccoSpecialeBase, int difesaSpecialeBase, int velocitaBase, String spriteFront, String spriteBack, String spriteMini,
                    int lvlEvoluzione, int ps, int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita, int EV, int ripetizioniAttacco,
-                   int ripetizioniDifesa, int ripetizioniAttaccoSpeciale, int ripetizioniDifesaSpeciale, int IVps, int IVattacco, int IVdifesa, int IVattaccoSpeciale,
+                   int ripetizioniDifesa, int ripetizioniAttaccoSpeciale, int ripetizioniDifesaSpeciale,int tipetizioniVelocita, int IVps, int IVattacco, int IVdifesa ,int IVattaccoSpeciale,
                    int IVdifesaSpeciale, int IVvelocita, int EVps,
-                   int EVattacco, int EVdifesa, int EVattaccoSpeciale, int EVdifesaSpeciale, int EVvelocita, String nomeEvoluzione, int salute) {
+                   int EVattacco, int EVdifesa,int EVvelocita, int EVattaccoSpeciale, int EVdifesaSpeciale, String nomeEvoluzione, int salute) {
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;

@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Random;
 import java.io.IOException;
 
-public class LottaProva extends Reader{
+public class LottaProva {
 
     public LottaProva(){}
 
     public static void main(String[] args) throws IOException {
-        Reader a = new Reader();
+        Reader a =  Reader.getInstance();
         //Formule b = new Formule();  se dichiari static le funzioni le puoi usare quando vuoi
 
         String place = a.getRigaByIndex("testo/pokemon.txt",0);
@@ -38,7 +38,7 @@ public class LottaProva extends Reader{
         //System.out.println(danno);
 
         Pokemon[] sqvad = new Pokemon[6];
-        Reader rd = new Reader();
+        Reader rd =  Reader.getInstance();
         sqvad[0] = rd.buildPokemonByString(rd.getRigaByIndex("testo/pokemon.txt",0));
         sqvad[1] = rd.buildPokemonByString(rd.getRigaByIndex("testo/pokemon.txt",3));
         sqvad[2] = rd.buildPokemonByString(rd.getRigaByIndex("testo/pokemon.txt",6));
