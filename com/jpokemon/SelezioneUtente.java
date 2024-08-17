@@ -17,6 +17,9 @@ public class SelezioneUtente extends JFrame {
     private String nome2;
     private String nome3;
     private String nome4;
+    // aggiungo un attributo utente, che poi verrà passato a lotta per utilizzare l'utente selezionato
+    // da questa schermata nella battalia
+    private Utente utenteGenerato;
 
 
 
@@ -81,16 +84,16 @@ public class SelezioneUtente extends JFrame {
             bottone1.addActionListener(e -> {
                 // potrei ottimizzare tutto con una funzione che prende in input solo utente (cosi sa quale bottone modificare)
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente1 = null;
+
                 try {
-                    utente1 = new Utente(input); // INUTILE, GLI UTENTI SERVONO DENTRO LOTTA, NON QUI
+                    utenteGenerato = new Utente(input); // INUTILE, GLI UTENTI SERVONO DENTRO LOTTA, NON QUI
                 } catch (IOException ex) {
                     System.err.println("Creazione utente non avvenuta correttamente");
                     throw new RuntimeException(ex);
                 }
                 // utente 1 genera squadra
                 try {
-                    utente1.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                    utenteGenerato.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
                     System.err.println("Salvataggio non andato a buon fine ");
                     throw new RuntimeException(exc);
@@ -102,7 +105,7 @@ public class SelezioneUtente extends JFrame {
                 try {
 
 
-                    Utente utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",0));
+                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",0));
                     // utente 1 sarà passato a lotta nel momento in cui verrà inizializzata (non so come)
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
@@ -117,15 +120,15 @@ public class SelezioneUtente extends JFrame {
         if (bottone2.getText().equals("NUOVO UTENTE")){
             bottone2.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente2 = null;
+
                 try {
-                    utente2 = new Utente(input);
+                    utenteGenerato = new Utente(input);
                 } catch (IOException ex) {
                     System.err.println("Creazione utente non avvenuta correttamente");
                     throw new RuntimeException(ex);
                 }
                 try {
-                    utente2.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                    utenteGenerato.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
                     System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
@@ -136,7 +139,7 @@ public class SelezioneUtente extends JFrame {
             bottone2.addActionListener(e->{
                 try {
 
-                    Utente utente2 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",1));
+                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",1));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -148,15 +151,15 @@ public class SelezioneUtente extends JFrame {
         if(bottone3.getText().equals("NUOVO UTENTE")){
             bottone3.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente3 = null;
+
                 try {
-                    utente3 = new Utente(input);
+                    utenteGenerato = new Utente(input);
                 } catch (IOException ex) {
                     System.err.println("Creazione utente non andato a buon fine");
                     throw new RuntimeException(ex);
                 }
                 try {
-                    utente3.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                    utenteGenerato.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
                     System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
@@ -166,7 +169,7 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone3.addActionListener(e->{
                 try {
-                    Utente utente3 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",2));
+                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",2));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -177,15 +180,15 @@ public class SelezioneUtente extends JFrame {
         if (bottone4.getText().equals("NUOVO UTENTE")){
             bottone4.addActionListener(e -> {
                 String input = JOptionPane.showInputDialog(casella,"Inserisci il nome utente = ");
-                Utente utente4;
+
                 try {
-                    utente4 = new Utente(input);
+                    utenteGenerato = new Utente(input);
                 } catch (IOException ex) {
                     System.err.println("Creazione utente non andato a buon fine");
                     throw new RuntimeException(ex);
                 }
                 try {
-                    utente4.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
+                    utenteGenerato.scrittore(); // dovrà scrivere il contenuto dentro dell istanza dentro il .txt
                 } catch (IOException exc) {
                     System.err.println("Salvataggio non andato a buon fine");
                     throw new RuntimeException(exc);
@@ -195,8 +198,8 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone4.addActionListener(e->{
                 try {
-                     Utente utente4 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",3));
-                     //Lotta schermoLotta = new Lotta(utente4);
+                     utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",3));
+                     //Lotta schermoLotta = new Lotta(utente4); <---- devo trovare una soluzione a questo
                      //return utente4; <---chiaramente non si puo fare e devo quindi trovare una soluzione
                     // o istanzio la schermata da qua o trovo il metodo per restituirlo e gestisco tutto dentro finestra
 
@@ -217,6 +220,7 @@ public class SelezioneUtente extends JFrame {
         pannello.add(bottone4,BorderLayout.CENTER);
         pannello.add(label,BorderLayout.CENTER);
         setContentPane(pannello);
+
 
         // nome = rd.legginomeutente();
 

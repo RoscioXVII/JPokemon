@@ -238,7 +238,6 @@ public class Reader {
         // --- fare if per vedere se squad è vuoto ---
 
         //build squadra by string qua dentro
-        System.out.println("SQUAD = "+ squad);
         pokemons = buildSquadrabyString(squad);
         // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
         // metto tutti i parametri dentro
@@ -278,7 +277,7 @@ public class Reader {
         // prevedere se sono null
         // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
 
-        for(int i=1;i<=6;i++){ // inizio da 1 perche il primo elemento (indice 0), sarebbe il nome dell'utente proprietario della squadra
+        for(int i=1;i<6;i++){ // inizio da 1 perche il primo elemento (indice 0), sarebbe il nome dell'utente proprietario della squadra
             // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
             squadra[i] = loadPokemon(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
         }
@@ -288,34 +287,41 @@ public class Reader {
         //serve per caricare i pokemon da file di testo (sono separati da #)
         String[] attributi = info.split("#");
 
-        for (int i=0;i<attributi.length;i++)
-            System.out.println("£££££££ attributi = " + attributi[i] + " indice = " + i);
-        Tipo tipo1 = Tipo.getTipoByString(attributi[2]); // index 1 out of bound for lenght 1
-        Tipo tipo2 = Tipo.getTipoByString(attributi[3]);
+        //for (int i=0;i<attributi.length;i++)
+            //System.out.println("£££££££ attributi = " + attributi[i] + " indice = " + i);
+        Tipo tipo1 = Tipo.getTipoByString(attributi[1]); // index 1 out of bound for lenght 1
+        Tipo tipo2 = Tipo.getTipoByString(attributi[2]);
         Mossa[] mosse = new Mossa[4];
 
         for (int i=0;i<3;i++){
             if(attributi[42+i].equals("null"))
                 mosse[i] = null;
             else
-                mosse[i] = buildMossaByString(attributi[42+i]);
+                mosse[i] = buildMossaByString(attributi[41+i]);
         }
-        for (Mossa mossa: mosse)
-            System.out.println("mosse = " + mossa.getNome());
+        for (Mossa mossa: mosse){
+            if (mossa == null)
+                System.out.println("mosse = null");
+            else
+                System.out.println("mosse = " + mossa.getNome());
+        }
 
 
-        return new Pokemon(attributi[1],tipo1,tipo2,Integer.parseInt(attributi[4]),Integer.parseInt(attributi[5]),mosse,Integer.parseInt(attributi[6]),
-                Integer.parseInt(attributi[7]),Integer.parseInt(attributi[8]),Integer.parseInt(attributi[9]),Integer.parseInt(attributi[10]),
-                Integer.parseInt(attributi[11]),attributi[12],attributi[13],attributi[14],Integer.parseInt(attributi[15]),Integer.parseInt(attributi[16]),
-                Integer.parseInt(attributi[17]), Integer.parseInt(attributi[18]),Integer.parseInt(attributi[19]),Integer.parseInt(attributi[20]),Integer.parseInt(attributi[21]),
-                Integer.parseInt(attributi[22]),Integer.parseInt(attributi[23]),Integer.parseInt(attributi[24]),
-                Integer.parseInt(attributi[25]), Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),Integer.parseInt(attributi[28]),
-                Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),Integer.parseInt(attributi[33]),
-                Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),Integer.parseInt(attributi[38]),
-                Integer.parseInt(attributi[39]),attributi[40],Integer.parseInt(attributi[41]));
+
+
+
+        return new Pokemon(attributi[0],tipo1,tipo2,Integer.parseInt(attributi[3]),Integer.parseInt(attributi[4]),mosse,Integer.parseInt(attributi[5]),
+                Integer.parseInt(attributi[6]),Integer.parseInt(attributi[7]),Integer.parseInt(attributi[8]),Integer.parseInt(attributi[9]),
+                Integer.parseInt(attributi[10]),attributi[11],attributi[12],attributi[13],Integer.parseInt(attributi[14]),Integer.parseInt(attributi[15]),
+                Integer.parseInt(attributi[16]), Integer.parseInt(attributi[17]),Integer.parseInt(attributi[18]),Integer.parseInt(attributi[19]),Integer.parseInt(attributi[20]),
+                Integer.parseInt(attributi[21]),Integer.parseInt(attributi[22]),Integer.parseInt(attributi[23]),
+                Integer.parseInt(attributi[24]), Integer.parseInt(attributi[25]),Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),
+                Integer.parseInt(attributi[28]),Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),
+                Integer.parseInt(attributi[33]),Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),
+                Integer.parseInt(attributi[38]),attributi[39],Integer.parseInt(attributi[40]));
                 //fino a 44
                 // dentro l'array se ho meno di 4 mosse quelle assenti sono "null"
-
+                // ho messo Integer.parseInt dove ci sono i riferimenti delle gif --> DA RSIOLVERE
     }
 
 
