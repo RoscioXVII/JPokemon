@@ -139,7 +139,7 @@ public class SelezioneUtente extends JFrame {
             bottone2.addActionListener(e->{
                 try {
 
-                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",1));
+                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",1));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -169,7 +169,7 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone3.addActionListener(e->{
                 try {
-                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",2));
+                    utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",2));
                 } catch (IOException ex) {
                     System.err.println("File non formattato correttamente ");
 
@@ -198,7 +198,7 @@ public class SelezioneUtente extends JFrame {
         else{
             bottone4.addActionListener(e->{
                 try {
-                     utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti",3));
+                     utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",3));
                      //Lotta schermoLotta = new Lotta(utente4); <---- devo trovare una soluzione a questo
                      //return utente4; <---chiaramente non si puo fare e devo quindi trovare una soluzione
                     // o istanzio la schermata da qua o trovo il metodo per restituirlo e gestisco tutto dentro finestra

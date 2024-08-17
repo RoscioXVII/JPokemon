@@ -49,6 +49,7 @@ public class Lotta extends JFrame {
 
     private Pokemon[] squadraUtente2 = new Pokemon[6];
 
+    private Utente utente1;
     private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
 
     // viene passato dalla schermata precedente, in base al tasto cliccato viene deciso quale utente utilizzare e questo viene caricato da memoria 
@@ -69,9 +70,22 @@ public class Lotta extends JFrame {
 
         // PARTE AGGIUNTA POKEMON
 
+
+
+
+
         Reader provaLettore = Reader.getInstance();
         //Random rnd = new Random();
-        //utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));    <--------
+        //TODO: DEVO IMPLEMENTARE IL NUMERO UTENTE (GLI DO L'INDICE DELLA RIGA DA LEGGERE NEL FILE E MI OTTENGO L'UTENTE)
+        //System.out.println("numero utente da creare = "+ numeroUtente);
+        utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
+        for (Pokemon cazzo: utente1.getSquadra()){
+            if(cazzo == null)
+                System.out.println("non ce sta ncazzo");
+            else
+                System.out.println("POKEMON SQUADRA = " + cazzo.getNome());
+        }
+
         //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
 
 
@@ -88,9 +102,9 @@ public class Lotta extends JFrame {
 
         Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
-        //squadraUtente1 = utente1.getSquadra();
-        squadraUtente1[0] = contro;
-        squadraUtente1[1] = squad2;
+        squadraUtente1 = utente1.getSquadra();
+        //squadraUtente1[0] = contro;
+        //squadraUtente1[1] = squad2;
         //squadra[0] = contro;
         //squadra[1] = squad2;
 
@@ -137,9 +151,13 @@ public class Lotta extends JFrame {
             mossa4 = new JButton(test[3].getNome());
 
 
-
+        // DA SISTEMARE, SI ALTERANO LE CORRISPONDENZE CON I BOTTONI
         pokemon1 = new JButton(squadra[0].getNome(),new ImageIcon(squadra[0].getSpriteMini()));
         pokemon2 = new JButton(squadra[1].getNome(), new ImageIcon(squadra[1].getSpriteMini()));
+        pokemon3 = new JButton(squadra[2].getNome(), new ImageIcon(squadra[2].getSpriteMini()));
+        pokemon4 = new JButton(squadra[3].getNome(), new ImageIcon(squadra[3].getSpriteMini()));
+        pokemon5 = new JButton(squadra[4].getNome(), new ImageIcon(squadra[4].getSpriteMini()));
+        pokemon6 = new JButton(squadra[5].getNome(), new ImageIcon(squadra[5].getSpriteMini()));
         // il resto lo prendo (anche questo in realtà) dall'array squadra
         // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
         Image img1 = gif1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
@@ -881,14 +899,14 @@ public class Lotta extends JFrame {
         pokemon2.setText(squad[1].getNome());
         pokemon2.setIcon(new ImageIcon(squad[1].getSpriteMini()));
         // QUANDO AVRO LE SQUADRE COMPLETE CON GLI UTENTI POTRO TOGLIERE I COMMENTI ALLE ISTR. QUA SOTTO
-        //pokemon3.setText(squad[2].getNome());
-        //pokemon3.setIcon(new ImageIcon(squad[2].getSpriteMini()));
-        //pokemon4.setText(squad[3].getNome());
-        //pokemon4.setIcon(new ImageIcon(squad[3].getSpriteMini()));
-        //pokemon5.setText(squad[4].getNome());
-        //pokemon5.setIcon(new ImageIcon(squad[4].getSpriteMini()));
-        //pokemon6.setText(squad[5].getNome());
-        //pokemon6.setIcon(new ImageIcon(squad[5].getSpriteMini()));
+        pokemon3.setText(squad[2].getNome());
+        pokemon3.setIcon(new ImageIcon(squad[2].getSpriteMini()));
+        pokemon4.setText(squad[3].getNome());
+        pokemon4.setIcon(new ImageIcon(squad[3].getSpriteMini()));
+        pokemon5.setText(squad[4].getNome());
+        pokemon5.setIcon(new ImageIcon(squad[4].getSpriteMini()));
+        pokemon6.setText(squad[5].getNome());
+        pokemon6.setIcon(new ImageIcon(squad[5].getSpriteMini()));
         cambioUtente=!cambioUtente;
 
          // il contrario, quindi l'altro utente
@@ -965,6 +983,10 @@ public class Lotta extends JFrame {
         }
         return squadraClonata;
     }
+    protected void setUtente1(Utente utente1){
+        this.utente1 = utente1;
+    }
+
 
 // TODO: SE CLICCO UNA MOSSA NON PRESENTE SI BLOCCA (NON DEVE FARE NULLA)
 

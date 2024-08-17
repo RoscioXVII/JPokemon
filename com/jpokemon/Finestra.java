@@ -43,7 +43,7 @@ public class Finestra extends JFrame {
 
 
         //aggiungo il pannello al frame (finestra)
-        add(pannelloCard);
+        add(pannelloCard); // non ha lo scenario dopo, da sistemare
 
         //creazione pulsanti di controllo
         // da risolvere, devo capire quale utente passare a lotta
@@ -57,9 +57,12 @@ public class Finestra extends JFrame {
             }
             JPanel pannello3 = pannelloLotta.getPannello();
             pannelloCard.add(pannello3,"CARD 3");
-            cardLayout.next(pannelloCard);
+            pannelloCard.revalidate();  // Forza il ricalcolo del layout
+            pannelloCard.repaint();     // Ridisegna il pannello
+            cardLayout.show(pannelloCard, "CARD 3");
+
         });
-        pannelloUtente.getBottone1().addActionListener(e -> {
+        pannelloUtente.getBottone2().addActionListener(e -> {
             try {
                 pannelloLotta = new Lotta(1); // UTENTE 2
             } catch (IOException ex) {
@@ -67,9 +70,12 @@ public class Finestra extends JFrame {
             }
             JPanel pannello3 = pannelloLotta.getPannello();
             pannelloCard.add(pannello3,"CARD 3");
-            cardLayout.next(pannelloCard);
+            pannelloCard.revalidate();  // Forza il ricalcolo del layout
+            pannelloCard.repaint();     // Ridisegna il pannello
+            cardLayout.show(pannelloCard, "CARD 3");
+
         });
-        pannelloUtente.getBottone1().addActionListener(e -> {
+        pannelloUtente.getBottone3().addActionListener(e -> {
             try {
                 pannelloLotta = new Lotta(2); // UTENTE 3
             } catch (IOException ex) {
@@ -77,9 +83,11 @@ public class Finestra extends JFrame {
             }
             JPanel pannello3 = pannelloLotta.getPannello();
             pannelloCard.add(pannello3,"CARD 3");
-            cardLayout.next(pannelloCard);
+            pannelloCard.revalidate();  // Forza il ricalcolo del layout
+            pannelloCard.repaint();     // Ridisegna il pannello
+            cardLayout.show(pannelloCard, "CARD 3");
         });
-        pannelloUtente.getBottone1().addActionListener(e -> {
+        pannelloUtente.getBottone4().addActionListener(e -> {
             try {
                 pannelloLotta = new Lotta(3); // UTENTE 4
             } catch (IOException ex) {
@@ -87,7 +95,9 @@ public class Finestra extends JFrame {
             }
             JPanel pannello3 = pannelloLotta.getPannello();
             pannelloCard.add(pannello3,"CARD 3");
-            cardLayout.next(pannelloCard);
+            pannelloCard.revalidate();  // Forza il ricalcolo del layout
+            pannelloCard.repaint();     // Ridisegna il pannello
+            cardLayout.show(pannelloCard, "CARD 3");
         });
 
         //pannelloUtente.getBottone2().addActionListener(e->cardLayout.next(pannelloCard));
