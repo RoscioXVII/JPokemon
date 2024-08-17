@@ -3,7 +3,7 @@ Ivysaur:erba:veleno:Tackle:Growl:Leech Seed:Vine whip:32:Venusaur:60:141:62:63:8
 Venusaur:erba:veleno:Tackle:Leech Seed:Vine Whip:Razor Leaf:-1:-1:80:208:82:83:100:100:80:EV:0:0:0:2:1:0
 Charmander:fuoco:null:Scratch:Growl:Ember:null:16:Charmeleon:39:65:52:43:60:50:65:EV:0:0:0:0:0:1
 Charmeleon:fuoco:null:Scratch:Growl:Ember:null:36:Charizard:58:142:64:58:80:65:80:EV:0:0:0:1:0:1
-Charizard:fuoco:volante:Lanciafiamme:Scratch:Ember:Leer:-1:-1:78:209:84:78:109:85:100:EV:0:0:0:3:0:0
+Charizard:fuoco:volante:Flamethrower:Scratch:Ember:Leer:-1:-1:78:209:84:78:109:85:100:EV:0:0:0:3:0:0
 Squirtle:acqua:null:Tackle:Tail Whip:null:null:16:Wartortle:44:66:48:65:50:64:43:EV:0:0:1:0:0:0
 Wartortle:acqua:null:Bubble:Water Gun:null:null36:Blastoise:59:143:63:80:65:80:58:EV:0:0:1:0:1:0
 Blastoise:acqua:null:Tail Whip:Water Gun:Bite:Withdraw:-1:-1:79:210:83:100:85:105:78:EV:0:0:0:0:3:0
@@ -23,8 +23,8 @@ Pidgeot:normale:volante:Gust:Sand Attack:Quick Attack:null:-1:-1:83:216:80:75:70
 Nidoran:veleno:null:Growl:Tackle:null:null:16:Nidorina:55:55:47:52:40:40:41:EV:1:0:0:0:0:0
 Nidorina:veleno:null:Growl:Tackle:Scratch:null:30:Nidoqueen:70:128:62:67:55:55:56:EV:2:0:0:0:0:0
 Nidoqueen:veleno:terra:Growl:Tackle:Scratch:Body Slam:-1:-1:90:227:82:87:75:85:76:EV:3:0:0:0:0:0
-Growlithe:fuoco:null:Bite:Roar:null:null:21:Arcanine:55:70:70:45:70:50:60:EV:0:1:0:0:0:0
-Arcanine:fuoco:null:Ember:Leer:Roar:Take Down:-1:-1:90:194:110:80:100:80:95:EV:0:2:0:0:0:0
+Growlithe:fuoco:null:Bite:Rage:null:null:21:Arcanine:55:70:70:45:70:50:60:EV:0:1:0:0:0:0
+Arcanine:fuoco:null:Ember:Leer:Rage:Take Down:-1:-1:90:194:110:80:100:80:95:EV:0:2:0:0:0:0
 Graveler:roccia:terra:Defense Curl:Tackle:null:null:28:Golem:55:137:95:115:45:45:35:EV:0:0:2:0:0:0
 Golem:roccia:terra:Defense Curl:Tackle:null:null:-1:-1:80:223:110:130:55:65:45:EV:0:0:3:0:0:0
 Machop:lotta:null:Karate Chop:Low Kick:null:null:28:Machoke:70:61:80:50:35:35:35:EV:0:1:0:0:0:0
