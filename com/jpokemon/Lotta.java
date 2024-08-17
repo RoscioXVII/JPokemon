@@ -79,6 +79,7 @@ public class Lotta extends JFrame {
         //TODO: DEVO IMPLEMENTARE IL NUMERO UTENTE (GLI DO L'INDICE DELLA RIGA DA LEGGERE NEL FILE E MI OTTENGO L'UTENTE)
         //System.out.println("numero utente da creare = "+ numeroUtente);
         utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
+        utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt",1)); // ho preso un utente a caso per provare
         for (Pokemon cazzo: utente1.getSquadra()){
             if(cazzo == null)
                 System.out.println("non ce sta ncazzo");
@@ -89,20 +90,21 @@ public class Lotta extends JFrame {
         //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
 
 
-        Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
+        //Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
         // dovrei inizializzare i due utenti (vengono creati con delle squadre random)
         //squadra2[0] = prova;
         //squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
-        squadraUtente2[0] = prova;
-        squadraUtente2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+        //squadraUtente2[0] = prova;
+        //squadraUtente2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
         //squadraUtente1 = Utente1.getSquadra();
         //squadraUtente2 = Utente2.getSquadra();
         // UTENTE1 DEVE ESSERE QUELLO SELEZIONATO DAL BOTTONE
         // UTENTE2 O VIENE CREATO RANDOM O VIENE SELEZIONATO RANDOM DAGLI UTENTI SALVATI SUL FILE (PIU SENSATO)
 
-        Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
-        Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
+        //Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
+        //Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
         squadraUtente1 = utente1.getSquadra();
+        squadraUtente2 = utente2.getSquadra();
         //squadraUtente1[0] = contro;
         //squadraUtente1[1] = squad2;
         //squadra[0] = contro;
