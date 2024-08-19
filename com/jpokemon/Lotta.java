@@ -26,10 +26,10 @@ public class Lotta extends JFrame {
 
     private JButton pokemon1;
     private JButton pokemon2;
-    private JButton pokemon3 = new JButton("POKEMON 3");
-    private JButton pokemon4 = new JButton("POKEMON 4");
-    private JButton pokemon5 = new JButton("POKEMON 5");
-    private JButton pokemon6 = new JButton("POKEMON 6");
+    private JButton pokemon3; //= new JButton("POKEMON 3");
+    private JButton pokemon4; //= new JButton("POKEMON 4");
+    private JButton pokemon5; //= new JButton("POKEMON 5");
+    private JButton pokemon6; //= new JButton("POKEMON 6");
 
     private JButton indietro = new JButton("INDIETRO");
     private JPanel pannello;
@@ -79,13 +79,8 @@ public class Lotta extends JFrame {
         //TODO: DEVO IMPLEMENTARE IL NUMERO UTENTE (GLI DO L'INDICE DELLA RIGA DA LEGGERE NEL FILE E MI OTTENGO L'UTENTE)
         //System.out.println("numero utente da creare = "+ numeroUtente);
         utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
-        utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt",1)); // ho preso un utente a caso per provare
-        for (Pokemon cazzo: utente1.getSquadra()){
-            if(cazzo == null)
-                System.out.println("non ce sta ncazzo");
-            else
-                System.out.println("POKEMON SQUADRA = " + cazzo.getNome());
-        }
+        utente2 = new Utente("BOT");
+        //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt",1)); // ho preso un utente a caso per provare, devo creare un utente temproaneo random  (chiamato bot )
 
         //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
 
@@ -891,9 +886,9 @@ public class Lotta extends JFrame {
             utente.setText("UTENTE 1"); // utente.getNome()
         }
 
-
-        mossa1.setText(mosse[0].getNome());
-        mossa2.setText(mosse[1].getNome());
+        // qua perde il riferimento pd
+        mossa1.setText(mosse[0] != null ? mosse[0].getNome() : "vuoto");
+        mossa2.setText(mosse[1] != null ? mosse[1].getNome() : "vuoto");
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");
         mossa4.setText(mosse[3] != null ? mosse[3].getNome() : "vuoto");
         pokemon1.setText(squad[0].getNome());

@@ -41,6 +41,7 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
+            System.out.println("Che cazzo arriva = " + squadraString());
             writer.write(nome+":"+squadraString());
             writer.newLine();
 
