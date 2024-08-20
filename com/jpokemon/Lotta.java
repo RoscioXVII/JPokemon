@@ -74,36 +74,13 @@ public class Lotta extends JFrame {
 
 
 
-        Reader provaLettore = Reader.getInstance();
-        //Random rnd = new Random();
-        //TODO: DEVO IMPLEMENTARE IL NUMERO UTENTE (GLI DO L'INDICE DELLA RIGA DA LEGGERE NEL FILE E MI OTTENGO L'UTENTE)
-        //System.out.println("numero utente da creare = "+ numeroUtente);
-        utente1 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
+        Reader rd = Reader.getInstance();
+
+        utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
         utente2 = new Utente("BOT");
-        //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt",1)); // ho preso un utente a caso per provare, devo creare un utente temproaneo random  (chiamato bot )
 
-        //utente2 = provaLettore.buildUtentebyString(provaLettore.getRigaByIndex("testo/utenti.txt", rnd.nextInt(4)));
-
-
-        //Pokemon prova=provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",4));
-        // dovrei inizializzare i due utenti (vengono creati con delle squadre random)
-        //squadra2[0] = prova;
-        //squadra2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
-        //squadraUtente2[0] = prova;
-        //squadraUtente2[1] = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
-        //squadraUtente1 = Utente1.getSquadra();
-        //squadraUtente2 = Utente2.getSquadra();
-        // UTENTE1 DEVE ESSERE QUELLO SELEZIONATO DAL BOTTONE
-        // UTENTE2 O VIENE CREATO RANDOM O VIENE SELEZIONATO RANDOM DAGLI UTENTI SALVATI SUL FILE (PIU SENSATO)
-
-        //Pokemon contro = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",6));
-        //Pokemon squad2 = provaLettore.buildPokemonByString(provaLettore.getRigaByIndex("testo/pokemon.txt",0));
         squadraUtente1 = utente1.getSquadra();
         squadraUtente2 = utente2.getSquadra();
-        //squadraUtente1[0] = contro;
-        //squadraUtente1[1] = squad2;
-        //squadra[0] = contro;
-        //squadra[1] = squad2;
 
         // PROVA
         squadra = clonaSquadra(squadraUtente1);
@@ -126,12 +103,9 @@ public class Lotta extends JFrame {
         label.setSize(1280, 400); // parte per l'aggiunta delle gif
         label.setLocation(0, 0);
         pannello.add(label);
-        //pannello.setLayout(new BorderLayout());
 
-        // prova GIF -- carico la gif -->
         ImageIcon gif1 = new ImageIcon(squadra2[0].getSpriteFront());
-        ImageIcon gif2 = new ImageIcon(squadra[0].getSpriteBack());  //ImageIcon gif2 = new ImageIcon("img/retro/charizard-retro.gif");
-
+        ImageIcon gif2 = new ImageIcon(squadra[0].getSpriteBack());
         Mossa[] test;
         test = squadra[0].getMosse();
 
@@ -270,15 +244,12 @@ public class Lotta extends JFrame {
         pannello.add(label,BorderLayout.NORTH);
         setContentPane(pannello); // TODO
 
-        //QUESTO VA CAMBIATO MA DOPO
-        //Reader AssegnaMosse = new Reader();
 
         Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
         Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
 
         cambioUtente=false;
-        //Mossa Mossapokemon1 = null; // SE LA MOSSA VALE "null" allora ha priorità sulle altre perché non fa danno al pokemon avversario (ad esempio cambiare pokemon ha la priorità)
-        //Mossa Mossapokemon2 = null;
+
         mossa1.addActionListener(e -> {
             if (!cambioUtente){
                 setMossa(0);
@@ -429,10 +400,8 @@ public class Lotta extends JFrame {
     }
 
     public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
-        // la velocita e del pokemon non della mossa
-        int danno, CondEffetto1, CondEffetto2,effetti; //effetti non viene mai usata, da togliere
-        String effetto1, effetto2 = null; // mai usati
-        Boolean turno1, turno2 = false; // mai usati
+        int danno, CondEffetto1, CondEffetto2;
+
 
         //SE IL POKEMON VIENE CAMBIATO COL TASTO FACCIAMO CHE LA MOSSA VIENE ISTANZIATA NULL
         //QUINDI POSSIAMO GESTIRE IL CAMBIO POKEMON FUORI DAL TURNO
@@ -714,14 +683,13 @@ public class Lotta extends JFrame {
             if(!cambioUtente){
                 pokemon1.setEnabled(false); // quindi anche le mosse
                 vittorieUtente2++;
-                // devo passarci il flag di vittoria
-
                 Vittoria frameVittoria = new Vittoria(cambioUtente); // è una finestra in piu, non la stessa modificata
                 //salvo i progressi sui file
-                //utente1.scrittoreModifica();
-                //utente2.scrittoreModifica();
+
                 resettaLotta();
                 checkBattaglia();
+                //utente1.scrittoreModifica();
+                //utente2.scrittoreModifica();
 
 
                 // vuol dire che ha vinto il giocatore 2, perche 1 sta senza pokemon
@@ -730,10 +698,11 @@ public class Lotta extends JFrame {
                 pokemon1.setEnabled(false); // quindi anche le mosse
                 vittorieUtente1++;
                 Vittoria frameVittoria = new Vittoria(cambioUtente);
-                //utente1.scrittoreModifica();
-                //utente2.scrittoreModifica();
+
                 resettaLotta();
                 checkBattaglia();
+                //utente1.scrittoreModifica();
+                //utente2.scrittoreModifica();
 
             }
 
@@ -906,18 +875,13 @@ public class Lotta extends JFrame {
         pokemon6.setIcon(new ImageIcon(squad[5].getSpriteMini()));
         cambioUtente=!cambioUtente;
 
-         // il contrario, quindi l'altro utente
-        // il cambio contesto si ha quando viene cambiato pokemon
-        // per il resto viene fatto un if sulla velocita delle mosse
-        // quindi per i casi normali è da rivedere
 
     }
     public void checkBattaglia() throws IOException {
 
 
         if(vittorieUtente1-vittorieUtente2>1){
-            // resetto le vittorie e poi restarto
-            //JOptionPane.showMessageDialog(null, "Giocatore 1 ha vinto la serie di battaglie!");
+
             SchermataBattaglia battaglia = new SchermataBattaglia(true);
             // sovrascrivo i file
             //utente1.incrementaVittorie();
@@ -941,12 +905,7 @@ public class Lotta extends JFrame {
     }
 
     public void resettaLotta(){
-        // sistemo hp e tutto il resto cosi
-        // squadraUtente1 = new Utente(rd.getRigaByIndex("testo/utenti.txt",0); --> DEVO CONTROLLARE QUALE UTENTE DEVO PRENDERE
         squadra = clonaSquadra(squadraUtente1);
-        // dovrei prendere i cloni dai file di testo (che salvo a fine lotta)
-        // cosi tengo conto dei progressi dei pokemon (exp,lvl, ecc..)
-        // per fare questo devo implementare l'utente e utilizzare scrittoremodifica()
 
         squadra2 = clonaSquadra(squadraUtente2);
         aggiornaUI();
@@ -956,14 +915,6 @@ public class Lotta extends JFrame {
         pokemon4.setEnabled(true);
         pokemon5.setEnabled(true);
         pokemon6.setEnabled(true);
-
-
-        // -- PROBLEMI
-        // se cambio pokemon e l'altro attacca non succede nulla
-        // si blocca il tasto, non fa nulla e bisogna far cambiare pokemon necessariamente anche all'altro utente
-
-
-        // quando cambio il primo pokemon deve fare la lotta il secondo indipendetemente
 
     }
 
@@ -980,24 +931,9 @@ public class Lotta extends JFrame {
         }
         return squadraClonata;
     }
-    protected void setUtente1(Utente utente1){
-        this.utente1 = utente1;
-    }
 
 
-// TODO: SE CLICCO UNA MOSSA NON PRESENTE SI BLOCCA (NON DEVE FARE NULLA)
-
-    /*
-        public Pokemon trovaPokemon(String nomePokemon){ // non optional perche se in squadra è certamente presente
-        for(Pokemon pokemon:squadra){
-            if(nomePokemon.equals(pokemon.getSpriteMini())) // questo è contenuto nel bottone
-                return pokemon; // pokemon trovato
-        }
-        return null; // condizione in cui non si arriva mai --> è sicuramente presente
-    }
-     */
-
-
+    // posso fare le funzioni per delle parti di codice in lotta, ma bisogna prima finire il codice sopra (setMossa(-10))
 
 
 

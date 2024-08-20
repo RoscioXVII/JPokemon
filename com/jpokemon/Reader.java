@@ -217,30 +217,13 @@ public class Reader {
         String[] info;
         info = parametriUtente.split(":");
         Pokemon[] pokemons;
-        /*try{
-            sc = new Scanner(new File(infoUtente));
-            // o leggo tutto e creo una lista oppure leggo una linea random con cui costruire la squadra dell'utente
-            if (sc.hasNextLine())
-                info = sc.nextLine().split(":");
-            else
-                return null; // caso in cui sono finite le righe da leggere
-        } catch (FileNotFoundException e){
-            System.err.println("file non presente");
-            throw e;
-        }
-         */
-
 
         //cerca squadra
         String squad = cercaSquadra(info[0]);
-        //qua dentro mi serve un build squadra
-        // da info dovrei lanciare 6 build pokemon con gli attributi contenuti in info
-        // --- fare if per vedere se squad è vuoto ---
 
         //build squadra by string qua dentro
         pokemons = buildSquadrabyString(squad);
         // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
-        // metto tutti i parametri dentro
         return new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),pokemons);
     }
 
@@ -279,7 +262,7 @@ public class Reader {
 
         for(int i=1;i<=6;i++){ // inizio da 1 perche il primo elemento (indice 0), sarebbe il nome dell'utente proprietario della squadra
             // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
-            squadra[i-1] = loadPokemon(pokemons[i]); // i parametri sono divisi da #, nel buildpokemon vengono splittati pero con il :, devo quindi usare un replace
+            squadra[i-1] = loadPokemon(pokemons[i]);
         }
 
         return squadra;
@@ -320,22 +303,9 @@ public class Reader {
                 Integer.parseInt(attributi[28]),Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),
                 Integer.parseInt(attributi[33]),Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),
                 Integer.parseInt(attributi[38]),attributi[39],Integer.parseInt(attributi[40]));
-                //fino a 44
-                // dentro l'array se ho meno di 4 mosse quelle assenti sono "null"
-                // ho messo Integer.parseInt dove ci sono i riferimenti delle gif --> DA RSIOLVERE
+
     }
 
-
-
-/*
-    public String[] cercaSquadraPokemon(String nomeUtente){
-        String[] info;
-        // devo splittare le info lette dal file .txt
-        return info;
-    }
-
-
- */
 
 
     }

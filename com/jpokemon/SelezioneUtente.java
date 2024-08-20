@@ -17,10 +17,8 @@ public class SelezioneUtente extends JFrame {
     private String nome2;
     private String nome3;
     private String nome4;
-    // aggiungo un attributo utente, che poi verrà passato a lotta per utilizzare l'utente selezionato
-    // da questa schermata nella battalia
-    private Utente utenteGenerato;
-    private boolean execution = false;
+
+
 
 
 
@@ -110,6 +108,6 @@ public class SelezioneUtente extends JFrame {
         return bottone4;
     }
 
-    protected boolean getExecution(){return execution;}
+
 
 }
