@@ -10,6 +10,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe per la lettura e la manipolazione dei dati
+ * contenuti all'interno dei file di testo
+ * del package 'testo'
+ *
+ */
 public class Reader {
     //classe responsabile della lettura delle mosse e dei pokemon contenuti nei file .txt
     private static final String infoPokemon = "testo/pokemon.txt";
@@ -28,6 +34,13 @@ public class Reader {
     }
 
     // si usa pe i pokemon nuovi, senno si usa il load
+
+    /**
+     * Genera un'istanza pokemon a partire da una stringa di attributi fornita come parametro
+     * @param string La stringa contenente tutti gli attributi del pokemon
+     * @return pokemon l'istanza pokemon generato dagli attributi forniti
+     * @throws IOException
+     */
     public Pokemon buildPokemonByString(String string) throws IOException {
         Random a = new Random();    //SERVONO PER LA CREAZIONE DEGLI IV
         int[] IV = new int[6];      //SPIEGAZIONE VELOCE: Valori random che vanno da 0 a 15 che indicano dove il pokemon "spicca" di piu
@@ -80,6 +93,13 @@ public class Reader {
 
     }
 
+    /**
+     * Metodo che data una stringa di attributi, se correttemente formattata
+     * restituisce un'istanza di Mossa
+     * @param string Attributi per creare un'istanza di mossa
+     * @return Mossa Mossa generata
+     * @throws IOException
+     */
     public Mossa buildMossaByString(String string)throws IOException{
         String[] info;
         try{
@@ -122,6 +142,11 @@ public class Reader {
         }
     }
 
+    /**
+     * Conta il numero di righe del file di testo "infopokemon" e lo resituisce
+     * @return i Il numero di righe presenti nel file
+     * @throws FileNotFoundException
+     */
     public int contaRighe() throws FileNotFoundException { //cosi posso determinare il limite massimo del numero da generare tramite random
         int i=0;
         try{
@@ -162,6 +187,12 @@ public class Reader {
 
     }
 
+
+    /**
+     * Conta il numero di righe contenuto all'intento del file 'infomosse' e le restituisce
+     * @return i Numero righe del file di testo
+     * @throws FileNotFoundException
+     */
     public int contaRigheMosse() throws FileNotFoundException { //cosi posso determinare il massimo del file Mosse
         int i=0;
         try{
@@ -195,6 +226,14 @@ public class Reader {
         }
 
     }
+
+    /**
+     * Dato il nome dell'evoluzione di un pokemon cerca la riga all'intenrno del file 'infopokemon'
+     * contenente tute le informazioni relative al pokemon ricercato e le restiuisce
+     * @param nomeEvoluzione Nome del pokemon di cui di richiedono le informazioni
+     * @return i Indice della riga del file di testo che contiene le operazioni
+     * @throws FileNotFoundException
+     */
     public int cercaRiga(String nomeEvoluzione) throws FileNotFoundException {
         int i=0;
         try{
@@ -213,6 +252,13 @@ public class Reader {
         return -1; // non è stata trovata l'evoluzione TODO: da cambiare
     }
 
+    /**
+     * Data una strigna contenente i parametri di salvataggio di un utente
+     * ne restituisce l'istanza generata da questi ultimi
+     * @param parametriUtente Parametri rilevati dal file di testo 'utenti.txt'
+     * @return Utente Utente generato
+     * @throws IOException
+     */
     public Utente buildUtentebyString(String parametriUtente) throws IOException {
         String[] info;
         info = parametriUtente.split(":");
@@ -227,6 +273,13 @@ public class Reader {
         return new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),pokemons);
     }
 
+    /**
+     * Dato il nome di un utente viene restituita la squadra che gli appartiene, contenuta
+     * all'interno del file 'squadreUtenti.txt'
+     * @param squadra
+     * @return La lista di attributi della squadra dell'utente fornito
+     * @throws FileNotFoundException
+     */
     private String cercaSquadra(String squadra) throws FileNotFoundException {
         System.out.println("QUESTO ARRIVA = "+ squadra);
         sc = new Scanner(new File("testo/squadreUtenti.txt"));
@@ -241,6 +294,12 @@ public class Reader {
         // squadra non trovata
     }
 
+    /**
+     * Genera una squadra di pokemon, scegliendone 6 dal file di testo
+     * contenente tutte le informazioni di base dei pokemon definiti
+     * @return La squadra generata (array di 6 pokemon)
+     * @throws IOException
+     */
     public Pokemon[] generaSquadra() throws IOException {
         Random random = new Random();
         Pokemon[] squad = new Pokemon[6];
@@ -251,6 +310,14 @@ public class Reader {
         }
         return squad;
     }
+
+    /**
+     * Data una stringa contenente tutti i parametri di base di una squadra
+     * viene generata, a partire da una stringa fornita, un array di pokemon (inteso come squadra)
+     * @param parametriSquadra stringa letto dal file di testo 'squadreUtenti.txt' contenente tutti gli attributi fondamentali
+     * @return array di 6 Pokemon
+     * @throws IOException
+     */
 
     public Pokemon[] buildSquadrabyString(String parametriSquadra) throws IOException {
         String pokemons[];
@@ -267,6 +334,15 @@ public class Reader {
 
         return squadra;
     }
+
+
+    /**
+     * Fornita una stringa di informazioni, genera un'istanza di un pokemon
+     * salvato all'interno di un file di testo, tenendo conto dei progressi salvati
+     * @param info Stringa prelevata dal file di testo
+     * @return Pokemon caricato dalla squadra del file di testo
+     * @throws IOException
+     */
     public Pokemon loadPokemon(String info) throws IOException {
         //serve per caricare i pokemon da file di testo (sono separati da #)
         String[] attributi = info.split("#");

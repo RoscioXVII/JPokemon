@@ -3,6 +3,9 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Finestra che determina il vincitore della singola lotta
+ */
 public class Vittoria extends StaticScreen {
     public Vittoria(boolean flag){
         setTitle("JPokemon");

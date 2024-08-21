@@ -2,6 +2,9 @@ package com.jpokemon;
 
 import javax.swing.*;
 
+/**
+ * Barra della salute legata ai pokemon coivnolti in lotta
+ */
 public class BarraPS extends JFrame {
     private int vita;
     private JProgressBar barraSalute;
@@ -14,6 +17,11 @@ public class BarraPS extends JFrame {
         barraSalute.setStringPainted(false); // mostra la percentuale
 
     }
+
+    /**
+     * Diminuisce la salute del pokemon e di conseguenza anche la barra relativa ad essa
+     * @param danno
+     */
 
     public void diminuisci(int danno){
         int salute = barraSalute.getValue();

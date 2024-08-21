@@ -3,7 +3,10 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * Finestra che viene  visualizzata alla fine della serie di lotte
+ * per determinare il vincitore della battaglia
+ */
 public class SchermataBattaglia extends StaticScreen {
 
     public SchermataBattaglia(boolean flag){

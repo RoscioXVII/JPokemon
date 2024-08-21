@@ -1,5 +1,8 @@
 package com.jpokemon;
 
+/**
+ * Tipi relativi ai pokemon
+ */
 public enum Tipo {
     NORMALE, FUOCO, LOTTA,
     ACQUA, ERBA, ELETTRO,

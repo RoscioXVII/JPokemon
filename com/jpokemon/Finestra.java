@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Classe che estende JFrame contenente un cardLayout
+ * con all'interno tutti gli scenari del videogioco
+ */
 public class Finestra extends JFrame {
     private CardLayout cardLayout;
     private  JPanel pannelloCard;
@@ -13,6 +17,11 @@ public class Finestra extends JFrame {
     private Reader rd = Reader.getInstance();
 
 
+    /**
+     * Inizializzazione e definizione di tutti i componenti grafici
+     * da inserire dentro il card layout
+     * @throws IOException
+     */
 
     public Finestra() throws IOException {
         setTitle("JPokemon");
@@ -83,17 +92,17 @@ public class Finestra extends JFrame {
             inizializzaLotta(3);
         });
 
-
-
-        //pannelloUtente.getBottone2().addActionListener(e->cardLayout.next(pannelloCard));
-        //pannelloUtente.getBottone3().addActionListener(e->cardLayout.next(pannelloCard));
-        //pannelloUtente.getBottone4().addActionListener(e->cardLayout.next(pannelloCard));
-        // pannello lotta è l'ultimo quindi posso aggiungere la schermata alla fine appunto
-        // non so se questo sia possibile utilizzando lambda
         setResizable(false);
         setVisible(true);
 
     }
+
+    /**
+     * Inizializza la pagina successiva (Lotta)
+     * indicando quale utente è stato selezionato nella schermata precedente
+     * e che dovrà quindi partecipare alla lotta
+     * @param indiceUtente indice dell'utente nel file di testo di salvataggio
+     */
     private void inizializzaLotta(int indiceUtente) {
         try {
             pannelloLotta = new Lotta(indiceUtente); // UTENTE 1
@@ -106,6 +115,10 @@ public class Finestra extends JFrame {
         pannelloCard.repaint();     // Ridisegna il pannello
         cardLayout.show(pannelloCard, "CARD 3");
     }
+
+    /**
+     * Genera un nuovo utente, chiedendo di inserire il suo nome
+     */
 
     private void creaUtente(){
 
@@ -123,6 +136,12 @@ public class Finestra extends JFrame {
             throw new RuntimeException(exc);
         }
     }
+
+    /**
+     *  carica uno già definito nel file di salvataggio
+     *  a seconda del bottone selezionato
+     * @param indiceUtente indice della riga da analizzare nel file di salvataggio dei progressi
+     */
     private void caricaUtente(int indiceUtente){
         try {
             utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",indiceUtente));

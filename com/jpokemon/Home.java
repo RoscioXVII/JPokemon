@@ -3,6 +3,9 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Finestra di avvio del videogioco
+ */
 public class Home extends JFrame {
     private JPanel pannello;
     private JButton start;

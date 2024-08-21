@@ -1,5 +1,8 @@
 package com.jpokemon;
 
+/**
+ * Mossa appartenente al pokemon che l'utente puo selezionare durante la lotta
+ */
 public class Mossa {
     private String nome;
     private Tipo tipo; // i tipi sono speciale, fisico, stato

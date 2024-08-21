@@ -2,7 +2,11 @@ package com.jpokemon;
 
 import java.io.*;
 
-
+/**
+ * Descrive l'utente che affronterà la lotta
+ * tramite la squadra che gli appartiene
+ * e lo storico dei progressi ottenuti
+ */
 public class Utente {
     private String nome;
     private int vittorie;
@@ -10,6 +14,12 @@ public class Utente {
     private int partiteGiocate;
 
     private Pokemon[] squadra;
+
+    /**
+     * Costruttore per un nuovo utente
+     * @param nome
+     * @throws IOException
+     */
     public Utente(String nome) throws IOException {
         this.nome = nome;
         vittorie=0;
@@ -21,6 +31,16 @@ public class Utente {
     }
     // caso in cui l'utente non esiste, viene preso solo in input il nome
     // e la squadra viene random
+
+    /**
+     * Costruttore per un Utente già definito in memoria
+     * che viene caricato dal file dei salvataggi
+     * @param nome
+     * @param vittorie
+     * @param sconfitte
+     * @param partiteGiocate
+     * @param squadra array di pokemon
+     */
     public Utente(String nome, int vittorie, int sconfitte, int partiteGiocate,Pokemon[] squadra){
         // questo è nel caso in cui ho una stringa nel file di testo
         this.nome = nome;
@@ -29,6 +49,11 @@ public class Utente {
         this.partiteGiocate = partiteGiocate;
         this.squadra = squadra;
     }
+
+    /**
+     * Scrive su file di testo i progressi e la squadra relativa all'utente
+     * @throws IOException
+     */
     public void scrittore() throws IOException {
         // crea i file da testo quando non sono gia presenti
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/utenti.txt",true))){
@@ -57,6 +82,11 @@ public class Utente {
         //FORMATO FILE .TXT SQUADREUTENTI:
         //nomeUtente:pokemon:statistichePokemon:pokemon2:statistichePokemon
     }
+
+    /**
+     * Sovrascrive i salvataggi precedenti contenuti nel file dei salvataggi 'utenti.txt'
+     * di un utente già definiti con quelli aggiornati
+     */
     public void scrittoreModifica() {
         // la uso ad ogni chiusura dell'applicazione, prima di uscire la mando in esecuzione
         // aggiorna i salvataggi quando sono stati gia creati e vengono registrati progressi

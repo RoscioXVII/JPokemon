@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Contiene tutte le formule necesserie per il calcolo e la gestione dei danni
+ * in relazione ai pokemon, alle loro mosse e ai loro tipi
+ */
 public class Formule {
 
     private static final Map<Tipo,Map<Tipo,Double>> tabellaDebolezze = new HashMap<>();
@@ -14,6 +18,21 @@ public class Formule {
     public Formule(){
 
     }
+
+    /**
+     * Produce il calcolo e la stima del danno tenendo conto delle diverse variabili di efficacia
+     * @param tipoPoke1_1
+     * @param tipoPoke1_2
+     * @param tipoPoke2_1
+     * @param tipoPoke2_2
+     * @param tipoMossa
+     * @param livello
+     * @param potenza
+     * @param attacco
+     * @param difesa
+     * @param velocita
+     * @return
+     */
     public static int danno(Tipo tipoPoke1_1, Tipo tipoPoke1_2,Tipo tipoPoke2_1,Tipo tipoPoke2_2, Tipo tipoMossa,int livello, int potenza, int attacco, int difesa, int velocita){
 
         if(potenza <= 0){
@@ -54,6 +73,11 @@ public class Formule {
         return (int)danno;
     }
 
+    /**
+     * Calcolo dle brutto colpo (determinato randomicamente)
+     * @param velocita
+     * @return
+     */
     public static int bruttoColpo(int velocita){
         Random rand = new Random();
         int x = rand.nextInt(255);
@@ -68,6 +92,12 @@ public class Formule {
 
     }
 
+    /**
+     * Calcolo del guadagno dell'esperienza dopo aver sconfitto un pokemon
+     * @param baseExp
+     * @param livelloPokemon
+     * @return
+     */
     public static int exp(int baseExp, int livelloPokemon){
 
         double formula = ((1.5 * baseExp * livelloPokemon)/(7*2));
@@ -86,6 +116,15 @@ public class Formule {
     public static int calcolaStatisticheBase(int statistica,int livello, int IV, int EV){
         return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + 5;
     }
+
+    /**
+     * Calcolo della salute di base di un pokeon
+     * @param statistica
+     * @param livello
+     * @param IV
+     * @param EV
+     * @return
+     */
     public static int calcolaHpBase(int statistica,int livello, int IV, int EV){
         return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + livello + 10;
     }
@@ -248,6 +287,14 @@ public class Formule {
     }
 
     //Prendi il valore del confronto tra i tipi
+
+    /**
+     * Tenendo conto dei tipi, viene restituita la costante motliplictiva del danno
+     * legata alla tabella di efficacia dei tipi
+     * @param tipo1
+     * @param tipo2
+     * @return costante moltiplicativa del danno
+     */
     public static Double getCostanteMoltiplicativa(Tipo tipo1,Tipo tipo2){
         return tabellaDebolezze.get(tipo1).get(tipo2);
     }
@@ -433,6 +480,14 @@ public class Formule {
     TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
     TODO: inoltre questo aumento/diminuzione delle statistiche arriva fino ad un massimo di 6 (se hai una statistica a +5 e fai una mossa da +2 il risultato deve essere +6)
      */
+
+    /**
+     * Aumenta le statistiche generali di un pokemon
+     * @param pokemon
+     * @param valore
+     * @param campo
+     * @param percentuale
+     */
     public static void Aumenta(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
         Random roll = new Random(100);
@@ -450,6 +505,14 @@ public class Formule {
             default -> x = -1;
         }
     }
+
+    /**
+     * Diminiusce le statistiche generali di un pokemon
+     * @param pokemon
+     * @param valore
+     * @param campo
+     * @param percentuale
+     */
     public static void Diminuisci(Pokemon pokemon,int valore,String campo, int percentuale){
         int x;
         Random roll = new Random(100);

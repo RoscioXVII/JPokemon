@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Classe descrivente l'entità pokemon, che farà parte della squdra dell'utente
+ * e che verrà coinvolta nello svolgimento della Lotta
+ */
 public class Pokemon implements Cloneable {
     private String nome;
     private Tipo tipo1;
@@ -510,6 +514,7 @@ public class Pokemon implements Cloneable {
     // ogni bottone è specifico per una mossa e
     // richiama il metodo fornendo l'avversario
     // e la mossa (presa dall'array) che verrà eseguita
+
     public void copia(Pokemon evoluzione){ //copia dopo evoluzione
         this.nome = evoluzione.nome;
         this.psBase = evoluzione.psBase;
