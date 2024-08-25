@@ -31,13 +31,13 @@ public class SchermataBattaglia extends StaticScreen {
         //testo.setSize(100,100)
         testo.setBounds(350,20,1200,100);
         testo.setFont(new Font("Arial", Font.BOLD, 30));
-        back = new JButton("Esci dal gioco");
-        back.setSize(250,70);
-        back.setLocation(540,590);
+        button = new JButton("Esci dal gioco");
+        button.setSize(250,70);
+        button.setLocation(540,590);
         //testo.setLocation(600,100);
         pannello.add(testo, BorderLayout.CENTER);
-        pannello.add(back);
-        back.addActionListener(e -> System.exit(0));
+        pannello.add(button);
+        button.addActionListener(e -> System.exit(0));
         pannello.add(label,BorderLayout.CENTER);
 
         setContentPane(pannello);

@@ -6,9 +6,9 @@ import java.awt.*;
 /**
  * Finestra di avvio del videogioco
  */
-public class Home extends JFrame {
-    private JPanel pannello;
-    private JButton start;
+public class Home extends StaticScreen {
+    //private JPanel pannello;
+    //private JButton start;
     public Home(){
         ImageIcon img = new ImageIcon("img/home.png");
         Image wallpaper = img.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
@@ -18,20 +18,20 @@ public class Home extends JFrame {
         pannello.setLayout(new BorderLayout());
 
         // creo bottone
-        start = new JButton("START");
-        start.setSize(250,70);
+        button = new JButton("START");
+        button.setSize(250,70);
 
         // aggiungo il bottone al pannello
-        pannello.add(start);
+        pannello.add(button);
         pannello.add(label,BorderLayout.CENTER);
-        start.setLocation(540,570);
+        button.setLocation(540,570);
 
         setContentPane(pannello); // TODO
 
 
     }
-    public JButton getStart(){
-        return start;
+    public JButton getButton(){
+        return button;
     }
     public JPanel getPannello(){
         return pannello;

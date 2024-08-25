@@ -23,12 +23,12 @@ public class Vittoria extends StaticScreen {
         JLabel testo;
 
         // creo bottone
-        back = new JButton("Torna alla lotta");
-        back.setSize(250,70);
+        button = new JButton("Torna alla lotta");
+        button.setSize(250,70);
 
         // aggiungo il bottone al pannello
 
-        back.setLocation(540,570);
+        button.setLocation(540,570);
         if(!flag)
             testo = new JLabel("Il giocatore 2 ha vinto ");
         else
@@ -39,10 +39,10 @@ public class Vittoria extends StaticScreen {
         testo.setFont(new Font("Arial", Font.BOLD, 50));
         //testo.setLocation(600,100);
         pannello.add(testo, BorderLayout.CENTER);
-        pannello.add(back);
+        pannello.add(button);
         pannello.add(label,BorderLayout.CENTER);
         setContentPane(pannello);
-        back.addActionListener(e->dispose());
+        button.addActionListener(e->dispose());
 
     }
 }
