@@ -63,7 +63,7 @@ public class Finestra extends JFrame {
 
         //creazione pulsanti di controllo
         // da risolvere, devo capire quale utente passare a lotta
-        pannelloHome.getStart().addActionListener(e -> cardLayout.next(pannelloCard));
+        pannelloHome.getButton().addActionListener(e -> cardLayout.next(pannelloCard));
         //pannelloUtente.getBottone1().addActionListener(e-> cardLayout.next(pannelloCard)); //qua passo il numero della riga dove prendere l'utente da inizalizzare dentro lotta
 
         pannelloUtente.getBottone1().addActionListener(e -> {
