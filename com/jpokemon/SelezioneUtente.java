@@ -19,9 +19,6 @@ public class SelezioneUtente extends JFrame {
     private String nome4;
 
 
-
-
-
     public SelezioneUtente() throws IOException {
         Reader rd =  Reader.getInstance();
         ImageIcon img = new ImageIcon("img/selezioneutenti.jpg");

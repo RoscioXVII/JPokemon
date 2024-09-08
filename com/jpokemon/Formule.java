@@ -305,6 +305,7 @@ public class Formule {
 
         //AGGIUNTA MANUALE DEGLI EFFETTI (SPERO FUNZIONI PERCHE STO IMPAZZENDO GRAZIE)
         //TODO: Devo finire di mettere tutte le mosse, prima capisco come devo formattarli e poi compilo tutto.
+        Effetti.put("Cambio","Attacco Rapido:Prima");
         Effetti.put("Absorb","Assorbimento:Dopo");
         Effetti.put("Acid","Diminuisci:1:difesaSpeciale:30:Dopo");
         Effetti.put("Acid Armor","Aumenta:2:difesa:100:Dopo");
@@ -314,7 +315,7 @@ public class Formule {
         Effetti.put("Barrage","RipetiAttacco:2:5:Durante");
         Effetti.put("Barrier","Aumenta:2:difesa:100:Dopo");
         Effetti.put("Bide","Bide"); //mossa con effetto unico (salva il danno subito per due turni poi attacca con il doppio del danno subito)
-        Effetti.put("Bind","Trappola"); //altro effetto unico
+        Effetti.put("Bind",null); //altro effetto unico
         Effetti.put("Bite","Tentenna:Dopo");
         Effetti.put("Blizzard",null);
         Effetti.put("Body Slam",null);
@@ -322,7 +323,7 @@ public class Formule {
         Effetti.put("Bonemerang","RipetiAttacco:2:2:Durante");
         Effetti.put("Bubble","Diminuisci:1:velocita:30:Dopo");
         Effetti.put("Bubble Beam","Diminuisci:1:velocita:30:Dopo");
-        Effetti.put("Clamp","Trappola");
+        Effetti.put("Clamp",null);
         Effetti.put("Comet Punch","RipetiAttacco:2:5:Durante");
         Effetti.put("Confuse Ray",null);
         Effetti.put("Confusion",null);
@@ -348,7 +349,7 @@ public class Formule {
         Effetti.put("Explosion","Esplosione:Durante");
         Effetti.put("Fire Blast",null);
         Effetti.put("Fire Punch",null);
-        Effetti.put("Fire Spin","Trappola");
+        Effetti.put("Fire Spin",null);
         Effetti.put("Fissure","UnColpo:Durante");
         Effetti.put("Flamethrower",null);
         Effetti.put("Flash","Diminuisci:1:Accuracy:30:Dopo");
@@ -467,7 +468,7 @@ public class Formule {
         Effetti.put("Waterfall","Tentenna:Dopo");
         Effetti.put("Whirlwind",null);//RIMUOVI
         Effetti.put("Withdraw","Aumenta:1:Difesa:100:Dopo");
-        Effetti.put("Wrap","Trappola:Dopo");
+        Effetti.put("Wrap",null);
     }
     public static String getEffettoFromTabella(String nome){
         if(Effetti.get(nome) == null){
@@ -597,9 +598,10 @@ public class Formule {
         }
         return risultato;
     }
-    public static int Bide(int danno){
-        return danno * 2;
-    } // non implementiamo ti prego
+
+    public static int CreaTrappola(){
+        return 3;
+    }
     public static int Trappola(int hpMAX){
         return hpMAX/8;
     }

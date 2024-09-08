@@ -1,34 +1,34 @@
-7:Leech Seed:13:Vine Whip
-30:Razor Leaf
-43:Growth:65:SolarBeam
-9:Ember:15:Leer
-24:Rage:33:Slash
-46:Flamethrower:55:Fire Spin
-8:Bubble:15:Water Gun
-24:Bite:31:Withdraw
-42:Skull Bash:52:Hydro Pump
-7:Tackle:26:Whirlwind:32:Psybeam
-21:Stomp:28:Tail Whip:35:Leer:44:Rage:51:Take Down
-25:Body Slam:38:Ice Beam:46:Hydro Pump
-17:Leer:24:Double Team:29:Slash:35:Swords Dance:42:Agility
-30:Tail Whip:32:Stomp:35:Growl:39:Fire Spin
-47:Take Down:55:Agility
-10:Poison Sting:17:Bite
-27:Glare:36:Screech:47:Acid
-16:Quick Attack
-26:Swift:33:Agility:43:Thunder
-12:Quick Attack
-21:Whirlwind:31:Wing Attack
-44:Agility
-8:Scratch:14:Poison Sting
-23:Tail Whip
-31:Body Slam:32:Bite:41:Fury Swipes:50:Double Kick
-18:Ember:20:Leer
-30:Take Down:39:Agility:50:Flamethrower
-11:Defense Curl:16:Rock Throw:21:Self-Destruct
-29:Harden:36:Earthquake:43:Explosion
-20:Low Kick:25:Leer
-35:Seismic Toss
-52:Submission
-18:Poison Sting:22:Water Gun:27:Constrict
-35:Barrier:43:Screech:50:Hydro Pump
+0:Bulbasaur:7:Leech Seed:13:Vine Whip
+1:Ivysaur:30:Razor Leaf
+2:Venusaur:43:Growth:65:SolarBeam
+3:Charmander:9:Ember:15:Leer
+4:Charmeleon:24:Rage:33:Slash
+5:Charizard:46:Flamethrower:55:Fire Spin
+6:Squirtle:8:Bubble:15:Water Gun
+7:Wartortle:24:Bite:31:Withdraw
+8:Blastoise:42:Skull Bash:52:Hydro Pump
+9:Butterfree:7:Tackle:26:Whirlwind:32:Psybeam
+10:Tauros:21:Stomp:28:Tail Whip:35:Leer:44:Rage:51:Take Down
+11:Lapras:25:Body Slam:38:Ice Beam:46:Hydro Pump
+12:Scyther:17:Leer:24:Double Team:29:Slash:35:Swords Dance:42:Agility
+13:Ponyta:30:Tail Whip:32:Stomp:35:Growl:39:Fire Spin
+14:Rapidash:47:Take Down:55:Agility
+15:Ekans:10:Poison Sting:17:Bite
+16:Arbok:27:Glare:36:Screech:47:Acid
+17:Pikachu:16:Quick Attack
+18:Raichu:26:Swift:33:Agility:43:Thunder
+19:Pidgey:12:Quick Attack
+20:Pidgeotto:21:Whirlwind:31:Wing Attack
+21:Pidgeot:44:Agility
+22:Nidoran:8:Scratch:14:Poison Sting
+23:Nidorina:23:Tail Whip
+24:Nidoqueen:31:Body Slam:32:Bite:41:Fury Swipes:50:Double Kick
+25:Growlithe:18:Ember:20:Leer
+26:Arcanine:30:Take Down:39:Agility:50:Flamethrower
+27:Graveler:11:Defense Curl:16:Rock Throw:21:Self-Destruct
+28:Golem:29:Harden:36:Earthquake:43:Explosion
+29:Machop:20:Low Kick:25:Leer
+30:Machoke:35:Seismic Toss
+31:Machamp:52:Submission
+32:Tentacool:18:Poison Sting:22:Water Gun:27:Constrict
+33:Tentacruel:35:Barrier:43:Screech:50:Hydro Pump

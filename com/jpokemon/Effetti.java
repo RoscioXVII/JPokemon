@@ -79,29 +79,17 @@ public class Effetti {
         String[] accesso = place.split(":");
 
         switch (accesso[0]) {
-            case "Assorbimento" -> risultato = Formule.Assorbimento(attaccante, danno);
             case "Aumenta" -> Formule.Aumenta(attaccante,Integer.parseInt(accesso[1]),accesso[2],Integer.parseInt(accesso[3]));
             case "Diminuisci" -> Formule.Diminuisci(attaccante,Integer.parseInt(accesso[1]),accesso[2],Integer.parseInt(accesso[3]));
             case "Tentenna" -> risultato = Formule.Tentenna(30);
             case "Rinculo" -> Formule.Rinculo(danno,attaccante,Integer.parseInt(accesso[1]),Integer.parseInt(accesso[2]));
             case "Esplosione" -> Formule.Esplosione(attaccante);
-            case "Cura" -> Formule.Cura(attaccante);
-            /*
-            case "JKick" -> ;       //implemento quando cho la roba del miss
-            case "Schermo" -> ;
-            case "Riflesso" -> ;
 
-             */
         }
-        /*
-        TABELLA RISULTATI
-        -3 corretto/Non succede nulla
-        -2 fallito per miss/non efficace
-        1 tentenna
-        2 JKick
-        3 schermoluce
-        4 Riflesso
-         */
+        if(accesso[0].equals("Tentenna") && danno == 0){
+            return -3;
+        }
+
         return risultato;
     }
 

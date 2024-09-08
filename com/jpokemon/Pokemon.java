@@ -17,8 +17,10 @@ public class Pokemon implements Cloneable {
     private int esp; // esperienza per l'aumento del livello
     private Mossa[] mosse = new Mossa[4];
 
+    private String listaMosse;
+
     //statistiche base
-    private int psBase; // TODO: AO NON SO A CHE SERVE, MI SERVE SALUTE
+    private int psBase;
     private int attaccoBase;
     private int difesaBase;
     private int attaccoSpecialeBase;
@@ -76,6 +78,8 @@ public class Pokemon implements Cloneable {
     private int EVdifesaSpecialeYield;
     private int EVvelocitaYield;
 
+    private int xp;
+    private int xpNecessari;
 
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
                    int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita,int evps, int evattacco, int evdifesa,
@@ -103,6 +107,7 @@ public class Pokemon implements Cloneable {
         this.EVattaccoSpecialeYield = evattaccoSpeciale;
         this.EVdifesaSpecialeYield = evdifesaSpeciale;
         this.EVvelocitaYield = evvelocita;
+
     }
 
     public void setNome(String nome){
@@ -161,12 +166,23 @@ public class Pokemon implements Cloneable {
     }
     public int getSalute(){return salute;}
 
-    public void setLvl(int lvl) {
+    public void setLvl(int lvl,int x) {
         this.lvl = lvl;
+        if(x == 0){
+            this.xp = (lvl)^3;
+        }
+        this.xpNecessari = (lvl+1)^3 - xp;
     }
     public int getLvl(){
         return lvl;
     }
+    public void setListaMosse(String listaMosse){
+        this.listaMosse = listaMosse;
+    }
+    public String getListaMosse(){
+        return listaMosse;
+    }
+
 
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
@@ -224,9 +240,11 @@ public class Pokemon implements Cloneable {
         return precisioneN;
     }
     public int getElusione(){
-        return this.ripetizioniElusione;
+        return ripetizioniElusione;
     }
-
+    public int getEsp(){
+        return esp;
+    }
 
     public int aumentaAttacco(int valore){
         if(this.ripetizioniAttacco == 6){
@@ -446,21 +464,92 @@ public class Pokemon implements Cloneable {
     }
 
     public void sconfitto(Pokemon sconfitta){
-        this.EVps += sconfitta.EVpsYield;
-        this.EVattacco += sconfitta.EVattaccoYield;
-        this.EVdifesa += sconfitta.EVdifesaYield;
-        this.EVattaccoSpeciale += sconfitta.EVattaccoSpecialeYield;
-        this.EVdifesaSpeciale += sconfitta.EVdifesaSpecialeYield;
-        this.EVvelocita += sconfitta.EVvelocitaYield;
+
+        int sommaEV = this.EVps + this.EVattacco + this.EVdifesa + this.EVattaccoSpeciale + this.EVdifesaSpeciale + this.EVvelocita;
+
+        int[] array =  new int[] {this.EVps, this.EVattacco, this.EVdifesa, this.EVattaccoSpeciale, this.EVdifesaSpeciale,this.EVvelocita};
+        int[] array2 = new int[] {sconfitta.EVpsYield, sconfitta.EVattaccoYield, sconfitta.EVdifesaYield, sconfitta.EVattaccoSpecialeYield,
+                sconfitta.EVdifesaSpecialeYield, sconfitta.EVvelocitaYield};
+        int[] array3 = new int[] {0,0,0,0,0,0};
+
+        /*
+        510 equivale al massimo di ev che un pokemon puo avere in tutte e 6 le stats:
+        252 equivale a quante stats puo avere in una stat in particolare
+
+        esempio:
+
+        ps : 252
+        attacco : 0
+        difesa : 252
+        attaccoSpeciale : 0
+        difesaSpeciale : 6
+        velocita : 0
+
+        tutti gli ev sono stati messi 252 + 252 + 6 = 510 quindi quando viene sconfitto un altro pokemon i valori sono invariati
+
+         */
+
+        for(int i = 0; i<5;i++){
+            if(sommaEV < 510){
+                if(array[i] + array2[i] < 252){
+                    if(array2[i] + sommaEV < 510){
+                        array3[i] = array2[i];
+                    }else{
+                        int cont = 0;
+                        while(sommaEV + cont < 510){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }
+                }else{
+                    if(array2[i] + sommaEV < 510){
+                        int cont = 0;
+                        while(array[i] + cont < 252){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }else{
+                        int cont = 0;
+                        while(array[i] + cont < 510){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }
+                }
+            }
+        }
+        this.EVps += array3[0];
+        this.EVattacco += array3[1];
+        this.EVdifesa += array3[2];
+        this.EVattaccoSpeciale += array3[3];
+        this.EVdifesaSpeciale += array3[4];
+        this.EVvelocita += array3[5];
 
         int xpPresa = xpGain(sconfitta);
         // gestire xp per capire quando scatta il lvl successivo
         //this.esp +=xpPresa;
+        xp += xpPresa;
+        if(xp >= xpNecessari && lvl != 100){
+            setLvl(getLvl()+1,1);
+            if(lvl == lvlEvoluzione){
+                /*
+                try {
+                    evolvi();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
 
+                 */
+                evolvi();
+            }
+        }
     }
 
     public int xpGain(Pokemon sconfitta){
-        return 0;
+
+        double risultato = (1.5 * sconfitta.getEsp() * sconfitta.getLvl())/7;
+
+        return (int)risultato;
     }
 
     public void evolvi()   {
@@ -484,6 +573,8 @@ public class Pokemon implements Cloneable {
         int prec = this.getPrecisione();
         int precN = this.getPrecisioneN();
         int elusione = avversario.getElusione();
+        int PrecisioneAttacco;
+
 
         if(elusione <= 0){
             risultato = (((double) (prec + elusione) /precN));
@@ -491,8 +582,10 @@ public class Pokemon implements Cloneable {
             risultato = (((double) (prec) /precN+elusione));
         }
 
-        if(roll.nextInt(100) > (int)risultato*mossa.getPrecisione()){
-            return 0;
+        if(mossa.getPrecisione() != -1){
+            if(roll.nextInt(100) > (int)risultato*mossa.getPrecisione()){
+                return 0;
+            }
         }
 
         if(mossa.getTipoMossa() == TipoMossa.FISICO){

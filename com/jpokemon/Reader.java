@@ -21,10 +21,13 @@ public class Reader {
     private static final String infoPokemon = "testo/pokemon.txt";
     private static final String infoMosse = "testo/mosse.txt";
     private static final String infoUtente = "testo/utenti.txt";
+    private static final String infoListaMosse = "testo/MosseLista.txt";
     private static Scanner sc;
     private static Reader instance = null;
     private String[] mosse = new String[4]; // //Le metto come string per prendere solo il nome poi con l'altro metodo prenderò anche tutto il resto
 
+
+    // singleton pattern
     private Reader() { // vuoto perche tutti i campi sono static / final
     }
     public static Reader getInstance(){
@@ -76,9 +79,13 @@ public class Reader {
                 Integer.parseInt(info[14]),Integer.parseInt(info[15]),Integer.parseInt(info[17]),Integer.parseInt(info[18]),Integer.parseInt(info[19]),Integer.parseInt(info[20])
                 ,Integer.parseInt(info[21]),Integer.parseInt(info[22]));
 
-        pokemon.setLvl(lvl);
+        pokemon.setLvl(lvl,0);
 
         pokemon.setMosse(mossa);
+
+        String listaMosse = buildListaMosse(info[0]);
+        pokemon.setListaMosse(listaMosse);
+
 
         pokemon.setPs(Ps);
         pokemon.setSalute(Ps);
@@ -92,7 +99,31 @@ public class Reader {
         return pokemon;
 
     }
-
+    public String buildListaMosse(String nome) throws FileNotFoundException {
+        String[] info;
+        String mosse = "";
+        try{
+            sc = new Scanner(new File(infoListaMosse));
+            while(sc.hasNextLine()){
+                info = sc.nextLine().split(":");
+                if(info[0].equals(nome)){
+                    for(int i = 2; i < info.length; i++){
+                        if(i == 2){
+                            mosse = mosse + info[i];
+                        }else{
+                            mosse = mosse + ":" + info[i];
+                        }
+                    }
+                    System.out.println(mosse);
+                    return mosse;
+                }
+            }
+        }catch (FileNotFoundException e){
+            System.err.println("file non presente");
+            throw e;
+        }
+        return null;
+    }
     /**
      * Metodo che data una stringa di attributi, se correttemente formattata
      * restituisce un'istanza di Mossa
