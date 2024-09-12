@@ -5,7 +5,11 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 
-
+/**
+ * Classe incaricata della visualizzazione grafica della lotta pokemon
+ * contenente elementi grafici e bottone di interazione gestiti per analizzare
+ * e generare le corrette dinamiche di gioco
+ */
 public class Lotta extends JFrame {
     private Pokemon[] squadra; //= new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
     private Pokemon[] squadra2; //= new Pokemon[6]; // squadra dell'avversario
@@ -89,9 +93,6 @@ public class Lotta extends JFrame {
         //squadra2 = squadraUtente2.clone();
 
 
-        // quando finisco la lotta ripristino tutto da squadraUtente1 e 2 cosi riprendo da 0
-
-
 
 
 
@@ -110,7 +111,11 @@ public class Lotta extends JFrame {
         test = squadra[0].getMosse();
 
         mossa1 = new JButton(test[0].getNome()); //un pokemon ha sempre due mosse minimo
-        mossa2 = new JButton(test[1].getNome());
+        if (test[1] == null){
+            mossa2 = new JButton("vuoto");
+        }
+        else
+            mossa2 = new JButton(test[1].getNome());
         if(test[2] == null)
             mossa3 = new JButton("vuoto"); //TODO: Implementare if per i bottoni senza mosse
         else
@@ -399,6 +404,12 @@ public class Lotta extends JFrame {
         return turno;
     }
 
+    /**
+     * determina graficamente lo svolgimento di un turno durante la lotta
+     * @param Mossapokemon1 mossa del primo pokemon
+     * @param Mossapokemon2 mossa del secondo pokemon
+     * @return flag che determina se il pokemon è stato sconfitto
+     */
     public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
         int danno, CondEffetto1, CondEffetto2;
 
@@ -656,6 +667,11 @@ public class Lotta extends JFrame {
     public JPanel getPannello(){
         return pannello;
     }
+
+    /**
+     * funzione di controllo per verificare la possibilita di effetture un cambio pokemon
+     * @throws IOException
+     */
     public void PreCambiaPokemon() throws IOException {
         int possibiliCambi = 0;
         int[] indiceCambi = new int[6];
@@ -732,6 +748,10 @@ public class Lotta extends JFrame {
 
     }
 
+    /**
+     * funzione per il cambio di un pokemon (tra uno in squadra e quello attualmente coinvolto in lotta)
+     * @param indice
+     */
     public void cambiaPokemon(int indice){// quello contenuto nel bottone, viene ritornato dall actionlistener
         if(!cambioUtente) {
             Pokemon cambio = squadra[indice]; // identifico il pokemon che subentrera nella lotta
@@ -771,7 +791,9 @@ public class Lotta extends JFrame {
         aggiornaUI();
     }
 
-
+    /**
+     * metodo per l'aggiornamento degli elementi grafici visualizzati dopo una modifica apportata sui pokemon utilizzati
+     */
     private void aggiornaUI(){
         // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
             nomePok1.setText(squadra[0].getNome());
@@ -838,6 +860,9 @@ public class Lotta extends JFrame {
         indietro.setVisible(false);
     }
 
+    /**
+     * determina chi deve effettuare il proprio turno tra i due utenti personalizzando l'interfaccia grafica in funzione di questi
+     */
     private void cambiaContesto(){
         // sarebbe la funz utile per lo scambio utente
         Mossa[] mosse;
@@ -877,6 +902,11 @@ public class Lotta extends JFrame {
 
 
     }
+
+    /**
+     * controlla se uno dei due utenti ha vinto la battaglia generale (al meglio delle tre)
+     * @throws IOException
+     */
     public void checkBattaglia() throws IOException {
 
 
@@ -904,6 +934,9 @@ public class Lotta extends JFrame {
             resettaLotta();
     }
 
+    /**
+     * dopo la vittoria di una singola lotta ripristina lo stato iniziale della lotta
+     */
     public void resettaLotta(){
         squadra = clonaSquadra(squadraUtente1);
 
@@ -918,6 +951,11 @@ public class Lotta extends JFrame {
 
     }
 
+    /**
+     * clona la squadra di un pokemon
+     * @param squad : squadra pokemon
+     * @return clone della squadra data come parametro
+     */
     private Pokemon[] clonaSquadra(Pokemon[] squad){
         if (squad==null){
             return null;
