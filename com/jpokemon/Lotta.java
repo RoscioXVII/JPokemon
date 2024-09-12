@@ -2,7 +2,10 @@ package com.jpokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -30,6 +33,8 @@ public class Lotta extends JFrame {
     private JButton pokemon4; //= new JButton("POKEMON 4");
     private JButton pokemon5; //= new JButton("POKEMON 5");
     private JButton pokemon6; //= new JButton("POKEMON 6");
+
+    private JDialog mossaImparata;
 
     private JButton indietro = new JButton("INDIETRO");
     private JPanel pannello;
@@ -169,6 +174,8 @@ public class Lotta extends JFrame {
         pokemon4.setSize(200,100);
         pokemon5.setSize(200,100);
         pokemon6.setSize(200,100);
+
+        //mossaImparata.setSize(500,100);
 // SET LOCATION
         attacca.setLocation(0,400);
         pokemon.setLocation(200,400);
@@ -184,6 +191,8 @@ public class Lotta extends JFrame {
         pokemon4.setLocation(200,500);
         pokemon5.setLocation(0,600);
         pokemon6.setLocation(200,600);
+
+        //mossaImparata.setLocation(960,540);
 
         //BOTTONE INDIETRO -- DA SISTEMARE
         indietro.setSize(200,300);
@@ -206,6 +215,8 @@ public class Lotta extends JFrame {
         pannello.add(pokemon4,BorderLayout.SOUTH);
         pannello.add(pokemon5,BorderLayout.SOUTH);
         pannello.add(pokemon6,BorderLayout.SOUTH);
+
+        //pannello.add(mossaImparata);
 
         vistaMain();
 
@@ -309,7 +320,7 @@ public class Lotta extends JFrame {
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
-        });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
+        });
         mossa2.addActionListener(e -> {
             if (!cambioUtente){
                 setMossa(1);
@@ -474,6 +485,72 @@ public class Lotta extends JFrame {
 
     }
 
+    private static void createDialog(Mossa[] mossePoke, Pokemon poke) {
+        // Creazione del JDialog
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Dialog con 5 Bottoni");
+        dialog.setSize(960, 540);
+        dialog.setLocationRelativeTo(null); // Centra il dialog
+        dialog.setModal(true); // Rende il dialog modale
+
+        // Pannello per i bottoni
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 5)); // 1 riga, 5 colonne
+
+        // Creazione dei 5 bottoni
+
+        JButton button1 = new JButton(mossePoke[1].getNome());
+        JButton button2 = new JButton(mossePoke[2].getNome());
+        JButton button3 = new JButton(mossePoke[3].getNome());
+        JButton button4 = new JButton(mossePoke[4].getNome());
+        JButton button5 = new JButton(poke.getMossaDaImparare());
+
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(button3);
+        buttonPanel.add(button4);
+        buttonPanel.add(button5);
+
+        button1.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),0);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button2.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button3.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),2);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button4.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),3);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button5.addActionListener(e -> {
+            dialog.setVisible(false);
+        });
+
+        dialog.getContentPane().add(buttonPanel, BorderLayout.CENTER);
+        dialog.setVisible(true); // Mostra il dialog
+    }
+
     public void setMossa(int numero){
         this.mossa = numero;
     }
@@ -490,18 +567,13 @@ public class Lotta extends JFrame {
     public int turno(Mossa Mossapokemon1, Mossa Mossapokemon2){
         int danno, CondEffetto1, CondEffetto2;
 
-
-        //SE IL POKEMON VIENE CAMBIATO COL TASTO FACCIAMO CHE LA MOSSA VIENE ISTANZIATA NULL
-        //QUINDI POSSIAMO GESTIRE IL CAMBIO POKEMON FUORI DAL TURNO
-
         CondEffetto1 = Effetti.Effetto(Mossapokemon1.getNome());
         CondEffetto2 = Effetti.Effetto(Mossapokemon2.getNome());
 
         //GESTIONE CASI CondEffetto = 1
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
-        // FARE IF IN CUI SE UNA DELLE DUE MOSSE E NULL (CASO IN CUI VIENE CAMBIATO POKEMON) CHI NON CAMBIA MA SEMPRE LA MOSSA (SOLO LUI)
 
-        if(CondEffetto1==-10 && CondEffetto2!=-10){ // SIMO CONTROLLA STA ROBA
+        if(CondEffetto1==-10 && CondEffetto2!=-10){
             danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
             barraPSpok1.diminuisci(danno);
             PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
@@ -510,7 +582,7 @@ public class Lotta extends JFrame {
                 return -1;
             }
         }
-        if(CondEffetto2==-10 && CondEffetto1!=-10){ // SIMO CONTROLLA STA ROBA
+        if(CondEffetto2==-10 && CondEffetto1!=-10){
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
             PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
             barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
@@ -745,7 +817,7 @@ public class Lotta extends JFrame {
     public JPanel getPannello(){
         return pannello;
     }
-    public void PreCambiaPokemon() throws IOException {
+    public void PreCambiaPokemon() throws IOException{
         int possibiliCambi = 0;
         int[] indiceCambi = new int[6];
 
@@ -802,17 +874,47 @@ public class Lotta extends JFrame {
                 if(squadra[0].getLvl() == squadra[0].getLvlEvoluzione()){
                     squadra[0].evolvi();
                     aggiornaUI();
+
+                } else if (squadra[0].getLvl() == (squadra[0].getIndiceDaImparare())){
+
+                    Mossa[] mosse = squadra[0].getMosse();
+                    int cont = 0;
+                    for(int i=0;i<4;i++){
+                        if(!Objects.equals(mosse[i].getNome(), "null")){
+                            cont++;
+                        }
+                    }
+                    if(cont == 4){
+                        createDialog(mosse,squadra[0]);
+
+                    }else{
+                        squadra[0].imparaMossa(squadra[0].getMossaDaImparare(),0);
+                    }
+
                 }
                 //cambiaPokemon(indiceCambi[0]);
 
             }
             else{
                 squadra2[0].sconfitto(squadra[0]);
-                if(squadra2[0].getLvl() == squadra2[0].getLvlEvoluzione()){
+                if(squadra2[0].getLvl() == squadra2[0].getLvlEvoluzione()) {
                     squadra2[0].evolvi();
                     aggiornaUI();
+                } else if (squadra2[0].getLvl() == (squadra2[0].getIndiceDaImparare())) {
+
+                    Mossa[] mosse = squadra2[0].getMosse();
+                    int cont = 0;
+                    for(int i=0;i<4;i++){
+                        if(!Objects.equals(mosse[i].getNome(), "null")){
+                            cont++;
+                        }
+                    }
+                    if(cont == 4){
+                        createDialog(mosse,squadra2[0]);
+                    }else{
+                        squadra2[0].imparaMossa(squadra2[0].getMossaDaImparare(),0);
+                    }
                 }
-                //cambiaPokemon(indiceCambi[0]);
             }
 
             cambiaPokemon(indiceCambi[0]);
@@ -922,6 +1024,7 @@ public class Lotta extends JFrame {
         mossa3.setVisible(true);
         mossa4.setVisible(true);
         indietro.setVisible(true);
+
     }
     private void vistaPokemon(){
         attacca.setVisible(false);
@@ -934,6 +1037,7 @@ public class Lotta extends JFrame {
         pokemon5.setVisible(true);
         pokemon6.setVisible(true);
         indietro.setVisible(true);
+
     }
 
     private void vistaMain(){
@@ -950,6 +1054,7 @@ public class Lotta extends JFrame {
         pokemon5.setVisible(false);
         pokemon6.setVisible(false);
         indietro.setVisible(false);
+
     }
 
     private void cambiaContesto(){
@@ -969,7 +1074,7 @@ public class Lotta extends JFrame {
             utente.setText("UTENTE 1"); // utente.getNome()
         }
 
-        // qua perde il riferimento pd
+
         mossa1.setText(mosse[0] != null ? mosse[0].getNome() : "vuoto");
         mossa2.setText(mosse[1] != null ? mosse[1].getNome() : "vuoto");
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");

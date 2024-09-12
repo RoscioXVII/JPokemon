@@ -1,7 +1,9 @@
 package com.jpokemon;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -80,6 +82,41 @@ public class Pokemon implements Cloneable {
 
     private int xp;
     private int xpNecessari;
+
+    //PRATICAMENTE PRENDE LE MOSSE CHE HA GIA IMPARATO E AUMENTA DI 2 OGNI VOLTA
+    private int mosseImparate = 0;
+
+    public void aggiornaMosseImparate(){
+        mosseImparate += 2;
+    }
+    public String getMossaDaImparare(){
+        String[] a = listaMosse.split(":");
+
+        return a[this.mosseImparate+1];
+    }
+    public int getIndiceDaImparare(){
+
+        String[] a = listaMosse.split(":");
+
+        return Integer.parseInt(a[this.mosseImparate]);
+    }
+
+    public void imparaMossa(String mossa, int indice) throws IOException {
+        Reader a = Reader.getInstance();
+        Mossa ausiliare = a.buildMossaByString(mossa);
+
+        if(indice == 0){
+            for(int i = 0; i < 4; i++){
+                if(Objects.equals(mosse[i].getNome(), "null")){
+                    mosse[i] = ausiliare;
+                }
+            }
+        }else{
+            mosse[indice] = ausiliare;
+        }
+    }
+
+
 
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
                    int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita,int evps, int evattacco, int evdifesa,
@@ -638,6 +675,8 @@ public class Pokemon implements Cloneable {
         this.setAttaccoSpeciale(Formule.calcolaStatisticheBase(evoluzione.attaccoSpecialeBase,lvl,IVattaccoSpeciale,EVattaccoSpeciale));
         this.setDifesaSpeciale(Formule.calcolaStatisticheBase(evoluzione.difesaSpecialeBase,lvl,IVdifesaSpeciale,EVdifesaSpeciale));
         this.setVelocita(Formule.calcolaStatisticheBase(evoluzione.velocitaBase,lvl,IVvelocita,EVvelocita));
+
+        this.listaMosse = this.listaMosse + evoluzione.listaMosse;
 
     }
 
