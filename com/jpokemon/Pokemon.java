@@ -16,6 +16,8 @@ public class Pokemon implements Cloneable {
     private int lvl;
 
     private int esp; // esperienza per l'aumento del livello
+    private int xp;
+    private int XpNecessaria;
     private Mossa[] mosse = new Mossa[4];
 
     private String[] listaMosse;
@@ -159,6 +161,14 @@ public class Pokemon implements Cloneable {
         this.EVvelocitaYield = evvelocita;
     }
 
+    public void setXpNecessaria(int lvl){
+        this.XpNecessaria = lvl * lvl * lvl;
+    }
+
+    public int getEsp(){
+        return this.esp;
+    }
+
     public void setNome(String nome){
         this.nome = nome;
     }
@@ -227,6 +237,8 @@ public class Pokemon implements Cloneable {
     public String[] getListaMosse(){
         return listaMosse;
     }
+
+
 
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
@@ -584,18 +596,77 @@ public class Pokemon implements Cloneable {
      * determina la sconfitto di un pokemon, comportando quindi un aumento di alcune statistiche nel pokemon vincitore dello scontro
      * @param sconfitta : pokemon sconfitto nella lotta
      */
+
     public void sconfitto(Pokemon sconfitta){
-        this.EVps += sconfitta.EVpsYield;
-        this.EVattacco += sconfitta.EVattaccoYield;
-        this.EVdifesa += sconfitta.EVdifesaYield;
-        this.EVattaccoSpeciale += sconfitta.EVattaccoSpecialeYield;
-        this.EVdifesaSpeciale += sconfitta.EVdifesaSpecialeYield;
-        this.EVvelocita += sconfitta.EVvelocitaYield;
+
+        int sommaEV = this.EVps + this.EVattacco + this.EVdifesa + this.EVattaccoSpeciale + this.EVdifesaSpeciale + this.EVvelocita;
+
+        int[] array =  new int[] {this.EVps, this.EVattacco, this.EVdifesa, this.EVattaccoSpeciale, this.EVdifesaSpeciale,this.EVvelocita};
+        int[] array2 = new int[] {sconfitta.EVpsYield, sconfitta.EVattaccoYield, sconfitta.EVdifesaYield, sconfitta.EVattaccoSpecialeYield,
+                sconfitta.EVdifesaSpecialeYield, sconfitta.EVvelocitaYield};
+        int[] array3 = new int[] {0,0,0,0,0,0};
+
+        /*
+        510 equivale al massimo di ev che un pokemon puo avere in tutte e 6 le stats:
+        252 equivale a quante stats puo avere in una stat in particolare
+
+        esempio:
+
+        ps : 252
+        attacco : 0
+        difesa : 252
+        attaccoSpeciale : 0
+        difesaSpeciale : 6
+        velocita : 0
+
+        tutti gli ev sono stati messi 252 + 252 + 6 = 510 quindi quando viene sconfitto un altro pokemon i valori sono invariati
+
+         */
+
+        for(int i = 0; i<5;i++){
+            if(sommaEV < 510){
+                if(array[i] + array2[i] < 252){
+                    if(array2[i] + sommaEV < 510){
+                        array3[i] = array2[i];
+                    }else{
+                        int cont = 0;
+                        while(sommaEV + cont < 510){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }
+                }else{
+                    if(array2[i] + sommaEV < 510){
+                        int cont = 0;
+                        while(array[i] + cont < 252){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }else{
+                        int cont = 0;
+                        while(array[i] + cont < 510){
+                            cont++;
+                        }
+                        array3[i] = cont;
+                    }
+                }
+            }
+        }
+        this.EVps += array3[0];
+        this.EVattacco += array3[1];
+        this.EVdifesa += array3[2];
+        this.EVattaccoSpeciale += array3[3];
+        this.EVdifesaSpeciale += array3[4];
+        this.EVvelocita += array3[5];
 
         int xpPresa = xpGain(sconfitta);
         // gestire xp per capire quando scatta il lvl successivo
         //this.esp +=xpPresa;
-
+        this.esp += xpPresa;
+        if(this.esp >= this.XpNecessaria && this.lvl != 100){
+            this.lvl +=1;
+            setXpNecessaria(this.lvl);
+        }
     }
 
     /**
@@ -604,7 +675,9 @@ public class Pokemon implements Cloneable {
      * @return esperienza guadagnata dallo scontro
      */
     public int xpGain(Pokemon sconfitta){
-        return 0;
+        double risultato = (1.5 * sconfitta.getEsp() * sconfitta.getLvl())/7;
+
+        return (int)risultato;
     }
 
     /**
@@ -822,6 +895,7 @@ public class Pokemon implements Cloneable {
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
         this.lvl = lvl;
+        this.setXpNecessaria(lvl);
         this.esp = esp;
         this.mosse = mosse;
         this.psBase = psBase;

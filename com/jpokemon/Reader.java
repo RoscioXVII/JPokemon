@@ -80,6 +80,7 @@ public class Reader {
                 ,Integer.parseInt(info[21]),Integer.parseInt(info[22]));
 
         pokemon.setLvl(lvl);
+        pokemon.setXpNecessaria(lvl);
 
         pokemon.setMosse(mossa);
 
