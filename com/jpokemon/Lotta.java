@@ -945,12 +945,24 @@ public class Lotta extends JFrame {
             if (squadra[indice].getSalute() <= 0) {
                 // rendo il bottone non cliccabile
                 switch (indice) {
-                    case 0: pokemon1.setEnabled(false); // devo bloccare anche le mosse
-                    case 1: pokemon2.setEnabled(false);
-                    case 2: pokemon3.setEnabled(false);
-                    case 3: pokemon4.setEnabled(false);
-                    case 4: pokemon5.setEnabled(false);
-                    case 5: pokemon6.setEnabled(false);
+                    case 0:
+                        pokemon1.setEnabled(false); // devo bloccare anche le mosse
+                        break;
+                    case 1:
+                        pokemon2.setEnabled(false);
+                        break;
+                    case 2:
+                        pokemon3.setEnabled(false);
+                        break;
+                    case 3:
+                        pokemon4.setEnabled(false);
+                        break;
+                    case 4:
+                        pokemon5.setEnabled(false);
+                        break;
+                    case 5:
+                        pokemon6.setEnabled(false);
+                        break;
                 }
             }
             setMossa(-10);
@@ -961,13 +973,27 @@ public class Lotta extends JFrame {
             squadra2[0]=cambio;
             if(squadra2[indice].getSalute()<=0){
                 // rendo il bottone non cliccabile in caso di pokemon esausto
+                System.out.println("indice passato = "+  indice);
                 switch (indice){
-                    case 0: pokemon1.setEnabled(false);
-                    case 1: pokemon2.setEnabled(false);
-                    case 2: pokemon3.setEnabled(false);
-                    case 3: pokemon4.setEnabled(false);
-                    case 4: pokemon5.setEnabled(false);
-                    case 5: pokemon6.setEnabled(false);
+                    // qua c'è il problema
+                    case 0:
+                        pokemon1.setEnabled(false);
+                        break;
+                    case 1:
+                        pokemon2.setEnabled(false);
+                        break;
+                    case 2:
+                        pokemon3.setEnabled(false);
+                        break;
+                    case 3:
+                        pokemon4.setEnabled(false);
+                        break;
+                    case 4:
+                        pokemon5.setEnabled(false);
+                        break;
+                    case 5:
+                        pokemon6.setEnabled(false);
+                        break;
 
                 }
 
