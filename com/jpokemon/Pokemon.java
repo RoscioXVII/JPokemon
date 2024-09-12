@@ -105,6 +105,8 @@ public class Pokemon implements Cloneable {
         }else{
             mosse[indice] = ausiliare;
         }
+
+        aggiornaMosseImparate();
     }
 
 
@@ -815,7 +817,7 @@ public class Pokemon implements Cloneable {
                    int lvlEvoluzione, int ps, int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita, int EV, int ripetizioniAttacco,
                    int ripetizioniDifesa, int ripetizioniAttaccoSpeciale, int ripetizioniDifesaSpeciale,int tipetizioniVelocita, int IVps, int IVattacco, int IVdifesa ,int IVattaccoSpeciale,
                    int IVdifesaSpeciale, int IVvelocita, int EVps,
-                   int EVattacco, int EVdifesa,int EVvelocita, int EVattaccoSpeciale, int EVdifesaSpeciale, String nomeEvoluzione, int salute) {
+                   int EVattacco, int EVdifesa,int EVvelocita, int EVattaccoSpeciale, int EVdifesaSpeciale, String nomeEvoluzione, int salute,String lista) {
         this.nome = nome;
         this.tipo1 = tipo1;
         this.tipo2 = tipo2;
@@ -857,7 +859,7 @@ public class Pokemon implements Cloneable {
         this.EVvelocita = EVvelocita;
         this.nomeEvoluzione = nomeEvoluzione;
         this.salute = salute;
-
+        this.setListaMosse(lista);
 
     }
 

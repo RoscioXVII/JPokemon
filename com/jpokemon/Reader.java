@@ -398,7 +398,7 @@ public class Reader {
         }
 
 
-
+       String listaMosse = buildListaMosse(attributi[0]);
 
 
         return new Pokemon(attributi[0],tipo1,tipo2,Integer.parseInt(attributi[3]),Integer.parseInt(attributi[4]),mosse,Integer.parseInt(attributi[5]),
@@ -409,7 +409,7 @@ public class Reader {
                 Integer.parseInt(attributi[24]), Integer.parseInt(attributi[25]),Integer.parseInt(attributi[26]),Integer.parseInt(attributi[27]),
                 Integer.parseInt(attributi[28]),Integer.parseInt(attributi[29]),Integer.parseInt(attributi[30]),Integer.parseInt(attributi[31]),Integer.parseInt(attributi[32]),
                 Integer.parseInt(attributi[33]),Integer.parseInt(attributi[34]),Integer.parseInt(attributi[35]),Integer.parseInt(attributi[36]),Integer.parseInt(attributi[37]),
-                Integer.parseInt(attributi[38]),attributi[39],Integer.parseInt(attributi[40]));
+                Integer.parseInt(attributi[38]),attributi[39],Integer.parseInt(attributi[40]),listaMosse);
 
     }
 
