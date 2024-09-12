@@ -3,6 +3,7 @@ package com.jpokemon;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -55,6 +56,8 @@ public class Lotta extends JFrame {
 
     private Utente utente1;
     private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
+
+    private Mossa Cambio = new Mossa("Cambio",Tipo.NORMALE,TipoMossa.SPECIALE,0,0,9999);
 
     // viene passato dalla schermata precedente, in base al tasto cliccato viene deciso quale utente utilizzare e questo viene caricato da memoria 
 
@@ -263,59 +266,102 @@ public class Lotta extends JFrame {
             else{
                 // index -10 out of bounds for length 4 (da rivedere, sarebbe il valore restituito dal cambio pokemon)
                 // implementare if in piu, se ho -10 restituisco null, se ho null dentro turno cambio pokemon e non faccio nulla
-                setTurno(turno(finalTest[getMossa()], finalTest2[0]));
-                if(getTurno() == -1){
-                    if(squadra[0].getSalute() <= 0){
-                        //squadra2[0].sconfitto(squadra[0]);
-                        cambioUtente=false;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                if(getMossa() == -10){
+                    setTurno(turno(Cambio, finalTest2[0]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            //squadra2[0].sconfitto(squadra[0]);
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            //squadra[0].sconfitto(squadra2[0]);
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
-                    }else{
-                        //squadra[0].sconfitto(squadra2[0]);
-                        cambioUtente=true;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                    }
+                }else{
+                    setTurno(turno(finalTest[getMossa()], finalTest2[0]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            //squadra2[0].sconfitto(squadra[0]);
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            //squadra[0].sconfitto(squadra2[0]);
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
                 cambioUtente=true;
-                setMossa(-10);
+                //setMossa(-10);
                 cambiaContesto();
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
-        });                                                //PER TESTARE DICHIARO UNA FUNZIONE CHE A PRIORI PRENDE LA VITA MA NON LA FACCIAMO COSI
+        });
         mossa2.addActionListener(e -> {
             if (!cambioUtente){
                 setMossa(1);
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[1]));
-                if(getTurno() == -1){
-                    if(squadra[0].getSalute() <= 0){
-                        cambioUtente=false;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                if(getMossa() == -10){
+                    setTurno(turno(Cambio, finalTest2[1]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
-                    }else{
-                        cambioUtente=true;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                    }
+                }else{
+                    setTurno(turno(finalTest[getMossa()], finalTest2[1]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
-                cambioUtente=true;
-                setMossa(-10);
+                //setMossa(-10);
                 cambiaContesto();
             }
 
@@ -327,26 +373,48 @@ public class Lotta extends JFrame {
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[2]));
-                if(getTurno() == -1){
-                    if(squadra[0].getSalute() <= 0){
-                        cambioUtente=false;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                if(getMossa() == -10){
+                    setTurno(turno(Cambio, finalTest2[2]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
-                    }else{
-                        cambioUtente=true;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                    }
+                }else{
+                    setTurno(turno(finalTest[getMossa()], finalTest2[2]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
+
                 cambioUtente=true;
-                setMossa(-10);
+                //setMossa(-10);
                 cambiaContesto();
             }
 
@@ -358,26 +426,47 @@ public class Lotta extends JFrame {
                 cambiaContesto();
             }
             else{
-                setTurno(turno(finalTest[getMossa()], finalTest2[3]));
-                if(getTurno() == -1){
-                    if(squadra[0].getSalute() <= 0){
-                        cambioUtente=false;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                if(getMossa() == -10){
+                    setTurno(turno(Cambio, finalTest2[3]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
-                    }else{
-                        cambioUtente=true;
-                        try {
-                            PreCambiaPokemon();
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                    }
+                }else{
+                    setTurno(turno(finalTest[getMossa()], finalTest2[3]));
+                    if(getTurno() == -1){
+                        if(squadra[0].getSalute() <= 0){
+                            cambioUtente=false;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }else{
+                            cambioUtente=true;
+                            try {
+                                PreCambiaPokemon();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
                 cambioUtente=true;
-                setMossa(-10);
+                //setMossa(-10);
                 cambiaContesto();
             }
 
@@ -389,6 +478,72 @@ public class Lotta extends JFrame {
         pokemon5.addActionListener(e->cambiaPokemon(4));
         pokemon6.addActionListener(e->cambiaPokemon(5));
 
+    }
+
+    private static void createDialog(Mossa[] mossePoke, Pokemon poke) {
+        // Creazione del JDialog
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Dialog con 5 Bottoni");
+        dialog.setSize(960, 540);
+        dialog.setLocationRelativeTo(null); // Centra il dialog
+        dialog.setModal(true); // Rende il dialog modale
+
+        // Pannello per i bottoni
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 5)); // 1 riga, 5 colonne
+
+        // Creazione dei 5 bottoni
+
+        JButton button1 = new JButton(mossePoke[1].getNome());
+        JButton button2 = new JButton(mossePoke[2].getNome());
+        JButton button3 = new JButton(mossePoke[3].getNome());
+        JButton button4 = new JButton(mossePoke[4].getNome());
+        JButton button5 = new JButton(poke.getMossaDaImparare());
+
+        buttonPanel.add(button1);
+        buttonPanel.add(button2);
+        buttonPanel.add(button3);
+        buttonPanel.add(button4);
+        buttonPanel.add(button5);
+
+        button1.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),0);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button2.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),1);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button3.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),2);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button4.addActionListener(e -> {
+            try {
+                poke.imparaMossa(poke.getMossaDaImparare(),3);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            dialog.setVisible(false);
+        });
+        button5.addActionListener(e -> {
+            dialog.setVisible(false);
+        });
+
+        dialog.getContentPane().add(buttonPanel, BorderLayout.CENTER);
+        dialog.setVisible(true); // Mostra il dialog
     }
 
     public void setMossa(int numero){
@@ -422,8 +577,8 @@ public class Lotta extends JFrame {
 
         //GESTIONE CASI CondEffetto = 1
         // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
-        // FARE IF IN CUI SE UNA DELLE DUE MOSSE E NULL (CASO IN CUI VIENE CAMBIATO POKEMON) CHI NON CAMBIA MA SEMPRE LA MOSSA (SOLO LUI)
-        if(CondEffetto1==-10 && CondEffetto2!=-10){ // SIMO CONTROLLA STA ROBA
+
+        if(CondEffetto1==-10 && CondEffetto2!=-10){
             danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
             barraPSpok1.diminuisci(danno);
             PsPok1.setText(squadra[0].getSalute()+"/"+squadra[0].getPs());
@@ -432,7 +587,7 @@ public class Lotta extends JFrame {
                 return -1;
             }
         }
-        if(CondEffetto2==-10 && CondEffetto1!=-10){ // SIMO CONTROLLA STA ROBA
+        if(CondEffetto2==-10 && CondEffetto1!=-10){
             barraPSpok2.diminuisci(squadra[0].attacca(squadra2[0], Mossapokemon1));
             PsPok2.setText(squadra2[0].getSalute()+"/"+squadra2[0].getPs());
             barraPSpok2.getBarraSalute().setValue(squadra2[0].getSalute());
@@ -729,17 +884,47 @@ public class Lotta extends JFrame {
                 if(squadra[0].getLvl() == squadra[0].getLvlEvoluzione()){
                     squadra[0].evolvi();
                     aggiornaUI();
+
+                } else if (squadra[0].getLvl() == (squadra[0].getIndiceDaImparare())){
+
+                    Mossa[] mosse = squadra[0].getMosse();
+                    int cont = 0;
+                    for(int i=0;i<4;i++){
+                        if(!Objects.equals(mosse[i].getNome(), "null")){
+                            cont++;
+                        }
+                    }
+                    if(cont == 4){
+                        createDialog(mosse,squadra[0]);
+
+                    }else{
+                        squadra[0].imparaMossa(squadra[0].getMossaDaImparare(),0);
+                    }
+
                 }
                 //cambiaPokemon(indiceCambi[0]);
 
             }
             else{
                 squadra2[0].sconfitto(squadra[0]);
-                if(squadra2[0].getLvl() == squadra2[0].getLvlEvoluzione()){
+                if(squadra2[0].getLvl() == squadra2[0].getLvlEvoluzione()) {
                     squadra2[0].evolvi();
                     aggiornaUI();
+                } else if (squadra2[0].getLvl() == (squadra2[0].getIndiceDaImparare())) {
+
+                    Mossa[] mosse = squadra2[0].getMosse();
+                    int cont = 0;
+                    for(int i=0;i<4;i++){
+                        if(!Objects.equals(mosse[i].getNome(), "null")){
+                            cont++;
+                        }
+                    }
+                    if(cont == 4){
+                        createDialog(mosse,squadra2[0]);
+                    }else{
+                        squadra2[0].imparaMossa(squadra2[0].getMossaDaImparare(),0);
+                    }
                 }
-                //cambiaPokemon(indiceCambi[0]);
             }
 
             cambiaPokemon(indiceCambi[0]);
@@ -768,6 +953,7 @@ public class Lotta extends JFrame {
                     case 5: pokemon6.setEnabled(false);
                 }
             }
+            setMossa(-10);
         }
         else{
             Pokemon cambio = squadra2[indice]; // identifico il pokemon che subentrera nella lotta
@@ -786,6 +972,30 @@ public class Lotta extends JFrame {
                 }
 
             }
+            if(getMossa() == -10){
+                setTurno(turno(Cambio, Cambio));
+            }else{
+                Mossa mossa = squadra[0].getMosse()[getMossa()];
+                setTurno(turno(mossa,Cambio));
+                if(getTurno() == -1){
+                    if(squadra2[0].getSalute() <= 0){
+                        cambioUtente=false;
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }else{
+                        cambioUtente=true;
+                        try {
+                            PreCambiaPokemon();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                }
+            }
+
         }
 
         aggiornaUI();
@@ -880,7 +1090,7 @@ public class Lotta extends JFrame {
             utente.setText("UTENTE 1"); // utente.getNome()
         }
 
-        // qua perde il riferimento pd
+
         mossa1.setText(mosse[0] != null ? mosse[0].getNome() : "vuoto");
         mossa2.setText(mosse[1] != null ? mosse[1].getNome() : "vuoto");
         mossa3.setText(mosse[2] != null ? mosse[2].getNome() : "vuoto");

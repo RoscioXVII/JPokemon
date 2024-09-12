@@ -79,7 +79,7 @@ public class Reader {
                 Integer.parseInt(info[14]),Integer.parseInt(info[15]),Integer.parseInt(info[17]),Integer.parseInt(info[18]),Integer.parseInt(info[19]),Integer.parseInt(info[20])
                 ,Integer.parseInt(info[21]),Integer.parseInt(info[22]));
 
-        pokemon.setLvl(lvl,0);
+        pokemon.setLvl(lvl);
 
         pokemon.setMosse(mossa);
 
@@ -106,7 +106,7 @@ public class Reader {
             sc = new Scanner(new File(infoListaMosse));
             while(sc.hasNextLine()){
                 info = sc.nextLine().split(":");
-                if(info[0].equals(nome)){
+                if(info[1].equals(nome)){
                     for(int i = 2; i < info.length; i++){
                         if(i == 2){
                             mosse = mosse + info[i];

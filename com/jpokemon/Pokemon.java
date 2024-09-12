@@ -1,7 +1,9 @@
 package com.jpokemon;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
+
 
 /**
  * Classe descrivente l'entità pokemon, che farà parte della squdra dell'utente
@@ -15,6 +17,8 @@ public class Pokemon implements Cloneable {
 
     private int esp; // esperienza per l'aumento del livello
     private Mossa[] mosse = new Mossa[4];
+
+    private String[] listaMosse;
 
     //statistiche base
     private int psBase;
@@ -74,6 +78,35 @@ public class Pokemon implements Cloneable {
     private int EVattaccoSpecialeYield;
     private int EVdifesaSpecialeYield;
     private int EVvelocitaYield;
+
+    //PRATICAMENTE PRENDE LE MOSSE CHE HA GIA IMPARATO E AUMENTA DI 2 OGNI VOLTA
+    private int mosseImparate = 0;
+
+    public void aggiornaMosseImparate(){
+        mosseImparate += 2;
+    }
+    public String getMossaDaImparare(){
+        return listaMosse[this.mosseImparate+1];
+    }
+    public int getIndiceDaImparare(){
+        return Integer.parseInt(listaMosse[this.mosseImparate]);
+    }
+
+    public void imparaMossa(String mossa, int indice) throws IOException {
+        Reader a = Reader.getInstance();
+        Mossa ausiliare = a.buildMossaByString(mossa);
+
+        if(indice == 0){
+            for(int i = 0; i < 4; i++){
+                if(Objects.equals(mosse[i].getNome(), "null")){
+                    mosse[i] = ausiliare;
+                }
+            }
+        }else{
+            mosse[indice] = ausiliare;
+        }
+    }
+
 
     /**
      * Costruttore utilizzato per i pokemon generati dal file di testo 'pokemon.txt' contente le informazioni di default, senza quindi progressi e modifiche
@@ -185,6 +218,12 @@ public class Pokemon implements Cloneable {
     }
     public int getLvl(){
         return lvl;
+    }
+    public void setListaMosse(String listaMosse){
+        this.listaMosse = listaMosse.split(":");
+    }
+    public String[] getListaMosse(){
+        return listaMosse;
     }
 
     public void setAttacco(int attacco){this.attacco = attacco;}
