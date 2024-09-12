@@ -12,7 +12,9 @@ public class Finestra extends JFrame {
     private CardLayout cardLayout;
     private  JPanel pannelloCard;
     private Lotta pannelloLotta;
-    private Utente utenteGenerato;
+    private Utente utenteGenerato1;
+    private Utente utenteGenerato2;
+    private int indiceUtente1=-1;
     private JFrame casella = new JFrame("Inserisci Utente");
     private Reader rd = Reader.getInstance();
 
@@ -70,26 +72,39 @@ public class Finestra extends JFrame {
             if(pannelloUtente.getBottone1().getText().equals("NUOVO UTENTE")){
                 creaUtente();}
             else{caricaUtente(0);}
-            inizializzaLotta(0);
+            // devo fare in modo che qua ottengo tutti e due gli indici
+            if (indiceUtente1 == -1)
+                indiceUtente1 = 0;
+            else
+                inizializzaLotta(indiceUtente1,0);
         });
         pannelloUtente.getBottone2().addActionListener(e -> {
             if(pannelloUtente.getBottone2().getText().equals("NUOVO UTENTE")){
                 creaUtente();}
             else{caricaUtente(1);}
-            inizializzaLotta(1);
+            if (indiceUtente1 == -1)
+                indiceUtente1 = 1;
+            else
+                inizializzaLotta(indiceUtente1,1);
         });
         pannelloUtente.getBottone3().addActionListener(e -> {
             if(pannelloUtente.getBottone3().getText().equals("NUOVO UTENTE")){
                 creaUtente();}
             else{caricaUtente(2);}
-            inizializzaLotta(2); // o vedo se passargli l utente diretto.
+            if (indiceUtente1 == -1)
+                indiceUtente1 = 2;
+            else
+                inizializzaLotta(indiceUtente1,2);
         });
 
         pannelloUtente.getBottone4().addActionListener(e -> {
             if(pannelloUtente.getBottone4().getText().equals("NUOVO UTENTE")){
                 creaUtente();}
             else{caricaUtente(3);}
-            inizializzaLotta(3);
+            if (indiceUtente1 == -1)
+                indiceUtente1 = 3;
+            else
+                inizializzaLotta(indiceUtente1,3);
         });
 
         setResizable(false);
@@ -101,11 +116,12 @@ public class Finestra extends JFrame {
      * Inizializza la pagina successiva (Lotta)
      * indicando quale utente è stato selezionato nella schermata precedente
      * e che dovrà quindi partecipare alla lotta
-     * @param indiceUtente indice dell'utente nel file di testo di salvataggio
+     * @param indiceUtente1, indice dell'utente nel file di testo di salvataggio
+     * @param indiceUtente2, indice dell'utente 2 nel file di testo di salvataggio
      */
-    private void inizializzaLotta(int indiceUtente) {
+    private void inizializzaLotta(int indiceUtente1,int indiceUtente2) {
         try {
-            pannelloLotta = new Lotta(indiceUtente); // UTENTE 1
+            pannelloLotta = new Lotta(indiceUtente1,indiceUtente2); // UTENTE 1
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -124,13 +140,19 @@ public class Finestra extends JFrame {
 
         String input = JOptionPane.showInputDialog(casella, "Inserisci il nome utente");
         try{
-            utenteGenerato = new Utente(input);
+            if (utenteGenerato1==null)
+                utenteGenerato1 = new Utente(input);
+            else
+                utenteGenerato2 = new Utente(input);
         } catch (IOException ex) {
             System.err.println("Creazione utente non andato a buon fine");
             throw new RuntimeException(ex);
         }
         try{
-            utenteGenerato.scrittore();
+            if (utenteGenerato2==null)
+                utenteGenerato1.scrittore();
+            else
+                utenteGenerato2.scrittore();
         } catch (IOException exc){
             System.err.println("Salvataggio non andato a buon fine");
             throw new RuntimeException(exc);
@@ -144,7 +166,10 @@ public class Finestra extends JFrame {
      */
     private void caricaUtente(int indiceUtente){
         try {
-            utenteGenerato = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",indiceUtente));
+            if(utenteGenerato2==null)
+                utenteGenerato1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",indiceUtente));
+            else
+                utenteGenerato2 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt",indiceUtente));
         } catch (IOException ex) {
             System.err.println("File non formattato correttamente ");
 

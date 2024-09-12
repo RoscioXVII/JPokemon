@@ -64,7 +64,7 @@ public class Lotta extends JFrame {
     // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
-    public Lotta(int numeroUtente) throws IOException {
+    public Lotta(int numeroUtente1, int numeroUtente2) throws IOException {
         // anziche numeroutente prendo utente direttamente, ma lo implemento dopo senno è un casino per i test
 
         //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
@@ -83,8 +83,8 @@ public class Lotta extends JFrame {
 
         Reader rd = Reader.getInstance();
 
-        utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt", numeroUtente));// <--------
-        utente2 = new Utente("BOT");
+        utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt", numeroUtente1));// <--------
+        utente2 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt", numeroUtente2));
 
         squadraUtente1 = utente1.getSquadra();
         squadraUtente2 = utente2.getSquadra();
