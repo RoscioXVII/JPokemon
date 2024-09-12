@@ -1,9 +1,6 @@
 package com.jpokemon;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -18,8 +15,6 @@ public class Pokemon implements Cloneable {
 
     private int esp; // esperienza per l'aumento del livello
     private Mossa[] mosse = new Mossa[4];
-
-    private String listaMosse;
 
     //statistiche base
     private int psBase;
@@ -80,44 +75,27 @@ public class Pokemon implements Cloneable {
     private int EVdifesaSpecialeYield;
     private int EVvelocitaYield;
 
-    private int xp;
-    private int xpNecessari;
-
-    //PRATICAMENTE PRENDE LE MOSSE CHE HA GIA IMPARATO E AUMENTA DI 2 OGNI VOLTA
-    private int mosseImparate = 0;
-
-    public void aggiornaMosseImparate(){
-        mosseImparate += 2;
-    }
-    public String getMossaDaImparare(){
-        String[] a = listaMosse.split(":");
-
-        return a[this.mosseImparate+1];
-    }
-    public int getIndiceDaImparare(){
-
-        String[] a = listaMosse.split(":");
-
-        return Integer.parseInt(a[this.mosseImparate]);
-    }
-
-    public void imparaMossa(String mossa, int indice) throws IOException {
-        Reader a = Reader.getInstance();
-        Mossa ausiliare = a.buildMossaByString(mossa);
-
-        if(indice == 0){
-            for(int i = 0; i < 4; i++){
-                if(Objects.equals(mosse[i].getNome(), "null")){
-                    mosse[i] = ausiliare;
-                }
-            }
-        }else{
-            mosse[indice] = ausiliare;
-        }
-    }
-
-
-
+    /**
+     * Costruttore utilizzato per i pokemon generati dal file di testo 'pokemon.txt' contente le informazioni di default, senza quindi progressi e modifiche
+     * @param nome nome pokemon
+     * @param tipo1 primo tipo pokemon
+     * @param tipo2 secondo tipo pokemon
+     * @param lvlEvoluzione livello in cui il pokemon effettua l'evoluzione
+     * @param nomeEvoluzione nome del pokemon in cui si evolverà
+     * @param ps valori vitali
+     * @param esp esperienza per l'aumento di livello
+     * @param attacco statistica attacco attacco
+     * @param difesa statistica difesa difesa
+     * @param attaccoSpeciale statistica attaccospeciale
+     * @param difesaSpeciale statistica difesaspeciale
+     * @param velocita statistica velocita
+     * @param evps statistica evps
+     * @param evattacco statistica evattacco
+     * @param evdifesa statistica evdifesa
+     * @param evattaccoSpeciale statistica evattaccoespeciale
+     * @param evdifesaSpeciale statistica evdifesaspeciale
+     * @param evvelocita statistica evvelocita
+     */
     public Pokemon(String nome, Tipo tipo1,Tipo tipo2, int lvlEvoluzione,String nomeEvoluzione, int ps, int esp,
                    int attacco, int difesa, int attaccoSpeciale, int difesaSpeciale, int velocita,int evps, int evattacco, int evdifesa,
                    int evattaccoSpeciale,int evdifesaSpeciale, int evvelocita){
@@ -144,7 +122,6 @@ public class Pokemon implements Cloneable {
         this.EVattaccoSpecialeYield = evattaccoSpeciale;
         this.EVdifesaSpecialeYield = evdifesaSpeciale;
         this.EVvelocitaYield = evvelocita;
-
     }
 
     public void setNome(String nome){
@@ -203,23 +180,12 @@ public class Pokemon implements Cloneable {
     }
     public int getSalute(){return salute;}
 
-    public void setLvl(int lvl,int x) {
+    public void setLvl(int lvl) {
         this.lvl = lvl;
-        if(x == 0){
-            this.xp = (lvl)^3;
-        }
-        this.xpNecessari = (lvl+1)^3 - xp;
     }
     public int getLvl(){
         return lvl;
     }
-    public void setListaMosse(String listaMosse){
-        this.listaMosse = listaMosse;
-    }
-    public String getListaMosse(){
-        return listaMosse;
-    }
-
 
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
@@ -277,12 +243,15 @@ public class Pokemon implements Cloneable {
         return precisioneN;
     }
     public int getElusione(){
-        return ripetizioniElusione;
-    }
-    public int getEsp(){
-        return esp;
+        return this.ripetizioniElusione;
     }
 
+
+    /**
+     * aumenta l'attacco di un pokemon
+     * @param valore : valore dell'attacco di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaAttacco(int valore){
         if(this.ripetizioniAttacco == 6){
             return -1;
@@ -297,6 +266,11 @@ public class Pokemon implements Cloneable {
         }
     }
 
+    /**
+     *  aumenta la difesa di un pokemon
+     * @param valore valore di difesa di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaDifesa(int valore){
         if(this.ripetizioniDifesa == 6){
             return -1;
@@ -310,6 +284,11 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+    /**
+     * aumenta l'attacco speciale di un pokemon
+     * @param valore valore di attaccoSpeciale di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaAttaccoSpeciale(int valore){
         if(this.ripetizioniAttaccoSpeciale == 6){
             return -1;
@@ -324,6 +303,11 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+    /**
+     * aumenta la difesa speciale di un pokemon
+     * @param valore valore di difesaSpeciale di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaDifesaSpeciale(int valore){
         if(this.ripetizioniDifesaSpeciale == 6){
             return -1;
@@ -337,6 +321,11 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+    /**
+     *
+     * @param valore valore di velocita di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaVelocita(int valore){
         if(this.ripetizioniVelocita == 6){
             return -1;
@@ -350,6 +339,11 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+    /**
+     * aumenta la precisione di un pokemon
+     * @param valore valore di precisione di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaPrecisione(int valore){
         if(this.ripetizioniPrecisione == 6){
             return -1;
@@ -369,6 +363,11 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+    /**
+     * diminuisce la precisione di un pokemon
+     * @param valore valore di precisione di un pokemon
+     * @return flag relativo alla diminuzione
+     */
     public int diminuisciPrecisione(int valore){
         if(this.ripetizioniPrecisione == -6){
             return -1;
@@ -389,6 +388,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     * aumenta l'elusione di un pokemon
+     * @param valore : elusione di un pokemon
+     * @return flag relativo all'aumento
+     */
     public int aumentaElusione(int valore){
         if(this.ripetizioniElusione == 6){
             return -1;
@@ -410,6 +415,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     *  diminuisce l'elusione di un pokemon
+     * @param valore : valore di elusione di un pokemon
+     * @return flag relativo alla diminuzione
+     */
     public int diminuisciElusione(int valore){
         if(this.ripetizioniElusione == -6){
             return -1;
@@ -431,7 +442,11 @@ public class Pokemon implements Cloneable {
 
     }
 
-
+    /**
+     * diminuisce l'attacco di un pokemon
+     * @param valore : valore di attacco di un pokemon
+     * @return flag di aumento
+     */
     public int diminuisciAttacco(int valore){
         if(this.ripetizioniAttacco == -6){
             System.out.println("Attacco al minimo");
@@ -446,6 +461,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     * diminuisce la difesa di un pokemon
+     * @param valore : difesa di un pokemon
+     * @return flag di diminuzione
+     */
     public int diminuisciDifesa(int valore){
         if(this.ripetizioniDifesa == -6){
             System.out.println("Difesa al minimo");
@@ -460,6 +481,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     * diminuisce l' attacco speciale di un pokemon
+     * @param valore : attacco speciale di un pokemon
+     * @return flag di diminuzione
+     */
     public int diminuisciAttaccoSpeciale(int valore){
         if(this.ripetizioniAttaccoSpeciale == -6){
             return -1;
@@ -473,6 +500,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     * diminusice la difesa speciale di un pokemon
+     * @param valore : difesa speciale di un pokemon
+     * @return flag di diminuzione
+     */
     public int diminuisciDifesaSpeciale(int valore){
         if(this.ripetizioniDifesaSpeciale == -6){
             return -1;
@@ -486,6 +519,12 @@ public class Pokemon implements Cloneable {
             return 1;
         }
     }
+
+    /**
+     * diminuisce la velocita di un pokemon
+     * @param valore :velocita di un pokemon
+     * @return flag di diminuzione
+     */
     public int diminuisciVelocita(int valore){
         if(this.ripetizioniVelocita == -6){
             return -1;
@@ -500,95 +539,36 @@ public class Pokemon implements Cloneable {
         }
     }
 
+    /**
+     * determina la sconfitto di un pokemon, comportando quindi un aumento di alcune statistiche nel pokemon vincitore dello scontro
+     * @param sconfitta : pokemon sconfitto nella lotta
+     */
     public void sconfitto(Pokemon sconfitta){
-
-        int sommaEV = this.EVps + this.EVattacco + this.EVdifesa + this.EVattaccoSpeciale + this.EVdifesaSpeciale + this.EVvelocita;
-
-        int[] array =  new int[] {this.EVps, this.EVattacco, this.EVdifesa, this.EVattaccoSpeciale, this.EVdifesaSpeciale,this.EVvelocita};
-        int[] array2 = new int[] {sconfitta.EVpsYield, sconfitta.EVattaccoYield, sconfitta.EVdifesaYield, sconfitta.EVattaccoSpecialeYield,
-                sconfitta.EVdifesaSpecialeYield, sconfitta.EVvelocitaYield};
-        int[] array3 = new int[] {0,0,0,0,0,0};
-
-        /*
-        510 equivale al massimo di ev che un pokemon puo avere in tutte e 6 le stats:
-        252 equivale a quante stats puo avere in una stat in particolare
-
-        esempio:
-
-        ps : 252
-        attacco : 0
-        difesa : 252
-        attaccoSpeciale : 0
-        difesaSpeciale : 6
-        velocita : 0
-
-        tutti gli ev sono stati messi 252 + 252 + 6 = 510 quindi quando viene sconfitto un altro pokemon i valori sono invariati
-
-         */
-
-        for(int i = 0; i<5;i++){
-            if(sommaEV < 510){
-                if(array[i] + array2[i] < 252){
-                    if(array2[i] + sommaEV < 510){
-                        array3[i] = array2[i];
-                    }else{
-                        int cont = 0;
-                        while(sommaEV + cont < 510){
-                            cont++;
-                        }
-                        array3[i] = cont;
-                    }
-                }else{
-                    if(array2[i] + sommaEV < 510){
-                        int cont = 0;
-                        while(array[i] + cont < 252){
-                            cont++;
-                        }
-                        array3[i] = cont;
-                    }else{
-                        int cont = 0;
-                        while(array[i] + cont < 510){
-                            cont++;
-                        }
-                        array3[i] = cont;
-                    }
-                }
-            }
-        }
-        this.EVps += array3[0];
-        this.EVattacco += array3[1];
-        this.EVdifesa += array3[2];
-        this.EVattaccoSpeciale += array3[3];
-        this.EVdifesaSpeciale += array3[4];
-        this.EVvelocita += array3[5];
+        this.EVps += sconfitta.EVpsYield;
+        this.EVattacco += sconfitta.EVattaccoYield;
+        this.EVdifesa += sconfitta.EVdifesaYield;
+        this.EVattaccoSpeciale += sconfitta.EVattaccoSpecialeYield;
+        this.EVdifesaSpeciale += sconfitta.EVdifesaSpecialeYield;
+        this.EVvelocita += sconfitta.EVvelocitaYield;
 
         int xpPresa = xpGain(sconfitta);
         // gestire xp per capire quando scatta il lvl successivo
         //this.esp +=xpPresa;
-        xp += xpPresa;
-        if(xp >= xpNecessari && lvl != 100){
-            setLvl(getLvl()+1,1);
-            if(lvl == lvlEvoluzione){
-                /*
-                try {
-                    evolvi();
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
 
-                 */
-                evolvi();
-            }
-        }
     }
 
+    /**
+     * determina il guadagno di esperienza nel pokemon vincitore di uno scontro
+     * @param sconfitta : pokemon sconfitto nella lotta
+     * @return esperienza guadagnata dallo scontro
+     */
     public int xpGain(Pokemon sconfitta){
-
-        double risultato = (1.5 * sconfitta.getEsp() * sconfitta.getLvl())/7;
-
-        return (int)risultato;
+        return 0;
     }
 
+    /**
+     * permette a un pokemon di evolversi al raggiungimento del livello necessario indicato nel file di testo 'pokemon.txt'
+     */
     public void evolvi()   {
         Reader lettore =  Reader.getInstance();
         try {
@@ -600,6 +580,13 @@ public class Pokemon implements Cloneable {
     } // TODO: da implementare, potrebbere restituire un oggetto pokemon o semplicemente modificare il .this che chiama
     public void cambiaMossa(){} //TODO: da implementare, ad ogni livello sblocca una mossa e la sostituisce con un'altra (nel caso in cui gia gli slot siano pieni)
 
+
+    /**
+     * permette di sferrare un attacco verso un pokemon nemico
+     * @param avversario : pokemon nemico
+     * @param mossa : mossa utilizzata per l'attacco
+     * @return valore stimato del danno della mossa utilizzata
+     */
     public int attacca(Pokemon avversario, Mossa mossa){
 
         Random roll = new Random();
@@ -610,8 +597,6 @@ public class Pokemon implements Cloneable {
         int prec = this.getPrecisione();
         int precN = this.getPrecisioneN();
         int elusione = avversario.getElusione();
-        int PrecisioneAttacco;
-
 
         if(elusione <= 0){
             risultato = (((double) (prec + elusione) /precN));
@@ -619,10 +604,8 @@ public class Pokemon implements Cloneable {
             risultato = (((double) (prec) /precN+elusione));
         }
 
-        if(mossa.getPrecisione() != -1){
-            if(roll.nextInt(100) > (int)risultato*mossa.getPrecisione()){
-                return 0;
-            }
+        if(roll.nextInt(100) > (int)risultato*mossa.getPrecisione()){
+            return 0;
         }
 
         if(mossa.getTipoMossa() == TipoMossa.FISICO){
@@ -645,6 +628,7 @@ public class Pokemon implements Cloneable {
     // richiama il metodo fornendo l'avversario
     // e la mossa (presa dall'array) che verrà eseguita
 
+    //devo ridefinire clone
     public void copia(Pokemon evoluzione){ //copia dopo evoluzione
         this.nome = evoluzione.nome;
         this.psBase = evoluzione.psBase;
@@ -675,8 +659,6 @@ public class Pokemon implements Cloneable {
         this.setAttaccoSpeciale(Formule.calcolaStatisticheBase(evoluzione.attaccoSpecialeBase,lvl,IVattaccoSpeciale,EVattaccoSpeciale));
         this.setDifesaSpeciale(Formule.calcolaStatisticheBase(evoluzione.difesaSpecialeBase,lvl,IVdifesaSpeciale,EVdifesaSpeciale));
         this.setVelocita(Formule.calcolaStatisticheBase(evoluzione.velocitaBase,lvl,IVvelocita,EVvelocita));
-
-        this.listaMosse = this.listaMosse + evoluzione.listaMosse;
 
     }
 
@@ -725,6 +707,11 @@ public class Pokemon implements Cloneable {
                 "#" + salute +
                 "#" + mosse[0].getNome() + // implementare if che se e null restituisce null
                 "#" + mosse[1].getNome();
+        if(mosse[1]==null)
+            Stringa+="#null";
+        else
+            Stringa+="#" + mosse[1].getNome();
+
         if(mosse[2]==null)
             Stringa+="#null";
         else
@@ -738,6 +725,51 @@ public class Pokemon implements Cloneable {
         return Stringa;
     }
 
+    /**
+     * costruttore utilizzato per i pokemon caricati da un salvataggio di una squadra di un utente precedentemnte definito in memoria su file di testo
+     * @param nome : nome pokemon
+     * @param tipo1 : primo tipo del pokemon
+     * @param tipo2 : secondo tipo del pokemon
+     * @param lvl : livello attuale del pokemon
+     * @param esp : esperienza fino ad ora guadagnata dal pokemon
+     * @param mosse : array di mosse che il pokemon puo utilizzare
+     * @param psBase : salute di base
+     * @param attaccoBase
+     * @param difesaBase
+     * @param attaccoSpecialeBase
+     * @param difesaSpecialeBase
+     * @param velocitaBase
+     * @param spriteFront
+     * @param spriteBack
+     * @param spriteMini
+     * @param lvlEvoluzione
+     * @param ps
+     * @param attacco
+     * @param difesa
+     * @param attaccoSpeciale
+     * @param difesaSpeciale
+     * @param velocita
+     * @param EV
+     * @param ripetizioniAttacco
+     * @param ripetizioniDifesa
+     * @param ripetizioniAttaccoSpeciale
+     * @param ripetizioniDifesaSpeciale
+     * @param tipetizioniVelocita
+     * @param IVps
+     * @param IVattacco
+     * @param IVdifesa
+     * @param IVattaccoSpeciale
+     * @param IVdifesaSpeciale
+     * @param IVvelocita
+     * @param EVps
+     * @param EVattacco
+     * @param EVdifesa
+     * @param EVvelocita
+     * @param EVattaccoSpeciale
+     * @param EVdifesaSpeciale
+     * @param nomeEvoluzione
+     * @param salute : salute attuale
+     */
     // questo viene usato solo quando vengono caricati i pokemon dal file di testo, senno per quelli nuovi (non salvati), viene utilizzato l'altro costruttore
     public Pokemon(String nome, Tipo tipo1, Tipo tipo2, int lvl, int esp, Mossa[] mosse, int psBase, int attaccoBase, int difesaBase,
                    int attaccoSpecialeBase, int difesaSpecialeBase, int velocitaBase, String spriteFront, String spriteBack, String spriteMini,
@@ -789,6 +821,7 @@ public class Pokemon implements Cloneable {
 
 
     }
+
 
     @Override
     public Pokemon clone() {

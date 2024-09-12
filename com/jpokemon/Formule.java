@@ -258,7 +258,7 @@ public class Formule {
         tabellaDebolezze.get(Tipo.PSICO).put(Tipo.PSICO,0.5);
         tabellaDebolezze.get(Tipo.PSICO).put(Tipo.BUIO,0.0);
 
-        tabellaDebolezze.get(Tipo.GHIACCIO).put(Tipo.VOLANTE,2.0);
+            tabellaDebolezze.get(Tipo.GHIACCIO).put(Tipo.VOLANTE,2.0);
         tabellaDebolezze.get(Tipo.GHIACCIO).put(Tipo.TERRA,2.0);
         tabellaDebolezze.get(Tipo.GHIACCIO).put(Tipo.ERBA,2.0);
         tabellaDebolezze.get(Tipo.GHIACCIO).put(Tipo.DRAGO,2.0);

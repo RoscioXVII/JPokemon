@@ -7,6 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Interfaccia di selezione utente incaricata di creare o caricare da memoria un'utente in base
+ * al bottone selezionato
+ */
+
 public class SelezioneUtente extends JFrame {
     private JPanel pannello;
     private JButton bottone1;
