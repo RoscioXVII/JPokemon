@@ -8,7 +8,7 @@ import java.io.IOException;
  * attaverso la chiamata del costruttore della classe Finestra.
  */
 
-public class Application {
+public class JPokeBattle {
     public static void main(String[] args) throws IOException {
          new Finestra();
     }

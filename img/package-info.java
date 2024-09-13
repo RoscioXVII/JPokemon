@@ -1,3 +1,4 @@
+
 /**
  * Package contenente tutte le immagini utilizzate nel progetto sviluppato
  * front : gif del pokemon visto difronte

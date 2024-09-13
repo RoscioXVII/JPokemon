@@ -1,5 +1,6 @@
-package testo;
+
 /**
+ * Package contenente tutti i file di testo manipolati dal programma per la lettura e la scrittura di salvataggi e informazioni standard del videogioco
  * mosse: dizionario contente la descrizione standard delle mosse apprese dai pokemon
  * MosseLista: lista delle mosse che possono essere apprese da un pokemon (identificato per corrispondenza tra l'indice della stringa delle mosse e l'indice della stringa del pokemon, ordinate per numero di pokedex) associate al livello in cui possono essere apprese
  * pokemon: dizionario contente la descrizione di default dei pokemon utilizzabili in gioco
@@ -7,3 +8,4 @@ package testo;
  * utenti: lista di utenti definiti dall'utente con annesse statische (vittorie,sconfitte e partite totali giocate)
  *
  */
+package testo;
