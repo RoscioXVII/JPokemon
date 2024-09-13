@@ -17,15 +17,13 @@ import java.util.Scanner;
  *
  */
 public class Reader {
-    //classe responsabile della lettura delle mosse e dei pokemon contenuti nei file .txt
+
     private static final String infoPokemon = "testo/pokemon.txt";
     private static final String infoMosse = "testo/mosse.txt";
     private static final String infoUtente = "testo/utenti.txt";
     private static final String infoListaMosse = "testo/MosseLista.txt";
     private static Scanner sc;
     private static Reader instance = null;
-    private String[] mosse = new String[4]; // //Le metto come string per prendere solo il nome poi con l'altro metodo prenderò anche tutto il resto
-
 
     // singleton pattern
     private Reader() { // vuoto perche tutti i campi sono static / final
@@ -36,7 +34,6 @@ public class Reader {
         return instance;
     }
 
-    // si usa pe i pokemon nuovi, senno si usa il load
 
     /**
      * Genera un'istanza pokemon a partire da una stringa di attributi fornita come parametro
@@ -50,7 +47,6 @@ public class Reader {
                                     //ESEMPIO: se creiamo 2 pokemon, 1 snorlax e 1 charizard, sappiamo che charizard sarà sempre piu veloce
                                     // se creiamo 2 charizard pero' grazie a questi IV uno avrà le statistiche migliori dell altro
         String[] info;
-        // devo fare una funz uguale che funziona solo per i file di testo e quindi splitta con #
         info = string.split(":");
         Mossa[] mossa = new Mossa[4];
         int cont = 3;
@@ -115,7 +111,7 @@ public class Reader {
                             mosse = mosse + ":" + info[i];
                         }
                     }
-                    System.out.println(mosse);
+
                     return mosse;
                 }
             }
@@ -139,13 +135,13 @@ public class Reader {
             while (sc.hasNextLine()){
                 info = sc.nextLine().split(":");
                 if(info[0].equals(string)) {
-                    // da problemi qui, probabilmente alcune mosse non sono ancor state definite e da problemi
+
                     return new Mossa(info[0],Tipo.valueOf(info[1].toUpperCase()),TipoMossa.valueOf(info[2].toUpperCase()),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
                 }
                 if(info[0].equals("null"))
                     return null; // se è null il bottone non sarà cliccabile
             }
-            return null; // non arrivera mai
+            return null;
         } catch (FileNotFoundException e){
             System.err.println("file non presente");
             throw e;
@@ -153,26 +149,6 @@ public class Reader {
     }
 
 
-
-    public Mossa buildMossa() throws IOException {
-        String[] info;
-        try{
-            sc = new Scanner(new File(infoMosse));
-            if(sc.hasNextLine()){
-                info = sc.nextLine().split(":");
-                if (info.length<6) // numero argomenti file .txt che deve NECESSARIAMENTE avere
-                    throw new IOException("Il formato del file è errato, numero di elementi forniti insufficiente ");
-                // costruttore mossa -->
-                return new Mossa(info[0],Tipo.valueOf(info[1]),TipoMossa.valueOf(info[2]),Integer.parseInt(info[3]),Integer.parseInt(info[4]),Integer.parseInt(info[5]));
-            }
-            else
-                return null;
-
-        } catch (FileNotFoundException e){
-            System.err.println("file non presente");
-            throw e;
-        }
-    }
 
     /**
      * Conta il numero di righe del file di testo "infopokemon" e lo resituisce
@@ -199,7 +175,7 @@ public class Reader {
         try{
             Scanner sc = new Scanner(new File(path));
             for(int i=0;i<index;i++){
-                if(!sc.hasNextLine()) // se == false quindi
+                if(!sc.hasNextLine())
                     return null;
                 else
                     sc.nextLine(); // va avanti (ignora le righe non corrispondenti all'indice dato)
@@ -232,7 +208,7 @@ public class Reader {
             while(sc.hasNextLine()){
                 sc.nextLine();
                 i++;
-            }//PRODUCTOR CODE NON TOCCARE PER NESSUN MOTIVO
+            }
 
             return i;
         } catch (FileNotFoundException e) {
@@ -241,23 +217,6 @@ public class Reader {
         }
     }
 
-    public String[] BuildHashMossa() throws FileNotFoundException {
-        String[] res = new String[contaRigheMosse()];
-        int i = 0;
-        try{
-            sc = new Scanner(new File(infoMosse));
-            while(sc.hasNextLine()){
-                res[i] = sc.nextLine(); //con questo mi creo una base per fare il for dopo nella classe formule
-                i++;
-            }
-            return res;
-
-        } catch(FileNotFoundException e) {
-            System.err.println("File non trovato");
-            throw e;
-        }
-
-    }
 
     /**
      * Dato il nome dell'evoluzione di un pokemon cerca la riga all'intenrno del file 'infopokemon'
@@ -281,7 +240,7 @@ public class Reader {
             System.err.println("File non trovato");
             throw e;
         }
-        return -1; // non è stata trovata l'evoluzione TODO: da cambiare
+        return -1; // non è stata trovata l'evoluzione
     }
 
     /**
@@ -299,9 +258,7 @@ public class Reader {
         //cerca squadra
         String squad = cercaSquadra(info[0]);
 
-        //build squadra by string qua dentro
         pokemons = buildSquadrabyString(squad);
-        // non metto if perche i pokemon in squadra sono SEMPRE 6 (vengono selezionati random)
         return new Utente(info[0],Integer.parseInt(info[1]),Integer.parseInt(info[2]),Integer.parseInt(info[3]),pokemons);
     }
 
@@ -313,7 +270,7 @@ public class Reader {
      * @throws FileNotFoundException
      */
     private String cercaSquadra(String squadra) throws FileNotFoundException {
-        System.out.println("QUESTO ARRIVA = "+ squadra);
+
         sc = new Scanner(new File("testo/squadreUtenti.txt"));
         String info;
         while(sc.hasNextLine()){
@@ -336,9 +293,9 @@ public class Reader {
         Random random = new Random();
         Pokemon[] squad = new Pokemon[6];
         for(int i=0;i<6;i++){
-            //questo da errore
-            squad[i]=buildPokemonByString(getRigaByIndex("testo/pokemon.txt",random.nextInt(contaRighe())));
-            System.out.println("nome = "+squad[i].getNome()); // da togliere è solo per prova chiaramente
+
+            squad[i]=buildPokemonByString(getRigaByIndex(infoPokemon,random.nextInt(contaRighe())));
+
         }
         return squad;
     }
@@ -355,12 +312,9 @@ public class Reader {
         String pokemons[];
         Pokemon[] squadra = new Pokemon[6];
         pokemons = parametriSquadra.split(":"); // ogni pokemon è diviso dai :, mentre i parametri dal #
-        // i pokemon so che sono 6 fissi di conseguenza
-        // prevedere se sono null
-        // controllare bene sta roba in build pokemon e la funzione per scrivere / leggere ecc...
 
         for(int i=1;i<=6;i++){ // inizio da 1 perche il primo elemento (indice 0), sarebbe il nome dell'utente proprietario della squadra
-            // if se null mi mette null (non è da mettere in quanto vengono generate automaticamente squadre da 6 piene)
+
             squadra[i-1] = loadPokemon(pokemons[i]);
         }
 
@@ -379,9 +333,7 @@ public class Reader {
         //serve per caricare i pokemon da file di testo (sono separati da #)
         String[] attributi = info.split("#");
 
-        //for (int i=0;i<attributi.length;i++)
-            //System.out.println("£££££££ attributi = " + attributi[i] + " indice = " + i);
-        Tipo tipo1 = Tipo.getTipoByString(attributi[1]); // index 1 out of bound for lenght 1
+        Tipo tipo1 = Tipo.getTipoByString(attributi[1]);
         Tipo tipo2 = Tipo.getTipoByString(attributi[2]);
         Mossa[] mosse = new Mossa[4];
 
@@ -391,12 +343,7 @@ public class Reader {
             else
                 mosse[i] = buildMossaByString(attributi[41+i]);
         }
-        for (Mossa mossa: mosse){
-            if (mossa == null)
-                System.out.println("mosse = null");
-            else
-                System.out.println("mosse = " + mossa.getNome());
-        }
+
 
 
        String listaMosse = buildListaMosse(attributi[0]);

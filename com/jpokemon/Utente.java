@@ -30,7 +30,7 @@ public class Utente {
 
     }
     // caso in cui l'utente non esiste, viene preso solo in input il nome
-    // e la squadra viene random
+    // e la squadra viene generata random
 
     /**
      * Costruttore per un Utente già definito in memoria
@@ -42,7 +42,7 @@ public class Utente {
      * @param squadra array di pokemon
      */
     public Utente(String nome, int vittorie, int sconfitte, int partiteGiocate,Pokemon[] squadra){
-        // questo è nel caso in cui ho una stringa nel file di testo
+        //caso in cui ho una stringa nel file di testo relativa ad un utente
         this.nome = nome;
         this.vittorie = vittorie;
         this.sconfitte = sconfitte;
@@ -55,7 +55,7 @@ public class Utente {
      * @throws IOException
      */
     public void scrittore() throws IOException {
-        // crea i file da testo quando non sono gia presenti
+        // crea i file di testo quando non sono gia presenti
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/utenti.txt",true))){
             writer.write(toString());
             writer.newLine();
@@ -66,7 +66,6 @@ public class Utente {
         }
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("testo/squadreUtenti.txt",true))){
-            System.out.println("Che cazzo arriva = " + squadraString());
             writer.write(nome+":"+squadraString());
             writer.newLine();
 
@@ -109,7 +108,7 @@ public class Utente {
             }
             sorgente.delete();
             fileTemp.renameTo(new File("testo/utenti.txt"));
-            // scrivi la squadra nell'apposito file
+
         } catch (IOException e ){
             System.err.println("File non formattato corretamente");
         }
@@ -118,8 +117,8 @@ public class Utente {
         try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
             String stringa;
             while((stringa=reader.readLine())!=null){
-                // da modificare
-                if (stringa.startsWith(this.nome+":")){ // potrebbe andarci --> #
+
+                if (stringa.startsWith(this.nome+":")){
                     writer.write(nome+":"+squadraString());
                     writer.newLine();
                 }

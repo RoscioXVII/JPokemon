@@ -16,7 +16,7 @@ public class Pokemon implements Cloneable {
     private int lvl;
 
     private int esp; // esperienza per l'aumento del livello
-    private int xp;
+
     private int XpNecessaria;
     private Mossa[] mosse = new Mossa[4];
 
@@ -41,8 +41,7 @@ public class Pokemon implements Cloneable {
     private int attaccoSpeciale;
     private int difesaSpeciale;
     private int velocita;
-    private int EV; //DA INSERIRE DENTRO IL COSTRUTTORE E DENTRO IL FILE DI TESTO DEI POKEMON
-    //SET PER MOSSE
+    private int EV;
     //SERVONO PER GESTIRE GLI AUMENTI E LA DIMINUZIONE DELLE STATISTICHE, IL MASSIMO VALE +6 il minimo vale -6
     private int ripetizioniAttacco = 0;
     private int ripetizioniDifesa = 0;
@@ -81,7 +80,7 @@ public class Pokemon implements Cloneable {
     private int EVdifesaSpecialeYield;
     private int EVvelocitaYield;
 
-    //PRATICAMENTE PRENDE LE MOSSE CHE HA GIA IMPARATO E AUMENTA DI 2 OGNI VOLTA
+    // PRENDE LE MOSSE CHE HA GIA IMPARATO E AUMENTA DI 2 OGNI VOLTA
     private int mosseImparate = 0;
 
     public void aggiornaMosseImparate(){
@@ -169,18 +168,11 @@ public class Pokemon implements Cloneable {
         return this.esp;
     }
 
-    public void setNome(String nome){
-        this.nome = nome;
-    }
+
     public String getNome(){
         return nome;
     }
-    public void setTipo1(Tipo tipo) {
-        this.tipo1 = tipo;
-    }
-    public void setTipo2(Tipo tipo) {
-        this.tipo2 = tipo;
-    }
+
     public Tipo getTipo1() {
         return tipo1;
     }
@@ -216,9 +208,6 @@ public class Pokemon implements Cloneable {
     public int getPs() {
         return ps;
     }
-    public int getPsBase(){
-        return psBase;
-    }
 
     public void setSalute(int salute){
         this.salute = salute;
@@ -234,32 +223,25 @@ public class Pokemon implements Cloneable {
     public void setListaMosse(String listaMosse){
         this.listaMosse = listaMosse.split(":");
     }
-    public String[] getListaMosse(){
-        return listaMosse;
-    }
+
 
 
 
     public void setAttacco(int attacco){this.attacco = attacco;}
     public int getAttacco(){return attacco;}
-    public int getAttaccoBase(){return attaccoBase;}
+
     public int getLvlEvoluzione(){
         return lvlEvoluzione;
     }
 
     public void setDifesa(int difesa) {this.difesa = difesa;}
     public int getDifesa(){return difesa;}
-    public int getDifesaBase(){return difesaBase;}
+
 
     public void setAttaccoSpeciale(int ATS){
         this.attaccoSpeciale = ATS;
     }
-    public int getAttaccoSpeciale(){
-        return attaccoSpeciale;
-    }
-    public int getAttaccoSpecialeBase(){
-        return attaccoSpecialeBase;
-    }
+
 
     public void setDifesaSpeciale(int DFS){
         this.difesaSpeciale = DFS;
@@ -267,15 +249,13 @@ public class Pokemon implements Cloneable {
     public int getDifesaSpeciale(){
         return difesaSpeciale;
     }
-    public int getDifesaSpecialeBase(){
-        return difesaSpecialeBase;
-    }
+
 
     public void setVelocita(int velocita){this.velocita = velocita;}
     public int getVelocita(){return velocita;}
-    public int getVelocitaBase(){return velocitaBase;}
 
-    //per gli sprite basta il get
+
+
 
     public String getSpriteFront() {
         return spriteFront;
@@ -502,7 +482,7 @@ public class Pokemon implements Cloneable {
      */
     public int diminuisciAttacco(int valore){
         if(this.ripetizioniAttacco == -6){
-            System.out.println("Attacco al minimo");
+
             return -1;
         }else if(this.ripetizioniAttacco-valore < -6){
             this.attacco -= (6+this.ripetizioniAttacco);
@@ -522,7 +502,7 @@ public class Pokemon implements Cloneable {
      */
     public int diminuisciDifesa(int valore){
         if(this.ripetizioniDifesa == -6){
-            System.out.println("Difesa al minimo");
+
             return -1;
         }else if(this.ripetizioniDifesa-valore < -6){
             this.difesa -= (6+this.ripetizioniDifesa);
@@ -660,8 +640,7 @@ public class Pokemon implements Cloneable {
         this.EVvelocita += array3[5];
 
         int xpPresa = xpGain(sconfitta);
-        // gestire xp per capire quando scatta il lvl successivo
-        //this.esp +=xpPresa;
+
         this.esp += xpPresa;
         if(this.esp >= this.XpNecessaria && this.lvl != 100){
             this.lvl +=1;
@@ -737,12 +716,6 @@ public class Pokemon implements Cloneable {
     }
 
 
-    //mossa.getTipo();
-    // ogni bottone è specifico per una mossa e
-    // richiama il metodo fornendo l'avversario
-    // e la mossa (presa dall'array) che verrà eseguita
-
-    //devo ridefinire clone
     public void copia(Pokemon evoluzione){ //copia dopo evoluzione
         this.nome = evoluzione.nome;
         this.psBase = evoluzione.psBase;
@@ -943,7 +916,6 @@ public class Pokemon implements Cloneable {
         try {
             return (Pokemon) super.clone();
         } catch (CloneNotSupportedException e) {
-            // Questo non dovrebbe mai succedere, perché implementiamo Cloneable
             throw new RuntimeException(e);
         }
 

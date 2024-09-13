@@ -35,8 +35,6 @@ public class BarraPS extends JFrame {
     public JProgressBar getBarraSalute(){
         return barraSalute;
     }
-    public int getVita(){
-        return vita;
-    }
+
 
 }

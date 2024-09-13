@@ -12,15 +12,11 @@ import java.util.Random;
  * e generare le corrette dinamiche di gioco
  */
 public class Lotta extends JFrame {
-    private Pokemon[] squadra; //= new Pokemon[6]; // ha dimensione fissa = 6, posso usare anche un array semplice
-    private Pokemon[] squadra2; //= new Pokemon[6]; // squadra dell'avversario
+    private Pokemon[] squadra;
+    private Pokemon[] squadra2;
     private int mossa = -10;
-    private int numTurno = 0; // non la usiamo mai ao
     private int turno = 0;
-    //devo fare un metodo grafico per selezionarli
 
-    // Al posto di MOSSA metterò il nome della vera mossa ricavato dall'istanza
-    // mettero tutto a static
     private final JButton attacca = new JButton("Attacca");
     private final JButton pokemon = new JButton("Pokemon");
 
@@ -31,10 +27,10 @@ public class Lotta extends JFrame {
 
     private JButton pokemon1;
     private JButton pokemon2;
-    private JButton pokemon3; //= new JButton("POKEMON 3");
-    private JButton pokemon4; //= new JButton("POKEMON 4");
-    private JButton pokemon5; //= new JButton("POKEMON 5");
-    private JButton pokemon6; //= new JButton("POKEMON 6");
+    private JButton pokemon3;
+    private JButton pokemon4;
+    private JButton pokemon5;
+    private JButton pokemon6;
 
     private JButton indietro = new JButton("INDIETRO");
     private JPanel pannello;
@@ -55,32 +51,16 @@ public class Lotta extends JFrame {
     private Pokemon[] squadraUtente2 = new Pokemon[6];
 
     private Utente utente1;
-    private Utente utente2; // da implementare, fare le squadre random ecc, è stata solo implementata la scrittura delle vincite su file di testo
-
+    private Utente utente2;
     private Mossa Cambio = new Mossa("Cambio",Tipo.NORMALE,TipoMossa.SPECIALE,0,0,9999);
 
     // viene passato dalla schermata precedente, in base al tasto cliccato viene deciso quale utente utilizzare e questo viene caricato da memoria 
 
-    // non deve essere una nuova finestra ma una card che viene selezionata dopo lo start
 
     // la mossa 3 e 4 viene aggiunta successivamente se il pokemon le ha, in caso contrario il bottone non sarà cliccabile
     public Lotta(int numeroUtente1, int numeroUtente2) throws IOException {
-        // anziche numeroutente prendo utente direttamente, ma lo implemento dopo senno è un casino per i test
-
-        //COMMENTO OPZIONI VISUALIZZAZIONE A FINESTRA
-        //super("JPokemon");
-        //setLayout(null);
-        //setSize(1920,1080); // dimensioni finestra
-        //setLocationRelativeTo(null);
-        //setResizable(false);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // PARTE AGGIUNTA POKEMON
-
-
-
-
-
         Reader rd = Reader.getInstance();
 
         utente1 = rd.buildUtentebyString(rd.getRigaByIndex("testo/utenti.txt", numeroUtente1));// <--------
@@ -89,12 +69,9 @@ public class Lotta extends JFrame {
         squadraUtente1 = utente1.getSquadra();
         squadraUtente2 = utente2.getSquadra();
 
-        // PROVA
+
         squadra = clonaSquadra(squadraUtente1);
         squadra2 = clonaSquadra(squadraUtente2);
-        //squadra = squadraUtente1.clone();
-        //squadra2 = squadraUtente2.clone();
-
 
 
 
@@ -110,35 +87,33 @@ public class Lotta extends JFrame {
 
         ImageIcon gif1 = new ImageIcon(squadra2[0].getSpriteFront());
         ImageIcon gif2 = new ImageIcon(squadra[0].getSpriteBack());
-        Mossa[] test;
-        test = squadra[0].getMosse();
+        Mossa[] mosse;
+        mosse = squadra[0].getMosse();
 
-        mossa1 = new JButton(test[0].getNome()); //un pokemon ha sempre due mosse minimo
-        if (test[1] == null){
+        mossa1 = new JButton(mosse[0].getNome()); //un pokemon ha sempre almeno due mosse
+        if (mosse[1] == null){
             mossa2 = new JButton("vuoto");
         }
         else
-            mossa2 = new JButton(test[1].getNome());
-        if(test[2] == null)
-            mossa3 = new JButton("vuoto"); //TODO: Implementare if per i bottoni senza mosse
+            mossa2 = new JButton(mosse[1].getNome());
+        if(mosse[2] == null)
+            mossa3 = new JButton("vuoto");
         else
-            mossa3 = new JButton(test[2].getNome());
+            mossa3 = new JButton(mosse[2].getNome());
 
-        if(test[3]==null)
+        if(mosse[3]==null)
             mossa4 = new JButton("vuoto");
         else
-            mossa4 = new JButton(test[3].getNome());
+            mossa4 = new JButton(mosse[3].getNome());
 
 
-        // DA SISTEMARE, SI ALTERANO LE CORRISPONDENZE CON I BOTTONI
         pokemon1 = new JButton(squadra[0].getNome(),new ImageIcon(squadra[0].getSpriteMini()));
         pokemon2 = new JButton(squadra[1].getNome(), new ImageIcon(squadra[1].getSpriteMini()));
         pokemon3 = new JButton(squadra[2].getNome(), new ImageIcon(squadra[2].getSpriteMini()));
         pokemon4 = new JButton(squadra[3].getNome(), new ImageIcon(squadra[3].getSpriteMini()));
         pokemon5 = new JButton(squadra[4].getNome(), new ImageIcon(squadra[4].getSpriteMini()));
         pokemon6 = new JButton(squadra[5].getNome(), new ImageIcon(squadra[5].getSpriteMini()));
-        // il resto lo prendo (anche questo in realtà) dall'array squadra
-        // da qui posso scalare la dimensione --> (getScaledInstance(400,400,Image.SCALE_DEFAULT))
+
         Image img1 = gif1.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
         Image img2 = gif2.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
 
@@ -151,16 +126,17 @@ public class Lotta extends JFrame {
         labelgif2 = new JLabel(scaledGif2);
 
         // il label sarà grande quanto le gif stesse
-        labelgif1.setSize(150,150);//(gif1.getIconWidth(),gif1.getIconHeight()); //SONO LE DIMENSIONI STANDARD
-        labelgif2.setSize(150,150);//(gif2.getIconWidth(),gif2.getIconHeight());
+        labelgif1.setSize(150,150);
+        labelgif2.setSize(150,150);
 
         //posizionamento gif
         labelgif1.setLocation(880,100);
         labelgif2.setLocation(240,250);
 
-        pannello.add(labelgif1); // posso specificare il borderlayout (area in cui va a posizionarsi)
-        pannello.add(labelgif2); // aggiungo solo il label e successivamente lo posiziono
-//SET SIZE
+        pannello.add(labelgif1);
+        pannello.add(labelgif2);
+
+        //SET SIZE
         attacca.setSize(200,100);
         pokemon.setSize(200,100);
 
@@ -175,7 +151,8 @@ public class Lotta extends JFrame {
         pokemon4.setSize(200,100);
         pokemon5.setSize(200,100);
         pokemon6.setSize(200,100);
-// SET LOCATION
+
+        // SET LOCATION
         attacca.setLocation(0,400);
         pokemon.setLocation(200,400);
 
@@ -221,25 +198,26 @@ public class Lotta extends JFrame {
         indietro.addActionListener(x ->vistaMain());
 
         setFocusable(true);
-        requestFocus();     // SENZA QUESTI I CONTROLLI NON PARTONO
+        requestFocus();
 
         //LOCALE
-        nomePok1 = new JLabel(squadra[0].getNome()); //sostituire con pokemon.getNome()
+        nomePok1 = new JLabel(squadra[0].getNome());
         nomePok1.setBounds(930,320,100,20);
-        barraPSpok1 = new BarraPS(squadra[0].getPs()); //salute dovrà riferirsi ai PS del pokemon principale coinvolto nella lotta
+        barraPSpok1 = new BarraPS(squadra[0].getPs());
         barraPSpok1.getBarraSalute().setLocation(930,335); //PS del pokemonLocale
-        barraPSpok1.getBarraSalute().setSize(310,20); // DA LEVARE
-        PsPok1 = new JLabel(squadra[0].getPs() + "/" + squadra[0].getPs()); // sostituisco con ps (della classe pokemon) e vita (che ottengo dalla barra)
+        barraPSpok1.getBarraSalute().setSize(310,20);
+        PsPok1 = new JLabel(squadra[0].getPs() + "/" + squadra[0].getPs());
         PsPok1.setBounds(930,355,100,20);
+
         //AVVERSARI
         nomePok2 = new JLabel(squadra2[0].getNome());
         nomePok2.setBounds(55,55,100,20);
         barraPSpok2 = new BarraPS(squadra2[0].getPs());
-        barraPSpok2.getBarraSalute().setLocation(55,70); //PS del pokemonAvversario - potrei usare anche qui il setBounds
-        barraPSpok2.getBarraSalute().setSize(310,20); // DA LEVARE
-        PsPok2 = new JLabel(squadra2[0].getPs()+"/"+squadra2[0].getPs()); // devo aggiornare questo valore
+        barraPSpok2.getBarraSalute().setLocation(55,70); //PS del pokemonAvversario
+        barraPSpok2.getBarraSalute().setSize(310,20);
+        PsPok2 = new JLabel(squadra2[0].getPs()+"/"+squadra2[0].getPs());
         PsPok2.setBounds(55,90,100,20);
-        utente = new JLabel("UTENTE 1 ");
+        utente = new JLabel(utente1.getNome());
         utente.setBounds(605,320,200,200);
         pannello.add(utente);
         pannello.add(barraPSpok1.getBarraSalute());
@@ -250,11 +228,7 @@ public class Lotta extends JFrame {
         pannello.add(PsPok2);
 
         pannello.add(label,BorderLayout.NORTH);
-        setContentPane(pannello); // TODO
-
-
-        Mossa[] finalTest = test; // mi serve final, poi lo tolgo --si riferisce solo all utente 1
-        Mossa[] finalTest2 = squadra2[0].getMosse(); // provvisorio
+        setContentPane(pannello);
 
         cambioUtente=false;
 
@@ -265,12 +239,12 @@ public class Lotta extends JFrame {
             }
             else{
                 // index -10 out of bounds for length 4 (da rivedere, sarebbe il valore restituito dal cambio pokemon)
-                // implementare if in piu, se ho -10 restituisco null, se ho null dentro turno cambio pokemon e non faccio nulla
+
                 if(getMossa() == -10){
                     setTurno(turno(Cambio, squadra2[0].getMosse()[0]));
                     if(getTurno() == -1){
                         if(squadra[0].getSalute() <= 0){
-                            //squadra2[0].sconfitto(squadra[0]);
+
                             cambioUtente=false;
                             try {
                                 PreCambiaPokemon(-1);
@@ -278,7 +252,7 @@ public class Lotta extends JFrame {
                                 throw new RuntimeException(ex);
                             }
                         }else{
-                            //squadra[0].sconfitto(squadra2[0]);
+
                             cambioUtente=true;
                             try {
                                 PreCambiaPokemon(-1);
@@ -291,7 +265,7 @@ public class Lotta extends JFrame {
                     setTurno(turno(squadra[0].getMosse()[getMossa()], squadra2[0].getMosse()[0]));
                     if(getTurno() == -1){
                         if(squadra[0].getSalute() <= 0){
-                            //squadra2[0].sconfitto(squadra[0]);
+
                             cambioUtente=false;
                             try {
                                 PreCambiaPokemon(-1);
@@ -299,7 +273,7 @@ public class Lotta extends JFrame {
                                 throw new RuntimeException(ex);
                             }
                         }else{
-                            //squadra[0].sconfitto(squadra2[0]);
+
                             cambioUtente=true;
                             try {
                                 PreCambiaPokemon(-1);
@@ -310,7 +284,7 @@ public class Lotta extends JFrame {
                     }
                 }
                 cambioUtente=true;
-                //setMossa(-10);
+
                 cambiaContesto();
             }
 
@@ -361,7 +335,7 @@ public class Lotta extends JFrame {
                         }
                     }
                 }
-                //setMossa(-10);
+
                 cambiaContesto();
             }
 
@@ -381,7 +355,7 @@ public class Lotta extends JFrame {
                             try {
                                 PreCambiaPokemon(-1);
                             } catch (IOException ex) {
-                                throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                                throw new RuntimeException(ex);
                             }
                         }else{
                             cambioUtente=true;
@@ -400,7 +374,7 @@ public class Lotta extends JFrame {
                             try {
                                 PreCambiaPokemon(-1);
                             } catch (IOException ex) {
-                                throw new RuntimeException(ex); // da rivedere, al massimo stampare un messaggio d'errore
+                                throw new RuntimeException(ex);
                             }
                         }else{
                             cambioUtente=true;
@@ -414,7 +388,7 @@ public class Lotta extends JFrame {
                 }
 
                 cambioUtente=true;
-                //setMossa(-10);
+
                 cambiaContesto();
             }
 
@@ -466,7 +440,7 @@ public class Lotta extends JFrame {
                     }
                 }
                 cambioUtente=true;
-                //setMossa(-10);
+
                 cambiaContesto();
             }
 
@@ -570,13 +544,12 @@ public class Lotta extends JFrame {
 
 
         //SE IL POKEMON VIENE CAMBIATO COL TASTO FACCIAMO CHE LA MOSSA VIENE ISTANZIATA NULL
-        //QUINDI POSSIAMO GESTIRE IL CAMBIO POKEMON FUORI DAL TURNO
+
 
         CondEffetto1 = Effetti.Effetto(Mossapokemon1.getNome());
         CondEffetto2 = Effetti.Effetto(Mossapokemon2.getNome());
 
-        //GESTIONE CASI CondEffetto = 1
-        // ESSENDOCI SOLO ATTACCO RAPIDO EFFETTIVAMENTE COME EFFETTO 1 allora posso gestirla in poche righe
+        //GESTIONE CASI CondEffetto = 1 (attacco rapido)
 
         if(CondEffetto1==-10 && CondEffetto2!=-10){
             danno = squadra2[0].attacca(squadra[0], Mossapokemon2);
@@ -814,11 +787,9 @@ public class Lotta extends JFrame {
                 return 0;
             }
 
-            //qua non puo arrivare
         }
     }
 
-    // diamo per scontato che il pokemon numero 1 in squadra sia quello coinvolto in lotta
     public JPanel getPannello(){
         return pannello;
     }
@@ -855,15 +826,13 @@ public class Lotta extends JFrame {
             if(!cambioUtente){
                 pokemon1.setEnabled(false); // quindi anche le mosse
                 vittorieUtente2++;
-                Vittoria frameVittoria = new Vittoria(cambioUtente); // è una finestra in piu, non la stessa modificata
-                //salvo i progressi sui file
+                Vittoria frameVittoria = new Vittoria(cambioUtente);
 
+                //salvo i progressi sui file
                 resettaLotta();
                 checkBattaglia();
-                //utente1.scrittoreModifica();
-                //utente2.scrittoreModifica();
-
-
+                utente1.scrittoreModifica();
+                utente2.scrittoreModifica();
                 // vuol dire che ha vinto il giocatore 2, perche 1 sta senza pokemon
             }
             else{
@@ -873,12 +842,11 @@ public class Lotta extends JFrame {
 
                 resettaLotta();
                 checkBattaglia();
-                //utente1.scrittoreModifica();
-                //utente2.scrittoreModifica();
+                utente1.scrittoreModifica();
+                utente2.scrittoreModifica();
 
             }
 
-            //System.exit(1);
         }else{
             if(!cambioUtente){
                 squadra[0].sconfitto(squadra2[0]);
@@ -903,7 +871,7 @@ public class Lotta extends JFrame {
                     }
 
                 }
-                //cambiaPokemon(indiceCambi[0]);
+
 
             }
             else{
@@ -974,9 +942,9 @@ public class Lotta extends JFrame {
             squadra2[0]=cambio;
             if(squadra2[indice].getSalute()<=0){
                 // rendo il bottone non cliccabile in caso di pokemon esausto
-                System.out.println("indice passato = "+  indice);
+
                 switch (indice){
-                    // qua c'è il problema
+
                     case 0:
                         pokemon1.setEnabled(false);
                         break;
@@ -1035,7 +1003,7 @@ public class Lotta extends JFrame {
      * metodo per l'aggiornamento degli elementi grafici visualizzati dopo una modifica apportata sui pokemon utilizzati
      */
     private void aggiornaUI(){
-        // devo usare il metodo anche per quando vengono effettuate delle evoluzioni
+
             nomePok1.setText(squadra[0].getNome());
             barraPSpok1.getBarraSalute().setMaximum(squadra[0].getPs());
             barraPSpok1.getBarraSalute().setValue(squadra[0].getSalute());
@@ -1104,20 +1072,20 @@ public class Lotta extends JFrame {
      * determina chi deve effettuare il proprio turno tra i due utenti personalizzando l'interfaccia grafica in funzione di questi
      */
     private void cambiaContesto(){
-        // sarebbe la funz utile per lo scambio utente
         Mossa[] mosse;
         Pokemon[] squad;
+
         // Aggiorna le mosse
         if(!cambioUtente){
             mosse = squadra2[0].getMosse();
             squad = squadra2;
-            utente.setText("UTENTE 2"); // utente.getNome()
+            utente.setText(utente2.getNome());
         }
 
         else{
             mosse = squadra[0].getMosse();
             squad = squadra;
-            utente.setText("UTENTE 1"); // utente.getNome()
+            utente.setText(utente1.getNome());
         }
 
 
@@ -1129,7 +1097,6 @@ public class Lotta extends JFrame {
         pokemon1.setIcon(new ImageIcon(squad[0].getSpriteMini()));
         pokemon2.setText(squad[1].getNome());
         pokemon2.setIcon(new ImageIcon(squad[1].getSpriteMini()));
-        // QUANDO AVRO LE SQUADRE COMPLETE CON GLI UTENTI POTRO TOGLIERE I COMMENTI ALLE ISTR. QUA SOTTO
         pokemon3.setText(squad[2].getNome());
         pokemon3.setIcon(new ImageIcon(squad[2].getSpriteMini()));
         pokemon4.setText(squad[3].getNome());
@@ -1154,19 +1121,21 @@ public class Lotta extends JFrame {
 
             SchermataBattaglia battaglia = new SchermataBattaglia(true);
             // sovrascrivo i file
-            //utente1.incrementaVittorie();
-            //utente2.incrementaSconfitte();
+            utente1.incrementaVittorie();
+            utente1.partiteGiocate();
+            utente2.incrementaSconfitte();
+            utente2.partiteGiocate();
 
-            //non implemento la scrittura nei file perche sta nella funzione che richiama il metodo corrente
 
         }
         if(vittorieUtente2-vittorieUtente1>1) {
-            //JOptionPane.showMessageDialog(null, "Giocatore 2 ha vinto la serie di battaglie!");
+
             SchermataBattaglia battaglia = new SchermataBattaglia(false);
             // scrivo sul file
-            //utente2.incrementaVittorie();
-            //utente1.incrementaSconfitte();
-            //non implemento la scrittura nei file perche sta nella funzione che richiama il metodo corrente
+            utente2.incrementaVittorie();
+            utente2.partiteGiocate();
+            utente1.incrementaSconfitte();
+            utente1.partiteGiocate();
 
         }
 
@@ -1209,10 +1178,6 @@ public class Lotta extends JFrame {
         }
         return squadraClonata;
     }
-
-
-    // posso fare le funzioni per delle parti di codice in lotta, ma bisogna prima finire il codice sopra (setMossa(-10))
-
 
 
 

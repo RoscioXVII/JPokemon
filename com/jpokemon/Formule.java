@@ -53,7 +53,7 @@ public class Formule {
                 stab = 1.5;
             }
         }
-        // da 0 a 4 con valori 0 0.25 0.5 1 2 4
+
         if(tipoPoke2_2 == null){
             superefficace = getCostanteMoltiplicativa(tipoMossa,tipoPoke2_1);
         }else{
@@ -61,11 +61,11 @@ public class Formule {
         }
 
         if(superefficace >= 2){
-            System.out.println("superefficace");
+
         } else if (superefficace < 1 && superefficace > 0) {
-            System.out.println("non molto efficace....");
+
         }else if (superefficace == 0) {
-            System.out.println("Non ha effetto!");
+
         }
 
         double danno = ((((((((2.0*livello*bruttoColpo)/5) + 2) * (potenza) * (((double) attacco /difesa) )/50) + 2)) * stab * superefficace));
@@ -83,7 +83,7 @@ public class Formule {
         int x = rand.nextInt(255);
 
         if(x < velocita/2){
-            System.out.println("BRUTTO COLPO!!!!!");
+
             return 2;
         }else{
             return 1;
@@ -129,7 +129,7 @@ public class Formule {
         return floor(0.01 * (2 * statistica + IV + floor(0.25 * EV)) * livello) + livello + 10;
     }
 
-    // TABELLA DEBOLEZZE - POI LA SPOSTIAMO DOVE MEGLIO è
+
     // è una mappa che associa un tipo ad un'altra mappa con associazione tipo-moltiplicatore
     // è una costante in quanto predefinita dalle meccaniche di gioco
     //infatti questa viene riempita una volta e non piu modificata
@@ -286,8 +286,6 @@ public class Formule {
 
     }
 
-    //Prendi il valore del confronto tra i tipi
-
     /**
      * Tenendo conto dei tipi, viene restituita la costante motliplictiva del danno
      * legata alla tabella di efficacia dei tipi
@@ -328,20 +326,20 @@ public class Formule {
         Effetti.put("Confuse Ray",null);
         Effetti.put("Confusion",null);
         Effetti.put("Constrict","Diminuisci:1:velocita:30:Dopo");
-        Effetti.put("Conversion",null); //RIMUOVI
-        Effetti.put("Counter",null); //RIMUOVI
+        Effetti.put("Conversion",null);
+        Effetti.put("Counter",null);
         Effetti.put("Crabhammer","Critico:Durante");
         Effetti.put("Cut",null);
         Effetti.put("Defense Curl","Aumenta:1:Difesa:100:Dopo");
-        Effetti.put("Dig","FossaVolo"); //RIMUOVI
-        Effetti.put("Disable",null); //RIMUOVI
+        Effetti.put("Dig","FossaVolo");
+        Effetti.put("Disable",null);
         Effetti.put("Dizzy Punch",null);
         Effetti.put("Double Kick","RipetiAttacco:2:2:Durante");
         Effetti.put("Double Slap","RipetiAttacco:2:5:Durante");
-        Effetti.put("Double Team","Aumenta:1:Evasione:100:Dopo");   //BRUTTA DEVO IMPLEMENTA
+        Effetti.put("Double Team","Aumenta:1:Evasione:100:Dopo");
         Effetti.put("Double-Edge","Rinculo:1:3:Dopo");
         Effetti.put("Dragon Rage","DannoFisso:40:Durante");
-        Effetti.put("Dream Eater",null); //RIMUOVI
+        Effetti.put("Dream Eater",null);
         Effetti.put("Drill Peck",null);
         Effetti.put("Earthquake",null);
         Effetti.put("Egg Bomb",null);
@@ -353,65 +351,65 @@ public class Formule {
         Effetti.put("Fissure","UnColpo:Durante");
         Effetti.put("Flamethrower",null);
         Effetti.put("Flash","Diminuisci:1:Accuracy:30:Dopo");
-        Effetti.put("Fly","FossaVolo");//RIMUOVI
-        Effetti.put("Focus Energy",null);//RIMUOVI
+        Effetti.put("Fly","FossaVolo");
+        Effetti.put("Focus Energy",null);
         Effetti.put("Fury Attack","RipetiAttacco:2:5:Durante");
         Effetti.put("Fury Swipes","RipetiAttacco:2:5:Durante");
-        Effetti.put("Glare",null);//RIMUOVI
+        Effetti.put("Glare",null);
         Effetti.put("Growl","Diminuisci:1:attacco:100:Dopo");
         Effetti.put("Growth","Aumenta:1:attacco:100:Dopo");
         Effetti.put("Guillotine","UnColpo:Durante");
         Effetti.put("Gust",null);
         Effetti.put("Harden","Aumenta:1:Difesa:100:Dopo");
-        Effetti.put("Haze",null);//RIMUOVI
+        Effetti.put("Haze",null);
         Effetti.put("Headbutt","Tentenna:Dopo");
         Effetti.put("High Jump Kick","JKick:Dopo");
         Effetti.put("Horn Drill","UnColpo:Durante");
         Effetti.put("Hydro Pump",null);
         Effetti.put("Hyper Beam","Ricarica:Dopo");
         Effetti.put("Hyper Fang","Tentenna:Dopo");
-        Effetti.put("Hypnosis",null);//RIMUOVI
+        Effetti.put("Hypnosis",null);
         Effetti.put("Ice Beam",null);
         Effetti.put("Ice Punch",null);
         Effetti.put("Jump Kick","JKick:Dopo");
         Effetti.put("Karate Chop","Critico:Durante");
         Effetti.put("Kinesis","Diminuisci:1:Accuracy:30:Dopo");
         Effetti.put("Leech Life","Assorbimento:Dopo");
-        Effetti.put("Leech Seed",null); //RIMUOVI TROPPO DIFF
+        Effetti.put("Leech Seed",null);
         Effetti.put("Leer","Diminuisci:1:Difesa:30:Dopo");
         Effetti.put("Lick",null);
-        Effetti.put("Light Screen","Schermo:Dopo"); //EFFETTO DA CAMPO
-        Effetti.put("Lovely Kiss",null); //RIMUOVI
+        Effetti.put("Light Screen","Schermo:Dopo");
+        Effetti.put("Lovely Kiss",null);
         Effetti.put("Low Kick",null);
         Effetti.put("Meditate","Aumenta:1:attacco:100:Dopo");
         Effetti.put("Mega Drain","Assorbimento:Dopo");
         Effetti.put("Mega Kick",null);
         Effetti.put("Mega Punch",null);
-        Effetti.put("Metronome","Metronomo"); //RIMUOVI
-        Effetti.put("Mimic",null); //Rimuovi
+        Effetti.put("Metronome","Metronomo");
+        Effetti.put("Mimic",null);
         Effetti.put("Minimize","Aumenta:2:Evasione:100:Dopo");
-        Effetti.put("Mirror Move",null); //Rimuovi
-        Effetti.put("Mist",null); //rimuovi
+        Effetti.put("Mirror Move",null);
+        Effetti.put("Mist",null);
         Effetti.put("Night Shade","DannoFisso:Livello:Durante");
         Effetti.put("Pay Day",null);
         Effetti.put("Peck",null);
         Effetti.put("Petal Dance",null);
         Effetti.put("Pin Missile","RipetiAttacco:2:5:Durante");
-        Effetti.put("Poison Gas",null); //RIMUOVI
-        Effetti.put("Poison Powder",null); //RIMUOVI
+        Effetti.put("Poison Gas",null);
+        Effetti.put("Poison Powder",null);
         Effetti.put("Poison Sting",null);
         Effetti.put("Pound",null);
         Effetti.put("Psybeam",null);
         Effetti.put("Psychic",null);
         Effetti.put("Psywave","DannoFisso:Livello:Durante");
         Effetti.put("Quick Attack","Attacco Rapido:Prima");
-        Effetti.put("Rage",null); //RIMUOVI
+        Effetti.put("Rage",null);
         Effetti.put("Razor Leaf","Critico:Durante");
         Effetti.put("Razor Wind","Critico:Durante");
         Effetti.put("Recover","Cura:Dopo");
         Effetti.put("Reflect","Riflesso");
-        Effetti.put("Rest",null); //RIMUOVI
-        Effetti.put("Roar",null); //RIMUOVI
+        Effetti.put("Rest",null);
+        Effetti.put("Roar",null);
         Effetti.put("Rock Slide","Tentenna:Dopo");
         Effetti.put("Rock Throw",null);
         Effetti.put("Rolling Kick","Tentenna:Dopo");
@@ -421,12 +419,12 @@ public class Formule {
         Effetti.put("Seismic Toss","DannoFisso:Livello:Durante");
         Effetti.put("Self-Destruct","Esplosione:Dopo");
         Effetti.put("Sharpen","Aumenta:1:Attacco:100:Dopo");
-        Effetti.put("Sing",null);//RIMUOVI
+        Effetti.put("Sing",null);
         Effetti.put("Skull Bash",null);
         Effetti.put("Sky Attack","Tentenna:Dopo");
         Effetti.put("Slam",null);
         Effetti.put("Slash","Critico:Durante");
-        Effetti.put("Sleep Powder",null);//RIMUOVI
+        Effetti.put("Sleep Powder",null);
         Effetti.put("Sludge",null);
         Effetti.put("Smog",null);
         Effetti.put("Smokescreen","Diminuisci:1:Accuracy:30:Dopo");
@@ -435,38 +433,38 @@ public class Formule {
         Effetti.put("Sonic Boom","DannoFisso:20:Durante");
         Effetti.put("Spike Cannon","RipetiAttacco:2:5:Durante");
         Effetti.put("Splash",null);
-        Effetti.put("Spore",null);//RIMUOVI
+        Effetti.put("Spore",null);
         Effetti.put("Stomp","Tentenna:Dopo");
         Effetti.put("Strength",null);
         Effetti.put("String Shot","Diminuisci:2:Velocita:30:Dopo");
         Effetti.put("Struggle","Rinculo:1:3:Dopo");
-        Effetti.put("Stun Spore",null);//RIMUOVI
+        Effetti.put("Stun Spore",null);
         Effetti.put("Submission","Rinculo:1:4:Dopo");
-        Effetti.put("Substitute",null);//RIMUOVI
+        Effetti.put("Substitute",null);
         Effetti.put("Super Fang","DannoFisso:Meta:Durante");
-        Effetti.put("Supersonic",null);//RIMUOVI
+        Effetti.put("Supersonic",null);
         Effetti.put("Surf",null);
         Effetti.put("Swift",null);
         Effetti.put("Swords Dance","Aumenta:2:Attacco:100:Dopo");
         Effetti.put("Tackle",null);
         Effetti.put("Tail Whip","Diminuisci:1:difesa:100:Dopo");
         Effetti.put("Take Down","Rinculo:1:4:Dopo");
-        Effetti.put("Teleport",null);//RIMUOVI
+        Effetti.put("Teleport",null);
         Effetti.put("Thrash",null);
         Effetti.put("Thunder",null);
         Effetti.put("Thunder Punch",null);
         Effetti.put("Thunder Shock",null);
-        Effetti.put("Thunder Wave",null);//RIMUOVI
+        Effetti.put("Thunder Wave",null);
         Effetti.put("Thunderbolt",null);
-        Effetti.put("Toxic",null);//RIMUOVI
-        Effetti.put("Transform",null);//RIMUOVI
+        Effetti.put("Toxic",null);
+        Effetti.put("Transform",null);
         Effetti.put("Tri Attack",null);
         Effetti.put("Twineedle","RipetiAttacco:2:2:Durante");
         Effetti.put("Vine Whip",null);
         Effetti.put("Vise Grip",null);
         Effetti.put("Water Gun",null);
         Effetti.put("Waterfall","Tentenna:Dopo");
-        Effetti.put("Whirlwind",null);//RIMUOVI
+        Effetti.put("Whirlwind",null);
         Effetti.put("Withdraw","Aumenta:1:Difesa:100:Dopo");
         Effetti.put("Wrap",null);
     }
@@ -477,10 +475,7 @@ public class Formule {
             return Effetti.get(nome);
         }
     }
-    /*
-    TODO: questi due devono essere implementati in modo da prendere le statistiche del pokemon e le modificano non permanentemente
-    TODO: inoltre questo aumento/diminuzione delle statistiche arriva fino ad un massimo di 6 (se hai una statistica a +5 e fai una mossa da +2 il risultato deve essere +6)
-     */
+
 
     /**
      * Aumenta le statistiche generali di un pokemon
@@ -563,16 +558,7 @@ public class Formule {
 
 
     }
-    public static int Assorbimento(Pokemon pokemon,int danno){
 
-        if(pokemon.getSalute()+(danno/2) > pokemon.getPs()){
-            pokemon.setSalute(pokemon.getPs());
-        }else{
-            pokemon.setSalute(pokemon.getSalute()+(danno/2));
-        }
-
-        return 1;
-    }
     public static int RipetiAttacco(int minimo, int massimo, Pokemon attaccante,Pokemon bersaglio, Mossa mossa){
 
         int attacchi = minimo;
@@ -599,12 +585,6 @@ public class Formule {
         return risultato;
     }
 
-    public static int CreaTrappola(){
-        return 3;
-    }
-    public static int Trappola(int hpMAX){
-        return hpMAX/8;
-    }
     public static int Tentenna(int percentuale){
         Random roll = new Random();
 
@@ -627,15 +607,6 @@ public class Formule {
         }
 
     }
-    public static void Cura(Pokemon pokemon){
-        int risultato = pokemon.getSalute() + (pokemon.getPs()/2);
 
-        if(risultato >= pokemon.getPs()){
-            pokemon.setSalute(pokemon.getPs());
-        }else{
-            pokemon.setSalute(risultato);
-        }
-
-    }
 
 }

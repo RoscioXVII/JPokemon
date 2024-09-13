@@ -7,8 +7,7 @@ import java.awt.*;
  * Finestra di avvio del videogioco
  */
 public class Home extends StaticScreen {
-    //private JPanel pannello;
-    //private JButton start;
+
     public Home(){
         ImageIcon img = new ImageIcon("img/home.png");
         Image wallpaper = img.getImage().getScaledInstance(1280, 720, Image.SCALE_DEFAULT);
@@ -26,7 +25,7 @@ public class Home extends StaticScreen {
         pannello.add(label,BorderLayout.CENTER);
         button.setLocation(540,570);
 
-        setContentPane(pannello); // TODO
+        setContentPane(pannello);
 
 
     }

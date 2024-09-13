@@ -40,9 +40,7 @@ public class SelezioneUtente extends JFrame {
         bottone3.setBounds(800,200,300,100);
         bottone4 = new JButton();
         bottone4.setBounds(800,400,300,100);
-        //al posto di nome metto un array di utenti e uso getnome
-        // questi vengono tirati fuori dal file di testo
-        // implementare controllo (non sempre sono presenti tutti i nomi)
+
         String testo = rd.getRigaByIndex("testo/utenti.txt",0);
         if(testo==null)
             nome1 = null;
@@ -86,8 +84,6 @@ public class SelezioneUtente extends JFrame {
         pannello.add(label,BorderLayout.CENTER);
         setContentPane(pannello);
 
-
-        // nome = rd.legginomeutente();
 
     }
     public JPanel getPannello(){

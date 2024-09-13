@@ -45,12 +45,7 @@ public class Effetti {
         return 3;
     }
 
-    public static String getEffetto(String nome) {
-        String effetto = Formule.getEffettoFromTabella(nome);
-        String[] get = effetto.split(":");
 
-        return get[0];
-    }
 
     /**
      *
@@ -98,7 +93,7 @@ public class Effetti {
         int risultato = -3;
         String place = Formule.getEffettoFromTabella(mossa.getNome());
         if (place == null) {
-            return risultato; //se ritorno -3 allora vado avanti senza problemi
+            return risultato;
         }
         String[] accesso = place.split(":");
 
