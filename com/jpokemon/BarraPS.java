@@ -20,7 +20,7 @@ public class BarraPS extends JFrame {
 
     /**
      * Diminuisce la salute del pokemon e di conseguenza anche la barra relativa ad essa
-     * @param danno
+     * @param danno danno inflitto dal pokemon nemico
      */
 
     public void diminuisci(int danno){
