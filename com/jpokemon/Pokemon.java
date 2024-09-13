@@ -792,8 +792,7 @@ public class Pokemon implements Cloneable {
                 "#" + EVvelocita +
                 "#" + nomeEvoluzione +
                 "#" + salute +
-                "#" + mosse[0].getNome() + // implementare if che se e null restituisce null
-                "#" + mosse[1].getNome();
+                "#" + mosse[0].getNome();
         if(mosse[1]==null)
             Stringa+="#null";
         else

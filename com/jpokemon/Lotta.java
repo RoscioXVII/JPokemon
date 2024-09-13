@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * Classe incaricata della visualizzazione grafica della lotta pokemon
@@ -42,7 +41,7 @@ public class Lotta extends JFrame {
     private JLabel PsPok1;
     private JLabel PsPok2;
     private JLabel labelgif2;
-    private JLabel utente;
+    private JLabel labelUtente;
     private boolean cambioUtente;
     private int  vittorieUtente1;
     private int vittorieUtente2;
@@ -217,9 +216,9 @@ public class Lotta extends JFrame {
         barraPSpok2.getBarraSalute().setSize(310,20);
         PsPok2 = new JLabel(squadra2[0].getPs()+"/"+squadra2[0].getPs());
         PsPok2.setBounds(55,90,100,20);
-        utente = new JLabel(utente1.getNome());
-        utente.setBounds(605,320,200,200);
-        pannello.add(utente);
+        labelUtente = new JLabel(utente1.getNome());
+        labelUtente.setBounds(605,320,200,200);
+        pannello.add(labelUtente);
         pannello.add(barraPSpok1.getBarraSalute());
         pannello.add(barraPSpok2.getBarraSalute());
         pannello.add(nomePok1);
@@ -1079,13 +1078,13 @@ public class Lotta extends JFrame {
         if(!cambioUtente){
             mosse = squadra2[0].getMosse();
             squad = squadra2;
-            utente.setText(utente2.getNome());
+            labelUtente.setText(utente2.getNome());
         }
 
         else{
             mosse = squadra[0].getMosse();
             squad = squadra;
-            utente.setText(utente1.getNome());
+            labelUtente.setText(utente1.getNome());
         }
 
 
@@ -1118,24 +1117,26 @@ public class Lotta extends JFrame {
 
 
         if(vittorieUtente1-vittorieUtente2>1){
-
-            SchermataBattaglia battaglia = new SchermataBattaglia(true);
             // sovrascrivo i file
             utente1.incrementaVittorie();
             utente1.partiteGiocate();
             utente2.incrementaSconfitte();
             utente2.partiteGiocate();
+            SchermataBattaglia battaglia = new SchermataBattaglia(true);
+
+
 
 
         }
         if(vittorieUtente2-vittorieUtente1>1) {
-
-            SchermataBattaglia battaglia = new SchermataBattaglia(false);
             // scrivo sul file
             utente2.incrementaVittorie();
             utente2.partiteGiocate();
             utente1.incrementaSconfitte();
             utente1.partiteGiocate();
+            SchermataBattaglia battaglia = new SchermataBattaglia(false);
+
+
 
         }
 
