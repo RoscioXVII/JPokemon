@@ -105,8 +105,11 @@ public class Utente {
                 }
                 cont++;
             }
-            stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3]+"\n";
-
+            if(ContieniStringheFile[3] != null) {
+                stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3] + "\n";
+            }else{
+                stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n";
+            }
         } catch (IOException e ){
             System.err.println("File non formattato corretamente");
         }
@@ -133,8 +136,11 @@ public class Utente {
                 }
                 cont++;
             }
-            stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3]+"\n";
-
+            if(ContieniStringheFile[3] != null) {
+                stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3] + "\n";
+            }else{
+                stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n";
+            }
         } catch (IOException e ){
             System.err.println("File non formattato corretamente");
         }
