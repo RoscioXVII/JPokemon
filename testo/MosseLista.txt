@@ -1,4 +1,4 @@
-0:Bulbasaur:7:Leech Seed:13:Vine Whip
+0:Bulbasaur:13:Vine Whip
 1:Ivysaur:30:Razor Leaf
 2:Venusaur:43:Growth:65:SolarBeam
 3:Charmander:9:Ember:15:Leer
