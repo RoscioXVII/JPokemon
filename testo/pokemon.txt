@@ -5,7 +5,7 @@ Charmander:fuoco:null:Scratch:Growl:Ember:null:16:Charmeleon:39:65:52:43:60:50:6
 Charmeleon:fuoco:null:Scratch:Growl:Ember:null:36:Charizard:58:142:64:58:80:65:80:EV:0:0:0:1:0:1
 Charizard:fuoco:volante:Flamethrower:Scratch:Ember:Leer:-1:-1:78:209:84:78:109:85:100:EV:0:0:0:3:0:0
 Squirtle:acqua:null:Tackle:Tail Whip:null:null:16:Wartortle:44:66:48:65:50:64:43:EV:0:0:1:0:0:0
-Wartortle:acqua:null:Bubble:Water Gun:null:null36:Blastoise:59:143:63:80:65:80:58:EV:0:0:1:0:1:0
+Wartortle:acqua:null:Bubble:Water Gun:null:null:36:Blastoise:59:143:63:80:65:81:58:EV:0:0:1:0:1:0
 Blastoise:acqua:null:Tail Whip:Water Gun:Bite:Withdraw:-1:-1:79:210:83:100:85:105:78:EV:0:0:0:0:3:0
 Butterfree:coleottero:volante:Confusion:Psybeam:Tackle:String Shot:-1:-1:60:178:45:50:90:80:70:EV:0:0:0:2:1:0
 Tauros:normale:null:Tackle:Stomp:Tail Whip:Leer:-1:-1:75:172:100:95:40:70:110:EV:0:1:0:0:0:1
@@ -31,4 +31,4 @@ Machop:lotta:null:Karate Chop:Low Kick:null:null:28:Machoke:70:61:80:50:35:35:35
 Machoke:lotta:null:Karate Chop:Leer:Low Kick:null:36:Machamp:80:142:100:70:50:60:45:EV:0:2:0:0:0:0
 Machamp:lotta:null:Karate Chop:Leer:Low Kick:null:-1:-1:90:227:130:80:65:85:55:EV:0:3:0:0:0:0
 Tentacool:acqua:veleno:Acid:Wrap:null:null:30:Tentacruel:40:67:40:35:50:100:70:EV:0:0:0:0:1:0
-Tentacruel:acqua:veleno:Acid:Wrap:null:null:-1:-1:80:180:70:65:80:120:100:EV:0:0:0:0:2:0
+Tentacruel:acqua:veleno:Acid:Wrap:null:null:-1:-1:80:180:70:65:80:120:100:EV:0:0:0:0:2:
