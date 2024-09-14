@@ -89,52 +89,60 @@ public class Utente {
     public void scrittoreModifica() {
         // la uso ad ogni chiusura dell'applicazione, prima di uscire la mando in esecuzione
         // aggiorna i salvataggi quando sono stati gia creati e vengono registrati progressi
-        File fileTemp  = new File("fileTemp.txt");
         File sorgente = new File("testo/utenti.txt");
-
-        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
+        String stringaOverwrite = "";
+        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente))){
             String stringa;
+            String[] ContieniStringheFile = new String[4];
+            int cont = 0;
+
             while((stringa=reader.readLine())!=null){
                 if (stringa.startsWith(this.nome+":")){
-                    writer.write(this.toString());
-                    writer.newLine();
+                    ContieniStringheFile[cont] = this.toString();
                 }
-
                 else{
-                    writer.write(stringa);
-                    writer.newLine();
+                    ContieniStringheFile[cont] = stringa;
                 }
-
+                cont++;
             }
-            sorgente.delete();
-            fileTemp.renameTo(new File("testo/utenti.txt"));
+            stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3]+"\n";
 
         } catch (IOException e ){
             System.err.println("File non formattato corretamente");
         }
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(sorgente))){
+            writer.write(stringaOverwrite);
+        }catch (IOException e ){
+            System.err.println("File non formattato corretamente");
+        }
 
+        //resetto stringaOverwrite e modifico la directory sorgente/destinazione
+        stringaOverwrite = "";
         sorgente = new File("testo/squadreUtenti.txt");
-        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));BufferedWriter writer = new BufferedWriter(new FileWriter(fileTemp))){
+        try(BufferedReader reader = new BufferedReader(new FileReader(sorgente));){
             String stringa;
+            String[] ContieniStringheFile = new String[4];
+            int cont = 0;
+
             while((stringa=reader.readLine())!=null){
-
                 if (stringa.startsWith(this.nome+":")){
-                    writer.write(nome+":"+squadraString());
-                    writer.newLine();
+                    ContieniStringheFile[cont] = nome + ":" + squadraString();
                 }
-
                 else{
-                    writer.write(stringa);
-                    writer.newLine();
+                    ContieniStringheFile[cont] = stringa;
                 }
-
+                cont++;
             }
-            sorgente.delete();
-            fileTemp.renameTo(new File("testo/squadreUtenti.txt"));
+            stringaOverwrite = ContieniStringheFile[0] + "\n" + ContieniStringheFile[1] + "\n" + ContieniStringheFile[2] + "\n" + ContieniStringheFile[3]+"\n";
+
         } catch (IOException e ){
             System.err.println("File non formattato corretamente");
         }
-
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(sorgente))){
+            writer.write(stringaOverwrite);
+        }catch (IOException e ){
+            System.err.println("File non formattato corretamente");
+        }
     }
     public String getNome(){
         return nome;
@@ -148,16 +156,16 @@ public class Utente {
     public void partiteGiocate(){
         partiteGiocate++;
     }
+    public void setSquadra(Pokemon[] squadra){
+        this.squadra = squadra;
+    }
     public Pokemon[] getSquadra(){
         return squadra;
     }
 
     @Override
     public String toString() {
-        return nome +
-                ":" + vittorie + ':' + sconfitte +
-                ":" + sconfitte +
-                ":" + partiteGiocate;
+        return nome + ":" + partiteGiocate + ":" + vittorie + ":" + sconfitte;
     }
 
 
@@ -170,11 +178,6 @@ public class Utente {
         return info;
 
     }
-
-
-
-
-
 
 
 }

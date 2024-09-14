@@ -906,7 +906,7 @@ public class Pokemon implements Cloneable {
         this.nomeEvoluzione = nomeEvoluzione;
         this.salute = salute;
         this.setListaMosse(lista);
-
+        setSalute(ps);
     }
 
 
