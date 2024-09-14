@@ -235,6 +235,7 @@ public class Lotta extends JFrame {
             if (!cambioUtente){
                 setMossa(0);
                 cambiaContesto();
+                vistaMain();
             }
             else{
                 // index -10 out of bounds for length 4 (da rivedere, sarebbe il valore restituito dal cambio pokemon)
@@ -285,6 +286,7 @@ public class Lotta extends JFrame {
                 cambioUtente=true;
 
                 cambiaContesto();
+                vistaMain();
             }
 
             //IL PRIMO getPs prende la salute attuale, il secondo prende la salute MASSIMA, va fatta la cosa del clone
@@ -293,6 +295,7 @@ public class Lotta extends JFrame {
             if (!cambioUtente){
                 setMossa(1);
                 cambiaContesto();
+                vistaMain();
             }
             else{
                 if(getMossa() == -10){
@@ -336,6 +339,7 @@ public class Lotta extends JFrame {
                 }
 
                 cambiaContesto();
+                vistaMain();
             }
 
         });
@@ -344,6 +348,7 @@ public class Lotta extends JFrame {
             if (!cambioUtente){
                 setMossa(2);
                 cambiaContesto();
+                vistaMain();
             }
             else{
                 if(getMossa() == -10){
@@ -389,6 +394,7 @@ public class Lotta extends JFrame {
                 cambioUtente=true;
 
                 cambiaContesto();
+                vistaMain();
             }
 
         });
@@ -397,6 +403,7 @@ public class Lotta extends JFrame {
             if (!cambioUtente){
                 setMossa(3);
                 cambiaContesto();
+                vistaMain();
             }
             else{
                 if(getMossa() == -10){
@@ -441,15 +448,31 @@ public class Lotta extends JFrame {
                 cambioUtente=true;
 
                 cambiaContesto();
+                vistaMain();
             }
 
         });
         // cambio UI per il secondo utente
-        pokemon2.addActionListener(e->cambiaPokemon(1,0));
-        pokemon3.addActionListener(e->cambiaPokemon(2,0));
-        pokemon4.addActionListener(e->cambiaPokemon(3,0));
-        pokemon5.addActionListener(e->cambiaPokemon(4,0));
-        pokemon6.addActionListener(e->cambiaPokemon(5,0));
+        pokemon2.addActionListener(e->{
+            cambiaPokemon(1,0);
+            vistaMain();
+        });
+        pokemon3.addActionListener(e->{
+            cambiaPokemon(2,0);
+            vistaMain();
+        });
+        pokemon4.addActionListener(e->{
+            cambiaPokemon(3,0);
+            vistaMain();
+        });
+        pokemon5.addActionListener(e->{
+            cambiaPokemon(4,0);
+            vistaMain();
+        });
+        pokemon6.addActionListener(e->{
+            cambiaPokemon(5,0);
+            vistaMain();
+        });
 
     }
 

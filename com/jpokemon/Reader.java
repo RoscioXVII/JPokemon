@@ -338,7 +338,7 @@ public class Reader {
         Mossa[] mosse = new Mossa[4];
 
         for (int i=0;i<3;i++){
-            if(attributi[42+i].equals("null"))
+            if(attributi[41+i].equals("null"))
                 mosse[i] = null;
             else
                 mosse[i] = buildMossaByString(attributi[41+i]);

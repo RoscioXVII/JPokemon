@@ -72,11 +72,7 @@ public class SelezioneUtente extends JFrame {
         bottone2.setText(nome2 != null ? nome2 : "NUOVO UTENTE");
         bottone3.setText(nome3 != null ? nome3 : "NUOVO UTENTE");
         bottone4.setText(nome4 != null ? nome4 : "NUOVO UTENTE");
-
-
-
-
-
+        
         pannello.add(bottone1,BorderLayout.CENTER);
         pannello.add(bottone2,BorderLayout.CENTER);
         pannello.add(bottone3,BorderLayout.CENTER);
