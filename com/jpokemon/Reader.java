@@ -22,6 +22,7 @@ public class Reader {
     private static final String infoMosse = "testo/mosse.txt";
     private static final String infoUtente = "testo/utenti.txt";
     private static final String infoListaMosse = "testo/MosseLista.txt";
+    private static final String infoSquadreUtenti = "testo/squadreUtenti.txt";
     private static Scanner sc;
     private static Reader instance = null;
 
@@ -271,7 +272,7 @@ public class Reader {
      */
     private String cercaSquadra(String squadra) throws FileNotFoundException {
 
-        sc = new Scanner(new File("testo/squadreUtenti.txt"));
+        sc = new Scanner(new File(infoSquadreUtenti));
         String info;
         while(sc.hasNextLine()){
             info = sc.nextLine();

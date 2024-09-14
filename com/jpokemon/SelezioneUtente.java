@@ -69,13 +69,6 @@ public class SelezioneUtente extends JFrame {
         else
             nome4 = testo.split(":")[0];
 
-        /*
-        bottone1.setText(!Objects.equals(nome1, "null") ? nome1 : "NUOVO UTENTE");
-        bottone2.setText(!Objects.equals(nome2, "null") ? nome2 : "NUOVO UTENTE");
-        bottone3.setText(!Objects.equals(nome3, "null") ? nome3 : "NUOVO UTENTE");
-        bottone4.setText(!Objects.equals(nome4, "null") ? nome4 : "NUOVO UTENTE");
-        */
-
         bottone1.setText(nome1 != null ? nome1 : "NUOVO UTENTE");
         bottone2.setText(nome2 != null ? nome2 : "NUOVO UTENTE");
         bottone3.setText(nome3 != null ? nome3 : "NUOVO UTENTE");

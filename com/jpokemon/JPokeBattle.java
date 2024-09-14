@@ -1,6 +1,6 @@
 package com.jpokemon;
 
-import javax.swing.*;
+
 import java.io.IOException;
 
 /**

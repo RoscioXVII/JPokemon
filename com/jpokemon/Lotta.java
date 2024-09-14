@@ -45,9 +45,9 @@ public class Lotta extends JFrame {
     private boolean cambioUtente;
     private int  vittorieUtente1;
     private int vittorieUtente2;
-    private Pokemon[] squadraUtente1 = new Pokemon[6];
+    private Pokemon[] squadraUtente1;
 
-    private Pokemon[] squadraUtente2 = new Pokemon[6];
+    private Pokemon[] squadraUtente2;
 
     private Utente utente1;
     private Utente utente2;
@@ -534,9 +534,7 @@ public class Lotta extends JFrame {
             }
             dialog.setVisible(false);
         });
-        button5.addActionListener(e -> {
-            dialog.setVisible(false);
-        });
+        button5.addActionListener(e -> dialog.setVisible(false));
 
         dialog.getContentPane().add(buttonPanel, BorderLayout.CENTER);
         dialog.setVisible(true); // Mostra il dialog
@@ -1134,9 +1132,8 @@ public class Lotta extends JFrame {
 
     /**
      * controlla se uno dei due utenti ha vinto la battaglia generale (al meglio delle tre)
-     * @throws IOException
      */
-    public void checkBattaglia() throws IOException {
+    public void checkBattaglia() {
 
         if(vittorieUtente1-vittorieUtente2>1){
             // sovrascrivo i file
